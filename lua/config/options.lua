@@ -30,7 +30,7 @@ if vim.g.neovide then
   vim.g.neovide_input_ime = true  -- 支持中文输入法
   vim.g.neovide_light_angle_degrees = 45  -- 模拟光照角度45度，为部分元素增加视觉效果
   vim.g.neovide_light_radius = 5  -- 设置光照半径为5
-  vim.g.neovide_transparency = 1 -- 透明程度，作用于整个窗口
+  vim.g.neovide_opacity = 1 -- 透明程度，作用于整个窗口
   vim.g.neovide_normal_opacity = 1 -- 透明程度，仅影响普通文本背景
   vim.g.neovide_hide_mouse_when_typing = true -- 打字时，隐藏鼠标
   vim.g.neovide_refresh_rate = 240 -- 刷新率
