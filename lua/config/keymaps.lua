@@ -136,9 +136,6 @@ else
     "<Cmd>lua require('vscode').call('workbench.action.toggleActivityBarVisibility')<CR>",
     { desc = "toggleActivityBarVisibility" }
   )
-  -- vscode中使用vscode的格式化程序
-  map("n", "<leader>cf", "<Cmd>lua require('vscode').call('editor.action.formatDocument')<CR><CR>", { desc = "Format" })
-  map("v", "<leader>cf", "<Cmd>lua require('vscode').call('editor.action.formatSelection')<CR><CR>", { desc = "Format" })
   -- vscode中markdown文档的预览
   map(
     "n",

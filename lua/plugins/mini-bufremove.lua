@@ -1,6 +1,5 @@
 return {
   "echasnovski/mini.bufremove",
-  vscode = false,
   keys = {
     {
       "<leader>bd",
