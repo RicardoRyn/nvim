@@ -1,6 +1,5 @@
 return {
   "akinsho/bufferline.nvim",
-  vscode = false,
   event = "VeryLazy",
   opts = {
     options = {

@@ -1,6 +1,5 @@
 return {
   "saghen/blink.cmp",
-  vscode = false,
   opts = {
     keymap = {
       preset = "enter",
