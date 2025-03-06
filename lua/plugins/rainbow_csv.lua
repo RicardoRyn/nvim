@@ -1,3 +1,4 @@
+-- 启用rainbow_csv.nvim插件
 return {
     'cameron-wags/rainbow_csv.nvim',
     config = true,

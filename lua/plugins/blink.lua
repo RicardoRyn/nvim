@@ -1,3 +1,4 @@
+-- 设置tab键接受建议
 return {
   "saghen/blink.cmp",
   opts = {

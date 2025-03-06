@@ -1,7 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  cond = [[not vim.g.vscode]],
-
+  -- cond = [[not vim.g.vscode]],
   -- 通过v键和V键来快速框选
   config = function()
     require("nvim-treesitter.configs").setup({

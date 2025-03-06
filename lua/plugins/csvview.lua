@@ -1,3 +1,4 @@
+-- 启用csvview插件
 return {
   "hat0uma/csvview.nvim",
   ---@module "csvview"

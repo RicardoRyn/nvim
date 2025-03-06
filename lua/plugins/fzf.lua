@@ -1,3 +1,4 @@
+-- 原<leader>fF等快捷键无效，重新设置命令
 return {
   "ibhagwan/fzf-lua",
   keys = {

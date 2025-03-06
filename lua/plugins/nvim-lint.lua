@@ -1,3 +1,4 @@
+-- 禁用markdownlint-cli2
 return {
   "mfussenegger/nvim-lint",
   optional = true,

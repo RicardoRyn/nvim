@@ -1,3 +1,4 @@
+-- 更改lazyvim中tab样式
 return {
   "akinsho/bufferline.nvim",
   event = "VeryLazy",

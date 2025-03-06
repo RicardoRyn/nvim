@@ -1,3 +1,4 @@
+-- 自定义nvim dashboard
 return {
   "snacks.nvim",
   opts = {
