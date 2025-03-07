@@ -15,5 +15,7 @@ return {
         ]],
       },
     },
+    ---@type snacks.Config
+    image = { }
   },
 }
