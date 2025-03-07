@@ -1,3 +1,4 @@
+-- <leader>ll关闭buffer依赖项
 return {
   "echasnovski/mini.bufremove",
   keys = {
