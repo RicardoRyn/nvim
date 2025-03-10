@@ -7,6 +7,7 @@ local opt = vim.opt
 vim.g.molten_image_provider = "wezterm"
 vim.g.autoformat = false
 opt.conceallevel = 0 -- 不隐藏任何文本
+-- opt.shell = "D:/Git/Git/bin/bash.exe" -- 设置 Nushell 为默认终端
 opt.shell = "nu" -- 设置 Nushell 为默认终端
 opt.shellcmdflag = "-c"
 opt.shellquote = ""

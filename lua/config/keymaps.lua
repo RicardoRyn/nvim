@@ -15,58 +15,6 @@ map({ "n", "v" }, "J", "<Nop>")
 map({ "v" }, "U", "<Nop>")
 map({ "v" }, "u", "<Nop>")
 
--- for multicursor-nvim
-local mc = require("multicursor-nvim")
--- Add or skip cursor above/below the main cursor.
-map({ "n", "x" }, "<up>", function()
-  mc.lineAddCursor(-1)
-end, { desc = "Add multicursor above" })
-map({ "n", "x" }, "<down>", function()
-  mc.lineAddCursor(1)
-end, { desc = "Add multicursor blow" })
-map({ "n", "x" }, "<leader><up>", function()
-  mc.lineSkipCursor(-1)
-end, { desc = "Skip multicursor above" })
-map({ "n", "x" }, "<leader><down>", function()
-  mc.lineSkipCursor(1)
-end, { desc = "Skip multicursor blow" })
--- Add or skip adding a new cursor by matching word/selection
-map({ "n", "x" }, "<leader>n", function()
-  mc.matchAddCursor(1)
-end, { desc = "Match then add multicursor next" })
-map({ "n", "x" }, "<leader>s", function()
-  mc.matchSkipCursor(1)
-end, { desc = "Match then skip multicursor next" })
-map({ "n", "x" }, "<leader>N", function()
-  mc.matchAddCursor(-1)
-end, { desc = "Match then add multicursor prev" })
-map({ "n", "x" }, "<leader>S", function()
-  mc.matchSkipCursor(-1)
-end, { desc = "Match then skip multicursor prev" })
--- Add and remove cursors with control + left click.
-map("n", "<c-leftmouse>", mc.handleMouse)
-map("n", "<c-leftdrag>", mc.handleMouseDrag)
-map("n", "<c-leftrelease>", mc.handleMouseRelease)
--- Disable and enable cursors.
-map({ "n", "x" }, "<c-q>", mc.toggleCursor, { desc = "" })
--- Mappings defined in a keymap layer only apply when there are
--- multiple cursors. This lets you have overlapping mappings.
-mc.addKeymapLayer(function(layerSet)
-  -- Select a different cursor as the main one.
-  layerSet({ "n", "x" }, "<left>", mc.prevCursor)
-  layerSet({ "n", "x" }, "<right>", mc.nextCursor)
-  -- Delete the main cursor.
-  layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor)
-  -- Enable and clear cursors using escape.
-  layerSet("n", "<esc>", function()
-    if not mc.cursorsEnabled() then
-      mc.enableCursors()
-    else
-      mc.clearCursors()
-    end
-  end)
-end)
-
 -- for hop.nvim
 local hop = require("hop")
 local directions = require("hop.hint").HintDirection
@@ -115,6 +63,58 @@ if not vim.g.vscode then
   map("n", "<leader>rn", ":IncRename ") -- 让nvim中更改变量名字
   -- map("n", "<C-d>", "5j", { noremap = true, silent = true })
   -- map("n", "<C-u>", "5k", { noremap = true, silent = true })
+
+  -- for multicursor-nvim
+  local mc = require("multicursor-nvim")
+  -- Add or skip cursor above/below the main cursor.
+  map({ "n", "x" }, "<up>", function()
+    mc.lineAddCursor(-1)
+  end, { desc = "Add multicursor above" })
+  map({ "n", "x" }, "<down>", function()
+    mc.lineAddCursor(1)
+  end, { desc = "Add multicursor blow" })
+  map({ "n", "x" }, "<leader><up>", function()
+    mc.lineSkipCursor(-1)
+  end, { desc = "Skip multicursor above" })
+  map({ "n", "x" }, "<leader><down>", function()
+    mc.lineSkipCursor(1)
+  end, { desc = "Skip multicursor blow" })
+  -- Add or skip adding a new cursor by matching word/selection
+  map({ "n", "x" }, "<leader>n", function()
+    mc.matchAddCursor(1)
+  end, { desc = "Match then add multicursor next" })
+  map({ "n", "x" }, "<leader>s", function()
+    mc.matchSkipCursor(1)
+  end, { desc = "Match then skip multicursor next" })
+  map({ "n", "x" }, "<leader>N", function()
+    mc.matchAddCursor(-1)
+  end, { desc = "Match then add multicursor prev" })
+  map({ "n", "x" }, "<leader>S", function()
+    mc.matchSkipCursor(-1)
+  end, { desc = "Match then skip multicursor prev" })
+  -- Add and remove cursors with control + left click.
+  map("n", "<c-leftmouse>", mc.handleMouse)
+  map("n", "<c-leftdrag>", mc.handleMouseDrag)
+  map("n", "<c-leftrelease>", mc.handleMouseRelease)
+  -- Disable and enable cursors.
+  map({ "n", "x" }, "<c-q>", mc.toggleCursor, { desc = "" })
+  -- Mappings defined in a keymap layer only apply when there are
+  -- multiple cursors. This lets you have overlapping mappings.
+  mc.addKeymapLayer(function(layerSet)
+    -- Select a different cursor as the main one.
+    layerSet({ "n", "x" }, "<left>", mc.prevCursor)
+    layerSet({ "n", "x" }, "<right>", mc.nextCursor)
+    -- Delete the main cursor.
+    layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor)
+    -- Enable and clear cursors using escape.
+    layerSet("n", "<esc>", function()
+      if not mc.cursorsEnabled() then
+        mc.enableCursors()
+      else
+        mc.clearCursors()
+      end
+    end)
+  end)
 
   -- 以下命令在vscode中容易导致崩溃
   -- for csvview.lua
