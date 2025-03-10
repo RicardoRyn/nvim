@@ -1,5 +1,8 @@
 -- 启用rainbow-delimiters.nvim插件
-return {
-  "HiPhish/rainbow-delimiters.nvim",
-}
-
+if vim.g.vscode then
+  return {}
+else
+  return {
+    "HiPhish/rainbow-delimiters.nvim",
+  }
+end

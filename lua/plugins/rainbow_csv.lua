@@ -1,20 +1,24 @@
 -- 启用rainbow_csv.nvim插件
-return {
-    'cameron-wags/rainbow_csv.nvim',
+if vim.g.vscode then
+  return {}
+else
+  return {
+    "cameron-wags/rainbow_csv.nvim",
     config = true,
     ft = {
-        'csv',
-        'tsv',
-        'csv_semicolon',
-        'csv_whitespace',
-        'csv_pipe',
-        'rfc_csv',
-        'rfc_semicolon'
+      "csv",
+      "tsv",
+      "csv_semicolon",
+      "csv_whitespace",
+      "csv_pipe",
+      "rfc_csv",
+      "rfc_semicolon",
     },
     cmd = {
-        'RainbowDelim',
-        'RainbowDelimSimple',
-        'RainbowDelimQuoted',
-        'RainbowMultiDelim'
-    }
-}
+      "RainbowDelim",
+      "RainbowDelimSimple",
+      "RainbowDelimQuoted",
+      "RainbowMultiDelim",
+    },
+  }
+end
