@@ -8,7 +8,6 @@ local unmap = vim.keymap.del
 ------------------------------------
 ------- nvim和vscode共用部分 -------
 ------------------------------------
-
 map("n", "<leader>h", "<cmd>:noh<cr>", { desc = "No highlight" })
 -- 禁用部分lazyvim默认快捷键
 map({ "n", "v" }, "J", "<Nop>")
@@ -147,10 +146,10 @@ if not vim.g.vscode then
     moveBy("right")
   end, { desc = "Move current buffer to right" })
 else
+
   -------------------------------
   ------- vscode中的配置 --------
   -------------------------------
-
   -- 取消这些映射，尽量保证vscode-neovim不会崩
   unmap("n", "<leader>K", { desc = "Keywordprg" })
   unmap("n", "<leader>l", { desc = "Lazy" })
