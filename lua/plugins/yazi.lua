@@ -5,14 +5,14 @@ return {
   keys = {
     -- 👇 in this section, choose your own keymappings!
     {
-      "<leader>e",
+      "<leader>-",
       mode = { "n", "v" },
       "<cmd>Yazi<cr>",
       desc = "Open yazi at the current file",
     },
     {
       -- Open in the current working directory
-      "<leader>E",
+      "<leader>cw",
       "<cmd>Yazi cwd<cr>",
       desc = "Open the file manager in nvim's working directory",
     },
@@ -25,7 +25,7 @@ return {
   ---@type YaziConfig | {}
   opts = {
     -- if you want to open yazi instead of netrw, see below for more info
-    open_for_directories = true,
+    open_for_directories = false,
     keymaps = {
       show_help = "<f1>",
     },
