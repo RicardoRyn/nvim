@@ -120,9 +120,6 @@ if not vim.g.vscode then
   map("n", "<leader>csv", "<cmd>CsvViewToggle<cr>", { desc = "CsvViewToggle" })
   -- close buffer
   unmap("n", "<leader>l", { desc = "Lazy" })
-  map("n", "<leader>ll", function()
-    require("mini.bufremove").delete(0, true)
-  end, { desc = "Close current buffer" })
   -- 移动 buffer
   local moveBy = function(dir)
     if dir == "left" then
@@ -165,12 +162,6 @@ else
     "<leader>qq",
     "<Cmd>lua require('vscode').call('workbench.action.closeWindow')<CR>",
     { desc = "Quit VSCode" }
-  )
-  map(
-    "n",
-    "<leader>ll",
-    "<Cmd>lua require('vscode').call('workbench.action.closeEditorInAllGroups')<CR>",
-    { desc = "Close Current Tab" }
   )
   map("n", "u", "<Cmd>lua require('vscode').call('undo')<CR>", { desc = "Undo" })
   map("n", "<C-r>", "<Cmd>lua require('vscode').call('redo')<CR>", { desc = "Redo" })
