@@ -6,7 +6,6 @@ else
     "snacks.nvim",
     opts = {
       dashboard = {
-        -- dashboard configuration
         preset = {
           header = [[
         ██████╗ ██╗ ██████╗ █████╗ ██████╗ ██████╗  ██████╗     ██████╗ ██╗   ██╗███╗   ██╗
@@ -18,7 +17,6 @@ else
         ]],
         },
       },
-      ---@type snacks.Config
       image = {},
     },
   }
