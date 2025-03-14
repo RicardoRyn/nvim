@@ -8,6 +8,9 @@ local unmap = vim.keymap.del
 ------------------------------------
 ------- nvim和vscode共用部分 -------
 ------------------------------------
+-- insert 模式下，跳到行首行尾
+map("i", "<C-h>", "<ESC>I", { desc = "Move to the beginning of the line in Insert mode" })
+map("i", "<C-l>", "<ESC>A", { desc = "Move to the end of the line in Insert mode" })
 map("n", "<leader>h", "<cmd>:noh<cr>", { desc = "No highlight" })
 -- 禁用部分lazyvim默认快捷键
 map({ "n", "v" }, "J", "<Nop>")
@@ -56,13 +59,6 @@ if not vim.g.vscode then
   ------------------------------------
   ------- 仅在nvim中使用的命令 -------
   ------------------------------------
-  -- 以下命令在vscode中不生效
-  map({ "i" }, "jk", "<Esc>")
-  map("v", "<C-c>", '"+y') -- 让neovim中C-c可以复制内容到剪贴板
-  map("n", "<leader>rn", ":IncRename ") -- 让nvim中更改变量名字
-  -- map("n", "<C-d>", "5j", { noremap = true, silent = true })
-  -- map("n", "<C-u>", "5k", { noremap = true, silent = true })
-
   -- for multicursor-nvim
   local mc = require("multicursor-nvim")
   -- Add or skip cursor above/below the main cursor.
@@ -115,6 +111,13 @@ if not vim.g.vscode then
     end)
   end)
 
+  -- 以下命令在vscode中不生效
+  map({ "i" }, "jk", "<Esc>")
+  map("v", "<C-c>", '"+y') -- 让neovim中C-c可以复制内容到剪贴板
+  map("n", "<leader>rn", ":IncRename ") -- 让nvim中更改变量名字
+  -- map("n", "<C-d>", "5j", { noremap = true, silent = true })
+  -- map("n", "<C-u>", "5k", { noremap = true, silent = true })
+
   -- 以下命令在vscode中容易导致崩溃
   -- for csvview.lua
   map("n", "<leader>csv", "<cmd>CsvViewToggle<cr>", { desc = "CsvViewToggle" })
@@ -143,7 +146,6 @@ if not vim.g.vscode then
     moveBy("right")
   end, { desc = "Move current buffer to right" })
 else
-
   -------------------------------
   ------- vscode中的配置 --------
   -------------------------------
