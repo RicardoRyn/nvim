@@ -8,7 +8,6 @@ local unmap = vim.keymap.del
 ------------------------------------
 ------- nvim和vscode共用部分 -------
 ------------------------------------
--- insert 模式下，跳到行首行尾
 map("i", "<C-h>", "<ESC>I", { desc = "Move to the beginning of the line in Insert mode" })
 map("i", "<C-l>", "<ESC>A", { desc = "Move to the end of the line in Insert mode" })
 map("n", "<leader>h", "<cmd>:noh<cr>", { desc = "No highlight" })
@@ -115,8 +114,6 @@ if not vim.g.vscode then
   map({ "i" }, "jk", "<Esc>")
   map("v", "<C-c>", '"+y') -- 让neovim中C-c可以复制内容到剪贴板
   map("n", "<leader>rn", ":IncRename ") -- 让nvim中更改变量名字
-  -- map("n", "<C-d>", "5j", { noremap = true, silent = true })
-  -- map("n", "<C-u>", "5k", { noremap = true, silent = true })
 
   -- 以下命令在vscode中容易导致崩溃
   -- for csvview.lua
