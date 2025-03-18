@@ -1,4 +1,4 @@
--- 原<leader>fF等快捷键无效，重新设置命令
+-- 自定义部分快捷键
 if vim.g.vscode then
   return {}
 else

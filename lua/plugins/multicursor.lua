@@ -1,4 +1,4 @@
--- 启用多光标
+-- 多光标
 if vim.g.vscode then
   return {}
 else
