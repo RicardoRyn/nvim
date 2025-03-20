@@ -4,20 +4,22 @@
 
 local map = vim.keymap.set
 local unmap = vim.keymap.del
-local hop = require("hop")
-local directions = require("hop.hint").HintDirection
-local positions = require("hop.hint").HintPosition
 
 ------------------------------------
 ------- nvim和vscode共用部分 -------
 ------------------------------------
-
+map("i", "<C-h>", "<ESC>I", { desc = "Move to the beginning of the line in Insert mode" })
+map("i", "<C-l>", "<ESC>A", { desc = "Move to the end of the line in Insert mode" })
 map("n", "<leader>h", "<cmd>:noh<cr>", { desc = "No highlight" })
 -- 禁用部分lazyvim默认快捷键
 map({ "n", "v" }, "J", "<Nop>")
 map({ "v" }, "U", "<Nop>")
 map({ "v" }, "u", "<Nop>")
+
 -- for hop.nvim
+local hop = require("hop")
+local directions = require("hop.hint").HintDirection
+local positions = require("hop.hint").HintPosition
 -- leader leader w
 map({ "n", "v" }, "<leader><leader>w", function()
   hop.hint_words({ direction = directions.AFTER_CURSOR, hint_position = positions.END })
@@ -56,22 +58,68 @@ if not vim.g.vscode then
   ------------------------------------
   ------- 仅在nvim中使用的命令 -------
   ------------------------------------
+  -- for multicursor-nvim
+  local mc = require("multicursor-nvim")
+  -- Add or skip cursor above/below the main cursor.
+  map({ "n", "x" }, "<up>", function()
+    mc.lineAddCursor(-1)
+  end, { desc = "Add multicursor above" })
+  map({ "n", "x" }, "<down>", function()
+    mc.lineAddCursor(1)
+  end, { desc = "Add multicursor blow" })
+  map({ "n", "x" }, "<leader><up>", function()
+    mc.lineSkipCursor(-1)
+  end, { desc = "Skip multicursor above" })
+  map({ "n", "x" }, "<leader><down>", function()
+    mc.lineSkipCursor(1)
+  end, { desc = "Skip multicursor blow" })
+  -- Add or skip adding a new cursor by matching word/selection
+  map({ "n", "x" }, "<leader>n", function()
+    mc.matchAddCursor(1)
+  end, { desc = "Match then add multicursor next" })
+  map({ "n", "x" }, "<leader>s", function()
+    mc.matchSkipCursor(1)
+  end, { desc = "Match then skip multicursor next" })
+  map({ "n", "x" }, "<leader>N", function()
+    mc.matchAddCursor(-1)
+  end, { desc = "Match then add multicursor prev" })
+  map({ "n", "x" }, "<leader>S", function()
+    mc.matchSkipCursor(-1)
+  end, { desc = "Match then skip multicursor prev" })
+  -- Add and remove cursors with control + left click.
+  map("n", "<c-leftmouse>", mc.handleMouse)
+  map("n", "<c-leftdrag>", mc.handleMouseDrag)
+  map("n", "<c-leftrelease>", mc.handleMouseRelease)
+  -- Disable and enable cursors.
+  map({ "n", "x" }, "<c-q>", mc.toggleCursor, { desc = "" })
+  -- Mappings defined in a keymap layer only apply when there are
+  -- multiple cursors. This lets you have overlapping mappings.
+  mc.addKeymapLayer(function(layerSet)
+    -- Select a different cursor as the main one.
+    layerSet({ "n", "x" }, "<left>", mc.prevCursor)
+    layerSet({ "n", "x" }, "<right>", mc.nextCursor)
+    -- Delete the main cursor.
+    layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor)
+    -- Enable and clear cursors using escape.
+    layerSet("n", "<esc>", function()
+      if not mc.cursorsEnabled() then
+        mc.enableCursors()
+      else
+        mc.clearCursors()
+      end
+    end)
+  end)
 
   -- 以下命令在vscode中不生效
   map({ "i" }, "jk", "<Esc>")
   map("v", "<C-c>", '"+y') -- 让neovim中C-c可以复制内容到剪贴板
   map("n", "<leader>rn", ":IncRename ") -- 让nvim中更改变量名字
-  -- map("n", "<C-d>", "5j", { noremap = true, silent = true })
-  -- map("n", "<C-u>", "5k", { noremap = true, silent = true })
 
   -- 以下命令在vscode中容易导致崩溃
   -- for csvview.lua
   map("n", "<leader>csv", "<cmd>CsvViewToggle<cr>", { desc = "CsvViewToggle" })
   -- close buffer
   unmap("n", "<leader>l", { desc = "Lazy" })
-  map("n", "<leader>ll", function()
-    require("mini.bufremove").delete(0, true)
-  end, { desc = "Close current buffer" })
   -- 移动 buffer
   local moveBy = function(dir)
     if dir == "left" then
@@ -98,12 +146,11 @@ else
   -------------------------------
   ------- vscode中的配置 --------
   -------------------------------
-
   -- 取消这些映射，尽量保证vscode-neovim不会崩
   unmap("n", "<leader>K", { desc = "Keywordprg" })
   unmap("n", "<leader>l", { desc = "Lazy" })
   unmap("n", "<leader>L", { desc = "LazyVim Changelog" })
-  unmap("n", "<leader>n", { desc = "Notification History" })
+  -- unmap("n", "<leader>n", { desc = "Notification History" })
   unmap("n", "<leader>.", { desc = "Toggle Scratch Buffer" })
   unmap("n", "<leader>`", { desc = "Switch to Other Buffer" })
   -- 常规快捷键，尽量与nvim本身保持一致，但是使用vscode的方式
@@ -114,12 +161,6 @@ else
     "<leader>qq",
     "<Cmd>lua require('vscode').call('workbench.action.closeWindow')<CR>",
     { desc = "Quit VSCode" }
-  )
-  map(
-    "n",
-    "<leader>ll",
-    "<Cmd>lua require('vscode').call('workbench.action.closeEditorInAllGroups')<CR>",
-    { desc = "Close Current Tab" }
   )
   map("n", "u", "<Cmd>lua require('vscode').call('undo')<CR>", { desc = "Undo" })
   map("n", "<C-r>", "<Cmd>lua require('vscode').call('redo')<CR>", { desc = "Redo" })
