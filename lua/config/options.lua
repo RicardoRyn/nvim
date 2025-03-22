@@ -17,6 +17,7 @@ opt.wrap = true
 opt.relativenumber = true
 opt.list = true -- 显示隐藏的字符“例如空格、制表符”
 opt.listchars = "space:·" -- 将隐藏的字符设置成“·”
+opt.smartindent = false
 
 if vim.g.neovide then
   -- Put anything you want to happen only in Neovide here
