@@ -1,26 +1,28 @@
--- 设置tab键接受建议
-if vim.g.vscode then
-  return {}
-else
-  return {
-    "saghen/blink.cmp",
-    opts = {
-      keymap = {
-        preset = "enter",
-        ["<CR>"] = { "fallback" },
-        ["<Tab>"] = {
-          function(cmp)
-            if cmp.snippet_active() then
-              return cmp.accept()
-            else
-              return cmp.select_and_accept()
-            end
-          end,
-          "snippet_forward",
-          "fallback",
-        },
-        ["<S-Tab>"] = { "snippet_backward", "fallback" },
-      },
-    },
-  }
-end
+return {}
+
+-- -- 设置tab键接受建议
+-- if vim.g.vscode then
+--   return {}
+-- else
+--   return {
+--     "saghen/blink.cmp",
+--     opts = {
+--       keymap = {
+--         preset = "enter",
+--         ["<CR>"] = { "fallback" },
+--         ["<Tab>"] = {
+--           function(cmp)
+--             if cmp.snippet_active() then
+--               return cmp.accept()
+--             else
+--               return cmp.select_and_accept()
+--             end
+--           end,
+--           "snippet_forward",
+--           "fallback",
+--         },
+--         ["<S-Tab>"] = { "snippet_backward", "fallback" },
+--       },
+--     },
+--   }
+-- end
