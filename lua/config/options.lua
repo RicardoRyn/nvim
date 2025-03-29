@@ -14,8 +14,8 @@ opt.clipboard = "" -- 禁止neovim寄存器和系统剪贴板共用
 opt.conceallevel = 0 -- 不隐藏任何文本
 opt.wrap = true
 opt.relativenumber = true
-opt.list = true -- 显示隐藏的字符“例如空格、制表符”
-opt.listchars = "space:·" -- 将隐藏的字符设置成“·”
+-- opt.list = true -- 显示隐藏的字符“例如空格、制表符”
+-- opt.listchars = "space:·" -- 将隐藏的字符设置成“·”
 
 if vim.g.neovide then
   -- Put anything you want to happen only in Neovide here
