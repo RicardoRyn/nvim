@@ -4,6 +4,7 @@
 
 local opt = vim.opt
 
+vim.o.background = "light"
 vim.g.autoformat = false
 opt.timeoutlen = 300 -- 设置 timeoutlen 为等待键盘快捷键连击时间500ms
 opt.shell = "nu" -- 设置 Nushell 为默认终端
