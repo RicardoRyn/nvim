@@ -14,7 +14,7 @@ opt.shellxquote = ""
 opt.clipboard = "" -- 禁止neovim寄存器和系统剪贴板共用
 opt.conceallevel = 0 -- 不隐藏任何文本
 opt.wrap = true
-opt.relativenumber = true
+opt.relativenumber = false
 -- opt.list = true -- 显示隐藏的字符“例如空格、制表符”
 -- opt.listchars = "space:·" -- 将隐藏的字符设置成“·”
 
