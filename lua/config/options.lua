@@ -6,7 +6,7 @@ local opt = vim.opt
 
 vim.o.background = "light"
 vim.g.autoformat = false
-opt.timeoutlen = 300 -- 设置 timeoutlen 为等待键盘快捷键连击时间500ms
+opt.timeoutlen = 500 -- 设置 timeoutlen 为等待键盘快捷键连击时间500ms
 -- opt.shell = "D:/Git/Git/bin/bash.exe" -- 设置 Nushell 为默认终端
 opt.shell = "nu" -- 设置 Nushell 为默认终端
 opt.shellcmdflag = "-c"
@@ -40,5 +40,5 @@ if vim.g.neovide then
   vim.g.neovide_fullscreen = false -- 全屏 end
   vim.g.neovide_profiler = false -- 左上角会显示一个小的帧数图
   vim.g.neovide_cursor_vfx_mode = "pixiedust"
-  vim.g.neovide_cursor_vfx_particle_density = 100.0
+  vim.g.neovide_cursor_vfx_particle_density = 17.0
 end
