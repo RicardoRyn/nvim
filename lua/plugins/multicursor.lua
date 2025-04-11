@@ -4,7 +4,6 @@ if vim.g.vscode then
 else
   return {
     "jake-stewart/multicursor.nvim",
-    vscode = true,
     branch = "1.0",
     config = function()
       local mc = require("multicursor-nvim")

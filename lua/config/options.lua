@@ -2,21 +2,17 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
-local opt = vim.opt
-
-vim.o.background = "light"
 vim.g.autoformat = false
-opt.timeoutlen = 500 -- 设置 timeoutlen 为等待键盘快捷键连击时间500ms
--- opt.shell = "D:/Git/Git/bin/bash.exe" -- 设置 Nushell 为默认终端
-opt.shell = "nu" -- 设置 Nushell 为默认终端
-opt.shellcmdflag = "-c"
-opt.shellquote = '"'
-opt.shellxquote = ""
-opt.clipboard = "" -- 禁止neovim寄存器和系统剪贴板共用
-opt.conceallevel = 0 -- 不隐藏任何文本
-opt.wrap = true
-opt.relativenumber = false
-opt.smartindent = false
+vim.opt.timeoutlen = 500 -- 设置 timeoutlen 为等待键盘快捷键连击时间500ms
+vim.opt.shell = "nu" -- 设置 Nushell 为默认终端
+vim.opt.shellcmdflag = "-c"
+vim.opt.shellquote = '"'
+vim.opt.shellxquote = ""
+vim.opt.clipboard = "" -- 禁止neovim寄存器和系统剪贴板共用
+vim.opt.conceallevel = 0 -- 不隐藏任何文本
+vim.opt.wrap = true
+vim.opt.relativenumber = false
+vim.opt.smartindent = false
 
 if vim.g.neovide then
   -- Put anything you want to happen only in Neovide here
