@@ -12,6 +12,9 @@ local function augroup(name)
 end
 
 if not vim.g.vscode then
+  -- nvim中的配置
+  -- nvim中的配置
+  -- nvim中的配置
   vim.api.nvim_create_autocmd("FileType", {
     group = augroup("wrap_spell"),
     pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
@@ -20,6 +23,7 @@ if not vim.g.vscode then
       vim.opt_local.spell = false
     end,
   })
+
   vim.api.nvim_create_autocmd("FileType", {
     group = augroup("associate_filetype"),
     pattern = { "python" },
@@ -29,6 +33,7 @@ if not vim.g.vscode then
       vim.opt_local.spell = false
     end,
   })
+
   vim.api.nvim_create_autocmd("FileType", {
     group = augroup("associate_filetype"),
     pattern = { "sh", "lua", "nu" },
@@ -38,7 +43,25 @@ if not vim.g.vscode then
       vim.opt_local.spell = false
     end,
   })
+
+  require("lspconfig").pyright.setup({
+    settings = {
+      pyright = {
+        -- Using Ruff's import organizer
+        disableOrganizeImports = true,
+      },
+      python ={
+        analysis = {
+          -- Ignore all files for analysis to exclusively use Ruff for linting
+          ignore = { "*" }
+        }
+      }
+    }
+  })
+
 else
+  -- vscode中必须单独写出来才生效 = =+
+  -- vscode中必须单独写出来才生效 = =+
   -- vscode中必须单独写出来才生效 = =+
   vim.api.nvim_create_autocmd("FileType", {
     group = augroup("associate_filetype"),
