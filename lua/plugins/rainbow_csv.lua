@@ -1,4 +1,4 @@
--- 启用rainbow_csv.nvim插件
+-- 彩色csv
 if vim.g.vscode then
   return {}
 else
