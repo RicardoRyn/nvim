@@ -1,3 +1,4 @@
+-- 无需在lualine中显示时间
 if vim.g.vscode then
   return {}
 else
