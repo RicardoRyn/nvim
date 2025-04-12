@@ -3,6 +3,7 @@
 -- Add any additional options here
 
 vim.g.autoformat = false
+vim.opt.colorcolumn = "80"
 vim.opt.timeoutlen = 500 -- 设置 timeoutlen 为等待键盘快捷键连击时间500ms
 vim.opt.shell = "nu" -- 设置 Nushell 为默认终端
 vim.opt.shellcmdflag = "-c"
