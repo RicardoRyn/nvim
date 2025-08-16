@@ -15,6 +15,8 @@ else
 
         "pyright",
         "ruff",
+        "isort",
+        "black",
 
         "bash-language-server",
         "shellcheck",

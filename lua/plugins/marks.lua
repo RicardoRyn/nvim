@@ -1,9 +1,8 @@
-if vim.g.vscode then
-  return {}
-else
-  return {
-    "chentoast/marks.nvim",
-    event = "VeryLazy",
-    opts = {},
-  }
-end
+return {
+  "chentoast/marks.nvim",
+  cond = function()
+    return not vim.g.vscode
+  end,
+  event = "VeryLazy",
+  opts = {},
+}

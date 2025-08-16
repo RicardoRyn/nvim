@@ -1,55 +1,55 @@
-if vim.g.vscode then
-  return {}
-else
-  return {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify", -- 太挡视野了吧，但是可以<leader>nd
-    },
-    opts = {
-      lsp = {
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
-        },
+return {
+  "folke/noice.nvim",
+  cond = function()
+    return not vim.g.vscode
+  end,
+  event = "VeryLazy",
+  dependencies = {
+    "MunifTanjim/nui.nvim",
+    "rcarriga/nvim-notify", -- 太挡视野了吧，但是可以<leader>nd
+  },
+  opts = {
+    lsp = {
+      override = {
+        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+        ["vim.lsp.util.stylize_markdown"] = true,
+        ["cmp.entry.get_documentation"] = true,
       },
-      routes = {
-        {
-          filter = {
-            event = "msg_show",
-            any = {
-              { find = "%d+L, %d+B" },
-              { find = "; after #%d+" },
-              { find = "; before #%d+" },
-            },
+    },
+    routes = {
+      {
+        filter = {
+          event = "msg_show",
+          any = {
+            { find = "%d+L, %d+B" },
+            { find = "; after #%d+" },
+            { find = "; before #%d+" },
           },
-          view = "mini",
         },
-      },
-      presets = {
-        bottom_search = false,
-        command_palette = true,
-        long_message_to_split = true,
-        lsp_doc_border = true,
-      },
-      commands = {
-        history = {
-          view = "popup",
-        },
-        last = {
-          view = "popup",
-        },
-        error = {
-          view = "popup",
-        },
-        all = {
-          view = "popup",
-        },
+        view = "mini",
       },
     },
+    presets = {
+      bottom_search = false,
+      command_palette = true,
+      long_message_to_split = true,
+      lsp_doc_border = true,
+    },
+    commands = {
+      history = {
+        view = "popup",
+      },
+      last = {
+        view = "popup",
+      },
+      error = {
+        view = "popup",
+      },
+      all = {
+        view = "popup",
+      },
+    },
+  },
     -- stylua: ignore
     keys = {
       { "<leader>nm", "<cmd>messages<CR>", desc = "Messages" },
@@ -69,5 +69,4 @@ else
       end
       require("noice").setup(opts)
     end,
-  }
-end
+}

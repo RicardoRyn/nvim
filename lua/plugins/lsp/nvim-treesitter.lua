@@ -39,11 +39,11 @@ else
           enable = true,
           swap_next = {
             --- ... other keymap
-            ["<leader>scl"] = "@code_cell.outer",
+            ["<leader>sl"] = "@code_cell.outer",
           },
           swap_previous = {
             --- ... other keymap
-            ["<leader>sch"] = "@code_cell.outer",
+            ["<leader>sh"] = "@code_cell.outer",
           },
         },
       },

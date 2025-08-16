@@ -14,8 +14,8 @@ vim.opt.clipboard = "" -- 禁止neovim寄存器和系统剪贴板共用
 -------------------- UI --------------------
 vim.o.signcolumn = "yes" -- 在行号左边显示警告、错误、Git 修改等标记的列
 vim.opt.smoothscroll = true -- 启用 平滑滚动（滚动时不会跳动，画面更流畅）
-vim.opt.scrolloff = 4 -- 上下至少保留 4 行可见内容
-vim.opt.laststatus = 3 -- 即使有多个窗口，底部只有一个统一状态栏
+vim.opt.scrolloff = 2 -- 上下至少保留 4 行可见内容
+-- vim.opt.laststatus = 3 -- 即使有多个窗口，底部只有一个统一状态栏
 vim.opt.shortmess:append({
   W = true, -- 禁止显示 “written” 消息（保存文件后的提示信息）
   I = true, -- 禁止显示启动时的 Neovim 版本信息
@@ -43,13 +43,11 @@ vim.opt.listchars = { tab = ">-", trail = "-" } -- 用>-表示tab
 
 ------------------- Term -------------------
 vim.opt.shell = "nu" -- 调用外部命令时使用的 shell 为 NuShell
-vim.opt.shellcmdflag = "-c" -- 当 Neovim 执行命令时，会使用 nu -c "command" 的形式
-vim.opt.shellquote = '"' -- 告诉 Neovim 在构造命令时，用双引号把命令包起来，例如：nu -c "ls -l"
-vim.opt.shellxquote = "" -- 用于指定额外的外层引用符，空字符串表示不再额外包裹
+-- vim.opt.shellcmdflag = "-c" -- 当 Neovim 执行命令时，会使用 nu -c "command" 的形式
+-- vim.opt.shellquote = '"' -- 告诉 Neovim 在构造命令时，用双引号把命令包起来，例如：nu -c "ls -l"
+-- vim.opt.shellxquote = "" -- 用于指定额外的外层引用符，空字符串表示不再额外包裹
 
 ------------------- Code ------------------
-vim.env.PATH = vim.fn.expand("~/miniforge3/envs/neovim/bin") .. ":" .. vim.env.PATH -- 保证neovim环境中的jupytext可用
-vim.g.python3_host_prog = vim.fn.expand("~/miniforge3/envs/neovim/bin/python3")
 vim.g.autoformat = false -- 禁止自动格式化
 vim.g.markdown_recommended_style = 0 -- 不要强制 Markdown 的默认风格
 vim.opt.timeoutlen = vim.g.vscode and 1000 or 300 -- 触发键盘提示时长

@@ -95,57 +95,56 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
-
 -- jupyter
 -- automatically import output chunks from a jupyter notebook
 -- tries to find a kernel that matches the kernel in the jupyter notebook
 -- falls back to a kernel that matches the name of the active venv (if any)
 -- 定义 imb 函数：初始化 molten buffer
 local imb = function(e) -- init molten buffer
-    vim.schedule(function()
-        local kernels = vim.fn.MoltenAvailableKernels()
-        local try_kernel_name = function()
-            local metadata = vim.json.decode(io.open(e.file, "r"):read("a"))["metadata"]
-            return metadata.kernelspec.name
-        end
-        local ok, kernel_name = pcall(try_kernel_name)
-        if not ok or not vim.tbl_contains(kernels, kernel_name) then
-            kernel_name = nil
-            local venv = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_PREFIX")
-            if venv ~= nil then
-                kernel_name = string.match(venv, "/.+/(.+)")
-            end
-        end
-        if kernel_name ~= nil and vim.tbl_contains(kernels, kernel_name) then
-            vim.cmd(("MoltenInit %s"):format(kernel_name))
-        end
-        vim.cmd("MoltenImportOutput")
-    end)
+  vim.schedule(function()
+    local kernels = vim.fn.MoltenAvailableKernels()
+    local try_kernel_name = function()
+      local metadata = vim.json.decode(io.open(e.file, "r"):read("a"))["metadata"]
+      return metadata.kernelspec.name
+    end
+    local ok, kernel_name = pcall(try_kernel_name)
+    if not ok or not vim.tbl_contains(kernels, kernel_name) then
+      kernel_name = nil
+      local venv = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_PREFIX")
+      if venv ~= nil then
+        kernel_name = string.match(venv, "/.+/(.+)")
+      end
+    end
+    if kernel_name ~= nil and vim.tbl_contains(kernels, kernel_name) then
+      vim.cmd(("MoltenInit %s"):format(kernel_name))
+    end
+    vim.cmd("MoltenImportOutput")
+  end)
 end
 -- automatically import output chunks from a jupyter notebook
 -- 自动导入输出
 vim.api.nvim_create_autocmd("BufAdd", {
-    pattern = { "*.ipynb" },
-    callback = imb,
+  pattern = { "*.ipynb" },
+  callback = imb,
 })
 -- we have to do this as well so that we catch files opened like nvim ./hi.ipynb
 vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = { "*.ipynb" },
-    callback = function(e)
-        if vim.api.nvim_get_vvar("vim_did_enter") ~= 1 then
-            imb(e)
-        end
-    end,
+  pattern = { "*.ipynb" },
+  callback = function(e)
+    if vim.api.nvim_get_vvar("vim_did_enter") ~= 1 then
+      imb(e)
+    end
+  end,
 })
 -- automatically export output chunks to a jupyter notebook on write
 -- 自动导出输出
 vim.api.nvim_create_autocmd("BufWritePost", {
-    pattern = { "*.ipynb" },
-    callback = function()
-        if require("molten.status").initialized() == "Molten" then
-            vim.cmd("MoltenExportOutput!")
-        end
-    end,
+  pattern = { "*.ipynb" },
+  callback = function()
+    if require("molten.status").initialized() == "Molten" then
+      vim.cmd("MoltenExportOutput!")
+    end
+  end,
 })
 -- 当你打开 .py 文件时，Molten 的虚拟行（virt_lines_off_by_1）和虚拟文本输出（virt_text_output）都会 关闭，避免 Python 代码文件里出现执行输出的虚拟行/文本（因为可能会干扰正常代码阅读）。
 vim.api.nvim_create_autocmd("BufEnter", {

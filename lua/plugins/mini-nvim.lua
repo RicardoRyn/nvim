@@ -3,8 +3,7 @@ return {
   version = false,
   config = function()
     require("mini.ai").setup() -- 识别小/中/大括号
-    require("mini.pairs").setup()
-    require("mini.bracketed").setup()
+    require("mini.bracketed").setup() -- 增强光标在文档中通过[和]的跳转功能
     require("mini.surround").setup({
       mappings = {
         add = "gsa", -- Add surrounding in Normal and Visual modes
@@ -16,16 +15,30 @@ return {
         update_n_lines = "gsn", -- Update `n_lines`
       },
     })
+    require("mini.pairs").setup({
+      mappings = {
+        ["("] = { action = "open", pair = "()", neigh_pattern = "[^\\]." },
+        ["["] = { action = "open", pair = "[]", neigh_pattern = "[^\\]." },
+        ["{"] = { action = "open", pair = "{}", neigh_pattern = "[^\\]." },
+
+        [")"] = { action = "close", pair = "()", neigh_pattern = "[^\\]." },
+        ["]"] = { action = "close", pair = "[]", neigh_pattern = "[^\\]." },
+        ["}"] = { action = "close", pair = "{}", neigh_pattern = "[^\\]." },
+
+        ['"'] = { action = "closeopen", pair = '""', neigh_pattern = "[^\\].", register = { cr = false } },
+        ["'"] = { action = "closeopen", pair = "''", neigh_pattern = "[^%a\\].", register = { cr = false } },
+        ["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^\\].", register = { cr = false } },
+
+        ["```"] = { action = "closeopen", pair = "```python\n```", neigh_pattern = "[^\\].", register = { cr = false } },
+      },
+    })
 
     if not vim.g.vscode then
       require("mini.cursorword").setup()
-      -- require("mini.starter").setup()
-      -- require("mini.trailspace").setup()
       require("mini.icons").setup()
       vim.keymap.set("n", "<leader>uz", function()
         require("mini.misc").zoom()
       end, { desc = "Zoom (current window)" })
-
     end
   end,
 

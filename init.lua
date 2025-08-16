@@ -12,12 +12,7 @@ if not vim.g.vscode then
 
   require("snippets.lua")
   require("snippets.python")
+  require("snippets.markdown")
 
   require("utils.newnotebook")
 end
-
--- TODO: ```python```
--- TODO: markdown中python的格式化，quarto.nvim自带的快捷键
--- TODO: 九头蛇
--- TODO: markdown python pyright诊断信息
--- TODO: kitty烦人的确认框
