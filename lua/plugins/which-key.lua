@@ -24,7 +24,7 @@ return {
         { "<localleader>e", group = "Evaluate Operator", icon = { icon = " ", color = "purple" } },
 
         -- 有下级菜单
-        -- { "<leader>a", group = "AI" },
+        { "<leader>a", group = "AI" },
         { "<leader>b", group = "Buffer" },
         { "<leader>c", group = "Code" },
         { "<leader>f", group = "Find" },
