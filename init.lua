@@ -7,8 +7,8 @@ if not vim.g.vscode then
   require("config.lsp")
   require("config.lsp.lua")
   require("config.lsp.python")
-  require("config.lsp.bash")
   require("config.lsp.markdown")
+  require("config.lsp.bash")
 
   require("snippets.lua")
   require("snippets.python")

@@ -4,7 +4,7 @@ vim.g.maplocalleader = "\\" -- <localleader>键
 vim.opt.confirm = true -- 关闭窗口时确认
 vim.opt.mouse = "a" -- 启用鼠标
 vim.opt.number = true -- 行号
-vim.opt.relativenumber = true -- 相对行号
+vim.opt.relativenumber = false -- 相对行号
 vim.opt.wrap = true -- 软换行
 vim.opt.linebreak = true -- 软换行时，在合适位置换行
 vim.opt.conceallevel = 0 -- 不隐藏任何文本
@@ -42,10 +42,11 @@ vim.opt.list = true -- 显示不可见字符（空格、Tab、换行等）
 vim.opt.listchars = { tab = ">-", trail = "-" } -- 用>-表示tab
 
 ------------------- Term -------------------
-vim.opt.shell = "nu" -- 调用外部命令时使用的 shell 为 NuShell
--- vim.opt.shellcmdflag = "-c" -- 当 Neovim 执行命令时，会使用 nu -c "command" 的形式
--- vim.opt.shellquote = '"' -- 告诉 Neovim 在构造命令时，用双引号把命令包起来，例如：nu -c "ls -l"
--- vim.opt.shellxquote = "" -- 用于指定额外的外层引用符，空字符串表示不再额外包裹
+vim.opt.shell = "nu" -- 使用 Nushell 作为外部 shell
+vim.opt.shellcmdflag = "-c" -- 当 Neovim 执行命令时，用 -c 调用命令
+vim.opt.shellquote = '"' -- 用双引号包裹命令
+vim.opt.shellxquote = "" -- 不使用额外外层引用符（Nushell 不需要）
+vim.opt.shellslash = true -- 可选：防止 Windows 上路径被转义
 
 ------------------- Code ------------------
 vim.g.autoformat = false -- 禁止自动格式化
@@ -54,7 +55,7 @@ vim.opt.timeoutlen = vim.g.vscode and 1000 or 300 -- 触发键盘提示时长
 vim.opt.completeopt = "menu,menuone,noselect" -- 打开补全菜单时不自动选中第一项
 vim.opt.wildmode = "longest:full,full" -- 命令行补全模式,第一次按 Tab，会自动补全到 最长公共前缀,再按 Tab，会显示 完整匹配列表
 vim.opt.spelllang = { "en" } -- 拼写检查的语言为英语（English）
-vim.opt.undofile = true -- 即使关闭 Neovim，文件的撤销历史仍会被保留
+vim.opt.undofile = true -- 即使关闭 Neovim，保留撤销历史
 vim.opt.undolevels = 10000 -- 最大可撤销操作数量
 vim.opt.virtualedit = "block" -- 光标在可视块模式（Visual Block Mode）中移动到没有文本的位置
 vim.opt.grepformat = "%f:%l:%c:%m" --解析 grep 命令的输出格式为 file_path:line_number:column_number:matched_text
@@ -74,6 +75,7 @@ vim.o.foldenable = false -- 打开文件时默认全部展开
 vim.o.foldlevel = 99 -- 设置折叠层级为 99
 vim.o.foldexpr = "nvim_treesitter#foldexpr()" -- 禁止初始折叠，默认展开所有内容
 vim.opt.foldtext = "" -- 折叠行的显示文本为空（折叠的行不显示默认的 ... 或其他内容）
+vim.opt.foldcolumn = "3" -- 显示折叠信息
 vim.opt.fillchars = {
   foldopen = "", -- 折叠已打开时显示的符号（默认是 `-` 或 `v`）
   foldclose = "", -- 折叠未打开时显示的符号（默认是 `+` 或 `>`）

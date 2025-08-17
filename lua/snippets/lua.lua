@@ -4,8 +4,19 @@ local t = ls.text_node
 local i = ls.insert_node
 
 ls.add_snippets("lua", {
-  s("ifvscode", {
-    t("if vim.g.vscode then"), t({"", "  return {}"}), t({"", "else"}),
+  s("notvscode", {
+    t({
+      "cond = function()",
+      "  return not vim.g.vscode",
+      "end,",
+    }),
+  }),
+})
+
+ls.add_snippets("lua", {
+  s("sty", {
+    t("-- stylua: ignore"),
     i(0),
   }),
 })
+
