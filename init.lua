@@ -1,7 +1,8 @@
-require("config.options") -- options要写在keymaps前，否则默认<leader>为`\`
-require("config.keymaps")
-require("config.autocmds")
+-- lazy需要首先加载，因为里面定义了<leader>与<localleader>
 require("config.lazy")
+require("config.autocmds")
+require("config.options")
+require("config.keymaps")
 
 if not vim.g.vscode then
   require("config.lsp")
