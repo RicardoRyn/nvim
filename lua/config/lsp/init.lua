@@ -63,10 +63,12 @@ vim.keymap.set("n", "<leader>ux", function()
     print("󱏧 Diagnostics Disabled")
   end
 end, { desc = "Toggle Diagnostics" })
+
+-- stylua: ignore
 -- 功能
 vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })
-vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Show Diagnostics (line)" })
+vim.keymap.set("n", "<leader>cd", function() vim.diagnostic.open_float(nil, { border = "rounded" }) end, { desc = "Show Diagnostics (line)" })
 vim.keymap.set("n", "<leader>cD", ":Telescope diagnostics bufnr=0<CR>", { desc = "Show Diagnostics (buffer)" })
 -- 跳转
 vim.keymap.set("n", "gd", ":Telescope lsp_definitions<CR>", { desc = "Go to Definition" })
@@ -75,5 +77,6 @@ vim.keymap.set("n", "gr", ":Telescope lsp_references<CR>", { desc = "Go to Refer
 vim.keymap.set("n", "gt", ":Telescope lsp_type_definitions<CR>", { desc = "Go to Type Definition" })
 vim.keymap.set("n", "gI", ":Telescope lsp_implementations<CR>", { desc = "Go to Implementation" })
 -- 提示
-vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Hover Information" })
+-- vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Hover Information" })
 vim.keymap.set({ "i" }, "<C-k>", vim.lsp.buf.signature_help, { desc = "Show Signature Help" })
+vim.keymap.set("i", "<C-k>", function() vim.lsp.buf.signature_help({ border = "rounded" }) end, { desc = "Show Signature Help" })
