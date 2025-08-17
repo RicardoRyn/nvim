@@ -1,7 +1,7 @@
 return {
   "linux-cultist/venv-selector.nvim",
   cond = function()
-    return not vim.g.vscode
+    return vim.loop.os_uname().sysname == "Windows_NT" and not vim.g.vscode
   end,
   dependencies = {
     -- "neovim/nvim-lspconfig",
@@ -15,12 +15,12 @@ return {
     { "<leader>v", "<cmd>VenvSelect<cr>", desc = "Virtual Env" },
   },
   opts = {
-    -- Your settings go here
     search = {
       anaconda_base = {
-        command = "fd /python$ ~/miniforge3/envs --max-depth 3 --full-path --color never -E /proc",
+        command = "fd python.exe$ E:/python/envs --max-depth 2 --full-path --color never -HI -a -L",
         type = "anaconda", -- 这里必须是 anaconda，才能生效
       },
+      cwd = { command = "fd python.exe$ $CWD/.venv/Scripts --full-path --color never -HI -a -L" },
     },
   },
 }

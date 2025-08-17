@@ -8,8 +8,9 @@ else
     branch = "master", -- 详见本系列的附录
     event = "VeryLazy",
     opts = {
-      ensure_installed = { "lua", "python", "bash", "json", "markdown", "javascript" },
+      ensure_installed = { "lua", "python", "bash", "json", "markdown", "markdown_inline" },
       highlight = { enable = true },
+      indent = { enable = true },
 
       -- jupyter notebook相关
       textobjects = {
