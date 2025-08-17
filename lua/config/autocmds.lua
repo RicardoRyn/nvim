@@ -64,15 +64,15 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- 打开文本文件时，软换行并检查拼写
-vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("wrap_spell"),
-  pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
-  end,
-})
+-- -- 打开文本文件时，软换行并检查拼写
+-- vim.api.nvim_create_autocmd("FileType", {
+--   group = augroup("wrap_spell"),
+--   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
+--   callback = function()
+--     vim.opt_local.wrap = true
+--     vim.opt_local.spell = true
+--   end,
+-- })
 
 -- 禁用 JSON 文件中的“隐藏显示”（conceal）功能，确保内容完全可见
 vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -96,11 +96,11 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 -- jupyter
--- automatically import output chunks from a jupyter notebook
--- tries to find a kernel that matches the kernel in the jupyter notebook
--- falls back to a kernel that matches the name of the active venv (if any)
--- 定义 imb 函数：初始化 molten buffer
-if vim.loop.os_uname().sysname == "Linux" and not vim.g.vscode then
+if vim.loop.os_uname().sysname == "Windows_NT" and not vim.g.vscode then
+  -- automatically import output chunks from a jupyter notebook
+  -- tries to find a kernel that matches the kernel in the jupyter notebook
+  -- falls back to a kernel that matches the name of the active venv (if any)
+  -- 定义 imb 函数：初始化 molten buffer
   local imb = function(e) -- init molten buffer
     vim.schedule(function()
       local kernels = vim.fn.MoltenAvailableKernels()
