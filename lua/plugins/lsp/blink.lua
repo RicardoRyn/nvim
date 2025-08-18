@@ -10,40 +10,40 @@ return {
     { "xzbdmw/colorful-menu.nvim", opts = {} },
   },
   event = "VeryLazy",
+  -- stylua: ignore
   opts = {
-    menu = { border = "single" },
     completion = {
       documentation = {
-        auto_show = true,
-        window = { border = "single" },
+        auto_show = false,
       },
       menu = {
         draw = {
-          columns = { { "kind_icon" }, { "label", gap = 1 } },
+          columns = { { "kind_icon" }, { "label", gap = 1 }, {"label_description"}, {"source_name"} },
           components = {
             label = {
-              text = function(ctx)
-                return require("colorful-menu").blink_components_text(ctx)
-              end,
-              highlight = function(ctx)
-                return require("colorful-menu").blink_components_highlight(ctx)
-              end,
+              text = function(ctx) return require("colorful-menu").blink_components_text(ctx) end,
+              highlight = function(ctx) return require("colorful-menu").blink_components_highlight(ctx) end,
             },
           },
         },
       },
+      list = {
+        selection = { preselect = true, auto_insert = false }
+      }
     },
     keymap = {
-      preset = "super-tab",
-    },
-    signature = {
-      enabled = false, -- PERF: 查清楚现在的函数签名的来源
-      window = { border = "single" },
+      ['<CR>'] = { 'accept', 'fallback' },
+      ['<Tab>'] = { 'accept', 'fallback' },
+      ['<C-y>'] = { 'select_and_accept' },
     },
     cmdline = {
+      keymap = { preset = 'inherit' },
       completion = {
         menu = {
-          auto_show = true,
+          auto_show = true
+        },
+        list = {
+          selection = { preselect = false, auto_insert = false }
         },
       },
     },
