@@ -21,6 +21,13 @@ return {
       desc = "Find Files (recently opened)",
     },
     {
+      "<leader>fc",
+      function()
+        require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
+      end,
+      desc = "Find Config",
+    },
+    {
       "<leader>fg",
       function()
         local current_file = vim.api.nvim_buf_get_name(0)
@@ -36,6 +43,12 @@ return {
         require("telescope.builtin").live_grep()
       end,
       desc = "Find Live Grep (cwd)",
+    },
+    { "<leader>fw",
+      function()
+        require("telescope.builtin").live_grep({ default_text = vim.fn.expand("<cword>") })
+      end,
+      desc = "Find Word Under Cursor"
     },
     {
       "<leader>fb",

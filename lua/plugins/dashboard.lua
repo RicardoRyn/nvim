@@ -22,6 +22,7 @@ return {
             find_text = function() require("telescope.builtin").live_grep() end,
             recent_files = function() require("telescope.builtin").oldfiles() end,
             restore_session = 'lua require("persistence").load()',
+            find_config = function() require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") }) end,
             lazy = "Lazy",
             quit = function() vim.api.nvim_input("<cmd>qa<cr>") end,
           }
@@ -36,6 +37,7 @@ return {
           { action = actions.find_text, desc = " Find Text", icon = " ", key = "g" },
           { action = actions.recent_files, desc = " Recent Files", icon = " ", key = "r" },
           { action = actions.restore_session, desc = " Restore Session", icon = " ", key = "s" },
+          { action = actions.find_config, desc = " Config", icon = " ", key = "c" },
           { action = actions.lazy, desc = " Lazy", icon = "󰒲 ", key = "l" },
           { action = actions.quit, desc = " Quit", icon = " ", key = "q" },
         },
