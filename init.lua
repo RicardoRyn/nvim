@@ -17,3 +17,5 @@ if not vim.g.vscode then
 
   require("utils.newnotebook")
 end
+
+-- TODO: 在wsl中尝试kitty
