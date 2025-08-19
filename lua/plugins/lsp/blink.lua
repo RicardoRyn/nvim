@@ -33,7 +33,7 @@ return {
     },
     keymap = {
       ['<CR>'] = { 'accept', 'fallback' },
-      ['<Tab>'] = { 'accept', 'fallback' },
+      ['<Tab>'] = { 'select_and_accept', 'fallback' },
       ['<S-Tab>'] = { 'select_prev', 'fallback' },
       ['<C-y>'] = { 'select_and_accept' },
     },

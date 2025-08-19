@@ -18,4 +18,4 @@ if not vim.g.vscode then
   require("utils.newnotebook")
 end
 
--- TODO: 在wsl中尝试kitty
+-- TODO: 怎么在ipynb中折叠一个cell，但是显示其是否在运行的虚拟文字

@@ -1,5 +1,6 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
+  dependencies = { "HiPhish/rainbow-delimiters.nvim" },
   cond = function()
     return not vim.g.vscode
   end,
@@ -30,15 +31,29 @@ return {
       vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
     end)
 
-    vim.g.rainbow_delimiters = { highlight = highlight }
+    vim.g.rainbow_delimiters = {
+      strategy = {
+        [""] = "rainbow-delimiters.strategy.global",
+        vim = "rainbow-delimiters.strategy.local",
+      },
+      query = {
+        [""] = "rainbow-delimiters",
+        lua = "rainbow-blocks",
+      },
+      priority = {
+        [""] = 110,
+        lua = 210,
+      },
+      highlight = highlight,
+    }
+
     require("ibl").setup({
-      indent = { char = "▏" },
-      scope = {
+      scope = { enabled = false },
+      indent = {
         highlight = highlight,
+        char = "▏",
       },
       exclude = { filetypes = { "dashboard" } },
     })
-
-    hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
   end,
 }
