@@ -11,12 +11,15 @@ vim.keymap.set({ "v" }, "u", "<Nop>")
 if vim.g.vscode then
   -- NOTE: Vscode中生效的设置
 
-  -- TEST:
+  -- general
   vim.keymap.set( "n", "<leader>ff", "<Cmd>lua require('vscode').call('workbench.action.quickOpenWithModes')<CR>", { desc = "Find Files" })
   vim.keymap.set( "n", "<leader>uz", "<Cmd>lua require('vscode').call('workbench.action.toggleZenMode')<CR>", { desc = "Zen Mode" })
+  vim.keymap.set( "n", "<leader>oo", "<Cmd>lua require('vscode').call('outline.focus')<CR>", { desc = "Outline" })
+  vim.keymap.set( "n", "<leader>ov", "<Cmd>lua require('vscode').call('outline.toggleVisibility')<CR>", { desc = "Outline Visibility" })
   -- 以下两项既需要在此处设置，也需要在vscode的快捷键中设置
   vim.keymap.set( "n", "<C-h>", "<Cmd>lua require('vscode').call('workbench.action.navigateLeft')<CR>", { desc = "Move to left window" })
   vim.keymap.set( "n", "<C-l>", "<Cmd>lua require('vscode').call('workbench.action.navigateRight')<CR>", { desc = "Move to right window" })
+
 
   -- Code
   vim.api.nvim_exec2("nmap j gj", { output = false })
@@ -37,6 +40,7 @@ if vim.g.vscode then
   vim.keymap.set( "n", "<leader>bo", "<Cmd>lua require('vscode').call('workbench.action.closeOtherEditors')<CR>", { desc = "close other buffers (VSCode)" })
   vim.keymap.set( "n", "<leader>bl", "<Cmd>lua require('vscode').call('workbench.action.closeEditorsToTheLeft')<CR>", { desc = "close buffers to the left (VSCode)" })
   vim.keymap.set( "n", "<leader>br", "<Cmd>lua require('vscode').call('workbench.action.closeEditorsToTheRight')<CR>", { desc = "close buffers to the right (VSCode)" })
+  vim.keymap.set( "n", "<leader>ba", "<Cmd>lua require('vscode').call('workbench.action.closeAllEditors')<CR>", { desc = "close all buffers (VSCode)" })
   vim.keymap.set( "n", "<leader>b<", "<Cmd>lua require('vscode').call('workbench.action.moveEditorLeftInGroup')<CR>", { desc = "Move buffer left (VSCode)" })
   vim.keymap.set( "n", "<leader>b>", "<Cmd>lua require('vscode').call('workbench.action.moveEditorRightInGroup')<CR>", { desc = "Move buffer right (VSCode)" })
 
