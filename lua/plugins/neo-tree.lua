@@ -1,8 +1,6 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  cond = function()
-    return not vim.g.vscode
-  end,
+  cond = not vim.g.vscode,
   branch = "v3.x",
   dependencies = {
     "nvim-lua/plenary.nvim",

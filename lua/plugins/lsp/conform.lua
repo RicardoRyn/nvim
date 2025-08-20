@@ -1,8 +1,6 @@
 return {
   "stevearc/conform.nvim",
-  cond = function()
-    return not vim.g.vscode
-  end,
+  cond = not vim.g.vscode,
   cmd = { "ConformInfo" },
   keys = {
     {

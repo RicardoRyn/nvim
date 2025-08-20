@@ -1,8 +1,6 @@
 return {
   "hat0uma/csvview.nvim",
-  cond = function()
-    return not vim.g.vscode
-  end,
+  cond = not vim.g.vscode,
   ---@module "csvview"
   ---@type CsvView.Options
   opts = {

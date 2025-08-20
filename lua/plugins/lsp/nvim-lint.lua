@@ -1,8 +1,6 @@
 return {
   "mfussenegger/nvim-lint",
-  cond = function()
-    return not vim.g.vscode
-  end,
+  cond = not vim.g.vscode,
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     require("lint").linters_by_ft = {

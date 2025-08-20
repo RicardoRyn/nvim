@@ -1,8 +1,6 @@
 return {
   "cameron-wags/rainbow_csv.nvim",
-  cond = function()
-    return not vim.g.vscode
-  end,
+  cond = not vim.g.vscode,
   config = true,
   ft = {
     "csv",

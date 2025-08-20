@@ -1,8 +1,6 @@
 return {
   "s1n7ax/nvim-window-picker",
-  cond = function()
-    return not vim.g.vscode
-  end,
+  cond = not vim.g.vscode,
   name = "window-picker",
   event = "VeryLazy",
   version = "2.*",

@@ -1,8 +1,6 @@
 return {
   "jiaoshijie/undotree",
-  cond = function()
-    return not vim.g.vscode
-  end,
+  cond = not vim.g.vscode,
   dependencies = "nvim-lua/plenary.nvim",
   config = true,
   keys = { -- load the plugin only when using it's keybinding:

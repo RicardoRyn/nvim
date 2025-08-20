@@ -1,8 +1,6 @@
 return {
   "mason-org/mason.nvim",
-  cond = function()
-    return not vim.g.vscode
-  end,
+  cond = not vim.g.vscode,
   event = "VeryLazy",
   dependencies = {
     "neovim/nvim-lspconfig",

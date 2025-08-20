@@ -1,8 +1,6 @@
 return {
   "folke/persistence.nvim",
-  cond = function()
-    return not vim.g.vscode
-  end,
+  cond = not vim.g.vscode,
   event = "BufReadPre",
   opts = {},
     -- stylua: ignore

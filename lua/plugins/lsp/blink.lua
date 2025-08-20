@@ -1,8 +1,6 @@
 return {
   "saghen/blink.cmp",
-  cond = function()
-    return not vim.g.vscode
-  end,
+  cond = not vim.g.vscode,
   version = "*",
   dependencies = {
     "rafamadriz/friendly-snippets",

@@ -1,9 +1,7 @@
 -- PERF: master分支的treesitter，不再维护
 return {
   "nvim-treesitter/nvim-treesitter",
-  cond = function()
-    return not vim.g.vscode
-  end,
+  cond = not vim.g.vscode,
   main = "nvim-treesitter.configs",
   branch = "master", -- 详见本系列的附录
   event = "VeryLazy",

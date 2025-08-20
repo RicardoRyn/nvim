@@ -1,8 +1,6 @@
 return {
   "nvim-zh/colorful-winsep.nvim",
-  cond = function()
-    return not vim.g.vscode
-  end,
+  cond = not vim.g.vscode,
   config = true,
   event = { "WinLeave" },
   opts = {

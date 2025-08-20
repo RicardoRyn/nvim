@@ -6,9 +6,7 @@ local i = ls.insert_node
 ls.add_snippets("lua", {
   s("notvscode", {
     t({
-      "cond = function()",
-      "  return not vim.g.vscode",
-      "end,",
+      "cond = not vim.g.vscode,",
     }),
   }),
 })

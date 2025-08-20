@@ -1,8 +1,6 @@
 return {
   "mrjones2014/smart-splits.nvim",
-  cond = function()
-    return not vim.g.vscode
-  end,
+  cond = not vim.g.vscode,
   lazy = false,
   -- stylua: ignore
   keys = {
