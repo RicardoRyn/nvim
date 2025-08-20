@@ -1,17 +1,17 @@
 return {
   -- 新建名为neovim的虚拟环境，然后安装pynvim, jupyter_client, jupytext
   -- 在各自的项目虚拟环境中，需要通过`python -m ipykernel install --user --name <project_name>`创建对应的内核
+  -- jupyter kernelspec list 列出来所有可用的kernel
+  -- jupyter kernelspec remove plotfig 移除安装的kernel
   "benlubas/molten-nvim",
   cond = function()
     return vim.loop.os_uname().sysname == "Windows_NT" and not vim.g.vscode
   end,
   version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
-  build = ":UpdateRemotePlugins",
   dependencies = { "willothy/wezterm.nvim" },
+  build = ":UpdateRemotePlugins",
   init = function()
-    -- vim.env.PATH = vim.fn.expand("~/miniforge3/envs/neovim/bin") .. ":" .. vim.env.PATH -- 保证neovim环境中的jupytext可用
     vim.env.PATH = vim.fn.expand("E:/python/envs/neovim/Scripts") .. ":" .. vim.env.PATH -- 保证neovim环境中的jupytext可用
-    -- vim.g.python3_host_prog = vim.fn.expand("~/miniforge3/envs/neovim/bin/python3")
     vim.g.python3_host_prog = vim.fn.expand("E:/python/envs/neovim/python.exe")
 
     vim.g.molten_output_win_max_height = 20

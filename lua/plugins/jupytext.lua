@@ -1,8 +1,6 @@
 return {
   "GCBallesteros/jupytext.nvim",
-  cond = function()
-    return vim.loop.os_uname().sysname == "Linux" and not vim.g.vscode
-  end,
+  cond = not vim.g.vscode,
   config = true,
   opts = {
     style = "markdown",

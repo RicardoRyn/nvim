@@ -106,7 +106,6 @@ return {
     require("ufo").setup(opts)
     -- 自定义函数，用于折叠 Markdown 代码块
     local function fold_code_cell()
-      -- 在普通模式下，模拟按键 `vic` 来选中整个代码块，然后执行 `zf` 命令来折叠。
       vim.api.nvim_command("normal vic")
       vim.api.nvim_command("normal zf")
     end
