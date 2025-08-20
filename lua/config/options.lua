@@ -23,7 +23,7 @@ vim.opt.shortmess:append({
   c = true, -- 在使用 completion-menu 时，不显示额外的完成信息（比如 “match 1 of 2”）
   C = true, -- 禁止显示完成菜单中的消息提示（更进一步隐藏补全提示信息）
 })
-vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
+vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp" }
 vim.opt.inccommand = "nosplit" -- 增量替换（substitute）预览
 vim.opt.jumpoptions = "view" -- 跳转后 恢复光标所在窗口的视图（例如滚动位置、折叠状态）
 vim.opt.cursorline = true -- 显示光标当前行
@@ -69,22 +69,6 @@ vim.opt.tabstop = 2 -- 控制 tab显示宽度
 vim.opt.softtabstop = 2 -- 控制 按键插入/删除tab的空格数量
 vim.opt.shiftround = true -- 自动把缩进量 向 shiftwidth 的倍数对齐
 vim.opt.expandtab = true -- 使用空格而不是真正的tab
-
-------------------- Fold ------------------
-vim.o.foldmethod = "expr" -- 设置折叠
-vim.o.foldenable = false -- 打开文件时默认全部展开
-vim.o.foldlevel = 99 -- 设置折叠层级为 99
-vim.o.foldexpr = "nvim_treesitter#foldexpr()" -- 禁止初始折叠，默认展开所有内容
-vim.opt.foldtext = "" -- 折叠行的显示文本为空（折叠的行不显示默认的 ... 或其他内容）
-vim.opt.foldcolumn = "3" -- 显示折叠信息
-vim.opt.fillchars = {
-  foldopen = "", -- 折叠已打开时显示的符号（默认是 `-` 或 `v`）
-  foldclose = "", -- 折叠未打开时显示的符号（默认是 `+` 或 `>`）
-  fold = " ", -- 折叠行的填充字符（默认可能是 `-`），这里用空格更干净
-  foldsep = " ", -- 折叠列（fold column）之间的分隔符，这里用空格
-  diff = "╱", -- diff 模式中显示差异的填充字符（默认是 `-` 或 `~`）
-  eob = " ", -- End Of Buffer（文件结尾后的 ~ 符号），这里用空格隐藏
-}
 
 ----------------- Neovide -----------------
 if vim.g.neovide then

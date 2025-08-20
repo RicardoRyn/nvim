@@ -1,8 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter-textobjects",
-  cond = function()
-    return vim.loop.os_uname().sysname == "Linux" and not vim.g.vscode
-  end,
+  cond = not vim.g.vscode,
   dependencies = { "nvim-treesitter/nvim-treesitter" },
   event = "VeryLazy",
 }

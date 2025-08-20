@@ -9,6 +9,7 @@ return {
     ensure_installed = { "lua", "python", "bash", "json", "markdown", "markdown_inline" },
     highlight = { enable = true },
     indent = { enable = true },
+    fold = { enable = true },
 
     -- jupyter notebook相关
     textobjects = {
