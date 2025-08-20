@@ -5,6 +5,7 @@ return {
   main = "nvim-treesitter.configs",
   branch = "master", -- 详见本系列的附录
   event = "VeryLazy",
+  dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
   opts = {
     ensure_installed = { "lua", "python", "bash", "json", "markdown", "markdown_inline" },
     highlight = { enable = true },
@@ -17,19 +18,25 @@ return {
         enable = true,
         set_jumps = false, -- you can change this if you want.
         goto_next_start = {
-          --- ... other keymaps
-          ["]c"] = { query = "@code_cell.inner", desc = "next code block" },
+          ["]c"] = { query = "@code_cell.inner", desc = "Next Code Block" },
+        },
+        goto_next_end = {
+          ["]C"] = { query = "@code_cell.inner", desc = "Next Code Block" },
+          ["<leader>rl"] = { query = "@code_cell.inner", desc = "Run Block (end)" },
         },
         goto_previous_start = {
-          --- ... other keymaps
-          ["[c"] = { query = "@code_cell.inner", desc = "previous code block" },
+          ["[c"] = { query = "@code_cell.inner", desc = "Previous Code Block" },
+          ["<leader>rh"] = { query = "@code_cell.inner", desc = "Run Block (start)" },
         },
+        -- FIX: 这种写法有bug，部分时候不触发，HACK方法见config字段
+        -- goto_previous_end = {
+        --   ["[C"] = { query = "@code_cell.inner", desc = "Previous Code Block" },
+        -- },
       },
       select = {
         enable = true,
         lookahead = true, -- you can change this if you want
         keymaps = {
-          --- ... other keymaps
           ["ic"] = { query = "@code_cell.inner", desc = "in block" },
           ["ac"] = { query = "@code_cell.outer", desc = "around block" },
         },
@@ -37,17 +44,28 @@ return {
       swap = { -- Swap only works with code blocks that are under the same
         -- markdown header
         enable = true,
-        swap_next = {
-          --- ... other keymap
-          ["<leader>sl"] = "@code_cell.outer",
-        },
-        swap_previous = {
-          --- ... other keymap
-          ["<leader>sh"] = "@code_cell.outer",
-        },
+        swap_next = { ["<leader>sl"] = "@code_cell.outer" },
+        swap_previous = { ["<leader>sh"] = "@code_cell.outer" },
       },
     },
   },
+  config = function(_, opts)
+    require("nvim-treesitter.configs").setup(opts)
+    -- HACK: 先向上移动一行，再使用[C可以稳定跳转到上一个cell的末尾
+    local textobj_move = require("nvim-treesitter.textobjects.move")
+    local function previous_code_block()
+      vim.api.nvim_command("normal! k")
+      textobj_move.goto_previous_end("@code_cell.inner")
+    end
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "markdown",
+      callback = function()
+        vim.keymap.set("n", "[C", previous_code_block, {
+          desc = "Previous Code Block (stable)",
+        })
+      end,
+    })
+  end,
 }
 
 -- -- PERF: main分支的nvim-treesitter
