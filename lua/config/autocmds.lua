@@ -2,6 +2,32 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("ricardo_" .. name, { clear = true })
 end
 
+-- -- 自动切换输入法
+-- if vim.loop.os_uname().sysname == "Windows_NT" then
+--   vim.api.nvim_create_autocmd("InsertLeave", {
+--     group = augroup("switch_ime_to_en"),
+--     callback = function()
+--       vim.system({ vim.fn.stdpath("config") .. "/bin/im-select.exe", "1033" })
+--     end,
+--   })
+--   vim.api.nvim_create_autocmd("InsertEnter", {
+--     group = augroup("switch_ime_to_zh"),
+--     callback = function()
+--       vim.system({ vim.fn.stdpath("config") .. "/bin/im-select.exe", "2052" })
+--     end,
+--   })
+-- end
+
+-- -- 打开文本文件时，软换行并检查拼写
+-- vim.api.nvim_create_autocmd("FileType", {
+--   group = augroup("wrap_spell"),
+--   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
+--   callback = function()
+--     vim.opt_local.wrap = true
+--     vim.opt_local.spell = true
+--   end,
+-- })
+
 -- 再次打开文件，光标位于上次打开的地方
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),
@@ -23,8 +49,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- 通用q来退出部分页面
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_q"),
-  pattern = {
-    "PlenaryTestPopup",
+  pattern = { "PlenaryTestPopup",
     "checkhealth",
     "dbout",
     "gitsigns-blame",
@@ -64,16 +89,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- -- 打开文本文件时，软换行并检查拼写
--- vim.api.nvim_create_autocmd("FileType", {
---   group = augroup("wrap_spell"),
---   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
---   callback = function()
---     vim.opt_local.wrap = true
---     vim.opt_local.spell = true
---   end,
--- })
-
 -- 禁用 JSON 文件中的“隐藏显示”（conceal）功能，确保内容完全可见
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = augroup("json_conceal"),
@@ -96,10 +111,12 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 if not vim.g.vscode then
+  -- PERF: 每次进入jupyter文件都需要手动选择kernel，能否自动识别？或者记住上次使用的kernel
   -- jupyter
   -- automatically import output chunks from a jupyter notebook
   -- tries to find a kernel that matches the kernel in the jupyter notebook
   -- falls back to a kernel that matches the name of the active venv (if any)
+
   -- 定义 imb 函数：初始化 molten buffer
   local imb = function(e) -- init molten buffer
     vim.schedule(function()
@@ -122,8 +139,8 @@ if not vim.g.vscode then
       vim.cmd("MoltenImportOutput")
     end)
   end
-  -- automatically import output chunks from a jupyter notebook
   -- 自动导入输出
+  -- automatically import output chunks from a jupyter notebook
   vim.api.nvim_create_autocmd("BufAdd", {
     pattern = { "*.ipynb" },
     callback = imb,
@@ -137,8 +154,8 @@ if not vim.g.vscode then
       end
     end,
   })
-  -- automatically export output chunks to a jupyter notebook on write
   -- 自动导出输出
+  -- automatically export output chunks to a jupyter notebook on write
   vim.api.nvim_create_autocmd("BufWritePost", {
     pattern = { "*.ipynb" },
     callback = function()
@@ -147,52 +164,37 @@ if not vim.g.vscode then
       end
     end,
   })
-  -- 当你打开 .py 文件时，Molten 的虚拟行（virt_lines_off_by_1）和虚拟文本输出（virt_text_output）都会 关闭，避免 Python 代码文件里出现执行输出的虚拟行/文本（因为可能会干扰正常代码阅读）。
-  vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "*.py",
-    callback = function(e)
-      if string.match(e.file, ".otter.") then
-        return
-      end
-      if require("molten.status").initialized() == "Molten" then -- this is kinda a hack...
-        vim.fn.MoltenUpdateOption("virt_lines_off_by_1", false)
-        vim.fn.MoltenUpdateOption("virt_text_output", false)
-      else
-        vim.g.molten_virt_lines_off_by_1 = false
-        vim.g.molten_virt_text_output = false
-      end
-    end,
-  })
-  -- 当你返回 .qmd、.md、.ipynb 文件时，这两个选项会 开启，这样在文档里就能直接看到代码执行的输出（Molten 会用虚拟行和虚拟文本把结果插在代码下面）。
-  vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = { "*.qmd", "*.md", "*.ipynb" },
-    callback = function(e)
-      if string.match(e.file, ".otter.") then
-        return
-      end
-      if require("molten.status").initialized() == "Molten" then
-        vim.fn.MoltenUpdateOption("virt_lines_off_by_1", true)
-        vim.fn.MoltenUpdateOption("virt_text_output", true)
-      else
-        vim.g.molten_virt_lines_off_by_1 = true
-        vim.g.molten_virt_text_output = true
-      end
-    end,
-  })
-end
 
--- 自动切换输入法
-if vim.loop.os_uname().sysname == "Windows_NT" then
-  vim.api.nvim_create_autocmd("InsertLeave", {
-    group = augroup("switch_ime_to_en"),
-    callback = function()
-      vim.system({ vim.fn.stdpath("config") .. "/bin/im-select.exe", "1033" })
-    end,
-  })
-  vim.api.nvim_create_autocmd("InsertEnter", {
-    group = augroup("switch_ime_to_zh"),
-    callback = function()
-      vim.system({ vim.fn.stdpath("config") .. "/bin/im-select.exe", "2052" })
-    end,
-  })
+  -- -- 当你打开 .py 文件时，Molten 的虚拟行（virt_lines_off_by_1）和虚拟文本输出（virt_text_output）都会 关闭，避免 Python 代码文件里出现执行输出的虚拟行/文本（因为可能会干扰正常代码阅读）。
+  -- vim.api.nvim_create_autocmd("BufEnter", {
+  --   pattern = "*.py",
+  --   callback = function(e)
+  --     if string.match(e.file, ".otter.") then
+  --       return
+  --     end
+  --     if require("molten.status").initialized() == "Molten" then -- this is kinda a hack...
+  --       vim.fn.MoltenUpdateOption("virt_lines_off_by_1", false)
+  --       vim.fn.MoltenUpdateOption("virt_text_output", false)
+  --     else
+  --       vim.g.molten_virt_lines_off_by_1 = false
+  --       vim.g.molten_virt_text_output = false
+  --     end
+  --   end,
+  -- })
+  -- -- 当你返回 .qmd、.md、.ipynb 文件时，这两个选项会 开启，这样在文档里就能直接看到代码执行的输出（Molten 会用虚拟行和虚拟文本把结果插在代码下面）。
+  -- vim.api.nvim_create_autocmd("BufEnter", {
+  --   pattern = { "*.qmd", "*.md", "*.ipynb" },
+  --   callback = function(e)
+  --     if string.match(e.file, ".otter.") then
+  --       return
+  --     end
+  --     if require("molten.status").initialized() == "Molten" then
+  --       vim.fn.MoltenUpdateOption("virt_lines_off_by_1", true)
+  --       vim.fn.MoltenUpdateOption("virt_text_output", true)
+  --     else
+  --       vim.g.molten_virt_lines_off_by_1 = true
+  --       vim.g.molten_virt_text_output = true
+  --     end
+  --   end,
+  -- })
 end

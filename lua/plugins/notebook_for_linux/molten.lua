@@ -2,7 +2,7 @@ return {
   -- 新建名为neovim的虚拟环境，然后安装pynvim, jupyter_client, jupytext
   -- 在各自的项目虚拟环境中，需要通过`python -m ipykernel install --user --name <project_name>`创建对应的内核
   -- jupyter kernelspec list 列出来所有可用的kernel
-  -- jupyter kernelspec remove plotfig 移除安装的kernel
+  -- jupyter kernelspec remove <kernel_name> 移除安装的kernel
   "benlubas/molten-nvim",
   cond = function()
     return vim.loop.os_uname().sysname == "Linux" and not vim.g.vscode
