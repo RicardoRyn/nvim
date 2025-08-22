@@ -11,12 +11,26 @@ return {
     code = {
       sign = false,
       width = "block",
+      min_width = 80,
+      left_pad = 1,
       right_pad = 1,
       border = "thin",
+      position = "right",
+      -- 避免标题中出现其他背景色
+      highlight_inline = "RenderMarkdownCodeInfo",
     },
     heading = {
       sign = false,
       icons = {},
+      border = true,
+      render_modes = true,
+    },
+    anti_conceal = {
+      disabled_modes = true,
+      ignore = {
+        head_border = true,
+        head_background = true,
+      },
     },
   },
 }

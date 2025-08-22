@@ -26,12 +26,11 @@ local all_plugins = {
   { import = "plugins" },
   { import = "plugins.lsp" },
 }
-
 -- 根据系统选择性加载的插件
 if vim.loop.os_uname().sysname == "Windows_NT" then
-  table.insert(all_plugins, { import = "plugins.notebook_for_windows" })
+  table.insert(all_plugins, { import = "plugins.for_windows" })
 elseif vim.loop.os_uname().sysname == "Linux" then
-  table.insert(all_plugins, { import = "plugins.notebook_for_linux" })
+  table.insert(all_plugins, { import = "plugins.for_linux" })
 end
 
 -- Setup lazy.nvim
@@ -43,6 +42,6 @@ require("lazy").setup({
   -- automatically check for plugin updates
   checker = { enabled = true },
   ui = {
-    border = "rounded",
+    border = "single",
   }
 })

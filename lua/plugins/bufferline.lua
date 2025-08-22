@@ -1,12 +1,14 @@
 return {
   "akinsho/bufferline.nvim",
   cond = not vim.g.vscode,
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
-    "famiu/bufdelete.nvim",
-  },
+  lazy = false,
+  -- dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = {
     options = {
+      -- stylua: ignore
+      close_command = function(n) Snacks.bufdelete(n) end,
+      -- stylua: ignore
+      right_mouse_command = function(n) Snacks.bufdelete(n) end,
       diagnostics = "nvim_lsp",
       always_show_bufferline = true,
       diagnostics_indicator = function(_, _, diagnostics_dict)
@@ -14,11 +16,11 @@ return {
         for level, number in pairs(diagnostics_dict) do
           local symbol
           if level == "error" then
-            symbol = require("config.icons").diagnostics.error .. " "
+            symbol = require("utils.icons").diagnostics.error .. " "
           elseif level == "warning" then
-            symbol = require("config.icons").diagnostics.warning .. " "
+            symbol = require("utils.icons").diagnostics.warning .. " "
           else
-            symbol = require("config.icons").diagnostics.info .. " "
+            symbol = require("utils.icons").diagnostics.info .. " "
           end
           indicator = indicator .. number .. symbol
         end
@@ -37,22 +39,21 @@ return {
       },
     },
   },
+  -- stylua: ignore
   keys = {
     { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
     { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-    { "<leader>bd", function() local buf = vim.api.nvim_get_current_buf() require("bufdelete").bufdelete(buf, false) end, desc = "Delete Duffer", },
-    { "<leader>bo", ":BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
+    { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer", },
+    { "<leader>bo", function() Snacks.bufdelete.other() end, desc = "Delete Buffer", },
+    { "<leader>ba", function() Snacks.bufdelete.all() end, desc = "Delete Buffer", },
     { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
     { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
     { "<leader>bb", ":BufferLinePickClose<CR>", desc = "Delete Pick Buffer" },
     { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
-    { "<leader>ba", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
+    { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
     { "<leader>b<", "<cmd>BufferLineMovePrev<cr>", desc = "Move Buffer Prev" },
     { "<leader>b>", "<cmd>BufferLineMoveNext<cr>", desc = "Move Buffer Next" },
-
-    -- 自定义移动buffer左右的按键 <b 和 >b
-    {
-      "<b",
+    { "<b",
       function()
         local dir = -1
         local moveBy = vim.v.count > 0 and vim.v.count or 1
@@ -63,8 +64,7 @@ return {
       end,
       desc = "Move current buffer to left",
     },
-    {
-      ">b",
+    { ">b",
       function()
         local dir = 1
         local moveBy = vim.v.count > 0 and vim.v.count or 1
@@ -76,5 +76,4 @@ return {
       desc = "Move current buffer to right",
     },
   },
-  lazy = false,
 }

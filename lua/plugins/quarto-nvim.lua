@@ -34,14 +34,14 @@ return {
         vim.keymap.set("n", "<leader>qa", runner.run_above, { desc = "Run Cell and Above", silent = true })
         vim.keymap.set("n", "<leader>qA", runner.run_all, { desc = "Run All Cells", silent = true })
         vim.keymap.set("v", "<leader>q", runner.run_range, { desc = "Quarto Run (visual selection)", silent = true })
-        vim.keymap.set("n", "<leader>QA", function()
-          runner.run_all(true)
-        end, { desc = "Run All Cells of All Languages", silent = true })
-        -- vim.keymap.set("n", "<leader>ql", runner.run_line, { desc = "Run Line", silent = true })
+        vim.keymap.set("n", "<leader>ql", runner.run_line, { desc = "Run Line", silent = true })
+        -- vim.keymap.set("n", "<leader>QA", function()
+        --   runner.run_all(true)
+        -- end, { desc = "Run All Cells of All Languages", silent = true })
       end
     end
 
-    -- hydra
+    -- hydra 九头蛇
     local function keys(str)
       return function()
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(str, true, false, true), "m", true)
@@ -75,7 +75,6 @@ return {
         { "R", ":QuartoSendAbove<CR>" },
         { "<esc>", nil, { exit = true } },
         { "q", nil, { exit = true } },
-        -- { "l", ":QuartoSendLine<CR>" },
       },
     })
   end,

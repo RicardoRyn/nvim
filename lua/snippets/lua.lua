@@ -17,4 +17,3 @@ ls.add_snippets("lua", {
     i(0),
   }),
 })
-

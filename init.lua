@@ -5,15 +5,18 @@ require("config.options")
 require("config.keymaps")
 
 if not vim.g.vscode then
+  -- LSP
   require("config.lsp")
-  require("config.lsp.lua")
-  require("config.lsp.python")
-  require("config.lsp.markdown")
-  require("config.lsp.bash")
-
+  require("config.lsp.lua_ls") -- lua
+  require("config.lsp.pyright") -- python
+  require("config.lsp.marksman") -- markdown
+  require("config.lsp.bashls") -- bash
+  -- Snippets
   require("snippets.lua")
   require("snippets.python")
-  require("snippets.markdown")
-
+  -- Utils
   require("utils.newnotebook")
 end
+
+-- NOTE: neovim中的技巧
+-- `echo &filetype`可以查看当前文件类型

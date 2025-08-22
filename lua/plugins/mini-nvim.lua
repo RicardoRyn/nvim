@@ -1,5 +1,5 @@
 return {
-  "echasnovski/mini.nvim",
+  "nvim-mini/mini.nvim",
   version = false,
   config = function()
     require("mini.ai").setup() -- 识别小/中/大括号
@@ -34,14 +34,12 @@ return {
     })
 
     if not vim.g.vscode then
-      require("mini.cursorword").setup()
       require("mini.icons").setup()
-      vim.keymap.set("n", "<leader>uz", function()
-        require("mini.misc").zoom()
-      end, { desc = "Zoom (current window)" })
+      require("mini.cursorword").setup()
     end
   end,
 
+  -- 兼容层，让那些依赖 nvim-web-devicons 的插件也能用 mini.icons 的图标
   init = function()
     package.preload["nvim-web-devicons"] = function()
       require("mini.icons").mock_nvim_web_devicons()

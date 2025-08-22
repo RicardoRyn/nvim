@@ -1,17 +1,15 @@
 return {
   "kevinhwang91/nvim-ufo",
+  -- enabled = false,
   cond = not vim.g.vscode,
   dependencies = { "kevinhwang91/promise-async" },
-  event = "VeryLazy",
+  lazy = false,
   opts = {
     preview = {
-      win_config = {
-        border = "rounded",
-        winhighlight = "Normal:Folded",
-        winblend = 0,
-      },
+      win_config = { border = "rounded", winhighlight = "Normal:Folded", winblend = 0 },
+      mappings = { scrollU = "<C-u>", scrollD = "<C-d>", jumpTop = "[", jumpBot = "]" },
     },
-    provider_selector = function(bufnr, filetype, buftype)
+    provider_selector = function()
       return { "treesitter", "indent" }
     end,
     fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
@@ -42,37 +40,13 @@ return {
       return newVirtText
     end,
   },
+  -- stylua: ignore
   keys = {
-    {
-      "zR",
-      function()
-        require("ufo").openAllFolds()
-      end,
-      desc = "Open all folds (ufo)",
-    },
-    {
-      "zM",
-      function()
-        require("ufo").closeAllFolds()
-      end,
-      desc = "Close all folds (ufo)",
-    },
-    {
-      "zr",
-      function()
-        require("ufo").openFoldsExceptKinds()
-      end,
-      desc = "Open folds except kinds",
-    },
-    {
-      "zm",
-      function()
-        require("ufo").closeFoldsWith(0)
-      end,
-      desc = "Close folds with 0",
-    },
-    {
-      "K",
+    { "zR", function() require("ufo").openAllFolds() end, desc = "Open all folds (ufo)", },
+    { "zM", function() require("ufo").closeAllFolds() end, desc = "Close all folds (ufo)", },
+    { "zr", function() require("ufo").openFoldsExceptKinds() end, desc = "Open folds except kinds", },
+    { "zm", function() require("ufo").closeFoldsWith(0) end, desc = "Close folds with 0", },
+    { "zp",
       function()
         local winid = require("ufo").peekFoldedLinesUnderCursor()
         if not winid then
@@ -88,18 +62,10 @@ return {
     },
   },
   init = function()
-    vim.o.foldcolumn = "1" -- '0' is not bad
+    vim.o.foldcolumn = "0" -- '0' is not bad
     vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
     vim.o.foldlevelstart = 99
     vim.o.foldenable = true
-    vim.cmd([[
-      augroup remember_folds
-        autocmd!
-        autocmd BufWinLeave *.* mkview
-        autocmd BufWinEnter *.* silent! loadview
-      augroup END
-    ]])
-    vim.cmd([[set viewoptions-=curdir]])
   end,
 
   config = function(_, opts)

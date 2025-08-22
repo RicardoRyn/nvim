@@ -7,21 +7,21 @@ return {
     sign_priority = 8, -- sign priority
     keywords = {
       FIX = {
-        icon = require("config.icons").comments.fix, -- icon used for the sign, and in search results
+        icon = require("utils.icons").comments.fix, -- icon used for the sign, and in search results
         color = "error", -- can be a hex color, or a named color (see below)
         alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
         -- signs = false, -- configure signs for some keywords individually
       },
-      TODO = { icon = require("config.icons").comments.todo, color = "todo" },
-      HACK = { icon = require("config.icons").comments.hack, color = "warning" },
-      WARN = { icon = require("config.icons").comments.warn, color = "warning", alt = { "WARNING", "XXX" } },
+      TODO = { icon = require("utils.icons").comments.todo, color = "todo" },
+      HACK = { icon = require("utils.icons").comments.hack, color = "warning" },
+      WARN = { icon = require("utils.icons").comments.warn, color = "warning", alt = { "WARNING", "XXX" } },
       PERF = {
-        icon = require("config.icons").comments.perf,
+        icon = require("utils.icons").comments.perf,
         color = "perf",
         alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" },
       },
-      TEST = { icon = require("config.icons").comments.test, color = "info", alt = { "TESTING", "PASSED", "FAILED" } },
-      NOTE = { icon = require("config.icons").comments.note, color = "hint", alt = { "INFO" } },
+      TEST = { icon = require("utils.icons").comments.test, color = "info", alt = { "TESTING", "PASSED", "FAILED" } },
+      NOTE = { icon = require("utils.icons").comments.note, color = "hint", alt = { "INFO" } },
     },
     gui_style = {
       fg = "ITALIC", -- The gui style to use for the fg highlight group.

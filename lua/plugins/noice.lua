@@ -9,10 +9,10 @@ return {
 
   opts = {
     presets = {
-    --   bottom_search = false,
-    --   command_palette = false, -- 为true时，confirm相关的后续信息会被遮挡
-    --   long_message_to_split = true,
-    --   inc_rename = true,
+      bottom_search = false,
+      command_palette = true,
+      long_message_to_split = true,
+      inc_rename = false,
       lsp_doc_border = true,
     },
     commands = {
@@ -31,7 +31,6 @@ return {
     { "<leader>ne", function() require("noice").cmd("error") end, desc = "Error" },
     { "<leader>na", function() require("noice").cmd("all") end, desc = "All" },
     { "<leader>nd", function() require("noice").cmd("dismiss") end, desc = "Dismiss" },
-    { "<leader>nt", function() require("noice").cmd("pick") end, desc = "Noice Picker (Telescope)" },
     { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
     { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
   },

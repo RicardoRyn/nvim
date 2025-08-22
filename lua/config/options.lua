@@ -1,6 +1,4 @@
 ------------------ Gernal ------------------
-vim.g.mapleader = " " -- <leader>键
-vim.g.maplocalleader = "\\" -- <localleader>键
 vim.opt.confirm = true -- 关闭窗口时确认
 vim.opt.mouse = "a" -- 启用鼠标
 vim.opt.number = true -- 行号
@@ -12,7 +10,7 @@ vim.opt.clipboard = "" -- 禁止neovim寄存器和系统剪贴板共用
 -- vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- 同步系统的剪贴板
 
 -------------------- UI --------------------
-vim.o.winborder = "rounded"
+vim.o.winborder = "single" -- 窗口边框
 vim.o.signcolumn = "yes" -- 在行号左边显示警告、错误、Git 修改等标记的列
 vim.opt.smoothscroll = true -- 启用 平滑滚动（滚动时不会跳动，画面更流畅）
 vim.opt.scrolloff = 2 -- 上下至少保留 4 行可见内容
@@ -23,7 +21,7 @@ vim.opt.shortmess:append({
   c = true, -- 在使用 completion-menu 时，不显示额外的完成信息（比如 “match 1 of 2”）
   C = true, -- 禁止显示完成菜单中的消息提示（更进一步隐藏补全提示信息）
 })
-vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp" }
+vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 vim.opt.inccommand = "nosplit" -- 增量替换（substitute）预览
 vim.opt.jumpoptions = "view" -- 跳转后 恢复光标所在窗口的视图（例如滚动位置、折叠状态）
 vim.opt.cursorline = true -- 显示光标当前行
@@ -52,7 +50,7 @@ vim.opt.shellslash = true -- 可选：防止 Windows 上路径被转义
 ------------------- Code ------------------
 vim.g.autoformat = false -- 禁止自动格式化
 vim.g.markdown_recommended_style = 0 -- 不要强制 Markdown 的默认风格
-vim.opt.timeoutlen = vim.g.vscode and 1000 or 300 -- 触发键盘提示时长
+vim.opt.timeoutlen = vim.g.vscode and 1000 or 500 -- 触发键盘提示时长
 vim.opt.completeopt = "menu,menuone,noselect" -- 打开补全菜单时不自动选中第一项
 vim.opt.wildmode = "longest:full,full" -- 命令行补全模式,第一次按 Tab，会自动补全到 最长公共前缀,再按 Tab，会显示 完整匹配列表
 vim.opt.spelllang = { "en" } -- 拼写检查的语言为英语（English）

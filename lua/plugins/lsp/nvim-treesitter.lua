@@ -22,16 +22,12 @@ return {
         },
         goto_next_end = {
           ["]C"] = { query = "@code_cell.inner", desc = "Next Code Block" },
-          ["<leader>rl"] = { query = "@code_cell.inner", desc = "Run Block (end)" },
+          ["gl"] = { query = "@code_cell.inner", desc = "Cell End" },
         },
         goto_previous_start = {
           ["[c"] = { query = "@code_cell.inner", desc = "Previous Code Block" },
-          ["<leader>rh"] = { query = "@code_cell.inner", desc = "Run Block (start)" },
+          ["gh"] = { query = "@code_cell.inner", desc = "Cell Start" },
         },
-        -- FIX: 这种写法有bug，部分时候不触发，HACK方法见config字段
-        -- goto_previous_end = {
-        --   ["[C"] = { query = "@code_cell.inner", desc = "Previous Code Block" },
-        -- },
       },
       select = {
         enable = true,
@@ -44,8 +40,8 @@ return {
       swap = { -- Swap only works with code blocks that are under the same
         -- markdown header
         enable = true,
-        swap_next = { ["<leader>sl"] = "@code_cell.outer" },
-        swap_previous = { ["<leader>sh"] = "@code_cell.outer" },
+        swap_next = { ["<leader>msl"] = "@code_cell.outer" },
+        swap_previous = { ["<leader>msh"] = "@code_cell.outer" },
       },
     },
   },
