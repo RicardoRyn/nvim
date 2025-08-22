@@ -17,3 +17,4 @@ if not vim.g.vscode then
 
   require("utils.newnotebook")
 end
+-- `echo &filetype`可以查看当前文件类型

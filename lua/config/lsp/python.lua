@@ -12,7 +12,6 @@ local custom_config = {
     },
   },
 }
-
 local final_config = vim.tbl_deep_extend("force", default_config, custom_config) -- 深度合并，保证嵌套
 
 vim.lsp.config(lsp_name, final_config)

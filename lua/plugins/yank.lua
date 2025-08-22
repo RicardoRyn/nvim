@@ -1,25 +1,12 @@
 return {
   "gbprod/yanky.nvim",
-  vscode=true,
+  vscode = true,
   recommended = true,
   desc = "Better Yank/Paste",
-  opts = {
-    highlight = { timer = 150 },
-  },
+  opts = { highlight = { timer = 150 } },
+  -- stylua: ignore
   keys = {
-    {
-      "<leader>p",
-      function()
-        if vim.g.vscode then
-          vim.cmd([[YankyRingHistory]])
-        else
-          require("telescope").extensions.yank_history.yank_history({})
-        end
-      end,
-      mode = { "n", "x" },
-      desc = "Open Yank History",
-    },
-        -- stylua: ignore
+    { "<leader>p", function() vim.cmd([[YankyRingHistory]]) end, mode = { "n", "x" }, desc = "Yank History" },
     { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank Text" },
     { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put Text After Cursor" },
     { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put Text Before Cursor" },
@@ -39,4 +26,3 @@ return {
     { "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put Before Applying a Filter" },
   },
 }
-

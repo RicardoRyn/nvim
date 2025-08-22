@@ -1,5 +1,5 @@
 return {
-  "echasnovski/mini.nvim",
+  "nvim-mini/mini.nvim",
   version = false,
   config = function()
     require("mini.ai").setup() -- 识别小/中/大括号
@@ -35,10 +35,6 @@ return {
 
     if not vim.g.vscode then
       require("mini.cursorword").setup()
-      require("mini.icons").setup()
-      vim.keymap.set("n", "<leader>uz", function()
-        require("mini.misc").zoom()
-      end, { desc = "Zoom (current window)" })
     end
   end,
 

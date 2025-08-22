@@ -1,5 +1,5 @@
 -- NOTE: Neovim和Vscode都生效的设置
-vim.keymap.set("n", "<leader>h", "<cmd>:noh<cr>", { desc = "No Highlight" })
+vim.keymap.set("n", "<leader>h", "<cmd>:noh<cr>", { desc = "Clear Highlight" })
 vim.keymap.set("v", "<", "<gv", { desc = "Outdent and reselect" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent and reselect" })
 vim.keymap.set({ "v" }, "U", "<Nop>")
@@ -57,11 +57,13 @@ else
   vim.keymap.set("n", "gj", "j", { desc = "j" })
   vim.keymap.set("n", "gk", "k", { desc = "k" })
 
-  vim.keymap.set("n", "<C-d>", "5j", { noremap = true, silent = true, desc = "Down 5 lines" })
-  vim.keymap.set("n", "<C-u>", "5k", { noremap = true, silent = true, desc = "Up 5 lines" })
+  -- vim.keymap.set("n", "<C-d>", "5j", { noremap = true, silent = true, desc = "Down 5 lines" })
+  -- vim.keymap.set("n", "<C-u>", "5k", { noremap = true, silent = true, desc = "Up 5 lines" })
 
-  vim.keymap.set("i", "<C-h>", "<ESC>I", { desc = "Move to the beginning of the line in Insert mode" })
-  vim.keymap.set("i", "<C-l>", "<ESC>A", { desc = "Move to the end of the line in Insert mode" })
+  vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
+  vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
+  vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
+  vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
   -- stylua: ignore
   vim.keymap.set("v", "<C-c>", '"+y') -- 让neovim中C-c可以复制内容到剪贴板

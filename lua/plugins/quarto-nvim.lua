@@ -41,7 +41,7 @@ return {
       end
     end
 
-    -- hydra
+    -- hydra 九头蛇
     local function keys(str)
       return function()
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(str, true, false, true), "m", true)
@@ -75,7 +75,6 @@ return {
         { "R", ":QuartoSendAbove<CR>" },
         { "<esc>", nil, { exit = true } },
         { "q", nil, { exit = true } },
-        -- { "l", ":QuartoSendLine<CR>" },
       },
     })
   end,

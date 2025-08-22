@@ -3,7 +3,7 @@ return {
   cond = not vim.g.vscode,
   version = "*",
   dependencies = {
-    "rafamadriz/friendly-snippets",
+    { "rafamadriz/friendly-snippets" },
     { "L3MON4D3/LuaSnip", version = "v2.*" },
     { "xzbdmw/colorful-menu.nvim", opts = {} },
   },
@@ -48,7 +48,10 @@ return {
     },
     snippets = { preset = "luasnip" },
     sources = {
-      default = { "path", "snippets", "buffer", "lsp" },
+      default = { "path", "snippets", "buffer", "lsp", "codeium" },
+      providers = {
+        codeium = { name = 'Codeium', module = 'codeium.blink', async = true }
+      }
     },
   },
 }

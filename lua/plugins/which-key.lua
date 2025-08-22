@@ -13,6 +13,7 @@ return {
         { "z", group = "fold" },
 
         -- 无下级菜单
+        { "<leader>e", icon = { icon = "󰙅", color = "yellow" } },
         { "<leader>E", icon = { icon = "󰙅", color = "yellow" } },
         { "<leader>-", icon = { icon = "󰙅", color = "yellow" } },
         { "<leader>=", icon = { icon = "󰙅", color = "yellow" } },
@@ -24,7 +25,7 @@ return {
         -- 有下级菜单
         { "<leader>a", group = "AI" },
         { "<leader>b", group = "Buffer" },
-        { "<leader>c", group = "Code" },
+        { "<leader>c", group = "Code/CSV" },
         { "<leader>f", group = "Find" },
         { "<leader>ft", group = "Find Todo" },
         { "<leader>g", group = "Git" },
@@ -33,14 +34,17 @@ return {
         { "<leader>m", group = "Molten", icon = { icon = " ", color = "blue" } },
         { "<leader>o", group = "Output/Outline", icon = { icon = " ", color = "green" } },
         { "<leader>q", group = "Quarto", icon = { icon = " ", color = "blue" } },
-        { "<leader>s", group = "Swap", icon = { icon = "󰯎 " } },
+        { "<leader>s", group = "Search" },
+        { "<leader>S", group = "Session" },
         { "<leader>u", group = "UI", icon = { icon = "󰙵 ", color = "cyan" } },
         { "<leader>x", group = "Trouble", icon = { icon = "󱖫 ", color = "green" } },
+        { "[", group = "prev" },
+        { "]", group = "next" },
         { "<leader><space>", group = "Hop", icon = { icon = "󱔕" } },
+        { "<leader>/", group = "Grep", icon = { icon = " " } },
 
         { "<localleader>s", group = "Session" },
         { "<localleader>r", group = "Run", icon = { icon = " ", color = "green" } },
-
 
           -- stylua: ignore
           { "<leader>w", group = "Windows", proxy = "<c-w>", expand = function() return require("which-key.extras").expand.win() end },
@@ -49,19 +53,8 @@ return {
   },
 
   keys = {
-    {
-      "<c-w><space>",
-      function()
-        require("which-key").show({ keys = "<c-w>", loop = true })
-      end,
-      desc = "Window Hydra Mode (which-key)",
-    },
-    {
-      "<leader>?",
-      function()
-        require("which-key").show({ global = false })
-      end,
-      desc = "Buffer Local Keymaps (which-key)",
+    { "<c-w><space>", function() require("which-key").show({ keys = "<c-w>", loop = true }) end, desc = "Window Hydra Mode (which-key)", },
+    { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Local Keymaps (which-key)",
     },
   },
 }
