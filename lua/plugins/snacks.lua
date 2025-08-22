@@ -7,81 +7,46 @@ return {
     -- your configuration comes here
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
-    animate = { enabled = true },
     bigfile = { enabled = true },
-    bufdelete = { enabled = true },
     dashboard = {
       enabled = true,
       width = 30,
       preset = {
+        -- stylua: ignore
         keys = {
-          { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
           { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-          { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+          { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
           { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-          {
-            icon = " ",
-            key = "c",
-            desc = "Config",
-            action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
-          },
+          { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+          { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})", },
           { icon = " ", key = "s", desc = "Restore Session", section = "session" },
           { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
         header = [[
-██████╗ ██╗   ██╗███╗   ██╗    ██╗   ██╗██╗███╗   ███╗
-██╔══██╗╚██╗ ██╔╝████╗  ██║    ██║   ██║██║████╗ ████║
-██████╔╝ ╚████╔╝ ██╔██╗ ██║    ██║   ██║██║██╔████╔██║
-██╔══██╗  ╚██╔╝  ██║╚██╗██║    ╚██╗ ██╔╝██║██║╚██╔╝██║
-██║  ██║   ██║   ██║ ╚████║     ╚████╔╝ ██║██║ ╚═╝ ██║
-╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═══╝      ╚═══╝  ╚═╝╚═╝     ╚═╝]],
+        ██████╗ ██╗   ██╗███╗   ██╗    ██╗   ██╗██╗███╗   ███╗
+        ██╔══██╗╚██╗ ██╔╝████╗  ██║    ██║   ██║██║████╗ ████║
+        ██████╔╝ ╚████╔╝ ██╔██╗ ██║    ██║   ██║██║██╔████╔██║
+        ██╔══██╗  ╚██╔╝  ██║╚██╗██║    ╚██╗ ██╔╝██║██║╚██╔╝██║
+        ██║  ██║   ██║   ██║ ╚████║     ╚████╔╝ ██║██║ ╚═╝ ██║
+        ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═══╝      ╚═══╝  ╚═╝╚═╝     ╚═╝]],
       },
     },
-    debug = { enabled = false },
-    dim = { enabled = false },
-    explorer = { enabled = false },
-    git = { enabled = true },
-    gitbrowse = { enabled = false },
-    -- FIX: wezterm打开带图片的readme文件时,会出现问题
-    image = { enabled = false },
-    indent = { enabled = true },
+    image = { enabled = true }, -- PERF: wezterm需要nightly版本，才能显示 [参见](https://github.com/folke/snacks.nvim/discussions/1720)
+    indent = { enabled = false, },
     input = { enabled = true },
-    layout = { enabled = false },
-    lazygit = { enabled = true },
     notifier = { enabled = true },
-    notify = { enabled = true },
-    picker = { enabled = true },
-    profiler = { enabled = false },
-    quickfile = { enabled = true },
-    rename = { enabled = false },
-    scope = { enabled = true }, -- 高亮当前作用域
-    scratch = { enabled = true },
-    scroll = { enabled = true }, -- 平滑滚动
-    statuscolumn = { enabled = true }, -- 状态列
-    terminal = { enabled = true },
-    toggle = {
-      map = vim.keymap.set, -- keymap.set function to use
-      which_key = true, -- integrate with which-key to show enabled/disabled icons and colors
-      notify = true, -- show a notification when toggling
-      -- icons for enabled/disabled states
-      icon = {
-        enabled = " ",
-        disabled = " ",
-      },
-      -- colors for enabled/disabled states
-      color = {
-        enabled = "green",
-        disabled = "yellow",
-      },
-      wk_desc = {
-        enabled = "Disable ",
-        disabled = "Enable ",
-      },
-    },
-    util = { enabled = false },
-    words = { enabled = true },
-    zen = { enabled = true },
+    -- TODO: 切换icons
+    -- icons = {
+    --   error = " ",
+    --   warn = " ",
+    --   info = " ",
+    --   debug = " ",
+    --   trace = " ",
+    -- },
+    scope = { enabled = false }, -- TODO: 这是啥？
+    statuscolumn = { enabled = true }, -- TODO: 这是啥？
+    words = { enabled = false }, -- TODO: 这是啥？
   },
   -- stylua: ignore
   keys = {
@@ -133,15 +98,22 @@ return {
     { "<leader>cu", function() Snacks.picker.undo() end, desc = "Undo History" },
     -- ui
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
-    { "<leader>uz", function() Snacks.zen.zen() end, desc = "Zen" },
-    { "<leader>uZ", function() Snacks.zen.zoom() end, desc = "Zoom" },
     -- terminal
     { "<C-_>", function() Snacks.terminal.open() end, desc = "Open Terminal" },
     { "<C-_>", function() Snacks.terminal.toggle(nil, { shell = "nu", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
   },
-  config = function(_, opts)
-    require("snacks").setup(opts)
-    -- Snacks.toggle.zen():map("<leader>uz")
-    -- Snacks.toggle.zen():map("<leader>uZ")
-  end
+  init = function()
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "VeryLazy",
+      callback = function()
+        -- Create some toggle mappings
+        Snacks.toggle.dim():map("<leader>ud")
+        Snacks.toggle.zen():map("<leader>uz")
+        Snacks.toggle.zoom():map("<leader>uZ")
+        Snacks.toggle.inlay_hints():map("<leader>uh")
+        Snacks.toggle.diagnostics():map("<leader>ux")
+        Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+      end,
+    })
+  end,
 }

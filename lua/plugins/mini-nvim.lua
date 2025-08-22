@@ -33,13 +33,13 @@ return {
       },
     })
 
-    -- if not vim.g.vscode then
-    --   require("mini.cursorword").setup()
+    if not vim.g.vscode then
+      require("mini.cursorword").setup()
     --   require("mini.icons").setup()
     --   vim.keymap.set("n", "<leader>uz", function()
     --     require("mini.misc").zoom()
     --   end, { desc = "Zoom (current window)" })
-    -- end
+    end
   end,
 
   init = function()

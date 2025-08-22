@@ -29,40 +29,6 @@ vim.diagnostic.config({
     },
   },
 })
-vim.keymap.set("n", "<leader>ux", function()
-  vim.g.diagnostics_visible = not vim.g.diagnostics_visible
-  if vim.g.diagnostics_visible then
-    vim.diagnostic.enable()
-    vim.diagnostic.config({
-      virtual_text = true,
-      underline = true,
-      update_in_insert = true,
-      signs = {
-        text = {
-          [vim.diagnostic.severity.ERROR] = require("config.icons").diagnostics.error,
-          [vim.diagnostic.severity.WARN] = require("config.icons").diagnostics.warning,
-          [vim.diagnostic.severity.INFO] = require("config.icons").diagnostics.info,
-          [vim.diagnostic.severity.HINT] = require("config.icons").diagnostics.hint,
-        },
-        numhl = {
-          [vim.diagnostic.severity.ERROR] = "DiagnosticError",
-          [vim.diagnostic.severity.WARN] = "DiagnosticWarn",
-          [vim.diagnostic.severity.INFO] = "DiagnosticInfo",
-          [vim.diagnostic.severity.HINT] = "DiagnosticHint",
-        },
-      },
-    })
-    print("󰂚 Diagnostics Enabled")
-  else
-    vim.diagnostic.disable()
-    vim.diagnostic.config({
-      virtual_text = false,
-      underline = false,
-      signs = false,
-    })
-    print("󱏧 Diagnostics Disabled")
-  end
-end, { desc = "Toggle Diagnostics" })
 
 -- stylua: ignore
 -- 功能
