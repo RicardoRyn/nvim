@@ -5,7 +5,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
-    "nvim-tree/nvim-web-devicons", -- optional, but recommended
+    -- "nvim-tree/nvim-web-devicons", -- optional, but recommended
   },
   lazy = false, -- neo-tree will lazily load itself
   keys = {
@@ -110,52 +110,52 @@ return {
       },
     },
 
-    default_component_configs = {
-      -- neo-tree中使用mini.icons参考[#1527](https://github.com/nvim-neo-tree/neo-tree.nvim/pull/1527)
-      icon = {
-        provider = function(icon, node) -- setup a custom icon provider
-          local text, hl
-          local mini_icons = require("mini.icons")
-          if node.type == "file" then -- if it's a file, set the text/hl
-            text, hl = mini_icons.get("file", node.name)
-          elseif node.type == "directory" then -- get directory icons
-            text, hl = mini_icons.get("directory", node.name)
-            -- only set the icon text if it is not expanded
-            if node:is_expanded() then
-              text = nil
-            end
-          end
-          -- set the icon text/highlight only if it exists
-          if text then
-            icon.text = text
-          end
-          if hl then
-            icon.highlight = hl
-          end
-        end,
-      },
-      kind_icon = {
-        provider = function(icon, node)
-          local mini_icons = require("mini.icons")
-          icon.text, icon.highlight = mini_icons.get("lsp", node.extra.kind.name)
-        end,
-      },
-      indent = {
-        with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
-        expander_collapsed = "",
-        expander_expanded = "",
-        expander_highlight = "NeoTreeExpander",
-      },
-      git_status = {
-        symbols = {
-          unstaged = require("config.icons").git.unstaged,
-          staged = require("config.icons").git.staged,
-          modified = require("config.icons").git.modified,
-          added = require("config.icons").git.added,
-          ignored = require("config.icons").git.ignored,
-        },
-      },
-    },
+    -- default_component_configs = {
+    --   -- neo-tree中使用mini.icons参考[#1527](https://github.com/nvim-neo-tree/neo-tree.nvim/pull/1527)
+    --   icon = {
+    --     provider = function(icon, node) -- setup a custom icon provider
+    --       local text, hl
+    --       local mini_icons = require("mini.icons")
+    --       if node.type == "file" then -- if it's a file, set the text/hl
+    --         text, hl = mini_icons.get("file", node.name)
+    --       elseif node.type == "directory" then -- get directory icons
+    --         text, hl = mini_icons.get("directory", node.name)
+    --         -- only set the icon text if it is not expanded
+    --         if node:is_expanded() then
+    --           text = nil
+    --         end
+    --       end
+    --       -- set the icon text/highlight only if it exists
+    --       if text then
+    --         icon.text = text
+    --       end
+    --       if hl then
+    --         icon.highlight = hl
+    --       end
+    --     end,
+    --   },
+    --   kind_icon = {
+    --     provider = function(icon, node)
+    --       local mini_icons = require("mini.icons")
+    --       icon.text, icon.highlight = mini_icons.get("lsp", node.extra.kind.name)
+    --     end,
+    --   },
+    --   indent = {
+    --     with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+    --     expander_collapsed = "",
+    --     expander_expanded = "",
+    --     expander_highlight = "NeoTreeExpander",
+    --   },
+    --   git_status = {
+    --     symbols = {
+    --       unstaged = require("config.icons").git.unstaged,
+    --       staged = require("config.icons").git.staged,
+    --       modified = require("config.icons").git.modified,
+    --       added = require("config.icons").git.added,
+    --       ignored = require("config.icons").git.ignored,
+    --     },
+    --   },
+    -- },
   },
 
   config = function(_, opts)

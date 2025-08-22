@@ -3,7 +3,6 @@ return {
   cond = not vim.g.vscode,
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-    "famiu/bufdelete.nvim",
   },
   opts = {
     options = {
@@ -40,13 +39,14 @@ return {
   keys = {
     { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
     { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-    { "<leader>bd", function() local buf = vim.api.nvim_get_current_buf() require("bufdelete").bufdelete(buf, false) end, desc = "Delete Duffer", },
-    { "<leader>bo", ":BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
+    { "<leader>bd", function() require("snacks").bufdelete.delete() end , desc = "Delete Buffer", },
+    { "<leader>bo", function() require("snacks").bufdelete.other() end , desc = "Delete Other Buffer", },
+    { "<leader>ba", function() require("snacks").bufdelete.all() end, desc = "Delete All Buffers" },
     { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
     { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
     { "<leader>bb", ":BufferLinePickClose<CR>", desc = "Delete Pick Buffer" },
     { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
-    { "<leader>ba", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
+    { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
     { "<leader>b<", "<cmd>BufferLineMovePrev<cr>", desc = "Move Buffer Prev" },
     { "<leader>b>", "<cmd>BufferLineMoveNext<cr>", desc = "Move Buffer Next" },
 

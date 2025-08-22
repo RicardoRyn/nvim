@@ -48,7 +48,10 @@ return {
     },
     snippets = { preset = "luasnip" },
     sources = {
-      default = { "path", "snippets", "buffer", "lsp" },
+      default = { "path", "snippets", "buffer", "lsp", "codeium" },
+      providers = {
+        codeium = { name = 'Codeium', module = 'codeium.blink', async = true }
+      }
     },
   },
 }

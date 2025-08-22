@@ -52,7 +52,7 @@ vim.opt.shellslash = true -- 可选：防止 Windows 上路径被转义
 ------------------- Code ------------------
 vim.g.autoformat = false -- 禁止自动格式化
 vim.g.markdown_recommended_style = 0 -- 不要强制 Markdown 的默认风格
-vim.opt.timeoutlen = vim.g.vscode and 1000 or 300 -- 触发键盘提示时长
+vim.opt.timeoutlen = vim.g.vscode and 1000 or 500 -- 触发键盘提示时长
 vim.opt.completeopt = "menu,menuone,noselect" -- 打开补全菜单时不自动选中第一项
 vim.opt.wildmode = "longest:full,full" -- 命令行补全模式,第一次按 Tab，会自动补全到 最长公共前缀,再按 Tab，会显示 完整匹配列表
 vim.opt.spelllang = { "en" } -- 拼写检查的语言为英语（English）

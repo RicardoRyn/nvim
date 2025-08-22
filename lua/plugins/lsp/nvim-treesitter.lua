@@ -44,8 +44,8 @@ return {
       swap = { -- Swap only works with code blocks that are under the same
         -- markdown header
         enable = true,
-        swap_next = { ["<leader>sl"] = "@code_cell.outer" },
-        swap_previous = { ["<leader>sh"] = "@code_cell.outer" },
+        swap_next = { ["<leader>msl"] = "@code_cell.outer" },
+        swap_previous = { ["<leader>msh"] = "@code_cell.outer" },
       },
     },
   },

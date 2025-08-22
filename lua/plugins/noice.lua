@@ -9,10 +9,10 @@ return {
 
   opts = {
     presets = {
-    --   bottom_search = false,
-    --   command_palette = false, -- 为true时，confirm相关的后续信息会被遮挡
-    --   long_message_to_split = true,
-    --   inc_rename = true,
+      bottom_search = false,
+      command_palette = true,
+      long_message_to_split = true,
+      inc_rename = false,
       lsp_doc_border = true,
     },
     commands = {
