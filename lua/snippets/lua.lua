@@ -9,9 +9,6 @@ ls.add_snippets("lua", {
       "cond = not vim.g.vscode,",
     }),
   }),
-})
-
-ls.add_snippets("lua", {
   s("sty", {
     t("-- stylua: ignore"),
     i(0),

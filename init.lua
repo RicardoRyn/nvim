@@ -13,7 +13,6 @@ if not vim.g.vscode then
   require("config.lsp.bashls") -- bash
   -- Snippets
   require("snippets.lua")
-  require("snippets.python")
   -- Utils
   require("utils.newnotebook")
 end
