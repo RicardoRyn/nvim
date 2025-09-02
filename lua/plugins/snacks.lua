@@ -4,8 +4,9 @@
 -- 由于Windows上类Unix脚本的Shebang路径问题，可能需要修改gh-notify的脚本
 return {
   "folke/snacks.nvim",
-  priority = 1000,
+  cond = not vim.g.vscode,
   lazy = false,
+  priority = 1000,
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
@@ -24,7 +25,6 @@ return {
           { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})", },
           { icon = " ", key = "b", desc = "Browse Repo", action = ":lua Snacks.gitbrowse()", },
           { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
-          { icon = " ", key = "N", desc = "New File", action = ":ene | startinsert" },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
         header = [[
@@ -59,7 +59,7 @@ return {
                 vim.ui.open("https://github.com/notifications")
               end,
               key = "n",
-              height = 10,
+              height = 8,
               enabled = true,
             },
             {

@@ -1,44 +1,8 @@
 return {
   "akinsho/bufferline.nvim",
   cond = not vim.g.vscode,
-  lazy = false,
+  event = { "BufReadPost", "BufNewFile" },
   -- dependencies = { "nvim-tree/nvim-web-devicons" },
-  opts = {
-    options = {
-      -- stylua: ignore
-      close_command = function(n) Snacks.bufdelete(n) end,
-      -- stylua: ignore
-      right_mouse_command = function(n) Snacks.bufdelete(n) end,
-      diagnostics = "nvim_lsp",
-      always_show_bufferline = true,
-      diagnostics_indicator = function(_, _, diagnostics_dict)
-        local indicator = "  "
-        for level, number in pairs(diagnostics_dict) do
-          local symbol
-          if level == "error" then
-            symbol = require("utils.icons").diagnostics.error .. " "
-          elseif level == "warning" then
-            symbol = require("utils.icons").diagnostics.warning .. " "
-          else
-            symbol = require("utils.icons").diagnostics.info .. " "
-          end
-          indicator = indicator .. number .. symbol
-        end
-        return indicator
-      end,
-      offsets = {
-        {
-          filetype = "neo-tree",
-          text = "Neo-tree",
-          highlight = "Directory",
-          text_align = "left",
-        },
-        {
-          filetype = "snacks_layout_box",
-        },
-      },
-    },
-  },
   -- stylua: ignore
   keys = {
     { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
@@ -74,6 +38,42 @@ return {
         end
       end,
       desc = "Move current buffer to right",
+    },
+  },
+  opts = {
+    options = {
+      -- stylua: ignore
+      close_command = function(n) Snacks.bufdelete(n) end,
+      -- stylua: ignore
+      right_mouse_command = function(n) Snacks.bufdelete(n) end,
+      diagnostics = "nvim_lsp",
+      always_show_bufferline = true,
+      diagnostics_indicator = function(_, _, diagnostics_dict)
+        local indicator = "  "
+        for level, number in pairs(diagnostics_dict) do
+          local symbol
+          if level == "error" then
+            symbol = require("utils.icons").diagnostics.error .. " "
+          elseif level == "warning" then
+            symbol = require("utils.icons").diagnostics.warning .. " "
+          else
+            symbol = require("utils.icons").diagnostics.info .. " "
+          end
+          indicator = indicator .. number .. symbol
+        end
+        return indicator
+      end,
+      offsets = {
+        {
+          filetype = "neo-tree",
+          text = "Neo-tree",
+          highlight = "Directory",
+          text_align = "left",
+        },
+        {
+          filetype = "snacks_layout_box",
+        },
+      },
     },
   },
 }

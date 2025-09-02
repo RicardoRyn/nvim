@@ -1,7 +1,7 @@
 return {
   "mrjones2014/smart-splits.nvim",
   cond = not vim.g.vscode,
-  lazy = false,
+  event = "VeryLazy",
   -- stylua: ignore
   keys = {
     -- 窗口切换

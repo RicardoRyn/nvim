@@ -11,11 +11,12 @@ if not vim.g.vscode then
   require("config.lsp.pyright") -- python
   require("config.lsp.marksman") -- markdown
   require("config.lsp.bashls") -- bash
-  -- Snippets
-  require("snippets.lua")
   -- Utils
   require("utils.newnotebook")
 end
 
 -- NOTE: neovim中的技巧
 -- `echo &filetype`可以查看当前文件类型
+
+-- TODO: 优化启动插件
+-- TODO: yasb中锁定而不是注销

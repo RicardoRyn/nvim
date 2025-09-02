@@ -1,6 +1,7 @@
 return {
   "GCBallesteros/jupytext.nvim",
   cond = not vim.g.vscode,
+  event = "VeryLazy",
   config = true,
   opts = {
     style = "markdown",

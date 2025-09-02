@@ -1,10 +1,11 @@
 return {
   "yetone/avante.nvim",
   cond = not vim.g.vscode,
+  -- event = { "BufReadPost", "BufNewFile" },
+  event = "VeryLazy",
   -- 如果您想从源代码构建，请执行 `make BUILD_FROM_SOURCE=true`
   -- ⚠️ 一定要加上这一行配置！！！！！
   build = vim.fn.has("win32") ~= 0 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "make",
-  event = "VeryLazy",
   version = false, -- 永远不要将此值设置为 "*"！永远不要！
   ---@module 'avante'
   ---@type avante.Config

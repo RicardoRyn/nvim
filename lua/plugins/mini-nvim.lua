@@ -1,5 +1,6 @@
 return {
   "nvim-mini/mini.nvim",
+  event = "VeryLazy",
   version = false,
   config = function()
     require("mini.ai").setup() -- 识别小/中/大括号

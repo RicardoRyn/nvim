@@ -1,13 +1,21 @@
 return {
   "saghen/blink.cmp",
   cond = not vim.g.vscode,
+  -- event = { "InsertEnter", "CmdlineEnter" },
+  event = "VeryLazy",
   version = "*",
   dependencies = {
     { "rafamadriz/friendly-snippets" },
-    { "L3MON4D3/LuaSnip", version = "v2.*" },
+    {
+      "L3MON4D3/LuaSnip",
+      version = "v2.*",
+      config = function()
+        -- 添加需要的snippet
+        require("snippets.lua")
+      end,
+    },
     { "xzbdmw/colorful-menu.nvim", opts = {} },
   },
-  event = "VeryLazy",
   -- stylua: ignore
   opts = {
     completion = {

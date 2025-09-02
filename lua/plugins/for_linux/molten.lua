@@ -7,6 +7,7 @@ return {
   cond = function()
     return vim.loop.os_uname().sysname == "Linux" and not vim.g.vscode
   end,
+  event = "VeryLazy",
   version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
   dependencies = { "3rd/image.nvim" },
   build = ":UpdateRemotePlugins",

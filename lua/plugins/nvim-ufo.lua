@@ -1,9 +1,8 @@
 return {
   "kevinhwang91/nvim-ufo",
-  -- enabled = false,
   cond = not vim.g.vscode,
+  event = "VeryLazy",
   dependencies = { "kevinhwang91/promise-async" },
-  lazy = false,
   opts = {
     preview = {
       win_config = { border = "rounded", winhighlight = "Normal:Folded", winblend = 0 },

@@ -3,13 +3,13 @@ return {
   cond = function()
     return vim.loop.os_uname().sysname == "Linux" and not vim.g.vscode
   end,
+  event = "VeryLazy",
   dependencies = {
     -- "neovim/nvim-lspconfig",
     -- "mfussenegger/nvim-dap",
     -- "mfussenegger/nvim-dap-python", --optional
     -- { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
   },
-  lazy = false,
   branch = "main", -- This is the regexp branch, use this for the new version
   keys = {
     { "<leader>v", "<cmd>VenvSelect<cr>", desc = "Virtual Env" },

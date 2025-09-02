@@ -4,6 +4,7 @@ return {
   -- 如果没有显示token，事先在浏览器登录windsurf，然后在从neovim中跳转
   "Exafunction/windsurf.nvim",
   cond = not vim.g.vscode,
+  event = { "BufReadPost", "BufNewFile" },
   dependencies = {
     "nvim-lua/plenary.nvim",
     "hrsh7th/nvim-cmp",

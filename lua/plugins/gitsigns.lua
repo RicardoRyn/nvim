@@ -1,7 +1,7 @@
 return {
   "lewis6991/gitsigns.nvim",
-  enabled = true,
   cond = not vim.g.vscode,
+  event = "VeryLazy",
   opts = {
     signs = {
       add = { text = "▎" },
