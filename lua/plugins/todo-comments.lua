@@ -1,7 +1,7 @@
 return {
   "folke/todo-comments.nvim",
   cond = not vim.g.vscode,
-  event = "VeryLazy",
+  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   dependencies = { "nvim-lua/plenary.nvim" },
   opts = {
     signs = true, -- show icons in the signs column

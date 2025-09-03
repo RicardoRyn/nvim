@@ -1,5 +1,6 @@
 return {
   "chrisgrieser/nvim-spider",
+  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   opts = {},
   keys = {
     { "w", "<cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" }, desc = "Move to start of next of word", },

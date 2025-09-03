@@ -1,7 +1,7 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
   cond = not vim.g.vscode,
-  event = "VeryLazy",
+  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   dependencies = { "HiPhish/rainbow-delimiters.nvim" },
   main = "ibl",
   ---@module "ibl"

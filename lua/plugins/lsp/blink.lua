@@ -1,8 +1,7 @@
 return {
   "saghen/blink.cmp",
   cond = not vim.g.vscode,
-  -- event = { "InsertEnter", "CmdlineEnter" },
-  event = "VeryLazy",
+  event = { "InsertEnter", "CmdlineEnter" },
   version = "*",
   dependencies = {
     { "rafamadriz/friendly-snippets" },
