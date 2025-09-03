@@ -145,6 +145,7 @@ return {
     { "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks" },
     { "<leader>sn", function() Snacks.picker.notifications() end, desc = "Notification" },
     { "<leader>sp", function() Snacks.picker.projects() end, desc = "Projects" },
+    { "<leader>sr", function() Snacks.picker.resume() end, desc = "Resume" },
     -- LSP
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
     { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
