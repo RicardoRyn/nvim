@@ -8,8 +8,8 @@ return {
     require("catppuccin").setup({
       flavour = "latte",
       integrations = {
-        -- 开启 bufferline 支持
-        bufferline = true,
+        bufferline = true, -- 开启 bufferline 支持
+        blink_cmp = true, -- 开启 cmp 的高亮
       },
     })
 
