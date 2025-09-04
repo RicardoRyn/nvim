@@ -18,5 +18,4 @@ end
 -- NOTE: neovim中的技巧
 -- `echo &filetype`可以查看当前文件类型
 
--- TODO: 优化启动插件
--- TODO: yasb中锁定而不是注销
+-- TODO: 更改ai虚拟文本的颜色
