@@ -27,6 +27,7 @@ vim.diagnostic.config({
 })
 
 -- 功能
+vim.keymap.set("n", "<leader>r", "<cmd>LspRestart<CR>", { desc = "Restart LSP" })
 vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })
 vim.keymap.set("n", "<leader>cd", function() vim.diagnostic.open_float() end, { desc = "Show Diagnostics (line)" })
