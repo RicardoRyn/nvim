@@ -13,7 +13,7 @@ return {
         require("snippets.lua")
       end,
     },
-    { "xzbdmw/colorful-menu.nvim", opts = {} },
+    { "Exafunction/windsurf.nvim" },
   },
   -- stylua: ignore
   opts = {
@@ -21,24 +21,14 @@ return {
       documentation = {
         auto_show = false,
       },
-      menu = {
-        draw = {
-          columns = { { "kind_icon" }, { "label", gap = 1 }, {"label_description"}, {"source_name"} },
-          components = {
-            label = {
-              text = function(ctx) return require("colorful-menu").blink_components_text(ctx) end,
-              highlight = function(ctx) return require("colorful-menu").blink_components_highlight(ctx) end,
-            },
-          },
-        },
-      },
       list = {
         selection = { preselect = true, auto_insert = false }
       }
     },
     keymap = {
       ['<CR>'] = { 'accept', 'fallback' },
-      ['<Tab>'] = { 'select_and_accept', 'fallback' },
+      -- ['<Tab>'] = { 'select_and_accept', 'fallback' },
+      ['<Tab>'] = false,
       ['<S-Tab>'] = { 'select_prev', 'fallback' },
       ['<C-y>'] = { 'select_and_accept' },
     },
@@ -61,4 +51,9 @@ return {
       }
     },
   },
+  -- blink的虚拟文本颜色
+  config = function(_, opts)
+    require("blink.cmp").setup(opts)
+    vim.api.nvim_set_hl(0, "BlinkCmpGhostText", { fg = "#ffcc00", italic = true })
+  end,
 }
