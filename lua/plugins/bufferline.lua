@@ -1,7 +1,7 @@
 return {
   "akinsho/bufferline.nvim",
   cond = not vim.g.vscode,
-  event = "BufReadPost",
+  lazy = false,
   -- dependencies = { "nvim-tree/nvim-web-devicons" },
   -- stylua: ignore
   keys = {
