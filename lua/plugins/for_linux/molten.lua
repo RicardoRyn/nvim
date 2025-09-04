@@ -31,11 +31,11 @@ return {
     vim.api.nvim_set_hl(0, "MoltenCell", { link = "CursorLine" }) -- 代码单元
     vim.api.nvim_set_hl(0, "MoltenVirtualText", { link = "Comment" }) -- 虚拟文本输出
     -- 这些配置搞不明白，全部注掉用默认
-    vim.g.molten_auto_open_output = false -- 禁止打开浮动窗口显示输出
+    vim.g.molten_auto_open_output = true -- 自动打开浮动窗口显示输出
     vim.g.molten_cover_empty_lines = true -- 输出窗口和虚拟文本将显示在代码单元格最后一行的正下方。
     -- vim.g.molten_enter_output_behavior = "open_and_enter" -- 直接进入输出窗口
     -- vim.g.molten_virt_text_output = true -- 当true，cell下方显示输出文本，离开cell后仍然保留，不会自动打开输出窗口
-    -- vim.g.molten_output_virt_lines = true -- 为主缓冲区添加虚拟行填充，使浮动窗口打开时不会遮挡任何内容
+    vim.g.molten_output_virt_lines = true -- 为主缓冲区添加虚拟行填充，使浮动窗口打开时不会遮挡任何内容
     -- vim.g.molten_virt_lines_off_by_1 = false
   end,
 
