@@ -28,72 +28,19 @@ return {
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
         header = [[
-██████╗ ██╗   ██╗███╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
-██╔══██╗╚██╗ ██╔╝████╗  ██║██║   ██║██║████╗ ████║      Z    
-██████╔╝ ╚████╔╝ ██╔██╗ ██║██║   ██║██║██╔████╔██║   z       
-██╔══██╗  ╚██╔╝  ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║ z         
-██║  ██║   ██║   ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║           
-╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝           ]],
+           ██████╗ ██╗   ██╗███╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
+           ██╔══██╗╚██╗ ██╔╝████╗  ██║██║   ██║██║████╗ ████║      Z    
+           ██████╔╝ ╚████╔╝ ██╔██╗ ██║██║   ██║██║██╔████╔██║   z       
+           ██╔══██╗  ╚██╔╝  ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║ z         
+           ██║  ██║   ██║   ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║           
+           ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝           ]],
       },
       sections = {
         { section = "header" },
-        { section = "keys", gap = 1, padding = 1 },
+        { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
         { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
         { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
         { section = "startup" },
-        function()
-          local in_git = Snacks.git.get_root() ~= nil
-          local cmds = {
-            {
-              icon = " ",
-              title = "Git Status",
-              -- cmd = "git --no-pager diff --stat -B -M -C",
-              cmd = "git status --short --branch --renames",
-              height = 10,
-            },
-            {
-              icon = " ",
-              title = "Notifications",
-              cmd = "gh notify -a -s -n5",
-              action = function()
-                vim.ui.open("https://github.com/notifications")
-              end,
-              key = "n",
-              height = 8,
-              enabled = true,
-            },
-            {
-              title = "Open Issues",
-              cmd = "gh issue list -L 3",
-              key = "i",
-              action = function()
-                vim.fn.jobstart("gh issue list --web", { detach = true })
-              end,
-              icon = " ",
-              height = 5,
-            },
-            {
-              icon = " ",
-              title = "Open PRs",
-              cmd = "gh pr list -L 3",
-              key = "P",
-              action = function()
-                vim.fn.jobstart("gh pr list --web", { detach = true })
-              end,
-              height = 5,
-            },
-          }
-          return vim.tbl_map(function(cmd)
-            return vim.tbl_extend("force", {
-              pane = 2,
-              section = "terminal",
-              enabled = in_git,
-              padding = 2,
-              ttl = 5 * 60,
-              indent = 3,
-            }, cmd)
-          end, cmds)
-        end,
       },
     },
     explorer = { enabled = false },

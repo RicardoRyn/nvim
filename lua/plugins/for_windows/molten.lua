@@ -19,6 +19,7 @@ return {
     vim.g.molten_wrap_output = true
     vim.g.molten_image_location = "both" -- 图像呈现位置
     vim.g.molten_output_crop_border = true -- 当输出窗口本应停留在屏幕底部时，'裁剪'其底部边框
+    vim.g.molten_cover_empty_lines = true -- 输出窗口和虚拟文本将显示在代码单元格最后一行的正下方。
     -- Molten.nvim 高亮组链接到已有颜色组
     vim.g.molten_use_border_highlights = true -- 当为真时，根据单元格状态（运行中/完成/错误）使用不同的高亮显示输出边框
     vim.api.nvim_set_hl(0, "MoltenOutputBorder", { link = "FloatBorder" }) -- 默认输出窗口边框

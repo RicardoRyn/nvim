@@ -12,7 +12,6 @@ return {
       sign = false,
       width = "block",
       min_width = 80,
-      left_pad = 1,
       right_pad = 1,
       border = "thin",
       position = "right",
