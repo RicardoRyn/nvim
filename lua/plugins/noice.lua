@@ -25,14 +25,12 @@ return {
 
   -- stylua: ignore
   keys = {
-    { "<leader>nm", "<cmd>messages<CR>", desc = "Messages" },
-    { "<leader>nl", function() require("noice").cmd("last") end, desc = "Last Message" },
-    { "<leader>nh", function() require("noice").cmd("history") end, desc = "History" },
-    { "<leader>ne", function() require("noice").cmd("error") end, desc = "Error" },
-    { "<leader>na", function() require("noice").cmd("all") end, desc = "All" },
-    { "<leader>nd", function() require("noice").cmd("dismiss") end, desc = "Dismiss" },
-    { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
-    { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
+    { "<leader>sna", function() require("noice").cmd("all") end, desc = "All" },
+    { "<leader>snd", function() require("noice").cmd("dismiss") end, desc = "Dismiss" },
+    { "<leader>sne", function() require("noice").cmd("error") end, desc = "Error" },
+    { "<leader>snh", function() require("noice").cmd("history") end, desc = "History" },
+    { "<leader>snl", function() require("noice").cmd("last") end, desc = "Last Message" },
+    { "<leader>snm", "<cmd>messages<CR>", desc = "Messages" },
   },
 
   -- stylua: ignore

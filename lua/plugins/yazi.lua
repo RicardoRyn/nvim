@@ -7,8 +7,8 @@ return {
   },
   keys = {
     -- 👇 in this section, choose your own keymappings!
-    { "<leader>E", "<cmd>Yazi cwd<cr>", desc = "Yazi (cwd)" },
-    { "<leader>-", mode = { "n", "v" }, "<cmd>Yazi<cr>", desc = "Yazi (buffer directory)" },
+    { "<leader>-", "<cmd>Yazi cwd<cr>", desc = "Yazi (cwd)" },
+    { "<leader>cw", mode = { "n", "v" }, "<cmd>Yazi<cr>", desc = "Yazi (buffer directory)" },
     { "<leader>=", "<cmd>Yazi toggle<cr>", desc = "Yazi (last session)", } },
   ---@type YaziConfig | {}
   opts = {
