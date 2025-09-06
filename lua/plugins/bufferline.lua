@@ -9,7 +9,6 @@ return {
     { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
     { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer", },
     { "<leader>bo", function() Snacks.bufdelete.other() end, desc = "Delete Buffer", },
-    { "<leader>ba", function() Snacks.bufdelete.all() end, desc = "Delete Buffer", },
     { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
     { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
     { "<leader>bb", ":BufferLinePickClose<CR>", desc = "Delete Pick Buffer" },

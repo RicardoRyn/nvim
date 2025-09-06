@@ -12,7 +12,7 @@ return {
   },
   branch = "main", -- This is the regexp branch, use this for the new version
   keys = {
-    { "<leader>v", "<cmd>VenvSelect<cr>", desc = "Virtual Env" },
+    { "<leader>cv", "<cmd>VenvSelect<cr>", desc = "Virtual Env" },
   },
   opts = {
     search = {

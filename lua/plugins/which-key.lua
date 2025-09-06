@@ -15,8 +15,8 @@ return {
         { "[", group = "Prev" },
         { "]", group = "Next" },
         -- 无下级菜单
+        { "<leader>d", group = "Docstrings", icon = { icon = "󰙆 " } },
         { "<leader>e", icon = { icon = "󰙅", color = "yellow" } },
-        { "<leader>E", icon = { icon = "󰙅", color = "yellow" } },
         { "<leader>-", icon = { icon = "󰙅", color = "yellow" } },
         { "<leader>=", icon = { icon = "󰙅", color = "yellow" } },
         { "<leader>h", icon = { icon = "󰸱" } },

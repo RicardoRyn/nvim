@@ -12,8 +12,6 @@ return {
     bigfile = { enabled = true },
     dashboard = {
       enabled = true,
-      width = 61,
-      pane_gap = 7,
       preset = {
         -- stylua: ignore
         keys = {
@@ -70,6 +68,7 @@ return {
     { "<leader>ff", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
     { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+    { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
     -- grep
     { "<leader>//", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<leader>/l", function() Snacks.picker.lines() end, desc = "Lines" },
@@ -79,20 +78,20 @@ return {
     { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
     { "<leader>gg", function() require("snacks").lazygit.open() end, desc = "Open LazyGit", },
     -- search
+    { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification" },
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
     { '<leader>s.', function() Snacks.scratch.select() end, desc = "Scratch" },
     { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
-    { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands" },
+    { "<leader>sc", function() Snacks.picker.commands() end, desc = "Commands" },
     { "<leader>sd", function() Snacks.picker.diagnostics_buffer() end, desc = "Diagnostics (buffer)" },
     { "<leader>sD", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
     { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
     { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
     { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
-    { "<leader>sl", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
     { "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks" },
-    { "<leader>sn", function() Snacks.picker.notifications() end, desc = "Notification" },
-    { "<leader>sp", function() Snacks.picker.projects() end, desc = "Projects" },
+    { "<leader>sp", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
     { "<leader>sr", function() Snacks.picker.resume() end, desc = "Resume" },
+    { "<leader>su", function() Snacks.picker.undo() end, desc = "Undotree" },
     -- LSP
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
     { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
@@ -107,30 +106,11 @@ return {
     { "<C-_>", function() Snacks.terminal.open() end, desc = "Open Terminal" },
     { "<C-_>", function() Snacks.terminal.toggle(nil, { shell = "nu", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     -- code
-    { "<leader>cu", function() Snacks.picker.undo() end, desc = "Undo History" },
+    { "<leader>cl", function() Snacks.picker.lsp_config() end, desc = "Lsp Info" },
     { "<leader>st", function() Snacks.picker.todo_comments() end, desc = "Todo" },
     { "<leader>sT", function () Snacks.picker.todo_comments({ keywords = { "FIX", "TODO" } }) end, desc = "Todo/Fix" },
     -- ui
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
-    -- misc
-    {
-      "<leader>N",
-      desc = "Neovim News",
-      function()
-        Snacks.win({
-          file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
-          width = 0.6,
-          height = 0.6,
-          wo = {
-            spell = false,
-            wrap = false,
-            signcolumn = "yes",
-            statuscolumn = " ",
-            conceallevel = 3,
-          },
-        })
-      end,
-    }
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
@@ -150,7 +130,6 @@ return {
           end,
         }):map("<leader>ug")
         Snacks.toggle.inlay_hints():map("<leader>uh")
-        Snacks.toggle.indent():map("<leader>ui")
         Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>ul")
         Snacks.toggle.line_number():map("<leader>uL")
         Snacks.toggle.zen():map("<leader>uz")
