@@ -138,7 +138,8 @@ return {
       callback = function()
         -- Create some toggle mappings
         Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
-        Snacks.toggle.dim():map("<leader>ud")
+        Snacks.toggle.diagnostics():map("<leader>ud")
+        Snacks.toggle.dim():map("<leader>uD")
         Snacks.toggle({
           name = "Git Signs",
           get = function()
@@ -152,7 +153,6 @@ return {
         Snacks.toggle.indent():map("<leader>ui")
         Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>ul")
         Snacks.toggle.line_number():map("<leader>uL")
-        Snacks.toggle.diagnostics():map("<leader>ux")
         Snacks.toggle.zen():map("<leader>uz")
         Snacks.toggle.zoom():map("<leader>uZ")
       end,
