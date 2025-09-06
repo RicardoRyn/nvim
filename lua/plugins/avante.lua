@@ -1,7 +1,7 @@
 return {
   "yetone/avante.nvim",
+  enabled = false,
   cond = not vim.g.vscode,
-  -- event = { "BufReadPost", "BufNewFile" },
   event = "VeryLazy",
   -- 如果您想从源代码构建，请执行 `make BUILD_FROM_SOURCE=true`
   -- ⚠️ 一定要加上这一行配置！！！！！
