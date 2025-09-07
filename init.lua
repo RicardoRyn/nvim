@@ -17,5 +17,3 @@ end
 
 -- NOTE: neovim中的技巧
 -- `echo &filetype`可以查看当前文件类型
-
--- TODO: 更改ai虚拟文本的颜色
