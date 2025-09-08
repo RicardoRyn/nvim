@@ -14,8 +14,6 @@ return {
       -- NOTE: PYTHON
       "pyright",
       "ruff",
-      "isort",
-      "black",
       -- NOTE: BASH
       "bash-language-server",
       "shellcheck",

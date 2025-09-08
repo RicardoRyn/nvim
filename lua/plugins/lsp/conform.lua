@@ -1,3 +1,10 @@
+local function notify_formatters(formatters)
+  return function()
+    vim.notify("Formatter: **" .. table.concat(formatters, ", ") .. "**", vim.log.levels.INFO)
+    return formatters
+  end
+end
+
 return {
   "stevearc/conform.nvim",
   cond = not vim.g.vscode,
@@ -5,31 +12,26 @@ return {
   opts = {
     notify_on_error = false,
     format_on_save = false,
-    stop_after_first = false, -- 禁止在执行第一个 formatter 后就停止。适用于例isort+black的组合
+    stop_after_first = false,
     formatters_by_ft = {
       -- NOTE: LUA
-      lua = { "stylua" }, -- 支持 range_args，Visual 模式选中行可以格式化
+      lua = notify_formatters({ "stylua" }),
       -- NOTE: PYTHON
-      python = function(bufnr)
-        if require("conform").get_formatter_info("ruff_format", bufnr).available then
-          return { "ruff_format" }
-        else
-          return { "isort", "black" } -- Black 只能整个 buffer
-        end
-      end,
+      python = notify_formatters({ "ruff_format" }),
       -- NOTE: BASH
-      bash = { "shfmt" }, -- 支持 range_args
-      sh = { "shfmt" },
+      bash = notify_formatters({ "shfmt" }),
+      sh = notify_formatters({ "shfmt" }),
       -- NOTE: MARKDOWN
-      markdown = { "injected", "prettierd" },
-      quarto = { "injected" },
+      markdown = notify_formatters({ "injected", "prettierd" }),
+      quarto = notify_formatters({ "injected" }),
       -- NOTE: YAML
-      yaml = { "prettierd" },
+      yaml = notify_formatters({ "prettierd" }),
     },
   },
 
   keys = {
-    { "<leader>cf",
+    {
+      "<leader>cf",
       function()
         require("conform").format({ async = true }, function(err)
           if not err then
