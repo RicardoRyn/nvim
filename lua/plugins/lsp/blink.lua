@@ -28,7 +28,7 @@ return {
     keymap = {
       ['<CR>'] = { 'accept', 'fallback' },
       -- ['<Tab>'] = { 'select_and_accept', 'fallback' },
-      ['<Tab>'] = false,
+      ['<Tab>'] = false, -- 为了Tab键能更好地执行AI自动补全
       ['<S-Tab>'] = { 'select_prev', 'fallback' },
       ['<C-y>'] = { 'select_and_accept' },
     },
