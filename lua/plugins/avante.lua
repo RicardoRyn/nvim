@@ -1,6 +1,6 @@
 return {
   "yetone/avante.nvim",
-  enabled = false,
+  -- enabled = false,
   cond = not vim.g.vscode,
   event = "VeryLazy",
   -- 如果您想从源代码构建，请执行 `make BUILD_FROM_SOURCE=true`
