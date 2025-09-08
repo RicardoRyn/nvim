@@ -2,9 +2,34 @@ return {
   "stevearc/conform.nvim",
   cond = not vim.g.vscode,
   cmd = { "ConformInfo" },
+  opts = {
+    notify_on_error = false,
+    format_on_save = false,
+    stop_after_first = false, -- 禁止在执行第一个 formatter 后就停止。适用于例isort+black的组合
+    formatters_by_ft = {
+      -- NOTE: LUA
+      lua = { "stylua" }, -- 支持 range_args，Visual 模式选中行可以格式化
+      -- NOTE: PYTHON
+      python = function(bufnr)
+        if require("conform").get_formatter_info("ruff_format", bufnr).available then
+          return { "ruff_format" }
+        else
+          return { "isort", "black" } -- Black 只能整个 buffer
+        end
+      end,
+      -- NOTE: BASH
+      bash = { "shfmt" }, -- 支持 range_args
+      sh = { "shfmt" },
+      -- NOTE: MARKDOWN
+      markdown = { "injected", "prettierd" },
+      quarto = { "injected" },
+      -- NOTE: YAML
+      yaml = { "prettierd" },
+    },
+  },
+
   keys = {
-    {
-      "<leader>cf",
+    { "<leader>cf",
       function()
         require("conform").format({ async = true }, function(err)
           if not err then
@@ -18,28 +43,6 @@ return {
       end,
       desc = "Code Format",
       mode = { "n", "v" }, -- 普通模式和可视模式都生效
-    },
-  },
-  opts = {
-    notify_on_error = false,
-    format_on_save = false,
-    stop_after_first = true, -- 只运行第一个 formatter
-    formatters_by_ft = {
-      lua = { "stylua" }, -- 支持 range_args，Visual 模式选中行可以格式化
-
-      python = function(bufnr)
-        if require("conform").get_formatter_info("ruff_format", bufnr).available then
-          return { "ruff_format" }
-        else
-          return { "isort", "black" } -- Black 只能整个 buffer
-        end
-      end,
-
-      bash = { "shfmt" }, -- 支持 range_args
-      sh = { "shfmt" },
-
-      markdown = { "injected", "prettierd" }, -- 支持 range_args
-      quarto = { "injected" },
     },
   },
 

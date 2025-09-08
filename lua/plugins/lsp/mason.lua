@@ -8,21 +8,25 @@ return {
   },
   opts = {
     ensure_installed = {
+      -- NOTE: LUA
       "lua-language-server",
       "stylua",
-
+      -- NOTE: PYTHON
       "pyright",
       "ruff",
       "isort",
       "black",
-
+      -- NOTE: BASH
       "bash-language-server",
       "shellcheck",
       "shfmt",
-
+      -- NOTE: MARKDOWN
       "marksman", -- LSP (语法高亮、补全、跳转)
       "markdownlint-cli2", -- 静态检查
       "prettierd", -- 格式化
+      -- NOTE: YAML
+      "yaml-language-server", -- LSP
+      "yamllint", -- 静态检查
     },
   },
   config = function(_, opts)
