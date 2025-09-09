@@ -111,6 +111,7 @@ return {
     { "<leader>st", function() Snacks.picker.todo_comments() end, desc = "Todo" },
     { "<leader>sT", function () Snacks.picker.todo_comments({ keywords = { "FIX", "TODO" } }) end, desc = "Todo/Fix" },
     -- ui
+    { '<leader>D', function() Snacks.dashboard() end, desc = "Dashboard" },
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
   },
   init = function()
