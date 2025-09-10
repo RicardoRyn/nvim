@@ -27,7 +27,8 @@ if vim.g.vscode then
   vim.keymap.set( "n", "<leader>cr", "<Cmd>lua require('vscode').call('editor.action.rename')<CR>", { desc = "rename symbol" })
   vim.keymap.set( "n", "]d", "<Cmd>lua require('vscode').call('editor.action.marker.next')<CR>", { desc = "Go to next diagnostic" })
   vim.keymap.set( "n", "[d", "<Cmd>lua require('vscode').call('editor.action.marker.prev')<CR>", { desc = "Go to previous diagnostic" })
-  vim.keymap.set("n", "<leader>o", "<Cmd>lua require('vscode').call('outline.focus')<CR>", { desc = "open outline" })
+  vim.keymap.set("n", "<leader>o", "<Cmd>lua require('vscode').call('outline.focus')<CR>", { desc = "Open outline" })
+  vim.keymap.set("n", "za", "<Cmd>lua require('vscode').call('editor.toggleFold')<CR>", { desc = "Toggle fold" })
 
   -- Buffer
   vim.keymap.set( "n", "L", "<Cmd>lua require('vscode').call('workbench.action.nextEditor')<CR>", { desc = "Next buffer" })
