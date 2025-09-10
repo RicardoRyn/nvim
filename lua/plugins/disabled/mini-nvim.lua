@@ -36,7 +36,6 @@ return {
 
     if not vim.g.vscode then
       require("mini.icons").setup()
-      require("mini.cursorword").setup()
     end
   end,
 
