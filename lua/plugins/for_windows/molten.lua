@@ -15,22 +15,7 @@ return {
     vim.env.PATH = vim.fn.expand("E:/python/envs/neovim/Scripts") .. ":" .. vim.env.PATH -- 保证neovim环境中的jupytext可用
     vim.g.python3_host_prog = vim.fn.expand("E:/python/envs/neovim/python.exe")
 
-    vim.g.molten_output_win_max_height = 20
-    vim.g.molten_wrap_output = true
-    vim.g.molten_image_location = "both" -- 图像呈现位置
-    vim.g.molten_output_crop_border = true -- 当输出窗口本应停留在屏幕底部时，'裁剪'其底部边框
-    vim.g.molten_cover_empty_lines = true -- 输出窗口和虚拟文本将显示在代码单元格最后一行的正下方。
-    -- Molten.nvim 高亮组链接到已有颜色组
-    vim.g.molten_use_border_highlights = true -- 当为真时，根据单元格状态（运行中/完成/错误）使用不同的高亮显示输出边框
-    vim.api.nvim_set_hl(0, "MoltenOutputBorder", { link = "FloatBorder" }) -- 默认输出窗口边框
-    vim.api.nvim_set_hl(0, "MoltenOutputBorderFail", { link = "ErrorMsg" }) -- 失败输出边框
-    vim.api.nvim_set_hl(0, "MoltenOutputBorderSuccess", { link = "diffAdded" }) -- 成功输出边框
-    -- vim.api.nvim_set_hl(0, "MoltenOutputWin", { link = "NormalFloat" }) -- 输出窗口内部
-    -- vim.api.nvim_set_hl(0, "MoltenOutputWinNC", { link = "NormalFloat" }) -- 非当前输出窗口
-    -- vim.api.nvim_set_hl(0, "MoltenOutputFooter", { link = "FloatFooter" }) -- 输出窗口底部提示
-    -- vim.api.nvim_set_hl(0, "MoltenCell", { link = "CursorLine" }) -- 代码单元
-    -- vim.api.nvim_set_hl(0, "MoltenVirtualText", { link = "Comment" }) -- 虚拟文本输出
-    -- wezterm专用配置
+    -- wezterm专用配置，从官网抄的
     vim.g.molten_auto_open_output = false -- cannot be true if molten_image_provider = "wezterm"
     vim.g.molten_output_show_more = true
     vim.g.molten_image_provider = "wezterm"
@@ -40,7 +25,18 @@ return {
     vim.g.molten_virt_text_output = true
     vim.g.molten_virt_lines_off_by_1 = true
     vim.g.molten_auto_image_popup = false
+    vim.g.molten_output_win_zindex = 50
+
+    -- 其他配置
     vim.g.molten_enter_output_behavior = "open_and_enter"
+    vim.g.molten_output_win_max_height = 40
+    vim.g.molten_wrap_output = true
+
+    -- Molten.nvim 高亮组链接到已有颜色组
+    vim.g.molten_use_border_highlights = true -- 当为真时，根据单元格状态（运行中/完成/错误）使用不同的高亮显示输出边框
+    vim.api.nvim_set_hl(0, "MoltenOutputBorder", { link = "FloatBorder" }) -- 默认输出窗口边框
+    vim.api.nvim_set_hl(0, "MoltenOutputBorderFail", { link = "ErrorMsg" }) -- 失败输出边框
+    vim.api.nvim_set_hl(0, "MoltenOutputBorderSuccess", { link = "diffAdded" }) -- 成功输出边框
   end,
 
   -- stylua: ignore

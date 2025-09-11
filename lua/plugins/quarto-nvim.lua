@@ -54,7 +54,7 @@ return {
       _j_/_k_: move down/up
       _r_: run cell
       _R_: run above
-      _z_: fold cell
+      _f_: fold cell
       _<esc>_/_q_: exit]],
       config = {
         color = "pink",
@@ -72,7 +72,7 @@ return {
         { "j", keys("]c") },
         { "k", keys("[c") },
         { "r", ":QuartoSend<CR>" },
-        { "z", function() vim.api.nvim_command("normal vic") vim.api.nvim_command("normal zf") end, },
+        { "f", function() vim.api.nvim_command("normal vic") vim.api.nvim_command("normal zf") end, },
         { "R", ":QuartoSendAbove<CR>" },
         { "<esc>", nil, { exit = true } },
         { "q", nil, { exit = true } },
