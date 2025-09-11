@@ -4,12 +4,12 @@ icons.git = {
   modified = "󰏭 ",
   added = "󰜄 ",
   deleted = "󰛲 ",
-  removed = "󰛲 ",
-  ignored = "󰅘 ",
+  removed = "󰅘 ",
+  ignored = " ",
 
-  untracked = "󰄱 ",
+  untracked = " ",
   unstaged = "󰄱 ",
-  tracked = "󰱒 ",
+  tracked = " ",
   staged = "󰱒 ",
 
   renamed = "󰜶 ",
