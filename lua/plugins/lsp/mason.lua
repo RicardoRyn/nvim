@@ -25,6 +25,9 @@ return {
       -- NOTE: YAML
       "yaml-language-server", -- LSP
       "yamllint", -- 静态检查
+      -- NOTE: RUST
+      "rust-analyzer",
+      "rustfmt",
     },
   },
   config = function(_, opts)

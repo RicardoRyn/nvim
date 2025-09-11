@@ -26,6 +26,8 @@ return {
       quarto = notify_formatters({ "injected" }),
       -- NOTE: YAML
       yaml = notify_formatters({ "prettierd" }),
+      -- NOTE: RUST
+      rust = notify_formatters({ "rustfmt" }),
     },
   },
 
