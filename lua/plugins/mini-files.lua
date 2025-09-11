@@ -5,9 +5,23 @@ return {
   keys = {
     { "<leader>e", "<cmd>lua MiniFiles.open()<CR>", desc = "Mini Files" },
   },
-  opts = {},
+  opts = {
+    windows = {
+      width_preview = 100,
+    },
+  },
   config = function(_, opts)
-    require("mini.files").setup({ opts })
+    require("mini.files").setup(opts)
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "MiniFilesBufferCreate",
+      callback = function(args)
+        vim.keymap.set("n", "<C-p>", function()
+          MiniFiles = require("mini.files")
+          MiniFiles.config.windows.preview = not MiniFiles.config.windows.preview
+          MiniFiles.refresh({ windows = { preview = MiniFiles.config.windows.preview } })
+        end, { desc = "toggle preview" })
+      end,
+    })
 
     local nsMiniFiles = vim.api.nvim_create_namespace("mini_files_git")
     local autocmd = vim.api.nvim_create_autocmd
