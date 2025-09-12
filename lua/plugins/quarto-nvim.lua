@@ -6,10 +6,13 @@ return {
     "nvim-treesitter/nvim-treesitter",
     "nvimtools/hydra.nvim",
   },
-  ft = { "quarto", "markdown" }, -- 进入qmd/md文件时才加载插件
+  -- ft = { "quarto", "markdown" }, -- 进入qmd/md文件时才加载插件
+  keys = {
+    { "<leader>qq", "<cmd>QuartoActivate<cr>", desc = "Quarto Activate" },
+  },
   opts = {
     lspFeatures = {
-      languages = { "r", "python", "bash", "rust" },
+      languages = { "r", "python", "julia", "bash", "html" },
       chunks = "all",
       diagnostics = {
         enabled = true,
@@ -33,7 +36,7 @@ return {
         vim.keymap.set("n", "<C-CR>", runner.run_cell, { desc = "Run Cell", silent = true })
         vim.keymap.set("n", "<leader>qa", runner.run_above, { desc = "Run Cell and Above", silent = true })
         vim.keymap.set("n", "<leader>qA", runner.run_all, { desc = "Run All Cells", silent = true })
-        vim.keymap.set("n", "<leader>qq", "<cmd>QuartoActivate<CR>", { desc = "Quarto Activate", silent = true })
+        -- vim.keymap.set("n", "<leader>qq", "<cmd>QuartoActivate<CR>", { desc = "Quarto Activate", silent = true })
         vim.keymap.set("v", "<leader>q", runner.run_range, { desc = "Quarto Run (visual selection)", silent = true })
         vim.keymap.set("n", "<leader>ql", runner.run_line, { desc = "Run Line", silent = true })
         -- vim.keymap.set("n", "<leader>QA", function()
