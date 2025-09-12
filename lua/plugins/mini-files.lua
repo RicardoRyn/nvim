@@ -9,6 +9,9 @@ return {
     windows = {
       width_preview = 100,
     },
+    mappings = {
+      synchronize = "<CR>",
+    },
   },
   config = function(_, opts)
     require("mini.files").setup(opts)
