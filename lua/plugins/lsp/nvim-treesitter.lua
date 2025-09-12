@@ -7,7 +7,7 @@ return {
   event = "VeryLazy",
   dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
   opts = {
-    ensure_installed = { "lua", "python", "bash", "json", "markdown", "markdown_inline" },
+    ensure_installed = { "lua", "python", "bash", "json", "markdown", "markdown_inline", "rust" },
     highlight = { enable = true },
     indent = { enable = true },
     fold = { enable = true },

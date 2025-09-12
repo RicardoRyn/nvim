@@ -9,7 +9,7 @@ return {
   ft = { "quarto", "markdown" }, -- 进入qmd/md文件时才加载插件
   opts = {
     lspFeatures = {
-      languages = { "r", "python", "rust" },
+      languages = { "r", "python", "bash", "rust" },
       chunks = "all",
       diagnostics = {
         enabled = true,
