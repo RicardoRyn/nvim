@@ -18,6 +18,11 @@ return {
   -- stylua: ignore
   opts = {
     completion = {
+      -- menu = {
+      --   auto_show = function(ctx)
+      --     return ctx.mode ~= 'default'
+      --   end,
+      -- },
       documentation = {
         auto_show = false,
       },
@@ -26,11 +31,9 @@ return {
       }
     },
     keymap = {
+      ['<Tab>'] = { 'accept', 'fallback' },
       ['<CR>'] = { 'accept', 'fallback' },
-      -- ['<Tab>'] = { 'select_and_accept', 'fallback' },
-      ['<Tab>'] = false, -- 为了Tab键能更好地执行AI自动补全
-      ['<S-Tab>'] = { 'select_prev', 'fallback' },
-      ['<C-y>'] = { 'select_and_accept' },
+      ['<C-y>'] = false,
     },
     cmdline = {
       keymap = { preset = 'inherit' },
@@ -45,10 +48,7 @@ return {
     },
     snippets = { preset = "luasnip" },
     sources = {
-      default = { "path", "snippets", "buffer", "lsp", "codeium" },
-      providers = {
-        codeium = { name = 'Codeium', module = 'codeium.blink', async = true }
-      }
+      default = { "path", "snippets", "buffer", "lsp" },
     },
   },
   -- blink的虚拟文本颜色
