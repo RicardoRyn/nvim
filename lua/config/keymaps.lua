@@ -1,9 +1,9 @@
 -- NOTE: Neovim和Vscode都生效的设置
-vim.keymap.set("n", "<leader>h", "<cmd>:noh<cr>", { desc = "Clear Highlight" })
 vim.keymap.set("v", "<", "<gv", { desc = "Outdent and reselect" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent and reselect" })
 vim.keymap.set({ "v" }, "U", "<Nop>")
 vim.keymap.set({ "v" }, "u", "<Nop>")
+vim.keymap.set( "n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "Redraw / Clear hlsearch / Diff Update" })
 
 -- stylua: ignore
 if vim.g.vscode then
@@ -63,6 +63,7 @@ else
   -- vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
   -- vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
   -- vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
+
 end
 
 -- NOTE: Neovide中生效的设置

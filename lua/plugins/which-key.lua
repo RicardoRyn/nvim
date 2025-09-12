@@ -19,7 +19,6 @@ return {
         { "<leader>e", icon = { icon = "󰙅", color = "yellow" } },
         { "<leader>-", icon = { icon = "󰙅", color = "yellow" } },
         { "<leader>=", icon = { icon = "󰙅", color = "yellow" } },
-        { "<leader>h", icon = { icon = "󰸱" } },
         { "<leader>v", group = "Virtual Env", icon = { icon = " ", color = "purple" } },
         -- 有下级菜单
         { "<leader>a", group = "AI" },
@@ -46,7 +45,6 @@ return {
       },
     },
   },
-
   keys = {
     { "<c-w><space>", function() require("which-key").show({ keys = "<c-w>", loop = true }) end, desc = "Window Hydra Mode (which-key)", },
     { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Local Keymaps (which-key)",
