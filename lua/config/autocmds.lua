@@ -2,6 +2,16 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("ricardo_" .. name, { clear = true })
 end
 
+-- 在lua, python, rust文件中，使用`o`和`O`时不会自动添加注释符号
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("disable_o_comment"),
+  pattern = { "lua", "python", "rust" },
+  callback = function()
+    vim.opt.formatoptions:remove({ "o" })
+  end,
+})
+
+
 -- 再次打开文件，光标位于上次打开的地方
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),
