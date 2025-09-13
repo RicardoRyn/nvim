@@ -17,7 +17,7 @@ return {
       ["'"] = { action = "closeopen", pair = "''", neigh_pattern = "[^%a\\].", register = { cr = false } },
       ["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^\\].", register = { cr = false } },
 
-      ["```"] = { action = "closeopen", pair = "```python\n```", neigh_pattern = "[^\\].", register = { cr = false } },
+      ["```"] = { action = "closeopen", pair = "```\n```", neigh_pattern = "[^\\].", register = { cr = false } },
     },
   },
 }
