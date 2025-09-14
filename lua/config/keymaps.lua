@@ -49,10 +49,10 @@ if vim.g.vscode then
 else
   -- NOTE: Neovim中生效的设置
   vim.keymap.set({ "i" }, "jk", "<Esc>")
-  vim.keymap.set("n", "j", "gj", { desc = "gj" })
-  vim.keymap.set("n", "k", "gk", { desc = "gk" })
-  vim.keymap.set("n", "gj", "j", { desc = "j" })
-  vim.keymap.set("n", "gk", "k", { desc = "k" })
+  vim.keymap.set({ "n", "v" }, "j", "gj", { desc = "gj" })
+  vim.keymap.set({ "n", "v" }, "k", "gk", { desc = "gk" })
+  vim.keymap.set({ "n", "v" }, "gj", "j", { desc = "j" })
+  vim.keymap.set({ "n", "v" }, "gk", "k", { desc = "k" })
 
   -- Copy
   vim.keymap.set("v", "<C-c>", '"+y') -- 让neovim中C-c可以复制内容到剪贴板
