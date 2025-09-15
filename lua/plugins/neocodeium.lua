@@ -1,13 +1,15 @@
 return {
   "monkoose/neocodeium",
-  -- event = "VeryLazy",
-  lazy = false,
-  config = function()
-    local neocodeium = require("neocodeium")
-    neocodeium.setup()
-    vim.keymap.set("i", "<C-y>", neocodeium.accept)
-    vim.keymap.set("i", "<C-w>", neocodeium.accept_word)
-    vim.keymap.set("i", "<A-[>", neocodeium.cycle)
-    vim.keymap.set("i", "<A-]>", neocodeium.cycle)
-  end,
+  cond = not vim.g.vscode,
+  event = "VeryLazy",
+  opts = {
+    silent = true,
+  },
+  -- stylua: ignore
+  keys = {
+    { "<C-y>", function() require("neocodeium").accept() end, mode = "i" },
+    { "<C-w>", function() require("neocodeium").accept_word() end, mode = "i" },
+    { "<A-[>", function() require("neocodeium").cycle() end, mode = "i" },
+    { "<A-]>", function() require("neocodeium").cycle() end, mode = "i" },
+  },
 }
