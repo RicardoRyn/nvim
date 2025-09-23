@@ -61,12 +61,11 @@ return {
   -- stylua: ignore
   keys = {
     -- Picker
-    -- { "<leader>e", function() Snacks.explorer() end, desc = "Explorer (cwd)" },
+    { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>.",  function() Snacks.scratch() end, desc = "Scratch" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
     -- find
     { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
-    { "<leader>fs", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
     { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
     { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
