@@ -1,9 +1,11 @@
 local icons = {}
 
 icons.git = {
-  modified = "󰏭 ",
   added = "󰜄 ",
+  modified = "󰏭 ",
   deleted = "󰛲 ",
+  renamed = "󰜶 ",
+
   removed = "󰅘 ",
   ignored = " ",
 
@@ -12,7 +14,6 @@ icons.git = {
   tracked = " ",
   staged = "󰱒 ",
 
-  renamed = "󰜶 ",
   conflict = " ",
   updated = " ",
 }

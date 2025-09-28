@@ -2,7 +2,6 @@ return {
   "akinsho/bufferline.nvim",
   cond = not vim.g.vscode,
   lazy = false,
-  -- dependencies = { "nvim-tree/nvim-web-devicons" },
   -- stylua: ignore
   keys = {
     { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
@@ -41,12 +40,17 @@ return {
   },
   opts = {
     options = {
-      -- stylua: ignore
-      close_command = function(n) Snacks.bufdelete(n) end,
-      -- stylua: ignore
-      right_mouse_command = function(n) Snacks.bufdelete(n) end,
+      always_show_bufferline = false,
+      separator_style = "thick",
+
+      close_command = function(n)
+        Snacks.bufdelete(n)
+      end,
+      right_mouse_command = function(n)
+        Snacks.bufdelete(n)
+      end,
+
       diagnostics = "nvim_lsp",
-      always_show_bufferline = true,
       diagnostics_indicator = function(_, _, diagnostics_dict)
         local indicator = "  "
         for level, number in pairs(diagnostics_dict) do
@@ -62,17 +66,17 @@ return {
         end
         return indicator
       end,
+
       offsets = {
         {
           filetype = "neo-tree",
-          text = "Neo-tree",
+          text = "󰙅 Neo-Tree",
           highlight = "Directory",
-          text_align = "left",
-        },
-        {
-          filetype = "snacks_layout_box",
+          text_align = "center",
+          separator = false,
         },
       },
+
     },
   },
 }

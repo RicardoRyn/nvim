@@ -1,7 +1,6 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
   cond = not vim.g.vscode,
-  cmd = "Neotree",
   -- stylua: ignore
   keys = {
     { "<leader>e",
@@ -17,9 +16,6 @@ return {
       desc = "Buffer Explorer",
     },
   },
-  deactivate = function()
-    vim.cmd([[Neotree close]])
-  end,
   init = function()
     vim.api.nvim_create_autocmd("BufEnter", {
       group = vim.api.nvim_create_augroup("Neotree_start_directory", { clear = true }),
@@ -38,19 +34,36 @@ return {
     })
   end,
   opts = {
+    close_if_last_window = true,
+    enable_git_status = true,
+    enable_diagnostics = true,
+
     sources = { "filesystem", "buffers", "git_status" },
+    source_selector = {
+      winbar = true,
+      sources = {
+        { source = "filesystem", display_name = " 󰉓 Files" },
+        { source = "buffers", display_name = " 󰈙 Buf" },
+        { source = "git_status", display_name = " 󰊢 Git" },
+      },
+    },
+
     open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
     filesystem = {
       bind_to_cwd = true,
       follow_current_file = { enabled = true },
       use_libuv_file_watcher = true,
     },
+
     window = {
+      width = 60,
       mappings = {
         ["l"] = "open",
         ["h"] = "close_node",
         ["<space>"] = "none",
         ["t"] = "none",
+        ["s"] = "none",
+        ["v"] = "open_vsplit",
         ["c"] = "none",
         ["cc"] = {
           function(state)
@@ -105,6 +118,7 @@ return {
         ["P"] = { "toggle_preview", config = { use_float = false } },
       },
     },
+
     default_component_configs = {
       indent = {
         with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
@@ -112,15 +126,32 @@ return {
         expander_expanded = "",
         expander_highlight = "NeoTreeExpander",
       },
-      git_status = {
+      diagnostics = {
+        enable = true,
+        show_on_dirs = true,
         symbols = {
-          unstaged = require("utils.icons").git.unstaged,
-          staged = require("utils.icons").git.staged,
-          modified = require("utils.icons").git.modified,
-          added = require("utils.icons").git.added,
-          ignored = require("utils.icons").git.ignored,
+          hint = require("utils.icons").diagnostics.hint,
+          info = require("utils.icons").diagnostics.info,
+          warn = require("utils.icons").diagnostics.warn,
+          error = require("utils.icons").diagnostics.error,
         },
       },
+      git_status = {
+        symbols = {
+          -- Change type
+          added = require("utils.icons").git.added,
+          modified = require("utils.icons").git.modified,
+          deleted = require("utils.icons").git.deleted,
+          renamed = require("utils.icons").git.renamed,
+          -- Status type
+          untracked = require("utils.icons").git.untracked,
+          ignored = require("utils.icons").git.ignored,
+          unstaged = require("utils.icons").git.unstaged,
+          staged = require("utils.icons").git.staged,
+          conflict = require("utils.icons").git.conflict,
+        },
+      },
+
       -- neo-tree中使用mini.icons参考[#1527](https://github.com/nvim-neo-tree/neo-tree.nvim/pull/1527)
       icon = {
         provider = function(icon, node) -- setup a custom icon provider
@@ -153,26 +184,7 @@ return {
     },
   },
   config = function(_, opts)
-    local function on_move(data)
-      Snacks.rename.on_rename_file(data.source, data.destination)
-    end
-
-    local events = require("neo-tree.events")
-    opts.event_handlers = opts.event_handlers or {}
-    vim.list_extend(opts.event_handlers, {
-      { event = events.FILE_MOVED, handler = on_move },
-      { event = events.FILE_RENAMED, handler = on_move },
-    })
     require("neo-tree").setup(opts)
-    vim.api.nvim_create_autocmd("TermClose", {
-      pattern = "*lazygit",
-      callback = function()
-        if package.loaded["neo-tree.sources.git_status"] then
-          require("neo-tree.sources.git_status").refresh()
-        end
-      end,
-    })
-
     -- 设置 NeoTree 当前行颜色为灰色
     vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = "#dce0e8" })
   end,
