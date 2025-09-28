@@ -1,4 +1,3 @@
--- lazy需要首先加载，因为里面定义了<leader>与<localleader>
 require("config.lazy")
 require("config.autocmds")
 require("config.options")
@@ -15,6 +14,3 @@ if not vim.g.vscode then
   -- Utils
   require("utils.newnotebook")
 end
-
--- NOTE: neovim中的技巧
--- `echo &filetype`可以查看当前文件类型
