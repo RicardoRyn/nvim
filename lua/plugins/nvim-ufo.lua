@@ -74,6 +74,6 @@ return {
       vim.api.nvim_command("normal vic")
       vim.api.nvim_command("normal zf")
     end
-    vim.keymap.set("n", "<C-j><C-k>", fold_code_cell, { desc = "Fold current code cell" })
+    -- vim.keymap.set("n", "<C-j><C-k>", fold_code_cell, { desc = "Fold current code cell" }) -- TODO: 会影响<C-j>移动聚焦窗口的速度
   end,
 }

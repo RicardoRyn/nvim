@@ -56,5 +56,5 @@
   "window-picker": { "branch": "main", "commit": "6382540b2ae5de6c793d4aa2e3fe6dbb518505ec" },
   "windsurf.nvim": { "branch": "main", "commit": "821b570b526dbb05b57aa4ded578b709a704a38a" },
   "yanky.nvim": { "branch": "main", "commit": "04775cc6e10ef038c397c407bc17f00a2f52b378" },
-  "yazi.nvim": { "branch": "main", "commit": "9811dbc61c81a76b3665f174f5f7a20dd5c5dccb" }
+  "yazi.nvim": { "branch": "main", "commit": "3f11a3afc3d2d197cb944bd3c453c0b2f85024c1" }
 }
