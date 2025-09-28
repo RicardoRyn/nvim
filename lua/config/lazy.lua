@@ -24,7 +24,6 @@ vim.g.maplocalleader = "\\"
 -- 总是加载的插件
 local all_plugins = {
   { import = "plugins" },
-  { import = "plugins.lsp" },
 }
 -- 根据系统选择性加载的插件
 if vim.loop.os_uname().sysname == "Windows_NT" then
