@@ -20,6 +20,7 @@ return {
         { "<leader>-", icon = { icon = "󰙅", color = "yellow" } },
         { "<leader>=", icon = { icon = "󰙅", color = "yellow" } },
         { "<leader>v", group = "Virtual Env", icon = { icon = " ", color = "purple" } },
+        { "<leader>;", group = "Pick Symbols in Dropbar", icon = {icon = "󰁊 "}},
         -- 有下级菜单
         { "<leader>a", group = "AI" },
         { "<leader>b", group = "Buffer" },
@@ -40,14 +41,14 @@ return {
         { "<leader>u", group = "UI", icon = { icon = "󰙵 ", color = "cyan" } },
         { "<leader>w", group = "Windows", proxy = "<c-w>", expand = function() return require("which-key.extras").expand.win() end },
         { "<leader>x", group = "Trouble", icon = { icon = "󱖫 ", color = "green" } },
-        { "<leader><space>", group = "Flash", icon = { icon = "󱔕" } },
+        { "<leader><space>", group = "Smart Files" },
         { "<leader>/", group = "Grep", icon = { icon = " " } },
       },
     },
   },
+  -- stylua: ignore
   keys = {
-    { "<c-w><space>", function() require("which-key").show({ keys = "<c-w>", loop = true }) end, desc = "Window Hydra Mode (which-key)", },
-    { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Local Keymaps (which-key)",
-    },
+    { "<c-w><space>", function() require("which-key").show({ keys = "<c-w>", loop = true }) end, desc = "Window Hydra Mode (which-key)"},
+    { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Local Keymaps (which-key)"},
   },
 }

@@ -3,7 +3,7 @@ return {
   cond = not vim.g.vscode,
   dependencies = { { "echasnovski/mini.icons", opts = {} } },
   keys = {
-    { "<leader>e", "<cmd>Oil<cr>", desc = "Open parent directory" },
+    { "<leader>e", "<cmd>Oil<cr>", desc = "Oil" },
   },
   opts = {},
   config = function()
