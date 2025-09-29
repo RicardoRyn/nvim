@@ -3,6 +3,11 @@ return {
   cond = not vim.g.vscode,
   event = "VeryLazy",
   opts = {
+    options = {
+      disabled_filetypes = {
+        statusline = { "snacks_dashboard" },
+      },
+    },
     sections = {
       lualine_a = { "mode" },
       lualine_b = { "branch" },
