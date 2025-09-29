@@ -5,15 +5,15 @@ return {
   keys = {
     { "<leader>e",
       function() require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() }) end,
-      desc = "NeoTree (cwd)",
+      desc = "NeoTree (files)",
     },
     { "<leader>ge",
       function() require("neo-tree.command").execute({ source = "git_status", toggle = true }) end,
-      desc = "Git Explorer",
+      desc = "NeoTree (git status)",
     },
     { "<leader>be",
       function() require("neo-tree.command").execute({ source = "buffers", toggle = true }) end,
-      desc = "Buffer Explorer",
+      desc = "NeoTree (buffers)",
     },
   },
   init = function()
@@ -34,7 +34,6 @@ return {
     })
   end,
   opts = {
-    close_if_last_window = true,
     enable_git_status = true,
     enable_diagnostics = true,
 

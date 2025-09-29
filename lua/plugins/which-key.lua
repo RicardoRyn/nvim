@@ -17,10 +17,9 @@ return {
         -- 无下级菜单
         { "<leader>d", group = "Docstrings", icon = { icon = "󰙆 " } },
         { "<leader>e", icon = { icon = "󰙅", color = "yellow" } },
-        { "<leader>-", icon = { icon = "󰙅", color = "yellow" } },
-        { "<leader>=", icon = { icon = "󰙅", color = "yellow" } },
+        { "<leader>z", icon = { icon = "󰙅"} },
         { "<leader>v", group = "Virtual Env", icon = { icon = " ", color = "purple" } },
-        { "<leader>;", group = "Pick Symbols in Dropbar", icon = {icon = "󰁊 "}},
+        { "<leader>;", group = "Dropbar", icon = {icon = "󰁊 "}},
         -- 有下级菜单
         { "<leader>a", group = "AI" },
         { "<leader>b", group = "Buffer" },
