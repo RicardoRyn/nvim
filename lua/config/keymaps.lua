@@ -11,9 +11,7 @@ if vim.g.vscode then
   -- NOTE: Vscode中生效的设置
   -- general
   vim.keymap.set( "n", "<leader>ff", "<Cmd>lua require('vscode').call('workbench.action.quickOpenWithModes')<CR>", { desc = "Find Files" })
-  vim.keymap.set( "n", "<leader>uz", "<Cmd>lua require('vscode').call('workbench.action.toggleZenMode')<CR>", { desc = "Zen Mode" })
-  vim.keymap.set( "n", "<leader>oo", "<Cmd>lua require('vscode').call('outline.focus')<CR>", { desc = "Outline" })
-  vim.keymap.set( "n", "<leader>ov", "<Cmd>lua require('vscode').call('outline.toggleVisibility')<CR>", { desc = "Outline Visibility" })
+  vim.keymap.set( "n", "<leader><space>", "<Cmd>lua require('vscode').call('workbench.action.quickOpenWithModes')<CR>", { desc = "Find Files" })
   -- 以下两项既需要在此处设置，也需要在vscode的快捷键中设置
   vim.keymap.set( "n", "<C-h>", "<Cmd>lua require('vscode').call('workbench.action.navigateLeft')<CR>", { desc = "Move to left window" })
   vim.keymap.set( "n", "<C-l>", "<Cmd>lua require('vscode').call('workbench.action.navigateRight')<CR>", { desc = "Move to right window" })
@@ -30,6 +28,8 @@ if vim.g.vscode then
   vim.keymap.set( "n", "[d", "<Cmd>lua require('vscode').call('editor.action.marker.prev')<CR>", { desc = "Go to previous diagnostic" })
   vim.keymap.set("n", "<leader>oo", "<Cmd>lua require('vscode').call('outline.focus')<CR>", { desc = "Open outline" })
   vim.keymap.set("n", "za", "<Cmd>lua require('vscode').call('editor.toggleFold')<CR>", { desc = "Toggle fold" })
+  vim.keymap.set( "n", "<leader>oo", "<Cmd>lua require('vscode').call('outline.focus')<CR>", { desc = "Outline" })
+  vim.keymap.set( "n", "<leader>ov", "<Cmd>lua require('vscode').call('outline.toggleVisibility')<CR>", { desc = "Outline Visibility" })
 
   -- Buffer
   vim.keymap.set( "n", "L", "<Cmd>lua require('vscode').call('workbench.action.nextEditor')<CR>", { desc = "Next buffer" })
@@ -46,6 +46,7 @@ if vim.g.vscode then
   vim.keymap.set( "n", "<leader>e", "<Cmd>lua require('vscode').call('workbench.action.toggleSidebarVisibility')<CR>", { desc = "toggleSidebarVisibility" })
   vim.keymap.set("n", "<leader>E", "<Cmd>lua require('vscode').call('yazi-vscode.toggle')<CR>", { desc = "open yazi" })
   vim.keymap.set( "n", "<leader>a", "<Cmd>lua require('vscode').call('workbench.action.toggleActivityBarVisibility')<CR>", { desc = "toggleActivityBarVisibility" })
+  vim.keymap.set( "n", "<leader>uz", "<Cmd>lua require('vscode').call('workbench.action.toggleZenMode')<CR>", { desc = "Zen Mode" })
 
 else
   -- NOTE: Neovim中生效的设置
