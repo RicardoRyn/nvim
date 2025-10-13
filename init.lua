@@ -11,6 +11,4 @@ if not vim.g.vscode then
   require("config.lsp.marksman") -- markdown
   require("config.lsp.bashls") -- bash
   require("config.lsp.rust-analyzer") -- rust
-  -- Utils
-  require("utils.newnotebook")
 end

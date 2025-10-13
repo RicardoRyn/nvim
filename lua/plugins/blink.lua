@@ -13,7 +13,6 @@ return {
         require("snippets.lua")
       end,
     },
-    { "Exafunction/windsurf.nvim" },
   },
   -- stylua: ignore
   opts = {
