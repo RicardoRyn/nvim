@@ -1,9 +1,3 @@
--- 把 Mason 安装的工具路径自动加到 Neovim 的 PATH 中，方便插件直接调用这些工具
-local mason_bin = vim.fn.stdpath("data") .. "/mason/bin"
-if not string.find(vim.env.PATH, mason_bin, 1, true) then
-  vim.env.PATH = mason_bin .. package.config:sub(1, 1) .. vim.env.PATH
-end
-
 -- UI
 vim.g.diagnostics_visible = true
 vim.diagnostic.config({
