@@ -121,9 +121,9 @@ return {
     { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Symbols (workspace)" },
     -- terminal
     { "<C-/>", function() Snacks.terminal.open() end, desc = "Open Terminal" },
-    { "<C-/>", function() Snacks.terminal.toggle(nil, { shell = "nu", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
+    { "<C-/>", function() Snacks.terminal.toggle(nil, { shell = "zsh", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     { "<C-_>", function() Snacks.terminal.open() end, desc = "Open Terminal" },
-    { "<C-_>", function() Snacks.terminal.toggle(nil, { shell = "nu", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
+    { "<C-_>", function() Snacks.terminal.toggle(nil, { shell = "zsh", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     -- code
     { "<leader>cl", function() Snacks.picker.lsp_config() end, desc = "Lsp Info" },
     { "<leader>st", function() Snacks.picker.todo_comments() end, desc = "Todo" },
