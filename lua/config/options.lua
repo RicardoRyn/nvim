@@ -41,7 +41,7 @@ vim.opt.list = true -- 显示不可见字符（空格、Tab、换行等）
 vim.opt.listchars = { tab = ">-", trail = "-" } -- 用>-表示tab
 
 ----------------- Term -------------------
-vim.opt.shell = "zsh" -- 使用 zsh 作为外部 shell
+vim.opt.shell = "nu" -- shell
 vim.opt.shellcmdflag = "-c" -- 当 Neovim 执行命令时，用 -c 调用命令
 vim.opt.shellquote = "" -- 无须用双引号包裹命令
 vim.opt.shellxquote = "" -- 不使用额外外层引用符
