@@ -10,5 +10,5 @@ if not vim.g.vscode then
   require("config.lsp.pyright")       -- python
   require("config.lsp.marksman")      -- markdown
   require("config.lsp.bashls")        -- bash
-  require("config.lsp.rust-analyzer") -- rust
+  require("config.lsp.rust_analyzer") -- rust
 end
