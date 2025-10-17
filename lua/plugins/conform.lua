@@ -1,10 +1,3 @@
-local function notify_formatters(formatters)
-  return function()
-    vim.notify("Formatter: **" .. table.concat(formatters, ", ") .. "**", vim.log.levels.INFO)
-    return formatters
-  end
-end
-
 return {
   "stevearc/conform.nvim",
   cond = not vim.g.vscode,
@@ -15,19 +8,19 @@ return {
     stop_after_first = false,
     formatters_by_ft = {
       -- NOTE: LUA
-      lua = notify_formatters({ "stylua" }),
+      lua = { "stylua" },
       -- NOTE: PYTHON
-      python = notify_formatters({ "ruff_format" }),
+      python = { "ruff_format" },
       -- NOTE: BASH
-      bash = notify_formatters({ "shfmt" }),
-      sh = notify_formatters({ "shfmt" }),
+      bash = { "shfmt" },
+      sh = { "shfmt" },
       -- NOTE: MARKDOWN
-      markdown = notify_formatters({ "injected", "prettierd" }),
-      quarto = notify_formatters({ "injected" }),
+      markdown = { "injected", "prettierd" },
+      quarto = { "injected" },
       -- NOTE: YAML
-      yaml = notify_formatters({ "prettierd" }),
+      yaml = { "prettierd" },
       -- NOTE: RUST
-      rust = notify_formatters({ "rustfmt" }),
+      rust = { "rustfmt" },
     },
   },
 
@@ -42,6 +35,10 @@ return {
             if vim.startswith(string.lower(mode), "v") then
               vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
             end
+            -- 成功后显示通知
+            vim.notify("✨ Code formatted successfully!", vim.log.levels.INFO, { title = "Conform" })
+          else
+            vim.notify("⚠️ Formatting failed!", vim.log.levels.ERROR, { title = "Conform" })
           end
         end)
       end,
