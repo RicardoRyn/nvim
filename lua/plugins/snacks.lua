@@ -26,13 +26,6 @@ return {
           { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
-        -- header = [[
-        --    ██████╗ ██╗   ██╗███╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
-        --    ██╔══██╗╚██╗ ██╔╝████╗  ██║██║   ██║██║████╗ ████║      Z    
-        --    ██████╔╝ ╚████╔╝ ██╔██╗ ██║██║   ██║██║██╔████╔██║   z       
-        --    ██╔══██╗  ╚██╔╝  ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║ z         
-        --    ██║  ██║   ██║   ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║           
-        --    ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝           ]],
         header = [[
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣋⡻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⡟⢱⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⠌⠾⠋⠻⣮⡻⠋⣴⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⡦⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
@@ -54,9 +47,7 @@ return {
       },
       sections = {
         { section = "header" },
-        { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1},
-        { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-        { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+        { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 0 },
         { section = "startup" },
       },
     },
@@ -65,7 +56,7 @@ return {
     indent = { enabled = true, indent = { char = "▏" }, scope = { char = "▍", hl = "" } },
     input = { enabled = true },
     picker = { enabled = true },
-    notifier = { enabled = true, timeout = 10000 },
+    notifier = { enabled = true, timeout = 3000 },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = true },

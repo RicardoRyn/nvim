@@ -66,14 +66,4 @@ return {
     vim.o.foldlevelstart = 99
     vim.o.foldenable = true
   end,
-
-  config = function(_, opts)
-    require("ufo").setup(opts)
-    -- 自定义函数，用于折叠 Markdown 代码块
-    local function fold_code_cell()
-      vim.api.nvim_command("normal vic")
-      vim.api.nvim_command("normal zf")
-    end
-    -- vim.keymap.set("n", "<C-j><C-k>", fold_code_cell, { desc = "Fold current code cell" }) -- TODO: 会影响<C-j>移动聚焦窗口的速度
-  end,
 }

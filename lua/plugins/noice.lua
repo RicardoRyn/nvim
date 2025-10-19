@@ -4,7 +4,7 @@ return {
   event = "VeryLazy",
   dependencies = {
     "MunifTanjim/nui.nvim",
-    -- "rcarriga/nvim-notify", -- 太挡视野了吧，但是可以<leader>nd
+    "rcarriga/nvim-notify",
   },
 
   opts = {
@@ -20,6 +20,12 @@ return {
       last = { view = "popup" },
       error = { view = "popup" },
       all = { view = "popup" },
+    },
+    routes = {
+      {
+        view = "notify",
+        filter = { event = "msg_showmode" },
+      },
     },
   },
 

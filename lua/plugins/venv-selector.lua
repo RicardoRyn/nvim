@@ -1,8 +1,6 @@
 return {
   "linux-cultist/venv-selector.nvim",
-  cond = function()
-    return vim.loop.os_uname().sysname == "Linux" and not vim.g.vscode
-  end,
+  cond = not vim.g.vscode,
   event = "VeryLazy",
   dependencies = {
     "neovim/nvim-lspconfig",

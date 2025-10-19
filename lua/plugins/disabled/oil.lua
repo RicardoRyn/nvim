@@ -30,6 +30,8 @@ return {
         ["<C-s>"] = { "actions.select", opts = { horizontal = true } },
         ["<C-r>"] = "actions.refresh",
         ["<BS>"] = "actions.parent",
+        ["<leader>cc"] = "actions.yank_entry",
+        ["<leader>cr"] = { "actions.yank_entry", opts = { modify = ":." } },
         ["gd"] = {
           desc = "Toggle file detail view",
           callback = function()

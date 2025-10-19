@@ -17,11 +17,6 @@ return {
   -- stylua: ignore
   opts = {
     completion = {
-      -- menu = {
-      --   auto_show = function(ctx)
-      --     return ctx.mode ~= 'default'
-      --   end,
-      -- },
       documentation = {
         auto_show = false,
       },
@@ -50,9 +45,4 @@ return {
       default = { "path", "snippets", "buffer", "lsp" },
     },
   },
-  -- blink的虚拟文本颜色
-  config = function(_, opts)
-    require("blink.cmp").setup(opts)
-    vim.api.nvim_set_hl(0, "BlinkCmpGhostText", { fg = "#ffcc00", italic = true })
-  end,
 }
