@@ -2,6 +2,7 @@ local lsp_name = "lua_ls"
 
 local default_config = dofile(vim.fn.stdpath("data") .. "/lazy/nvim-lspconfig/lsp/" .. lsp_name .. ".lua")
 local custom_config = {
+  -- HACK: 不写下面一段，会加载大量文件，耗尽内存
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
     local root = require("lspconfig.util").root_pattern(
@@ -17,6 +18,7 @@ local custom_config = {
     )(fname) or vim.fn.getcwd()
     on_dir(root)
   end,
+
   settings = {
     Lua = {
       diagnostics = {
@@ -31,5 +33,4 @@ local custom_config = {
 }
 local final_config = vim.tbl_deep_extend("force", default_config, custom_config) -- 深度合并，保证嵌套
 
-vim.lsp.config(lsp_name, final_config)
-vim.lsp.enable(lsp_name)
+return final_config

@@ -1,5 +1,4 @@
--- 在blink.lua中添加`require("snippets.lua")`以启动该snippet
-
+-- 需要在blink.lua中添加`require("snippets.lua")`以启动该snippet
 local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node

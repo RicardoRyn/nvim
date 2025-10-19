@@ -1,3 +1,10 @@
+------------------ 启动 ------------------
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("pyright")
+vim.lsp.enable("bashls")
+vim.lsp.enable("marksman")
+vim.lsp.enable("rust-analyzer")
+
 -- UI
 vim.g.diagnostics_visible = true
 vim.diagnostic.config({
@@ -20,14 +27,14 @@ vim.diagnostic.config({
   },
 })
 
--- 功能
+------------------ 功能 ------------------
 vim.keymap.set("n", "<leader>r", "<cmd>LspRestart<CR>", { desc = "Restart LSP" })
 vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })
 vim.keymap.set("n", "<leader>cd", function() vim.diagnostic.open_float() end, { desc = "Show Diagnostics (line)" })
 vim.keymap.set("n", "<leader>cD", ":Telescope diagnostics bufnr=0<CR>", { desc = "Show Diagnostics (buffer)" })
 
--- 提示
+------------------ 提示 ------------------
 -- 不显示指定K也可以显示悬浮信息，但是指定了有更多的信息，比如语言名称
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Hover Information" })
 -- 函数签名会经过noice渲染，比如在此处指明{ border = "rounded" }，<C-k>才能正确进入该弹窗

@@ -21,21 +21,9 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- 总是加载的插件
-local all_plugins = {
-  { import = "plugins" },
-}
-
--- -- 根据系统选择性加载的插件
--- if vim.loop.os_uname().sysname == "Windows_NT" then
---   table.insert(all_plugins, { import = "plugins.for_windows" })
--- elseif vim.loop.os_uname().sysname == "Linux" then
---   table.insert(all_plugins, { import = "plugins.for_linux" })
--- end
-
 -- Setup lazy.nvim
 require("lazy").setup({
-  spec = all_plugins,
+  spec = { import = "plugins" },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "habamax" } },

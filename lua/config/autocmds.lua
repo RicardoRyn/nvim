@@ -11,7 +11,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-
 -- 再次打开文件，光标位于上次打开的地方
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),
