@@ -41,15 +41,10 @@ return {
   opts = {
     options = {
       always_show_bufferline = false,
-      separator_style = "thick",
-
-      close_command = function(n)
-        Snacks.bufdelete(n)
-      end,
-      right_mouse_command = function(n)
-        Snacks.bufdelete(n)
-      end,
-
+      separator_style = "thin",
+      numbers = "none",
+      close_command = function(n) Snacks.bufdelete(n) end,
+      right_mouse_command = function(n) Snacks.bufdelete(n) end,
       diagnostics = "nvim_lsp",
       diagnostics_indicator = function(_, _, diagnostics_dict)
         local indicator = "  "

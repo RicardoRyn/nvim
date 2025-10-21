@@ -5,7 +5,6 @@ return {
   event = { "WinLeave" },
   opts = {
     border = "rounded",
-    highlight = "#1e66f5",
     animate = {
       enabled = false,
     },

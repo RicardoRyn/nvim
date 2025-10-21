@@ -97,7 +97,7 @@ return {
     { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
     { "<leader>gg", function() require("snacks").lazygit.open() end, desc = "Open LazyGit", },
     -- search
-    { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification" },
+    -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification" },
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
     { '<leader>s.', function() Snacks.scratch.select() end, desc = "Scratch" },
     { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
