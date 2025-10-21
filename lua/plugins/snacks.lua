@@ -65,7 +65,7 @@ return {
     indent = { enabled = true, indent = { char = "▏" }, scope = { char = "▍", hl = "" } },
     input = { enabled = true },
     picker = { enabled = true },
-    notifier = { enabled = true, timeout = 3000 },
+    notifier = { enabled = false, timeout = 3000 },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = true },
