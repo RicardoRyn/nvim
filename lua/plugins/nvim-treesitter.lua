@@ -12,13 +12,6 @@ return {
       "json",
       "markdown",
       "markdown_inline",
-      "css",
-      "latex",
-      "norg",
-      "scss",
-      "svelte",
-      "typst",
-      "vue",
     }
     require("nvim-treesitter").setup({})
     require("nvim-treesitter").install(wanted)
