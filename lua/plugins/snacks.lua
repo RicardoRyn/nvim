@@ -56,7 +56,7 @@ return {
     indent = { enabled = true, indent = { char = "▏" }, scope = { char = "▍", hl = "" } },
     input = { enabled = true },
     picker = { enabled = true },
-    notifier = { enabled = true, timeout = 3000 },
+    notifier = { enabled = false, timeout = 3000 },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = true },
@@ -88,7 +88,7 @@ return {
     { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
     { "<leader>gg", function() require("snacks").lazygit.open() end, desc = "Open LazyGit", },
     -- search
-    { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification" },
+    -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification" },
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
     { '<leader>s.', function() Snacks.scratch.select() end, desc = "Scratch" },
     { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },

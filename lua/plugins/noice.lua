@@ -32,6 +32,7 @@ return {
   -- stylua: ignore
   keys = {
     { "<leader>un", function() require("noice").cmd("dismiss") end, desc = "Noice Dismiss" },
+    { "<leader>n", "<cmd>Noice pick<CR>", desc = "Noice" },
     { "<leader>sna", function() require("noice").cmd("all") end, desc = "All" },
     { "<leader>sne", function() require("noice").cmd("error") end, desc = "Error" },
     { "<leader>snh", function() require("noice").cmd("history") end, desc = "History" },
