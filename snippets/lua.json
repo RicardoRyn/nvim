@@ -1,0 +1,17 @@
+{
+  "disable": {
+    "prefix": "disable",
+    "body": ["enabled = false,"]
+    "description": "Disable feature"
+  },
+  "notvscode": {
+    "prefix": "notvscode",
+    "body": ["cond = not vim.g.vscode,"]
+    "description": "Not in vscode"
+  },
+  "styignore": {
+    "prefix": "styignore",
+    "body": ["-- stylua: ignore"]
+    "description": "Stylua ignore"
+  }
+}

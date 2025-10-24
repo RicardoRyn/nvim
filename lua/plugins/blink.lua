@@ -2,26 +2,11 @@ return {
   "saghen/blink.cmp",
   cond = not vim.g.vscode,
   event = { "InsertEnter", "CmdlineEnter" },
-  version = "*",
-  dependencies = {
-    { "rafamadriz/friendly-snippets" },
-    {
-      "L3MON4D3/LuaSnip",
-      version = "v2.*",
-      config = function()
-        -- 添加需要的snippet
-        require("snippets.lua")
-      end,
-    },
-  },
+  version = "1.*",
+  dependencies = { { "rafamadriz/friendly-snippets" } },
   -- stylua: ignore
   opts = {
     completion = {
-      -- menu = {
-      --   auto_show = function(ctx)
-      --     return ctx.mode ~= 'default'
-      --   end,
-      -- },
       documentation = {
         auto_show = false,
       },
@@ -45,14 +30,8 @@ return {
         },
       },
     },
-    snippets = { preset = "luasnip" },
     sources = {
-      default = { "path", "snippets", "buffer", "lsp" },
+      default = { "lsp", "path", "snippets", "buffer" },
     },
   },
-  -- blink的虚拟文本颜色
-  config = function(_, opts)
-    require("blink.cmp").setup(opts)
-    vim.api.nvim_set_hl(0, "BlinkCmpGhostText", { fg = "#ffcc00", italic = true })
-  end,
 }
