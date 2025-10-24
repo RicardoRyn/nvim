@@ -24,22 +24,5 @@ return {
     vim.keymap.set({ "n", "v" }, "xh", function()
       hop.hint_camel_case({ direction = directions.BEFORE_CURSOR })
     end, { desc = "Go to previous any begining of words" })
-
-    -- vim.keymap.set({ "n", "v" }, "<leader><leader>w", function()
-    --   hop.hint_words({ direction = directions.AFTER_CURSOR, hint_position = positions.END })
-    -- end, { desc = "Go to next any begining of words" })
-    --
-    -- vim.keymap.set({ "n", "v" }, "<leader><leader>e", function()
-    --   hop.hint_words({ direction = directions.AFTER_CURSOR })
-    -- end, { desc = "Go to next any end of words" })
-    --
-    -- vim.keymap.set({ "n", "v" }, "<leader><leader>b", function()
-    --   hop.hint_words({ direction = directions.BEFORE_CURSOR, hint_position = positions.END })
-    -- end, { desc = "Go to previous any begining of words" })
-    --
-    -- vim.keymap.set({ "n", "v" }, "<leader><leader>v", function()
-    --   hop.hint_words({ direction = directions.BEFORE_CURSOR })
-    -- end, { desc = "Go to previous any end of words" })
-    --
   end,
 }

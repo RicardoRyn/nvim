@@ -82,13 +82,6 @@ return {
       },
       lualine_z = {
         "encoding",
-        function()
-          local ok, kernels = pcall(require, "molten.status")
-          if ok and kernels.kernels then
-            return kernels.kernels()
-          end
-          return ""
-        end,
       },
     },
     extensions = { "neo-tree", "lazy", "fzf", "avante" },

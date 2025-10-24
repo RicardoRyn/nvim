@@ -35,6 +35,10 @@ return {
             if vim.startswith(string.lower(mode), "v") then
               vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
             end
+            -- 成功后显示通知
+            vim.notify("✨ Code formatted successfully!", vim.log.levels.INFO, { title = "Conform" })
+          else
+            vim.notify("⚠️ Formatting failed!", vim.log.levels.ERROR, { title = "Conform" })
           end
         end)
       end,

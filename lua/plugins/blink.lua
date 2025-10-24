@@ -3,17 +3,7 @@ return {
   cond = not vim.g.vscode,
   event = { "InsertEnter", "CmdlineEnter" },
   version = "*",
-  dependencies = {
-    { "rafamadriz/friendly-snippets" },
-    {
-      "L3MON4D3/LuaSnip",
-      version = "v2.*",
-      config = function()
-        -- 添加需要的snippet
-        require("snippets.lua")
-      end,
-    },
-  },
+  dependencies = { "rafamadriz/friendly-snippets" },
   -- stylua: ignore
   opts = {
     completion = {
@@ -40,9 +30,8 @@ return {
         },
       },
     },
-    snippets = { preset = "luasnip" },
     sources = {
-      default = { "path", "snippets", "buffer", "lsp" },
+      default = { "lsp", "path", "snippets", "buffer" },
     },
   },
 }
