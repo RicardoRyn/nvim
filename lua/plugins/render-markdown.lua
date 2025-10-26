@@ -26,5 +26,6 @@ return {
       enabled = true,
       disabled_modes = { "n" },
     },
+    latex = { enabled = false },
   },
 }
