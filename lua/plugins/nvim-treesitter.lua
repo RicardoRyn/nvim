@@ -1,10 +1,11 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  cond = not vim.g.vscode,
   branch = "main",
   lazy = false,
   build = ":TSUpdate",
   config = function()
-    local wanted = {
+    local languages = {
       "lua",
       "python",
       "bash",
@@ -12,12 +13,22 @@ return {
       "json",
       "markdown",
       "markdown_inline",
+      "css",
+      "html",
+      "javascript",
+      "latex",
+      "scss",
+      "svelte",
+      "tsx",
+      "typst",
+      "vue",
+      "norg",
     }
     require("nvim-treesitter").setup({})
-    require("nvim-treesitter").install(wanted)
+    require("nvim-treesitter").install(languages)
 
     vim.api.nvim_create_autocmd("FileType", {
-      pattern = wanted,
+      pattern = languages,
       callback = function()
         vim.treesitter.start()
       end,
