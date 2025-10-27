@@ -95,7 +95,7 @@ return {
     { "<leader>/w", function() Snacks.picker.grep_word() end, desc = "Word", mode = { "n", "x" } },
     -- git
     { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
-    { "<leader>gg", function() require("snacks").lazygit.open() end, desc = "Open LazyGit", },
+    -- { "<leader>gg", function() require("snacks").lazygit.open() end, desc = "Open LazyGit", },
     -- search
     -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification" },
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
