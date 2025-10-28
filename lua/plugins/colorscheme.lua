@@ -19,7 +19,5 @@ return {
       auto_integrations = true,
     })
     vim.cmd.colorscheme("catppuccin")
-
-    vim.cmd([[highlight CursorLine guibg=#dce0e8]])
   end,
 }
