@@ -26,13 +26,6 @@ return {
           { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
-        -- header = [[
-        --    ██████╗ ██╗   ██╗███╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
-        --    ██╔══██╗╚██╗ ██╔╝████╗  ██║██║   ██║██║████╗ ████║      Z    
-        --    ██████╔╝ ╚████╔╝ ██╔██╗ ██║██║   ██║██║██╔████╔██║   z       
-        --    ██╔══██╗  ╚██╔╝  ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║ z         
-        --    ██║  ██║   ██║   ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║           
-        --    ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝           ]],
         header = [[
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣋⡻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⡟⢱⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⠌⠾⠋⠻⣮⡻⠋⣴⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⡦⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
@@ -54,7 +47,7 @@ return {
       },
       sections = {
         { section = "header" },
-        { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1},
+        { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
         { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
         { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
         { section = "startup" },
@@ -79,25 +72,23 @@ return {
   },
   -- stylua: ignore
   keys = {
-    -- Picker
-    { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-    { "<leader>.",  function() Snacks.scratch() end, desc = "Scratch" },
-    { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-    -- find
+    -- file
     { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
     { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
     { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
+    { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
     -- grep
     { "<leader>//", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<leader>/l", function() Snacks.picker.lines() end, desc = "Lines" },
     { "<leader>/b", function() Snacks.picker.grep_buffers() end, desc = "Buffers" },
     { "<leader>/w", function() Snacks.picker.grep_word() end, desc = "Word", mode = { "n", "x" } },
-    -- git
-    { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
-    -- { "<leader>gg", function() require("snacks").lazygit.open() end, desc = "Open LazyGit", },
     -- search
     -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification" },
+    { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+    { "<leader>.", function() Snacks.scratch() end, desc = "Scratch" },
+    { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+    { "<leader>z", function() Snacks.picker.zoxide() end, desc = "Zoxide" },
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
     { '<leader>s.', function() Snacks.scratch.select() end, desc = "Scratch" },
     { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
@@ -106,31 +97,38 @@ return {
     { "<leader>sD", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
     { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
     { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
+    { "<leader>sI", function() Snacks.picker.lsp_incoming_calls() end, desc = "Incoming Calls" },
+    { "<leader>sj", function() Snacks.picker.jumps() end, desc = "Jumps" },
     { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+    { "<leader>sl", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
+    { "<leader>sL", function() Snacks.picker.lsp_config() end, desc = "Lsp Info" },
     { "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks" },
-    { "<leader>sp", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
+    { "<leader>so", function() Snacks.picker.lsp_outgoing_calls() end, desc = "Outgoing Calls" },
+    { "<leader>sp", function() Snacks.picker.spelling() end, desc = "Spelling" },
+    { "<leader>sP", function() Snacks.picker() end, desc = "Pickers" },
     { "<leader>sr", function() Snacks.picker.resume() end, desc = "Resume" },
+    { "<leader>st", function() Snacks.picker.todo_comments() end, desc = "Todo" },
+    { "<leader>sT", function() Snacks.picker.todo_comments({ keywords = { "FIX", "TODO" } }) end, desc = "Todo/Fix" },
     { "<leader>su", function() Snacks.picker.undo() end, desc = "Undotree" },
+    { "<leader>sv", function() Snacks.picker.cliphist() end, desc = "Clipboard History" },
     -- LSP
+    { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+    { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Symbols (workspace)" },
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
     { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
     { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
     { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
     { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-    { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
-    { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Symbols (workspace)" },
     -- terminal
     { "<C-/>", function() Snacks.terminal.open() end, desc = "Open Terminal" },
-    { "<C-/>", function() Snacks.terminal.toggle(nil, { shell = "nu", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
+    { "<C-/>", function() Snacks.terminal.toggle(nil, { shell = "zsh", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     { "<C-_>", function() Snacks.terminal.open() end, desc = "Open Terminal" },
-    { "<C-_>", function() Snacks.terminal.toggle(nil, { shell = "nu", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
-    -- code
-    { "<leader>cl", function() Snacks.picker.lsp_config() end, desc = "Lsp Info" },
-    { "<leader>st", function() Snacks.picker.todo_comments() end, desc = "Todo" },
-    { "<leader>sT", function () Snacks.picker.todo_comments({ keywords = { "FIX", "TODO" } }) end, desc = "Todo/Fix" },
+    { "<C-_>", function() Snacks.terminal.toggle(nil, { shell = "zsh", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     -- ui
     { '<leader>h', function() Snacks.dashboard() end, desc = "Home Page" },
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+    -- lazygit
+    { "<leader>gg", function() require("snacks").lazygit.open() end, desc = "Open LazyGit", },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
