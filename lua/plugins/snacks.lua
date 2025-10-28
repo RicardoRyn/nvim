@@ -121,9 +121,9 @@ return {
     { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
     -- terminal
     { "<C-/>", function() Snacks.terminal.open() end, desc = "Open Terminal" },
-    { "<C-/>", function() Snacks.terminal.toggle(nil, { shell = "zsh", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
+    { "<C-/>", function() Snacks.terminal.toggle(nil, { shell = "nu", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     { "<C-_>", function() Snacks.terminal.open() end, desc = "Open Terminal" },
-    { "<C-_>", function() Snacks.terminal.toggle(nil, { shell = "zsh", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
+    { "<C-_>", function() Snacks.terminal.toggle(nil, { shell = "nu", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     -- ui
     { '<leader>h', function() Snacks.dashboard() end, desc = "Home Page" },
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
