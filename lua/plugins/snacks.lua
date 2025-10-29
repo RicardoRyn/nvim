@@ -54,7 +54,7 @@ return {
       },
     },
     explorer = { enabled = false },
-    image = { enabled = true },
+    image = { enabled = false },
     indent = { enabled = true, indent = { char = "▏" }, scope = { char = "▍", hl = "" } },
     input = { enabled = true },
     picker = { enabled = true },
