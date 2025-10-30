@@ -37,24 +37,13 @@ return {
     close_if_last_window = true,
     enable_git_status = true,
     enable_diagnostics = true,
-
     sources = { "filesystem", "buffers", "git_status" },
-    source_selector = {
-      winbar = true,
-      sources = {
-        { source = "filesystem", display_name = " 󰉓 Files" },
-        { source = "buffers", display_name = " 󰈙 Buf" },
-        { source = "git_status", display_name = " 󰊢 Git" },
-      },
-    },
-
     open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
     filesystem = {
       bind_to_cwd = true,
       follow_current_file = { enabled = true },
       use_libuv_file_watcher = true,
     },
-
     window = {
       width = 60,
       mappings = {
@@ -118,7 +107,6 @@ return {
         ["P"] = { "toggle_preview", config = { use_float = false } },
       },
     },
-
     default_component_configs = {
       indent = {
         with_expanders = true, -- if nil and file nesting is enabled, will enable expanders

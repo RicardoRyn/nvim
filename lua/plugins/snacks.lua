@@ -2,6 +2,7 @@
 -- gh auth login
 -- gh extension install meiji163/gh-notify
 -- 由于Windows上类Unix脚本的Shebang路径问题，可能需要修改gh-notify的脚本
+
 return {
   "folke/snacks.nvim",
   cond = not vim.g.vscode,
@@ -16,14 +17,15 @@ return {
       preset = {
         -- stylua: ignore
         keys = {
-          { icon = " ", key = "s", desc = "Session", section = "session" },
+          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
           { icon = " ", key = "f", desc = "Find Files", action = ":lua Snacks.dashboard.pick('files')" },
+          { icon = " ", key = "w", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
           { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
           { icon = " ", key = "p", desc = "Projects", action = ":lua Snacks.dashboard.pick('projects')" },
-          { icon = " ", key = "w", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+          { icon = "󰑓 ", key = "s", desc = "Session", section = "session" },
           { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})", },
+          { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
           { icon = " ", key = "b", desc = "Browse Repo", action = ":lua Snacks.gitbrowse()", },
-          { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
         header = [[

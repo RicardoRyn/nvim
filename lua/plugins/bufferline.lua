@@ -40,9 +40,12 @@ return {
   },
   opts = {
     options = {
-      always_show_bufferline = false,
+      always_show_bufferline = true,
       separator_style = "thin",
-      numbers = "none",
+      indicator = {
+        icon = " ",
+        style = "icon", -- 'icon' | 'underline' | 'none'
+      },
       close_command = function(n) Snacks.bufdelete(n) end,
       right_mouse_command = function(n) Snacks.bufdelete(n) end,
       diagnostics = "nvim_lsp",
@@ -54,8 +57,10 @@ return {
             symbol = require("utils.icons").diagnostics.error .. " "
           elseif level == "warning" then
             symbol = require("utils.icons").diagnostics.warning .. " "
-          else
+          elseif level == "info" then
             symbol = require("utils.icons").diagnostics.info .. " "
+          elseif level == "hint" then
+            symbol = require("utils.icons").diagnostics.hint .. " "
           end
           indicator = indicator .. number .. symbol
         end
