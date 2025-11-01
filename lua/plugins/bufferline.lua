@@ -40,16 +40,18 @@ return {
   },
   opts = {
     options = {
-      always_show_bufferline = false,
-      separator_style = "thick",
-
+      always_show_bufferline = true,
+      separator_style = "thin",
+      indicator = {
+        icon = " ",
+        style = "icon", -- 'icon' | 'underline' | 'none'
+      },
       close_command = function(n)
         Snacks.bufdelete(n)
       end,
       right_mouse_command = function(n)
         Snacks.bufdelete(n)
       end,
-
       diagnostics = "nvim_lsp",
       diagnostics_indicator = function(_, _, diagnostics_dict)
         local indicator = "  "
@@ -59,14 +61,15 @@ return {
             symbol = require("utils.icons").diagnostics.error .. " "
           elseif level == "warning" then
             symbol = require("utils.icons").diagnostics.warning .. " "
-          else
+          elseif level == "info" then
             symbol = require("utils.icons").diagnostics.info .. " "
+          elseif level == "hint" then
+            symbol = require("utils.icons").diagnostics.hint .. " "
           end
           indicator = indicator .. number .. symbol
         end
         return indicator
       end,
-
       offsets = {
         {
           filetype = "neo-tree",
@@ -76,7 +79,10 @@ return {
           separator = false,
         },
       },
-
     },
   },
+  config = function (_, opts)
+    require("bufferline").setup(opts)
+    require("bufferline.groups").builtin.pinned:with({ icon = "󰐃 " })
+  end
 }

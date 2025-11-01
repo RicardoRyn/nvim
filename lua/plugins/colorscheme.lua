@@ -6,16 +6,17 @@ return {
   lazy = false,
   config = function()
     require("catppuccin").setup({
-      flavour = "auto", -- latte, frappe, macchiato, mocha
-      background = { -- :h background
+      flavour = "auto",
+      background = {
         light = "latte",
         dark = "mocha",
       },
-      dim_inactive = {
-        enabled = true, -- dims the background color of inactive window
-        shade = "dark",
-        percentage = 0.15, -- percentage of the shade to apply to the inactive window
+      transparent_background = true,
+      float = {
+        transparent = true, -- enable transparent floating windows
+        solid = true, -- use solid styling for floating windows, see |winborder|
       },
+      show_end_of_buffer = true,
       auto_integrations = true,
     })
     vim.cmd.colorscheme("catppuccin")
