@@ -16,7 +16,6 @@ return {
         transparent = true, -- enable transparent floating windows
         solid = true, -- use solid styling for floating windows, see |winborder|
       },
-      show_end_of_buffer = true,
       auto_integrations = true,
     })
     vim.cmd.colorscheme("catppuccin")
