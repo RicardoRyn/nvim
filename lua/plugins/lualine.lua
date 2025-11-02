@@ -13,6 +13,7 @@ return {
     sections = {
       lualine_a = { "filename" },
       lualine_b = {
+        { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
         {
           "diff",
           symbols = {
@@ -42,7 +43,6 @@ return {
         },
       },
       lualine_c = {
-        { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
         function()
           return vim.fn.fnamemodify(vim.fn.expand("%:p"), ":~:h")
         end,
@@ -82,10 +82,10 @@ return {
       },
       lualine_y = {
         { "progress", separator = "", padding = { left = 1, right = 0 } },
-        { "location" }
+        { "location", padding = { left = 0, right = 1 }  }
       },
       lualine_z = {
-        "searchcount",
+        { "searchcount", separator = "", padding = { left = 0, right = 0 } },
         "mode",
       },
     },
