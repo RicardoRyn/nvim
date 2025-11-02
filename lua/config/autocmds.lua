@@ -2,6 +2,24 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("ricardo_" .. name, { clear = true })
 end
 
+-- snacks dashboard 动画效果
+local db_anim = require("utils.dashboardAnimation")
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("snacks_dashboard"),
+  pattern = "snacks_dashboard",
+  callback = function()
+    db_anim.shouldPlayAnimation = true
+    db_anim.asciiImg = db_anim.frames[1]
+  end,
+})
+vim.api.nvim_create_autocmd("DirChanged", {
+  group = augroup("snacks_dashboard"),
+  pattern = "*",
+  callback = function()
+    db_anim.shouldPlayAnimation = false
+  end,
+})
+
 -- 在lua, python, rust文件中，使用`o`和`O`时不会自动添加注释符号
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("disable_o_comment"),
@@ -10,7 +28,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt.formatoptions:remove({ "o" })
   end,
 })
-
 
 -- 再次打开文件，光标位于上次打开的地方
 vim.api.nvim_create_autocmd("BufReadPost", {
