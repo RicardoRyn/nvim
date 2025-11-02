@@ -16,14 +16,15 @@ return {
       preset = {
         -- stylua: ignore
         keys = {
-          { icon = " ", key = "s", desc = "Session", section = "session" },
+          { icon = " ", key = "N", desc = "New File", action = ":ene | startinsert" },
           { icon = " ", key = "f", desc = "Find Files", action = ":lua Snacks.dashboard.pick('files')" },
+          { icon = " ", key = "w", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
           { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
           { icon = " ", key = "p", desc = "Projects", action = ":lua Snacks.dashboard.pick('projects')" },
-          { icon = " ", key = "w", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+          { icon = "󰑓 ", key = "s", desc = "Session", section = "session" },
           { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})", },
-          { icon = " ", key = "b", desc = "Browse Repo", action = ":lua Snacks.gitbrowse()", },
           { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+          { icon = " ", key = "b", desc = "Browse Repo", action = ":lua Snacks.gitbrowse()", },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
         header = [[

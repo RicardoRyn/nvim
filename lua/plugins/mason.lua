@@ -2,10 +2,7 @@ return {
   "mason-org/mason.nvim",
   cond = not vim.g.vscode,
   event = { "BufReadPost", "BufNewFile", "VimEnter" },
-  dependencies = {
-    "neovim/nvim-lspconfig",
-    -- "mason-org/mason-lspconfig.nvim",
-  },
+  dependencies = { "neovim/nvim-lspconfig" },
   opts = {
     ensure_installed = {
       -- NOTE: LUA
