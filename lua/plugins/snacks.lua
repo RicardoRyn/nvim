@@ -3,6 +3,8 @@
 -- gh extension install meiji163/gh-notify
 -- 由于Windows上类Unix脚本的Shebang路径问题，可能需要修改gh-notify的脚本
 
+local dbAnim = require("utils.dashboardAnimation")
+
 return {
   "folke/snacks.nvim",
   cond = not vim.g.vscode,
@@ -12,7 +14,6 @@ return {
   opts = {
     bigfile = { enabled = true },
     dashboard = {
-      width = 70,
       enabled = true,
       preset = {
         -- stylua: ignore
@@ -28,30 +29,17 @@ return {
           { icon = " ", key = "b", desc = "Browse Repo", action = ":lua Snacks.gitbrowse()", },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
-        header = [[
-⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣋⡻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⡟⢱⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⠌⠾⠋⠻⣮⡻⠋⣴⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⡦⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣇⠸⠿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠀⠀⠀⠀⠈⠻⡀⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⡇⢸⣿⣿⣿⣿⣿⣿⣿⡇⠐⠀⠀⠀⠀⠀⠀⠈⣠⣾⣿⣿⣿⣿⣿⣿⣿⠟⣡⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⡇⢸⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⡿⠟⣡⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⡇⢸⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⢊⣴⣿⣿⣿⣿⣿⣿⣿⡿⠋⣀⢾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⡿⡃⢼⣿⣿⣿⣿⣿⣿⣿⡇⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠙⢷⣝⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⡿⣫⡾⠃⣾⣿⣿⣿⣿⣿⣿⣿⣣⣴⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠙⠳⣌⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣯⡚⠋⠀⠀⣿⣿⣿⣿⣿⣿⣿⣷⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠓⣨⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣦⡀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⡆⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⡉⢩⣭⢹⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⡇⢸⣿⣿⣿⣿⣿⣿⣿⠟⣥⡶⠶⠶⠂⠂⣤⣶⠶⠶⠆⢀⣤⠶⢶⣦⡘⡿⣩⣴⣶⣶⣿⢃⠞⣡⡶⠶⣶⡆⢻
-⣿⣿⣿⣿⡇⢸⣿⣿⣿⣿⣿⣿⠏⠸⣿⣦⣤⡀⠀⣼⡟⠀⠂⠐⢠⣾⢃⣾⢠⣿⠀⣰⡿⢡⠆⣾⡏⡌⣼⣿⣤⣤⣾⠇⣾
-⣿⣿⣿⣿⡇⢸⣿⣿⣿⣿⠟⠁⠀⠂⠀⣹⣿⠃⢰⣿⣅⣀⣀⠀⣼⣇⠘⣣⣾⢃⢠⣿⣅⣋⣼⡟⣰⢠⣿⣁⣒⣂⠐⣾⣿
-⣿⣿⣿⣿⣧⡙⠛⠛⠛⣁⣴⣅⣛⣛⠛⠛⠁⠀⠈⠛⠛⢛⣋⣶⣌⣛⣛⣩⣴⣿⣌⣛⣛⣉⣛⣃⣹⣌⣛⣛⣛⣋⣼⣿⣿
-⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]],
+        header = false,
       },
       sections = {
-        { section = "header" },
+        {
+          section = "header",
+          padding = 0,
+          function()
+            return { header = dbAnim.asciiImg }
+          end,
+        },
         { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-        { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-        { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
         { section = "startup" },
       },
     },
@@ -156,5 +144,10 @@ return {
         Snacks.toggle.zoom():map("<leader>uZ")
       end,
     })
+
+    --for dashboardAnimation
+    vim.defer_fn(function()
+      dbAnim.theAnimation(dbAnim.theAnimation)
+    end, 100)
   end,
 }
