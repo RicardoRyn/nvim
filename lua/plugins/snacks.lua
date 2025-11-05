@@ -118,7 +118,7 @@ return {
     { '<leader>h', function() Snacks.dashboard() end, desc = "Home Page" },
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
     -- lazygit
-    { "<leader>gg", function() require("snacks").lazygit.open() end, desc = "Open LazyGit", },
+    { "<leader>gg", function() require("snacks").lazygit.open() end, desc = "LazyGit", },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
