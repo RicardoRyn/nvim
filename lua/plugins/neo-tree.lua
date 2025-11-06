@@ -171,9 +171,4 @@ return {
       },
     },
   },
-  config = function(_, opts)
-    require("neo-tree").setup(opts)
-    -- 设置 NeoTree 当前行颜色为灰色
-    vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = "#dce0e8" })
-  end,
 }

@@ -7,20 +7,17 @@ return {
   config = function()
     require("catppuccin").setup({
       flavour = "latte", -- latte, frappe, macchiato, mocha, auto
-      background = { -- :h background
+      background = {
         light = "latte",
         dark = "mocha",
       },
-      dim_inactive = {
-        enabled = true, -- dims the background color of inactive window
-        shade = "dark",
-        percentage = 0.15, -- percentage of the shade to apply to the inactive window
+      transparent_background = true,
+      float = {
+        transparent = true, -- enable transparent floating windows
+        solid = true, -- use solid styling for floating windows, see |winborder|
       },
       auto_integrations = true,
     })
     vim.cmd.colorscheme("catppuccin")
-
-    vim.cmd([[highlight CursorLine guibg=#dce0e8]])
-    vim.o.cursorline = true
   end,
 }
