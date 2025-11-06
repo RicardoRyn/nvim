@@ -13,8 +13,7 @@ return {
       right_pad = 1,
       border = "thin",
       position = "right",
-      -- 避免标题中出现其他背景色
-      highlight_inline = "RenderMarkdownCodeInfo",
+      highlight_inline = "rendermarkdowncodeinfo", -- 避免标题中出现其他背景色
     },
     heading = {
       sign = false,
