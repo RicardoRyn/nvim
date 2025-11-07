@@ -66,7 +66,6 @@ return {
         end
         return indicator
       end,
-
       offsets = {
         {
           filetype = "neo-tree",
@@ -76,7 +75,10 @@ return {
           separator = false,
         },
       },
-
     },
   },
+  config = function (_, opts)
+    require("bufferline").setup(opts)
+    require("bufferline.groups").builtin.pinned:with({ icon = "󰐃 " })
+  end
 }
