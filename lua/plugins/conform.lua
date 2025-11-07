@@ -7,19 +7,19 @@ return {
     format_on_save = false,
     stop_after_first = false,
     formatters_by_ft = {
-      -- NOTE: LUA
+      -- lua
       lua = { "stylua" },
-      -- NOTE: PYTHON
+      -- python
       python = { "ruff_format" },
-      -- NOTE: BASH
+      -- bash
       bash = { "shfmt" },
       sh = { "shfmt" },
-      -- NOTE: MARKDOWN
+      -- markdown
       markdown = { "injected", "prettierd" },
       quarto = { "injected" },
-      -- NOTE: YAML
+      -- yaml
       yaml = { "prettierd" },
-      -- NOTE: RUST
+      -- rust
       rust = { "rustfmt" },
     },
   },

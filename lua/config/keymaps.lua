@@ -1,4 +1,3 @@
--- NOTE: Neovim和Vscode都生效的设置
 vim.keymap.set("v", "<", "<gv", { desc = "Outdent and reselect" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent and reselect" })
 vim.keymap.set({ "v" }, "U", "<Nop>")
@@ -13,7 +12,6 @@ vim.keymap.set(
 
 -- stylua: ignore
 if vim.g.vscode then
-  -- NOTE: Vscode中生效的设置
   -- general
   vim.keymap.set( "n", "<leader>ff", "<Cmd>lua require('vscode').call('workbench.action.quickOpenWithModes')<CR>", { desc = "Find Files" })
   vim.keymap.set( "n", "<leader><space>", "<Cmd>lua require('vscode').call('workbench.action.quickOpenWithModes')<CR>", { desc = "Find Files" })
@@ -54,7 +52,6 @@ if vim.g.vscode then
   vim.keymap.set( "n", "<leader>uz", "<Cmd>lua require('vscode').call('workbench.action.toggleZenMode')<CR>", { desc = "Zen Mode" })
 
 else
-  -- NOTE: Neovim中生效的设置
   vim.keymap.set({ "i" }, "jk", "<Esc>")
   vim.keymap.set({ "n", "v" }, "j", "gj", { desc = "gj" })
   vim.keymap.set({ "n", "v" }, "k", "gk", { desc = "gk" })
@@ -65,7 +62,7 @@ else
   vim.keymap.set("v", "<C-c>", '"+y') -- 让neovim中C-c可以复制内容到剪贴板
   vim.keymap.set("i", "<C-v>", "<C-r>+", { noremap = true, silent = true, desc = "Paste from clipboard in insert mode" })
 
-  -- 由smart-splits.lua接管
+  -- -- 由smart-splits.lua接管
   -- vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
   -- vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
   -- vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
@@ -73,7 +70,6 @@ else
 
 end
 
--- NOTE: Neovide中生效的设置
 if vim.g.neovide then
   vim.keymap.set({ "n", "v", "s", "x", "o", "i", "l", "c", "t" }, "<C-S-v>", function()
     vim.api.nvim_paste(vim.fn.getreg("+"), true, -1)

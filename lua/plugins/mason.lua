@@ -8,24 +8,24 @@ return {
   },
   opts = {
     ensure_installed = {
-      -- NOTE: LUA
+      -- lua
       "lua-language-server",
       "stylua",
-      -- NOTE: PYTHON
+      -- python
       "pyright",
       "ruff",
-      -- NOTE: BASH
+      -- bash
       "bash-language-server",
       "shellcheck",
       "shfmt",
-      -- NOTE: MARKDOWN
+      -- markdown
       "marksman", -- LSP (语法高亮、补全、跳转)
       "markdownlint-cli2", -- 静态检查
       "prettierd", -- 格式化
-      -- NOTE: YAML
+      -- yaml
       "yaml-language-server", -- LSP
       "yamllint", -- 静态检查
-      -- NOTE: RUST
+      -- rust
       "rust-analyzer",
       "rustfmt",
     },
