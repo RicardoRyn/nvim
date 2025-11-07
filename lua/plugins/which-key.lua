@@ -28,6 +28,7 @@ return {
         { "<leader>f", group = "Find" },
         { "<leader>ft", group = "Find Todo" },
         { "<leader>g", group = "Git" },
+        { "<leader>gh", group = "GitHub" },
         { "<leader>j", group = "Quarto Hydra", icon = { icon = "󱔕 " } },
         { "<leader>n", group = "Noice" },
         { "<leader>m", group = "Molten", icon = { icon = " ", color = "blue" } },

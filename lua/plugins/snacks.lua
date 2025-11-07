@@ -43,7 +43,8 @@ return {
         { section = "startup" },
       },
     },
-    explorer = { enabled = false },
+    explorer = { enabled = true },
+    gh = { enabled = true },
     image = { enabled = false },
     indent = { enabled = true, indent = { char = "▏" }, scope = { char = "▍", hl = "" } },
     input = { enabled = true },
@@ -74,7 +75,6 @@ return {
     { "<leader>/b", function() Snacks.picker.grep_buffers() end, desc = "Buffers" },
     { "<leader>/w", function() Snacks.picker.grep_word() end, desc = "Word", mode = { "n", "x" } },
     -- search
-    -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification" },
     { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>.", function() Snacks.scratch() end, desc = "Scratch" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
@@ -109,6 +109,12 @@ return {
     { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
     { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
     { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+    -- git
+    { "<leader>gg", function() require("snacks").lazygit.open() end, desc = "LazyGit", },
+    { "<leader>ghi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
+    { "<leader>ghI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
+    { "<leader>ghp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
+    { "<leader>ghP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
     -- terminal
     { "<C-/>", function() Snacks.terminal.open() end, desc = "Open Terminal" },
     { "<C-/>", function() Snacks.terminal.toggle(nil, { shell = "nu", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
@@ -117,8 +123,6 @@ return {
     -- ui
     { '<leader>h', function() Snacks.dashboard() end, desc = "Home Page" },
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
-    -- lazygit
-    { "<leader>gg", function() require("snacks").lazygit.open() end, desc = "Open LazyGit", },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
