@@ -70,12 +70,10 @@ vim.opt.expandtab = true -- 使用空格而不是真正的tab
 
 ----------------- Neovide -----------------
 if vim.g.neovide then
-  vim.g.neovide_title_background_color =
-    string.format("%x", vim.api.nvim_get_hl(0, { id = vim.api.nvim_get_hl_id_by_name("Normal") }).bg)
-  vim.g.neovide_title_background_color = "#ffffff"
-  vim.g.neovide_title_text_color = "#58913d" -- 设置窗口标签的“Neovide”的颜色
+  vim.g.neovide_title_background_color = "#ffffff" -- 设置窗口标签的背景颜色
+  vim.g.neovide_title_text_color = "#58913d" -- 设置窗口标签的“Neovide”字体的颜色
   vim.o.guifont = "Maple Mono NF CN:h10" -- neovide字体及其字体大小
-  vim.g.neovide_scale_factor = 1.0 -- 界面字体缩放大小
+  vim.g.neovide_scale_factor = 0.9 -- 界面字体缩放大小
   vim.g.neovide_floating_blur_amount_x = 2 -- 浮动窗口的模糊程度
   vim.g.neovide_floating_blur_amount_y = 2 -- 浮动窗口的模糊程度
   vim.g.neovide_floating_shadow = true
