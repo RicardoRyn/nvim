@@ -25,6 +25,7 @@ return {
         { "<leader>g", group = "Git" },
         { "<leader>gh", group = "GitHub" },
         { "<leader>h", group = "Home", icon = { icon = "󰋜 " } },
+        { "<leader>m", group = "Toggle Code Block" },
         { "<leader>n", group = "Noice" },
         { "<leader>o", group = "Outline", icon = { icon = " ", color = "green" } },
         { "<leader>r", group = "Restart LSP", icon = { icon = " " } },
