@@ -67,10 +67,3 @@ else
   vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
 end
-
--- NOTE: Neovide中生效的设置
-if vim.g.neovide then
-  vim.keymap.set({ "n", "v", "s", "x", "o", "i", "l", "c", "t" }, "<C-S-v>", function()
-    vim.api.nvim_paste(vim.fn.getreg("+"), true, -1)
-  end, { noremap = true, silent = true })
-end
