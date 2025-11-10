@@ -40,7 +40,7 @@ return {
   },
   opts = {
     options = {
-      always_show_bufferline = true,
+      always_show_bufferline = false,
       separator_style = "thin",
       indicator = {
         icon = " ",
