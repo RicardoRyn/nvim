@@ -31,6 +31,7 @@ return {
         { "<leader>r", group = "Restart LSP", icon = { icon = " " } },
         { "<leader>s", group = "Search" },
         { "<leader>S", group = "Session" },
+        { "<leader>t", group = "Tab" },
         { "<leader>u", group = "UI", icon = { icon = "󰙵 ", color = "cyan" } },
         { "<leader>w", group = "Windows", proxy = "<c-w>", expand = function() return require("which-key.extras").expand.win() end },
         { "<leader>z", icon = { icon = "󰙅"} },

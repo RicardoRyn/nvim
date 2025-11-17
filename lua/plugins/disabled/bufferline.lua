@@ -4,47 +4,43 @@ return {
   lazy = false,
   -- stylua: ignore
   keys = {
-    -- Buffer
-    { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-    { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+    -- { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+    -- { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
     { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer", },
-    { "<leader>bo", function() Snacks.bufdelete.other() end, desc = "Delete Other Buffer", },
-    { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
-    { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
-    { "<leader>bb", ":BufferLinePickClose<CR>", desc = "Delete Pick Buffer" },
+    { "<leader>bo", function() Snacks.bufdelete.other() end, desc = "Delete Buffer", },
+    -- { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
+    -- { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
+    -- { "<leader>bb", ":BufferLinePickClose<CR>", desc = "Delete Pick Buffer" },
     { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
     { "<leader>ba", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
-    { "<leader>b<", "<cmd>BufferLineMovePrev<cr>", desc = "Move Buffer Prev" },
-    { "<leader>b>", "<cmd>BufferLineMoveNext<cr>", desc = "Move Buffer Next" },
-    { "<b",
-      function()
-        local dir = -1
-        local moveBy = vim.v.count > 0 and vim.v.count or 1
-        local bufferline = require("bufferline")
-        for _ = 1, moveBy do
-          bufferline.move(dir)
-        end
-      end,
-      desc = "Move current buffer to left",
-    },
-    { ">b",
-      function()
-        local dir = 1
-        local moveBy = vim.v.count > 0 and vim.v.count or 1
-        local bufferline = require("bufferline")
-        for _ = 1, moveBy do
-          bufferline.move(dir)
-        end
-      end,
-      desc = "Move current buffer to right",
-    },
-    -- Tab
-    { "<leader>td", "<Cmd>tabclose<CR>", desc = "Close Tab" },
-    { "<leader>ts", "<Cmd>tab split<CR>", desc = "Tab Split" },
-    { "<leader>tn", "<Cmd>tabnew<CR>", desc = "New Tab" },
+    -- { "<leader>b<", "<cmd>BufferLineMovePrev<cr>", desc = "Move Buffer Prev" },
+    -- { "<leader>b>", "<cmd>BufferLineMoveNext<cr>", desc = "Move Buffer Next" },
+    -- { "<b",
+    --   function()
+    --     local dir = -1
+    --     local moveBy = vim.v.count > 0 and vim.v.count or 1
+    --     local bufferline = require("bufferline")
+    --     for _ = 1, moveBy do
+    --       bufferline.move(dir)
+    --     end
+    --   end,
+    --   desc = "Move current buffer to left",
+    -- },
+    -- { ">b",
+    --   function()
+    --     local dir = 1
+    --     local moveBy = vim.v.count > 0 and vim.v.count or 1
+    --     local bufferline = require("bufferline")
+    --     for _ = 1, moveBy do
+    --       bufferline.move(dir)
+    --     end
+    --   end,
+    --   desc = "Move current buffer to right",
+    -- },
   },
   opts = {
     options = {
+      mode = "tabs",
       always_show_bufferline = false,
       separator_style = "thin",
       indicator = {
@@ -82,4 +78,8 @@ return {
       },
     },
   },
+  config = function (_, opts)
+    require("bufferline").setup(opts)
+    require("bufferline.groups").builtin.pinned:with({ icon = "󰐃 " })
+  end
 }

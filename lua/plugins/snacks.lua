@@ -82,6 +82,7 @@ return {
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
     { '<leader>s.', function() Snacks.scratch.select() end, desc = "Scratch" },
     { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
+    { "<leader>sb", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>sc", function() Snacks.picker.commands() end, desc = "Commands" },
     { "<leader>sd", function() Snacks.picker.diagnostics_buffer() end, desc = "Diagnostics (buffer)" },
     { "<leader>sD", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
