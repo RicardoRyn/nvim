@@ -4,6 +4,7 @@ return {
   lazy = false,
   -- stylua: ignore
   keys = {
+    -- Buffer
     { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
     { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
     { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer", },
@@ -37,6 +38,10 @@ return {
       end,
       desc = "Move current buffer to right",
     },
+    -- Tab
+    { "<leader>td", "<Cmd>tabclose<CR>", desc = "Close Tab" },
+    { "<leader>ts", "<Cmd>tab split<CR>", desc = "Tab Split" },
+    { "<leader>tn", "<Cmd>tabnew<CR>", desc = "New Tab" },
   },
   opts = {
     options = {
@@ -81,8 +86,4 @@ return {
       },
     },
   },
-  config = function (_, opts)
-    require("bufferline").setup(opts)
-    require("bufferline.groups").builtin.pinned:with({ icon = "󰐃 " })
-  end
 }
