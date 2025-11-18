@@ -5,8 +5,8 @@ return {
   config = function()
     require("lint").linters_by_ft = {
       -- NOTE: BASH
-      sh = { "shellcheck" },
-      bash = { "shellcheck" },
+      -- sh = { "shellcheck" },
+      -- bash = { "shellcheck" },
       -- NOTE: MARKDOWN
       markdown = { "markdownlint-cli2" },
       -- NOTE: YAML
