@@ -43,20 +43,13 @@ return {
     { "<leader>ts", "<Cmd>tab split<CR>", desc = "Tab Split" },
     { "<leader>tn", "<Cmd>tabnew<CR>", desc = "New Tab" },
   },
+  -- stylua: ignore
   opts = {
     options = {
       always_show_bufferline = false,
       separator_style = "thin",
-      indicator = {
-        icon = " ",
-        style = "icon", -- 'icon' | 'underline' | 'none'
-      },
-      close_command = function(n)
-        Snacks.bufdelete(n)
-      end,
-      right_mouse_command = function(n)
-        Snacks.bufdelete(n)
-      end,
+      close_command = function(n) Snacks.bufdelete(n) end,
+      right_mouse_command = function(n) Snacks.bufdelete(n) end,
       diagnostics = "nvim_lsp",
       diagnostics_indicator = function(_, _, diagnostics_dict)
         local indicator = "  "
