@@ -11,10 +11,10 @@ return {
         light = "latte",
         dark = "mocha",
       },
-      transparent_background = true,
+      transparent_background = false,
       float = {
-        transparent = true, -- enable transparent floating windows
-        solid = true, -- use solid styling for floating windows, see |winborder|
+        transparent = false, -- enable transparent floating windows
+        solid = false, -- use solid styling for floating windows, see |winborder|
       },
       auto_integrations = true,
     })
