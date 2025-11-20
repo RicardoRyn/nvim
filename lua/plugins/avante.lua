@@ -27,7 +27,7 @@ return {
     },
     shortcuts = {
       {
-        name = "translate",
+        name = "trans",
         description = "翻译文本或代码",
         details = "将选中的文本或代码翻译成中文/English，同时保留含义、语气和技术准确性",
         prompt = "尽可能简短回答，请将选中的文本或代码准确、清晰地翻译成中文/英文，并确保保留原意。",
