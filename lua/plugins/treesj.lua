@@ -1,6 +1,5 @@
 return {
   'Wansmer/treesj',
-  cond = not vim.g.vscode,
   keys = { '<space>m' },
   dependencies = { 'nvim-treesitter/nvim-treesitter' }, -- if you install parsers with `nvim-treesitter`
   config = function()
