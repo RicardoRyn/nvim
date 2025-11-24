@@ -36,7 +36,7 @@ return {
     -- 此文件可以包含针对你项目的特定指令
     instructions_file = "avante.md",
     -- 例如
-    provider = "deepseek",
+    provider = "qianwen",
     providers = {
       deepseek = {
         endpoint = "https://api.deepseek.com",
@@ -48,6 +48,17 @@ return {
         },
         __inherited_from = "openai",
         api_key_name = "AVANTE_DEEPSEEK_API_KEY",
+      },
+      qianwen = {
+        endpoint = "https://dashscope.aliyuncs.com/compatible-mode/v1",
+        model = "qwen-plus",
+        timeout = 30000, -- Timeout in milliseconds
+        extra_request_body = {
+          temperature = 0.75,
+          max_tokens = 8192,
+        },
+        __inherited_from = "openai",
+        api_key_name = "AVANTE_QIANWEN_API_KEY",
       },
     },
   },
