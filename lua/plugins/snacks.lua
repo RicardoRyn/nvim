@@ -40,7 +40,7 @@ return {
           end,
         },
         { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-        { section = "startup" },
+        -- { section = "startup" },
       },
     },
     explorer = { enabled = true },
@@ -150,7 +150,7 @@ return {
       end,
     })
 
-    --for dashboardAnimation
+    -- dashboardAnimation
     vim.defer_fn(function()
       dbAnim.theAnimation(dbAnim.theAnimation)
     end, 100)

@@ -1,8 +1,5 @@
-local M = {}
-
-M.frames = {
-  static = {
-    [[
+original
+[[
                                    
          ⠉⠛⠛⠿⠿⡿⠿⠿⠿⠿⠿⠿⢿⠿⠿⠛⠛⠉        
  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⠒⠦⠀⠀⠀⠀⠀⠀⠀⠀⠴⠒⠚⠉         
@@ -19,11 +16,10 @@ M.frames = {
  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⡀⠀⠀⠀⠀⠀⠀⢀⣿⡟           
  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⠀⠀⠀⠀⠀⠀⠀⠀⠏            
                                    
-                                   
 ]],
-  },
-  glitch = {
-    [[
+
+glitch
+[[
                                   
         ⠉⠛⠛⠿⠿⡿⠿⠿⠿⠿⠿⠿⢿⠿⠿⠛⠛⠉        
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⠒⠦⠀⠀⠀⠀⠀⠀⠀⠀⠴⠒⠚⠉         
@@ -41,7 +37,7 @@ M.frames = {
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⡀⠀⠀⠀⠀⠀⠀⢀⣿⡟             
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⠀⠀⠀⠀⠀⠀⠀⠀⠏              
 ]],
-    [[
+[[
                                         
          ⠉⠛⠛⠿⠿⡿⠿⠿⠿⠿⠿⠿⢿⠿⠿⠛⠛⠉             
  ⠀⠀⠀⠀⠀⠀⠀⠉⠓⠶⠶⠦          ⠚⠉               
@@ -59,7 +55,7 @@ M.frames = {
 ⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⡀⠀⠀⠀⠀⠀⠀⢀⣿⡟                   
     ⠀⠀⠀⠀⠀  ⠀⠀⠀⠀⠀⠀⠀⠀⠏                    
 ]],
-    [[
+[[
                     ⠿⠿⢿⠿ ⠛⠛         
  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⠒⠦⠀⠀⠀⠀⠀⠀⠀⠀⠴⠒⠚⠉          
                                     
@@ -77,7 +73,7 @@ M.frames = {
  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠛⠀⠀⠀⠀⠀⠀⠀⠏             
                                     
 ]],
-    [[
+[[
                  ⠿⠿⠿⠶                       
  ⠀⠀⠀⠀⠀⠀⠀  ⠀⠀⠉⠓⠒⠦⠀ ⠀     ⠒⠚⣿                 
                                             
@@ -95,7 +91,7 @@ M.frames = {
   ⠀⠀⠀⠀⠀⠀⠀⠀⠛⠀⠀⠀⠀⠀⠿                           
                                             
 ]],
-    [[
+[[
                                             
                ⠉⠛⠛⠿⠿⡿⠕⡞⠿⠿⢿⠕⠿⠛⠛⠛             
  ⠀⠀⠀⠀⠀    ⠀⠀⠀⠀  ⠉⠓⠒⠦⣀        ⠚⠉             
@@ -113,7 +109,7 @@ M.frames = {
      ⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀⠀⢻⣿⡀⠀⠀⠀    ⠀⢀⣿⡟            
                                             
 ]],
-    [[
+[[
          ⠉⠛⠛⠿⠿⡿⠿⠿⠿⠁⠶                           
                                                
  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⠒⠦                                 
@@ -131,7 +127,7 @@ M.frames = {
                                                
                                                
 ]],
-    [[
+[[
                                           
         ⠉⠛⠛⠿⠿⡿⠿⠿⠿⠿⠿⠿⢿⠿⠿⠛⠛⠉                
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⠒⠦⠀⠀⠀⠀⠀⠀⠀⠀⠴⠒⠚⠉                 
@@ -149,7 +145,7 @@ M.frames = {
 ⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⡀⠀⠀⠀⠀⠀⠀ ⣿⡟                      
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                
 ]],
-    [[
+[[
                                                    
  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⠒⠦⠀⠀       ⠚⠉                          
                                                    
@@ -167,7 +163,7 @@ M.frames = {
  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⣿⠏                                 
                                                    
 ]],
-    [[
+[[
                                                          
                                                          
                        ⠛⠿        ⠿⢿⠿⠿⠛⠛⠶                 
@@ -185,7 +181,7 @@ M.frames = {
           ⠀⠀   ⠀⠀⠀⠀⠈⢿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡿⠁                      
           ⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⠹⠿                                
 ]],
-    [[
+[[
                                                                          
                              ⠛⠿⠿⡿⠿⠿⠿⠿⠿⠛  ⠒⠿⠛⠛                            
   ⠀⠀⠀⠀⠀⠀⠀    ⠀                   ⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⠴⠛⠛                          
@@ -203,7 +199,7 @@ M.frames = {
                                    ⠹⠿                                    
                                                                          
 ]],
-    [[
+[[
                                                                       
                                                                       
                                                                       
@@ -221,7 +217,7 @@ M.frames = {
   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠉⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⡿                                    
                                                                       
 ]],
-    [[
+[[
                                                               
                                                               
                                                               
@@ -239,7 +235,7 @@ M.frames = {
                                            ⣿⣿                 
                                           ⠿⠿                  
 ]],
-    [[
+[[
                                                     
                         ⡼⠿⠿⢿⠿⠿⠛⠛⠉                   
  ⠀⠀⠀⠀⠀⠀        ⠀⠀⠀⠉⠓⠒⠦⠀⠀⠀⠀⠀    ⠀⠀⠀⠴⠒⠚⠉              
@@ -257,7 +253,7 @@ M.frames = {
  ⠀⠀⠀⠀⠀         ⠀⠳⠀⠘⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣴⠃⠀⠞              
  ⠀⠀⠀⠀⠀⠀⠀⠀     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡿⠁                         
 ]],
-    [[
+[[
                                                 
   ⠀⠀⠀⠀⠀⠀⠀⠀⠀        ⠉⠛⠛⠿⠿ ⠶⠶⠶                    
   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⠒⠦⠀⠀⠀⠀⠀⠀  ⠀⠀⠴⠒⠚⠉          
@@ -273,87 +269,5 @@ M.frames = {
  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡿⠁                      
  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⡀⠀⠀⠀⠀⠀⠀⢀⣿⡟                        
  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⠀⠀⠀⠀⠀⠀⠀⠀⠏                         
-                                                
+
 ]],
-  },
-}
-
--- 这个变量将始终指向当前要显示的ASCII艺术图
-M.asciiImg = M.frames["static"][1]
-
-M.currentStage = "static"
-M.currentColor = "#1E66F5"
-
--- 更新高亮颜色的函数
-local function updateHighlightColor(color)
-  vim.api.nvim_set_hl(0, "SnacksDashboardHeader", { fg = color, bold = true })
-end
-
--- 根据阶段选择颜色的函数
-local function getColorForStage(stageName)
-  if stageName == "static" then
-    return "#1E66F5"
-  else
-    local random = math.random()
-    if random < 0.75 then
-      return "#1E66F5"
-    elseif random < 0.9 then
-      return "#FFC070"
-    else
-      return "#EA76CB"
-    end
-  end
-end
-
--- 播放指定阶段的动画
-local function playStage(stageName, duration, reverse, nextCallback)
-  local frames = M.frames[stageName]
-  local totalFrames = #frames
-
-  require("snacks").animate(1, totalFrames + 1, function(value, _)
-    -- 更新全局的 asciiImg
-    local index = math.floor(value)
-    if reverse then
-      M.asciiImg = frames[math.max(1, totalFrames - index + 1)]
-    else
-      M.asciiImg = frames[math.min(index, totalFrames)]
-    end
-
-    -- 更新颜色
-    local currentColor = getColorForStage(stageName)
-    updateHighlightColor(currentColor)
-
-    -- 触发UI更新
-    Snacks.dashboard.update()
-
-    -- 检查当前阶段是否结束
-    if value >= totalFrames + 1 then
-      -- 如果有下一个阶段要播放，则调用回调
-      if nextCallback then
-        nextCallback()
-      end
-    end
-  end, {
-    duration = duration,
-  })
-
-end
-
--- 修改 theAnimation: 现在实现四阶段循环动画
-M.theAnimation = function(callback)
-  playStage("static", 300, false, function()
-    playStage("glitch", 15, false, function()
-      playStage("static", 100, false, function()
-        playStage("glitch", 5, true, function()
-          -- 当第四阶段结束后，根据 callback 决定下一步
-          if callback then
-            -- 重新开始整个动画循环（从 static 开始）
-            M.theAnimation(callback)
-          end
-        end)
-      end)
-    end)
-  end)
-end
-
-return M
