@@ -34,13 +34,12 @@ return {
       sections = {
         {
           section = "header",
-          padding = 0,
           function()
             return { header = dbAnim.asciiImg }
           end,
         },
         { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-        { section = "startup" },
+        { title = "  Talk is cheap. Show me the code.", align = "center", padding = 1 },
       },
     },
     explorer = { enabled = true },
@@ -150,7 +149,7 @@ return {
       end,
     })
 
-    --for dashboardAnimation
+    -- for dashboardAnimation
     vim.defer_fn(function()
       dbAnim.theAnimation(dbAnim.theAnimation)
     end, 100)
