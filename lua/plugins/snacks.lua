@@ -34,13 +34,12 @@ return {
       sections = {
         {
           section = "header",
-          padding = 0,
           function()
             return { header = dbAnim.asciiImg }
           end,
         },
-        { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 0 },
-        { section = "startup" },
+        { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
+        { title = "  Talk is cheap. Show me the code.", align = "center", padding = 1 },
       },
     },
     explorer = { enabled = false },
