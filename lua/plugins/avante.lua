@@ -10,6 +10,18 @@ return {
   ---@module 'avante'
   ---@type avante.Config
   opts = {
+    -- system_prompt as function ensures LLM always has latest MCP server state
+    -- This is evaluated for every message, even in existing chats
+    system_prompt = function()
+        local hub = require("mcphub").get_hub_instance()
+        return hub and hub:get_active_servers_prompt() or ""
+    end,
+    -- Using function prevents requiring mcphub before it's loaded
+    custom_tools = function()
+        return {
+            require("mcphub.extensions.avante").mcp_tool(),
+        }
+    end,
     -- 在此处添加任何选项
     mode = "legacy", -- "agentic" | "legacy"
     behaviour = {
@@ -36,8 +48,19 @@ return {
     -- 此文件可以包含针对你项目的特定指令
     instructions_file = "avante.md",
     -- 例如
-    provider = "deepseek",
+    provider = "qwen_plus",
     providers = {
+      qwen_plus = {
+        endpoint = "https://dashscope.aliyuncs.com/compatible-mode/v1",
+        model = "qwen-plus",
+        timeout = 30000, -- Timeout in milliseconds
+        extra_request_body = {
+          temperature = 0.75,
+          max_tokens = 8192,
+        },
+        __inherited_from = "openai",
+        api_key_name = "AVANTE_QWEN_API_KEY",
+      },
       deepseek = {
         endpoint = "https://api.deepseek.com",
         model = "deepseek-chat",
