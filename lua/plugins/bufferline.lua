@@ -46,11 +46,6 @@ return {
   opts = {
     options = {
       always_show_bufferline = false,
-      separator_style = "thin",
-      indicator = {
-        icon = " ",
-        style = "icon", -- 'icon' | 'underline' | 'none'
-      },
       close_command = function(n) Snacks.bufdelete(n) end,
       right_mouse_command = function(n) Snacks.bufdelete(n) end,
       diagnostics = "nvim_lsp",
