@@ -4,17 +4,58 @@ return {
   version = false,
   keys = {
     { "<leader>e", "<cmd>lua MiniFiles.open()<CR>", desc = "Mini Files" },
+    {
+      "<leader>lc",
+      function()
+        local entry = MiniFiles.get_fs_entry()
+        if entry then
+          vim.fn.setreg('"', entry.path)
+          vim.notify("Yanked full path")
+        end
+      end,
+    },
+    {
+      "<leader>ld",
+      function()
+        local entry = MiniFiles.get_fs_entry()
+        if entry then
+          local dir = vim.fn.fnamemodify(entry.path, ":p:h")
+          vim.fn.setreg('"', dir)
+          vim.notify("Yanked directory path")
+        end
+      end,
+    },
+    {
+      "<leader>lf",
+      function()
+        local entry = MiniFiles.get_fs_entry()
+        if entry then
+          local filename = vim.fn.fnamemodify(entry.path, ":t")
+          vim.fn.setreg('"', filename)
+          vim.notify("Yanked file name")
+        end
+      end,
+    },
+    {
+      "<leader>lr",
+      function()
+        local entry = MiniFiles.get_fs_entry()
+        if entry then
+          vim.fn.setreg('"', vim.fn.fnamemodify(entry.path, ":~:.:gs?\\?/?"))
+          vim.notify("Yanked relative path")
+        end
+      end,
+    },
   },
   opts = {
     windows = {
-      width_preview = 100,
-    },
-    mappings = {
-      synchronize = "<CR>",
+      width_preview = 120,
     },
   },
   config = function(_, opts)
     require("mini.files").setup(opts)
+
+    -- toggle preview
     vim.api.nvim_create_autocmd("User", {
       pattern = "MiniFilesBufferCreate",
       callback = function(args)
@@ -26,6 +67,7 @@ return {
       end,
     })
 
+    -- git
     local nsMiniFiles = vim.api.nvim_create_namespace("mini_files_git")
     local autocmd = vim.api.nvim_create_autocmd
     local _, MiniFiles = pcall(require, "mini.files")
@@ -45,21 +87,21 @@ return {
     ---@return string symbol, string hlGroup
     local function mapSymbols(status, is_symlink)
       local statusMap = {
+        -- stylua: ignore
         [" M"] = { symbol = require("utils.icons").git.modified .. " ", hlGroup = "MiniDiffSignChange" }, -- Modified in the working directory
         ["M "] = { symbol = require("utils.icons").git.staged .. " ", hlGroup = "MiniDiffSignChange" }, -- modified in index
-        ["MM"] = { symbol = "≠", hlGroup = "MiniDiffSignChange" }, -- modified in both working tree and index
         ["A "] = { symbol = require("utils.icons").git.added .. " ", hlGroup = "MiniDiffSignAdd" }, -- Added to the staging area, new file
-        ["AA"] = { symbol = "≈", hlGroup = "MiniDiffSignAdd" }, -- file is added in both working tree and index
         ["D "] = { symbol = require("utils.icons").git.deleted .. " ", hlGroup = "MiniDiffSignDelete" }, -- Deleted from the staging area
-        ["AM"] = { symbol = "⊕", hlGroup = "MiniDiffSignChange" }, -- added in working tree, modified in index
-        ["AD"] = { symbol = "-•", hlGroup = "MiniDiffSignChange" }, -- Added in the index and deleted in the working directory
         ["R "] = { symbol = require("utils.icons").git.renamed .. " ", hlGroup = "MiniDiffSignChange" }, -- Renamed in the index
-        ["U "] = { symbol = "‖", hlGroup = "MiniDiffSignChange" }, -- Unmerged path
         ["UU"] = { symbol = require("utils.icons").git.conflict .. " ", hlGroup = "MiniDiffSignAdd" }, -- file is unmerged
-        ["UA"] = { symbol = "⊕", hlGroup = "MiniDiffSignAdd" }, -- file is unmerged and added in working tree
         ["??"] = { symbol = require("utils.icons").git.untracked .. " ", hlGroup = "MiniDiffSignDelete" }, -- Untracked files
         ["!!"] = { symbol = require("utils.icons").git.ignored .. " ", hlGroup = "MiniDiffSignChange" }, -- Ignored files
-        -- stylua: ignore end
+        ["MM"] = { symbol = "≠", hlGroup = "MiniDiffSignChange" }, -- modified in both working tree and index
+        ["AA"] = { symbol = "≈", hlGroup = "MiniDiffSignAdd" }, -- file is added in both working tree and index
+        ["AM"] = { symbol = "⊕", hlGroup = "MiniDiffSignChange" }, -- added in working tree, modified in index
+        ["AD"] = { symbol = "-•", hlGroup = "MiniDiffSignChange" }, -- Added in the index and deleted in the working directory
+        ["U "] = { symbol = "‖", hlGroup = "MiniDiffSignChange" }, -- Unmerged path
+        ["UA"] = { symbol = "⊕", hlGroup = "MiniDiffSignAdd" }, -- file is unmerged and added in working tree
       }
 
       local result = statusMap[status] or { symbol = "?", hlGroup = "NonText" }

@@ -37,12 +37,13 @@ return {
           function()
             return { header = dbAnim.asciiImg }
           end,
+          padding = 1,
         },
         { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
         { title = "  Talk is cheap. Show me the code.", align = "center", padding = 1 },
       },
     },
-    explorer = { enabled = true },
+    explorer = { enabled = false },
     gh = { enabled = true },
     image = { enabled = false },
     indent = { enabled = true, indent = { char = "▏" }, scope = { char = "▍", hl = "" } },
