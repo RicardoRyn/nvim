@@ -2,10 +2,8 @@ return {
   "folke/which-key.nvim",
   cond = not vim.g.vscode,
   event = "VeryLazy",
-  opts_extend = { "spec" },
   opts = {
     preset = "helix",
-    defaults = {},
     spec = {
       -- stylua: ignore
       {
@@ -16,7 +14,7 @@ return {
         { "]", group = "Next" },
         { "<leader>a", group = "AI" },
         { "<leader>b", group = "Buffer" },
-        { "<leader>c", group = "Copy/CSV", icon = { icon = "󰆏 " } },
+        { "<leader>c", group = "CSV", icon = { icon = "󰆏 " } },
         { "<leader>cs", group = "CSV", icon = { icon = " " } },
         { "<leader>d", group = "Docstrings", icon = { icon = "󰙆 " } },
         { "<leader>e", icon = { icon = "󰙅", color = "yellow" } },
