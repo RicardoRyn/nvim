@@ -21,7 +21,7 @@ return {
       go_out_plus = "h",
     },
     windows = {
-      width_preview = 80,
+      width_preview = 78,
     },
   },
   config = function(_, opts)
