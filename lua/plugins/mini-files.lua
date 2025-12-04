@@ -6,6 +6,12 @@ return {
     { "<leader>e", "<cmd>lua MiniFiles.open()<CR>", desc = "Mini Files" },
   },
   opts = {
+    mappings = {
+      go_in = "L",
+      go_in_plus = "l",
+      go_out = "H",
+      go_out_plus = "h",
+    },
     windows = {
       width_preview = 120,
     },
@@ -121,21 +127,20 @@ return {
       end,
     })
 
-    -- git
+    ---------
+    -- git --
+    ---------
     local nsMiniFiles = vim.api.nvim_create_namespace("mini_files_git")
     local autocmd = vim.api.nvim_create_autocmd
     local _, MiniFiles = pcall(require, "mini.files")
-
     -- Cache for git status
     local gitStatusCache = {}
     local cacheTimeout = 2000 -- in milliseconds
     local uv = vim.uv or vim.loop
-
     local function isSymlink(path)
       local stat = uv.fs_lstat(path)
       return stat and stat.type == "link"
     end
-
     ---@type table<string, {symbol: string, hlGroup: string}>
     ---@param status string
     ---@return string symbol, string hlGroup
@@ -157,21 +162,16 @@ return {
         ["U "] = { symbol = "‖", hlGroup = "MiniDiffSignChange" }, -- Unmerged path
         ["UA"] = { symbol = "⊕", hlGroup = "MiniDiffSignAdd" }, -- file is unmerged and added in working tree
       }
-
       local result = statusMap[status] or { symbol = "?", hlGroup = "NonText" }
       local gitSymbol = result.symbol
       local gitHlGroup = result.hlGroup
-
       local symlinkSymbol = is_symlink and "↩" or ""
-
       -- Combine symlink symbol with Git status if both exist
       local combinedSymbol = (symlinkSymbol .. gitSymbol):gsub("^%s+", ""):gsub("%s+$", "")
       -- Change the color of the symlink icon from "MiniDiffSignDelete" to something else
       local combinedHlGroup = is_symlink and "MiniDiffSignDelete" or gitHlGroup
-
       return combinedSymbol, combinedHlGroup
     end
-
     ---@param cwd string
     ---@param callback function
     ---@return nil
@@ -187,7 +187,6 @@ return {
       ---@see vim.system
       vim.system({ "git", "status", "--ignored", "--porcelain" }, { text = true, cwd = clean_cwd }, on_exit)
     end
-
     ---@param buf_id integer
     ---@param gitStatusMap table
     ---@return nil
@@ -197,7 +196,6 @@ return {
         local cwd = vim.fs.root(buf_id, ".git")
         local escapedcwd = cwd and vim.pesc(cwd)
         escapedcwd = vim.fs.normalize(escapedcwd)
-
         for i = 1, nlines do
           local entry = MiniFiles.get_fs_entry(buf_id, i)
           if not entry then
@@ -205,7 +203,6 @@ return {
           end
           local relativePath = entry.path:gsub("^" .. escapedcwd .. "/", "")
           local status = gitStatusMap[relativePath]
-
           if status then
             local symbol, hlGroup = mapSymbols(status, isSymlink(entry.path))
             vim.api.nvim_buf_set_extmark(buf_id, nsMiniFiles, i - 1, 0, {
@@ -217,7 +214,6 @@ return {
             local line = vim.api.nvim_buf_get_lines(buf_id, i - 1, i, false)[1]
             -- Find the name position accounting for potential icons
             local nameStartCol = line:find(vim.pesc(entry.name)) or 0
-
             if nameStartCol > 0 then
               vim.api.nvim_buf_set_extmark(buf_id, nsMiniFiles, i - 1, nameStartCol - 1, {
                 end_col = nameStartCol + #entry.name - 1,
@@ -229,7 +225,6 @@ return {
         end
       end)
     end
-
     -- Thanks for the idea of gettings https://github.com/refractalize/oil-git-status.nvim signs for dirs
     ---@param content string
     ---@return table
@@ -265,7 +260,6 @@ return {
       end
       return gitStatusMap
     end
-
     ---@param buf_id integer
     ---@return nil
     local function updateGitStatus(buf_id)
@@ -275,7 +269,6 @@ return {
       local cwd = vim.fs.root(buf_id, ".git")
       -- local cwd = vim.fn.expand("%:p:h")
       local currentTime = os.time()
-
       if gitStatusCache[cwd] and currentTime - gitStatusCache[cwd].time < cacheTimeout then
         updateMiniWithGit(buf_id, gitStatusCache[cwd].statusMap)
       else
@@ -289,16 +282,13 @@ return {
         end)
       end
     end
-
     ---@return nil
     local function clearCache()
       gitStatusCache = {}
     end
-
     local function augroup(name)
       return vim.api.nvim_create_augroup("MiniFiles_" .. name, { clear = true })
     end
-
     autocmd("User", {
       group = augroup("start"),
       pattern = "MiniFilesExplorerOpen",
@@ -307,7 +297,6 @@ return {
         updateGitStatus(bufnr)
       end,
     })
-
     autocmd("User", {
       group = augroup("close"),
       pattern = "MiniFilesExplorerClose",
@@ -315,7 +304,6 @@ return {
         clearCache()
       end,
     })
-
     autocmd("User", {
       group = augroup("update"),
       pattern = "MiniFilesBufferUpdate",
