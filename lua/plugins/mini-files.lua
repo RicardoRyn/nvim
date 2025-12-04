@@ -4,48 +4,6 @@ return {
   version = false,
   keys = {
     { "<leader>e", "<cmd>lua MiniFiles.open()<CR>", desc = "Mini Files" },
-    {
-      "<leader>lc",
-      function()
-        local entry = MiniFiles.get_fs_entry()
-        if entry then
-          vim.fn.setreg('"', entry.path)
-          vim.notify("Yanked full path")
-        end
-      end,
-    },
-    {
-      "<leader>ld",
-      function()
-        local entry = MiniFiles.get_fs_entry()
-        if entry then
-          local dir = vim.fn.fnamemodify(entry.path, ":p:h")
-          vim.fn.setreg('"', dir)
-          vim.notify("Yanked directory path")
-        end
-      end,
-    },
-    {
-      "<leader>lf",
-      function()
-        local entry = MiniFiles.get_fs_entry()
-        if entry then
-          local filename = vim.fn.fnamemodify(entry.path, ":t")
-          vim.fn.setreg('"', filename)
-          vim.notify("Yanked file name")
-        end
-      end,
-    },
-    {
-      "<leader>lr",
-      function()
-        local entry = MiniFiles.get_fs_entry()
-        if entry then
-          vim.fn.setreg('"', vim.fn.fnamemodify(entry.path, ":~:.:gs?\\?/?"))
-          vim.notify("Yanked relative path")
-        end
-      end,
-    },
   },
   opts = {
     windows = {
@@ -54,8 +12,104 @@ return {
   },
   config = function(_, opts)
     require("mini.files").setup(opts)
+    --------------------
+    -- 一些辅助快捷键 --
+    --------------------
+    -- 重置当前工作目录
+    local set_cwd = function()
+      local path = (MiniFiles.get_fs_entry() or {}).path
+      if path == nil then
+        return vim.notify("Cursor is not on valid entry")
+      end
+      vim.fn.chdir(vim.fs.dirname(path))
+    end
+    -- 使用系统默认程序打开路径
+    local ui_open = function()
+      vim.ui.open(MiniFiles.get_fs_entry().path)
+    end
+    -- 复制当前条目的绝对路径
+    local yank_path = function()
+      local entry = MiniFiles.get_fs_entry() or {}
+      if not entry.path then
+        return vim.notify("Cursor is not on valid entry")
+      end
+      vim.fn.setreg(vim.v.register, entry.path)
+    end
+    -- 复制当前条目所在目录的绝对路径
+    local yank_dir = function()
+      local entry = MiniFiles.get_fs_entry() or {}
+      if not entry.path then
+        return vim.notify("Cursor is not on valid entry")
+      end
+      vim.fn.setreg(vim.v.register, vim.fs.dirname(entry.path))
+    end
+    -- 复制当前条目的文件名
+    local yank_fname = function()
+      local entry = MiniFiles.get_fs_entry() or {}
+      if not entry.name then
+        return vim.notify("Cursor is not on valid entry")
+      end
+      vim.fn.setreg(vim.v.register, entry.name)
+    end
+    -- 复制当前条目的相对路径（相对当前工作目录）
+    local yank_relpath = function()
+      local entry = MiniFiles.get_fs_entry() or {}
+      if not entry.path then
+        return vim.notify("Cursor is not on valid entry")
+      end
+      -- 只保留对 cwd 的相对路径
+      local cwd = vim.fn.getcwd()
+      local rel = vim.fn.fnamemodify(entry.path, ":.")
+      vim.fn.setreg(vim.v.register, rel)
+    end
+    -- 设置快捷键
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "MiniFilesBufferCreate",
+      callback = function(args)
+        local b = args.data.buf_id
+        vim.keymap.set("n", "_", set_cwd, { buffer = b, desc = "Set cwd" })
+        vim.keymap.set("n", "gX", ui_open, { buffer = b, desc = "OS open" })
+        vim.keymap.set("n", "<leader>cc", yank_path, { buffer = b, desc = "Yank absolute path" })
+        vim.keymap.set("n", "<leader>cd", yank_dir, { buffer = b, desc = "Yank directory path" })
+        vim.keymap.set("n", "<leader>cf", yank_fname, { buffer = b, desc = "Yank file name" })
+        vim.keymap.set("n", "<leader>cr", yank_relpath, { buffer = b, desc = "Yank relative path" })
+      end,
+    })
 
-    -- toggle preview
+    ----------------------
+    -- split for window --
+    ----------------------
+    local map_split = function(buf_id, lhs, direction)
+      local rhs = function()
+        -- Make new window and set it as target
+        local cur_target = MiniFiles.get_explorer_state().target_window
+        local new_target = vim.api.nvim_win_call(cur_target, function()
+          vim.cmd(direction .. " split")
+          return vim.api.nvim_get_current_win()
+        end)
+        MiniFiles.set_target_window(new_target)
+        -- This intentionally doesn't act on file under cursor in favor of
+        -- explicit "go in" action (`l` / `L`). To immediately open file,
+        -- add appropriate `MiniFiles.go_in()` call instead of this comment.
+      end
+      -- Adding `desc` will result into `show_help` entries
+      local desc = "Split " .. direction
+      vim.keymap.set("n", lhs, rhs, { buffer = buf_id, desc = desc })
+    end
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "MiniFilesBufferCreate",
+      callback = function(args)
+        local buf_id = args.data.buf_id
+        -- Tweak keys to your liking
+        map_split(buf_id, "<C-s>", "belowright vertical")
+        map_split(buf_id, "<C-h>", "belowright horizontal")
+        map_split(buf_id, "<C-t>", "tab")
+      end,
+    })
+
+    --------------------
+    -- toggle preview --
+    --------------------
     vim.api.nvim_create_autocmd("User", {
       pattern = "MiniFilesBufferCreate",
       callback = function(args)

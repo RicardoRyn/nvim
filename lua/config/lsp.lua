@@ -28,11 +28,14 @@ vim.diagnostic.config({
 })
 
 ------------------ 功能 ------------------
-vim.keymap.set("n", "<leader>r", "<cmd>LspRestart<CR>", { desc = "Restart LSP" })
-vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename Symbol" })
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })
-vim.keymap.set("n", "<leader>cd", function() vim.diagnostic.open_float() end, { desc = "Show Diagnostics (line)" })
-vim.keymap.set("n", "<leader>cD", ":Telescope diagnostics bufnr=0<CR>", { desc = "Show Diagnostics (buffer)" })
+vim.keymap.set("n", "<leader>lsp", function()
+  vim.notify("Restart LSP", vim.log.levels.INFO)
+  vim.cmd("LspRestart")
+end, { desc = "Restart LSP" })
+vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename Symbol" })
+vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code Actions" })
+vim.keymap.set("n", "<leader>ld", function() vim.diagnostic.open_float() end, { desc = "Show Diagnostics (line)" })
+vim.keymap.set("n", "<leader>lD", ":Telescope diagnostics bufnr=0<CR>", { desc = "Show Diagnostics (buffer)" })
 
 ------------------ 提示 ------------------
 -- 不显示指定K也可以显示悬浮信息，但是指定了有更多的信息，比如语言名称
