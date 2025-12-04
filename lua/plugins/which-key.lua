@@ -44,9 +44,30 @@ return {
       },
     },
   },
-  -- stylua: ignore
   keys = {
-    { "<c-w><space>", function() require("which-key").show({ keys = "<c-w>", loop = true }) end, desc = "Window Hydra Mode (which-key)"},
-    { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Local Keymaps (which-key)"},
+    {
+      "<c-w><space>",
+      function()
+        -- 标志进入 hydra 模式，由lualine显示
+        vim.g.window_hydra = true
+        require("which-key").show({ keys = "<c-w>", loop = true })
+      end,
+      desc = "Window Hydra Mode (which-key)",
+    },
+    {
+      "<esc>",
+      function()
+        -- 标志退出 hydra 模式，由lualine显示（需执行2次<esc>）
+        vim.g.window_hydra = false
+      end,
+      mode = { "n", "v" },
+    },
+    {
+      "<leader>?",
+      function()
+        require("which-key").show({ global = false })
+      end,
+      desc = "Buffer Local Keymaps (which-key)",
+    },
   },
 }
