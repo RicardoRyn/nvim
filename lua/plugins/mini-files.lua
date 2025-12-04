@@ -1,3 +1,8 @@
+-- 默认隐藏点文件
+local filter_hide = function(fs_entry)
+  return not vim.startswith(fs_entry.name, ".")
+end
+
 return {
   "nvim-mini/mini.files",
   cond = not vim.g.vscode,
@@ -6,6 +11,9 @@ return {
     { "<leader>e", "<cmd>lua MiniFiles.open()<CR>", desc = "Mini Files" },
   },
   opts = {
+    content = {
+      filter = filter_hide,
+    },
     mappings = {
       go_in = "L",
       go_in_plus = "l",
@@ -18,9 +26,27 @@ return {
   },
   config = function(_, opts)
     require("mini.files").setup(opts)
-    --------------------
-    -- 一些辅助快捷键 --
-    --------------------
+
+    ----------------
+    -- 一些快捷键 --
+    ----------------
+    -- 切换隐藏文件
+    local show_dotfiles = false -- 默认不显示
+    local filter_show = function(fs_entry)
+      return true
+    end
+    local toggle_dotfiles = function()
+      show_dotfiles = not show_dotfiles
+      local new_filter = show_dotfiles and filter_show or filter_hide
+      MiniFiles.refresh({ content = { filter = new_filter } })
+    end
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "MiniFilesBufferCreate",
+      callback = function(args)
+        local buf_id = args.data.buf_id
+        vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id, desc = "Toggle dotfiles" })
+      end,
+    })
     -- 重置当前工作目录
     local set_cwd = function()
       local path = (MiniFiles.get_fs_entry() or {}).path
@@ -63,7 +89,6 @@ return {
       if not entry.path then
         return vim.notify("Cursor is not on valid entry")
       end
-      -- 只保留对 cwd 的相对路径
       local cwd = vim.fn.getcwd()
       local rel = vim.fn.fnamemodify(entry.path, ":.")
       vim.fn.setreg(vim.v.register, rel)
@@ -74,6 +99,7 @@ return {
       callback = function(args)
         local b = args.data.buf_id
         vim.keymap.set("n", "_", set_cwd, { buffer = b, desc = "Set cwd" })
+        vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id, desc = "Toggle dotfiles" })
         vim.keymap.set("n", "gX", ui_open, { buffer = b, desc = "OS open" })
         vim.keymap.set("n", "<leader>cc", yank_path, { buffer = b, desc = "Yank absolute path" })
         vim.keymap.set("n", "<leader>cd", yank_dir, { buffer = b, desc = "Yank directory path" })
