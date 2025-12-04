@@ -13,8 +13,8 @@ return {
       },
       transparent_background = false,
       float = {
-        transparent = false, -- enable transparent floating windows
-        solid = false, -- use solid styling for floating windows, see |winborder|
+        transparent = true,
+        solid = true,
       },
       auto_integrations = true,
     })
