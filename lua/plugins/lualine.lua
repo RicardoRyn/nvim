@@ -5,30 +5,32 @@ return {
   opts = {
     options = {
       globalstatus = true,
-      component_separators = { left = "", right = ""},
-      section_separators = { left = "", right = ""},
+      component_separators = { left = "", right = "" },
+      section_separators = { left = "", right = "" },
       disabled_filetypes = {
         statusline = { "snacks_dashboard" },
       },
     },
     sections = {
-      lualine_a = { "filename" },
+      lualine_a = {
+        { "filename" },
+      },
       lualine_b = {
         { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
         {
           "diff",
           symbols = {
-            added = require("utils.icons").git.added .. "",
-            modified = require("utils.icons").git.modified .. "",
-            removed = require("utils.icons").git.deleted .. "",
+            added = require("utils.icons").git.added,
+            modified = require("utils.icons").git.modified,
+            removed = require("utils.icons").git.deleted,
           },
           source = function()
-            local gitsigns = vim.b.gitsigns_status_dict
-            if gitsigns then
+            local summary = vim.b.minidiff_summary
+            if summary then
               return {
-                added = gitsigns.added,
-                modified = gitsigns.changed,
-                removed = gitsigns.removed,
+                added = summary.add or 0,
+                modified = summary.change or 0,
+                removed = summary.delete or 0,
               }
             end
           end,
@@ -36,17 +38,19 @@ return {
         {
           "diagnostics",
           symbols = {
-            error = require("utils.icons").diagnostics.error .. "",
-            warn = require("utils.icons").diagnostics.warn .. "",
-            info = require("utils.icons").diagnostics.info .. "",
-            hint = require("utils.icons").diagnostics.hint .. "",
+            error = require("utils.icons").diagnostics.error,
+            warn = require("utils.icons").diagnostics.warn,
+            info = require("utils.icons").diagnostics.info,
+            hint = require("utils.icons").diagnostics.hint,
           },
         },
       },
       lualine_c = {
-        function()
-          return vim.fn.fnamemodify(vim.fn.expand("%:p"), ":~:h")
-        end,
+        {
+          function()
+            return vim.fn.fnamemodify(vim.fn.expand("%:p"), ":~:h")
+          end,
+        },
       },
       lualine_x = {
         {
@@ -83,7 +87,7 @@ return {
       },
       lualine_y = {
         { "progress", separator = "", padding = { left = 1, right = 0 } },
-        { "location" }
+        { "location" },
       },
       lualine_z = {
         "searchcount",

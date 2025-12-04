@@ -1,5 +1,6 @@
 return {
   "lewis6991/gitsigns.nvim",
+  enabled = false,
   cond = not vim.g.vscode,
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   opts = {
