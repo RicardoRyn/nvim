@@ -55,15 +55,6 @@ return {
       lualine_x = {
         {
           function()
-            if vim.g.window_hydra then
-              return " WINDOW HYDRA MODE"
-            end
-            return ""
-          end,
-          color = { fg = "#df8e1d" },
-        },
-        {
-          function()
             return require("noice").api.status.command.get()
           end,
           cond = function()

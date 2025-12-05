@@ -45,26 +45,9 @@ return {
     {
       "<c-w><space>",
       function()
-        -- 标志进入 hydra 模式，由lualine显示
-        vim.g.window_hydra = true
         require("which-key").show({ keys = "<c-w>", loop = true })
       end,
       desc = "Window Hydra Mode (which-key)",
-    },
-    {
-      "<esc>",
-      function()
-        if vim.g.window_hydra then
-          -- 只在 hydra 模式下执行你的退出逻辑
-          vim.g.window_hydra = false
-          vim.cmd("nohlsearch")
-        else
-          -- 不在 hydra 模式 -> 发送真正的 ESC（恢复原本功能）
-          local esc = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
-          vim.api.nvim_feedkeys(esc, "n", false)
-        end
-      end,
-      mode = { "n", "v" },
     },
     {
       "<leader>?",
