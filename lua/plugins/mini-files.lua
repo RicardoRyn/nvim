@@ -19,6 +19,7 @@ return {
       go_in_plus = "l",
       go_out = "H",
       go_out_plus = "h",
+      synchronize = '<CR>',
     },
     windows = {
       width_preview = 78,
