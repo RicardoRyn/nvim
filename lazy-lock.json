@@ -39,13 +39,11 @@
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "8aafe2cbd89cd4090f573a98cab6b20366576fde" },
   "render-markdown.nvim": { "branch": "main", "commit": "b2b135347e299ffbf7f4123fb7811899b0c9f4b8" },
-  "smart-splits.nvim": { "branch": "master", "commit": "e892a5da963813119d053af5b2260e3cd9d9f037" },
   "snacks.nvim": { "branch": "main", "commit": "fe7cfe9800a182274d0f868a74b7263b8c0c020b" },
   "todo-comments.nvim": { "branch": "main", "commit": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668" },
   "treesj": { "branch": "main", "commit": "4770492244ccecdc9b01e0e81fa8f2f6b4a23841" },
   "venv-selector.nvim": { "branch": "main", "commit": "58bae72c84b9f7f864c879ec1896e384296f9ffb" },
   "vim-wakatime": { "branch": "master", "commit": "d7973b157a632d1edeff01818f18d67e584eeaff" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
-  "window-picker": { "branch": "main", "commit": "6382540b2ae5de6c793d4aa2e3fe6dbb518505ec" },
   "yanky.nvim": { "branch": "main", "commit": "04fc42b94305d94948c9c197f679336668af3292" }
 }
