@@ -7,8 +7,6 @@ return {
     or "make",
   event = "VeryLazy",
   version = false, -- 永远不要将此值设置为 "*"！永远不要！
-  ---@module 'avante'
-  ---@type avante.Config
   opts = {
     -- system_prompt as function ensures LLM always has latest MCP server state
     -- This is evaluated for every message, even in existing chats
@@ -32,6 +30,7 @@ return {
       enabled = false,
     },
     windows = {
+      width = 40,
       ask = {
         floating = false, -- Open the 'AvanteAsk' prompt in a floating window
         start_insert = false,
@@ -112,15 +111,4 @@ return {
       ft = { "markdown", "Avante" },
     },
   },
-  -- keys = {
-  --   { "<leader>aa", "<cmd>AvanteAsk<cr>", mode = { "n", "v" }, desc = "Avante Ask" },
-  --   { "<leader>ac", "<cmd>AvanteClear<cr>", mode = { "n", "v" }, desc = "Avante Clear" },
-  --   { "<leader>ae", "<cmd>AvanteEdit<cr>", mode = { "v" }, desc = "Avante Eidt" },
-  --   { "<leader>ah", "<cmd>AvanteHistory<cr>", mode = { "n", "v" }, desc = "Avante History" },
-  --   { "<leader>an", "<cmd>AvanteChatNew<cr>", mode = { "n", "v" }, desc = "Avante New" },
-  --   { "<leader>ar", "<cmd>AvanteRefresh<cr>", mode = { "n", "v" }, desc = "Avante Refresh" },
-  --   { "<leader>as", "<cmd>AvanteStop<cr>", mode = { "n", "v" }, desc = "Avante Stop" },
-  --   { "<leader>at", "<cmd>AvanteToggle<cr>", mode = { "n", "v" }, desc = "Avante Toggle" },
-  -- },
 }
--- I have an apple!
