@@ -25,12 +25,12 @@ return {
             removed = require("utils.icons").git.deleted,
           },
           source = function()
-            local summary = vim.b.minidiff_summary
-            if summary then
+            local gitsigns = vim.b.gitsigns_status_dict
+            if gitsigns then
               return {
-                added = summary.add or 0,
-                modified = summary.change or 0,
-                removed = summary.delete or 0,
+                added = gitsigns.added,
+                modified = gitsigns.changed,
+                removed = gitsigns.removed,
               }
             end
           end,
