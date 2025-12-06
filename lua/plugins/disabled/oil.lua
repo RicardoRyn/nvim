@@ -49,8 +49,8 @@ return {
         -- 自定义键位
         ["<BS>"] = "actions.parent",
         ["<leader>e"] = "actions.close",
-        ["<leader>cc"] = "actions.yank_entry",
-        ["<leader>cr"] = { "actions.yank_entry", opts = { modify = ":." } },
+        ["<leader>lc"] = "actions.yank_entry",
+        ["<leader>lr"] = { "actions.yank_entry", opts = { modify = ":." } },
         ["<C-f>"] = "actions.preview_scroll_down",
         ["<C-b>"] = "actions.preview_scroll_up",
         ["gd"] = {

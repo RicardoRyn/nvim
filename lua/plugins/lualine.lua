@@ -4,22 +4,25 @@ return {
   event = "VeryLazy",
   opts = {
     options = {
-      component_separators = { left = "", right = ""},
-      section_separators = { left = "", right = ""},
+      globalstatus = true,
+      component_separators = { left = "", right = "" },
+      section_separators = { left = "", right = "" },
       disabled_filetypes = {
         statusline = { "snacks_dashboard" },
       },
     },
     sections = {
-      lualine_a = { "filename" },
+      lualine_a = {
+        { "filename" },
+      },
       lualine_b = {
         { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
         {
           "diff",
           symbols = {
-            added = require("utils.icons").git.added .. "",
-            modified = require("utils.icons").git.modified .. "",
-            removed = require("utils.icons").git.deleted .. "",
+            added = require("utils.icons").git.added,
+            modified = require("utils.icons").git.modified,
+            removed = require("utils.icons").git.deleted,
           },
           source = function()
             local gitsigns = vim.b.gitsigns_status_dict
@@ -35,19 +38,30 @@ return {
         {
           "diagnostics",
           symbols = {
-            error = require("utils.icons").diagnostics.error .. "",
-            warn = require("utils.icons").diagnostics.warn .. "",
-            info = require("utils.icons").diagnostics.info .. "",
-            hint = require("utils.icons").diagnostics.hint .. "",
+            error = require("utils.icons").diagnostics.error,
+            warn = require("utils.icons").diagnostics.warn,
+            info = require("utils.icons").diagnostics.info,
+            hint = require("utils.icons").diagnostics.hint,
           },
         },
       },
       lualine_c = {
-        function()
-          return vim.fn.fnamemodify(vim.fn.expand("%:p"), ":~:h")
-        end,
+        {
+          function()
+            return vim.fn.fnamemodify(vim.fn.expand("%:p"), ":~:h")
+          end,
+        },
       },
       lualine_x = {
+        {
+          function()
+            if vim.g.window_hydra then
+              return " WINDOW HYDRA MODE"
+            end
+            return ""
+          end,
+          color = { fg = "#df8e1d" },
+        },
         {
           function()
             return require("noice").api.status.command.get()
@@ -82,10 +96,10 @@ return {
       },
       lualine_y = {
         { "progress", separator = "", padding = { left = 1, right = 0 } },
-        { "location", padding = { left = 0, right = 1 }  }
+        { "location" },
       },
       lualine_z = {
-        { "searchcount", separator = "", padding = { left = 0, right = 0 } },
+        "searchcount",
         "mode",
       },
     },

@@ -21,12 +21,6 @@ return {
       error = { view = "popup" },
       all = { view = "popup" },
     },
-    routes = {
-      {
-        view = "notify",
-        filter = { event = "msg_showmode" },
-      },
-    },
   },
 
   -- stylua: ignore

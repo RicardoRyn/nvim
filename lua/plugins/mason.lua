@@ -13,7 +13,7 @@ return {
       "ruff",
       -- NOTE: BASH
       "bash-language-server",
-      -- "shellcheck",
+      "shellcheck",
       "shfmt",
       -- NOTE: MARKDOWN
       "marksman", -- LSP (语法高亮、补全、跳转)

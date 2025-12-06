@@ -6,18 +6,19 @@ return {
   lazy = false,
   config = function()
     require("catppuccin").setup({
-      flavour = "auto",
+      flavour = "latte",
       background = {
         light = "latte",
         dark = "mocha",
       },
-      transparent_background = true,
+      transparent_background = false,
       float = {
-        transparent = true, -- enable transparent floating windows
-        solid = true, -- use solid styling for floating windows, see |winborder|
+        transparent = true,
+        solid = true,
       },
       auto_integrations = true,
     })
     vim.cmd.colorscheme("catppuccin")
+    vim.cmd([[highlight CursorLine guibg=#dce0e8]])
   end,
 }

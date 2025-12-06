@@ -28,8 +28,8 @@ vim.diagnostic.config({
 })
 
 ------------------ 功能 ------------------
-vim.keymap.set("n", "<leader>r", "<cmd>LspRestart<CR>", { desc = "Restart LSP" })
-vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename Symbol" })
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })
-vim.keymap.set("n", "<leader>cd", function() vim.diagnostic.open_float() end, { desc = "Show Diagnostics (line)" })
+vim.keymap.set("n", "<leader>lsp", "<cmd>LspRestart<CR>", { desc = "Restart LSP" })
+vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename Symbol" })
+vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code Actions" })
+vim.keymap.set("n", "<leader>ld", function() vim.diagnostic.open_float() end, { desc = "Show Diagnostics (line)" })
 vim.keymap.set("i", "<C-k>", function() vim.lsp.buf.signature_help() end, { desc = "Show Signature Help" })

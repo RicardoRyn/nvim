@@ -1,6 +1,6 @@
 return {
   "mikesmithgh/kitty-scrollback.nvim",
-  enabled = true,
+  cond = not vim.g.vscode,
   lazy = true,
   cmd = { "KittyScrollbackGenerateKittens", "KittyScrollbackCheckHealth", "KittyScrollbackGenerateCommandLineEditing" },
   event = { "User KittyScrollbackLaunch" },

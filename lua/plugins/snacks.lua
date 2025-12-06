@@ -34,13 +34,13 @@ return {
       sections = {
         {
           section = "header",
-          padding = 0,
           function()
             return { header = dbAnim.asciiImg }
           end,
+          padding = 1,
         },
-        { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 0 },
-        { section = "startup" },
+        { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
+        { title = "  Talk is cheap. Show me the code.", align = "center", padding = 1 },
       },
     },
     explorer = { enabled = false },
@@ -116,8 +116,8 @@ return {
     { "<leader>ghp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
     { "<leader>ghP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
     -- terminal
-    { "<C-/>", function() Snacks.terminal.open() end, desc = "Open Terminal" },
-    { "<C-/>", function() Snacks.terminal.toggle(nil, { shell = "zsh", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
+    { "<C-\\>", function() Snacks.terminal.open() end, desc = "Open Terminal" },
+    { "<C-\\>", function() Snacks.terminal.toggle(nil, { shell = "zsh", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     { "<C-_>", function() Snacks.terminal.open() end, desc = "Open Terminal" },
     { "<C-_>", function() Snacks.terminal.toggle(nil, { shell = "zsh", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     -- ui
