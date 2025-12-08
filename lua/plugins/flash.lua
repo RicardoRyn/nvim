@@ -29,21 +29,21 @@ return {
   },
   config = function(_, opts)
     require("flash").setup(opts)
-    vim.keymap.set("n", "xj", function()
+    vim.keymap.set({ "n", "v" }, "xj", function()
       require("flash").jump({
         search = { forward = true, wrap = false, multi_window = false, mode = "search", max_length = 0 },
         label = { after = { 0, 0 } },
         pattern = "^",
       })
     end, { desc = "Go to line below" })
-    vim.keymap.set("n", "xk", function()
+    vim.keymap.set({ "n", "v" }, "xk", function()
       require("flash").jump({
         search = { forward = false, wrap = false, multi_window = false, mode = "search", max_length = 0 },
         label = { after = { 0, 0 } },
         pattern = "^",
       })
     end, { desc = "Go to line above" })
-    vim.keymap.set("n", "xl", function()
+    vim.keymap.set({ "n", "v" }, "xl", function()
       local Flash = require("flash")
       ---@param opts Flash.Format
       local function format(opts)
@@ -86,7 +86,7 @@ return {
         end,
       })
     end, { desc = "Go to next any begining of words" })
-    vim.keymap.set("n", "xh", function()
+    vim.keymap.set({ "n", "v" }, "xh", function()
       local Flash = require("flash")
       ---@param opts Flash.Format
       local function format(opts)
