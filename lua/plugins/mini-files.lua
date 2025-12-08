@@ -174,20 +174,20 @@ return {
     local function mapSymbols(status, is_symlink)
       local statusMap = {
         -- stylua: ignore
-        [" M"] = { symbol = require("utils.icons").git.modified .. " ", hlGroup = "MiniDiffSignChange" }, -- Modified in the working directory
-        ["M "] = { symbol = require("utils.icons").git.staged .. " ", hlGroup = "MiniDiffSignChange" }, -- modified in index
-        ["A "] = { symbol = require("utils.icons").git.added .. " ", hlGroup = "MiniDiffSignAdd" }, -- Added to the staging area, new file
-        ["D "] = { symbol = require("utils.icons").git.deleted .. " ", hlGroup = "MiniDiffSignDelete" }, -- Deleted from the staging area
-        ["R "] = { symbol = require("utils.icons").git.renamed .. " ", hlGroup = "MiniDiffSignChange" }, -- Renamed in the index
-        ["UU"] = { symbol = require("utils.icons").git.conflict .. " ", hlGroup = "MiniDiffSignAdd" }, -- file is unmerged
-        ["??"] = { symbol = require("utils.icons").git.untracked .. " ", hlGroup = "MiniDiffSignDelete" }, -- Untracked files
-        ["!!"] = { symbol = require("utils.icons").git.ignored .. " ", hlGroup = "MiniDiffSignChange" }, -- Ignored files
+        [" M"] = { symbol = require("utils.icons").git.modified, hlGroup = "MiniDiffSignChange" }, -- Modified in the working directory
+        ["M "] = { symbol = require("utils.icons").git.staged, hlGroup = "MiniDiffSignChange" }, -- modified in index
+        ["R "] = { symbol = require("utils.icons").git.renamed, hlGroup = "MiniDiffSignChange" }, -- Renamed in the index
+        ["A "] = { symbol = require("utils.icons").git.added, hlGroup = "MiniDiffSignAdd" }, -- Added to the staging area, new file
+        ["??"] = { symbol = require("utils.icons").git.untracked, hlGroup = "MiniDiffSignAdd" }, -- Untracked files
+        ["!!"] = { symbol = require("utils.icons").git.ignored, hlGroup = "MiniDiffSignIgnored" }, -- Ignored files
+        ["D "] = { symbol = require("utils.icons").git.deleted, hlGroup = "MiniDiffSignDelete" }, -- Deleted from the staging area
+        ["UU"] = { symbol = require("utils.icons").git.conflict, hlGroup = "MiniDiffSignDelete" }, -- file is unmerged
         ["MM"] = { symbol = "≠", hlGroup = "MiniDiffSignChange" }, -- modified in both working tree and index
         ["AA"] = { symbol = "≈", hlGroup = "MiniDiffSignAdd" }, -- file is added in both working tree and index
         ["AM"] = { symbol = "⊕", hlGroup = "MiniDiffSignChange" }, -- added in working tree, modified in index
         ["AD"] = { symbol = "-•", hlGroup = "MiniDiffSignChange" }, -- Added in the index and deleted in the working directory
-        ["U "] = { symbol = "‖", hlGroup = "MiniDiffSignChange" }, -- Unmerged path
-        ["UA"] = { symbol = "⊕", hlGroup = "MiniDiffSignAdd" }, -- file is unmerged and added in working tree
+        ["U "] = { symbol = "‖", hlGroup = "MiniDiffSignDelete" }, -- Unmerged path
+        ["UA"] = { symbol = "⊕", hlGroup = "MiniDiffSignDelete" }, -- file is unmerged and added in working tree
       }
       local result = statusMap[status] or { symbol = "?", hlGroup = "NonText" }
       local gitSymbol = result.symbol
@@ -342,5 +342,11 @@ return {
         end
       end,
     })
+  -- 定义Ignored高亮组
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    callback = function()
+      vim.api.nvim_set_hl(0, "MiniDiffSignIgnored", { guifg = "#6c7086" })
+    end,
+  })
   end,
 }
