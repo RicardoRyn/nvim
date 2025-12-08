@@ -12,8 +12,8 @@ icons.git = {
   staged = "󰱒 ",
   unstaged = "󰄱 ",
   updated = " ",
-  conflict = " ",
-  unmerged = " ",
+  conflict = "󱓌 ",
+  unmerged = " ",
 }
 
 icons.diagnostics = {
