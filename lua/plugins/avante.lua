@@ -35,6 +35,10 @@ return {
         floating = false, -- Open the 'AvanteAsk' prompt in a floating window
         start_insert = false,
       },
+      input = {
+        prefix = "",
+        height = 10,
+      },
     },
     shortcuts = {
       {
