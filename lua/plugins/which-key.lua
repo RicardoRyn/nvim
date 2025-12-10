@@ -21,6 +21,7 @@ return {
         { "<leader>f", group = "Find" },
         { "<leader>g", group = "Git" },
         { "<leader>gh", group = "GitHub" },
+        { "<leader>gj", group = "jjui"},
         { "<leader>h", group = "Home", icon = { icon = " " } },
         { "<leader>l", group = "LSP", icon = { icon = " ", color = "purple" } },
         { "<leader>ls", group = "LSP", icon = { icon = " ", color = "purple" } },
