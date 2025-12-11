@@ -3,12 +3,8 @@ vim.keymap.set("v", ">", ">gv", { desc = "Indent and reselect" })
 vim.keymap.set({ "v" }, "U", "<Nop>")
 vim.keymap.set({ "v" }, "u", "<Nop>")
 vim.keymap.set({ "n", "v" }, "x", "<Nop>")
-vim.keymap.set(
-  "n",
-  "<leader>ur",
-  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-  { desc = "Redraw / Clear hlsearch / Diff Update" }
-)
+vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy" })
+vim.keymap.set( "n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "Redraw / Clear hlsearch / Diff Update" })
 
 -- stylua: ignore
 if vim.g.vscode then
