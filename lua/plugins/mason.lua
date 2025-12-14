@@ -8,26 +8,27 @@ return {
   },
   opts = {
     ensure_installed = {
-      -- lua
+      -- LUA
       "lua-language-server",
       "stylua",
-      -- python
-      "pyright",
+      -- PYTHON
+      -- "pyright",
+      "ty",
       "ruff",
-      -- bash
+      -- BASH
       "bash-language-server",
       "shellcheck",
       "shfmt",
-      -- markdown
+      -- RUST
+      "rust-analyzer",
+      "rustfmt",
+      -- MARKDOWN
       "marksman", -- LSP (语法高亮、补全、跳转)
       "markdownlint-cli2", -- 静态检查
       "prettierd", -- 格式化
-      -- yaml
+      -- YAML
       "yaml-language-server", -- LSP
       "yamllint", -- 静态检查
-      -- rust
-      "rust-analyzer",
-      "rustfmt",
     },
   },
   config = function(_, opts)

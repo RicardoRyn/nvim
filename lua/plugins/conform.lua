@@ -7,20 +7,20 @@ return {
     format_on_save = false,
     stop_after_first = false,
     formatters_by_ft = {
-      -- lua
+      -- LUA
       lua = { "stylua" },
-      -- python
-      python = { "ruff_format" },
-      -- bash
+      -- PYTHON
+      python = { "ruff_organize_imports", "ruff_format" },
+      -- BASH
       bash = { "shfmt" },
       sh = { "shfmt" },
-      -- markdown
+      -- RUST
+      rust = { "rustfmt" },
+      -- MARKDOWN
       markdown = { "injected", "prettierd" },
       quarto = { "injected" },
-      -- yaml
+      -- YAML
       yaml = { "prettierd" },
-      -- rust
-      rust = { "rustfmt" },
     },
   },
 
@@ -35,7 +35,6 @@ return {
             if vim.startswith(string.lower(mode), "v") then
               vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
             end
-            -- 成功后显示通知
             vim.notify("✨ Code formatted successfully!", vim.log.levels.INFO, { title = "Conform" })
           else
             vim.notify("⚠️ Formatting failed!", vim.log.levels.ERROR, { title = "Conform" })
@@ -43,7 +42,7 @@ return {
         end)
       end,
       desc = "Code Format",
-      mode = { "n", "v" }, -- 普通模式和可视模式都生效
+      mode = { "n", "v" },
     },
   },
 

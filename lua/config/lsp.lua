@@ -1,9 +1,11 @@
 ------------------ 启动 ------------------
 vim.lsp.enable("lua_ls")
-vim.lsp.enable("pyright")
+-- vim.lsp.enable("pyright")
+vim.lsp.enable("ty")
 vim.lsp.enable("bashls")
-vim.lsp.enable("marksman")
 vim.lsp.enable("rust-analyzer")
+vim.lsp.enable("marksman")
+vim.lsp.enable("yamlls")
 
 -- UI
 vim.g.diagnostics_visible = true

@@ -4,12 +4,14 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     require("lint").linters_by_ft = {
-      -- bash
+      -- BASH
       sh = { "shellcheck" },
       bash = { "shellcheck" },
-      -- markdown
+      -- PYTHON
+      python = { "ruff" },
+      -- MARKDOWN
       markdown = { "markdownlint-cli2" },
-      -- yaml
+      -- YAML
       yaml = { "yamllint" },
     }
 
