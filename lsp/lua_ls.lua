@@ -20,16 +20,27 @@ local custom_config = {
 
   settings = {
     Lua = {
+      runtime = {
+        version = "LuaJIT", -- Neovim 使用 LuaJIT
+      },
       diagnostics = {
         globals = { "vim" },
       },
+      workspace = {
+        library = {
+          vim.env.VIMRUNTIME,
+        },
+        checkThirdParty = false,
+      },
+      telemetry = {
+        enable = false, -- 关闭遥测
+      },
+       format = {
+         enable = false,
+       },
     },
   },
-  on_attach = function(client)
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-  end,
 }
-local final_config = vim.tbl_deep_extend("force", default_config, custom_config) -- 深度合并，保证嵌套
+local final_config = vim.tbl_deep_extend("force", default_config, custom_config)
 
 return final_config
