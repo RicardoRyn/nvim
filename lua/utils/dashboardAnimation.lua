@@ -1,6 +1,7 @@
-local M = {}
-
 local asciiArts = require("utils.ascii_arts")
+local colors = require("catppuccin.palettes").get_palette("latte")
+
+local M = {}
 
 M.asciiImg = asciiArts.frames["static"][1]
 
@@ -10,15 +11,15 @@ end
 
 local function getColorForStage(stageName)
   if stageName == "static" then
-    return "#1E66F5"
+    return colors.blue
   else
     local random = math.random()
     if random < 0.75 then
-      return "#1E66F5"
+      return colors.blue
     elseif random < 0.9 then
-      return "#DF8E1D"
+      return colors.yellow
     else
-      return "#D20F39"
+      return colors.red
     end
   end
 end
