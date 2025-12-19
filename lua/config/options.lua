@@ -10,8 +10,9 @@ vim.opt.clipboard = "" -- 禁止neovim寄存器和系统剪贴板共用
 -- vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- 同步系统的剪贴板
 
 -------------------- UI --------------------
-vim.o.winborder = "single" -- 窗口边框
-vim.o.signcolumn = "yes" -- 在行号左边显示警告、错误、Git 修改等标记的列
+vim.opt.background = "light" -- 浅/深色主题（nvim无法识别windows主题，需手动设置）
+vim.opt.winborder = "single" -- 窗口边框
+vim.opt.signcolumn = "yes" -- 在行号左边显示警告、错误、Git 修改等标记的列
 vim.opt.smoothscroll = true -- 启用 平滑滚动（滚动时不会跳动，画面更流畅）
 vim.opt.scrolloff = 4 -- 上下至少保留 4 行可见内容
 vim.opt.laststatus = 3 -- 即使有多个窗口，底部只有一个统一状态栏

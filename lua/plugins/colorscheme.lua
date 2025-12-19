@@ -6,7 +6,7 @@ return {
   lazy = false,
   config = function()
     require("catppuccin").setup({
-      flavour = "latte", -- latte, frappe, macchiato, mocha, auto
+      flavour = "auto", -- latte, frappe, macchiato, mocha, auto
       background = {
         light = "latte",
         dark = "mocha",
@@ -22,6 +22,8 @@ return {
       }
     })
     vim.cmd.colorscheme("catppuccin")
-    vim.cmd([[highlight CursorLine guibg=#dce0e8]])
+    if vim.opt.background:get() == "light" then
+      vim.cmd([[highlight CursorLine guibg=#dce0e8]])
+    end
   end,
 }

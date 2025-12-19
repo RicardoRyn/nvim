@@ -1,5 +1,7 @@
 local asciiArts = require("utils.ascii_arts")
-local colors = require("catppuccin.palettes").get_palette("latte")
+local is_light = vim.opt.background:get() == "light"
+local flavor = is_light and "latte" or "mocha"
+local colors = require("catppuccin.palettes").get_palette(flavor)
 
 local M = {}
 

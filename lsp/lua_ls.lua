@@ -24,7 +24,7 @@ local custom_config = {
         version = "LuaJIT", -- Neovim 使用 LuaJIT
       },
       diagnostics = {
-        globals = { "vim" },
+        globals = { "vim", "Snacks" },
       },
       workspace = {
         library = {
