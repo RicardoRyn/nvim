@@ -22,7 +22,7 @@ return {
       }
     })
     vim.cmd.colorscheme("catppuccin")
-    if vim.opt.background:get() == "light" then
+    if require("catppuccin").flavour == "latte" then
       vim.cmd([[highlight CursorLine guibg=#dce0e8]])
     end
   end,

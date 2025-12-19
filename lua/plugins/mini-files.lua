@@ -346,7 +346,7 @@ return {
   -- 定义Ignored高亮组
   vim.api.nvim_create_autocmd("ColorScheme", {
     callback = function()
-      vim.api.nvim_set_hl(0, "MiniDiffSignIgnored", { guifg = "#6c7086" })
+      vim.api.nvim_set_hl(0, "MiniDiffSignIgnored", { fg = "#6c7086" })
     end,
   })
   end,

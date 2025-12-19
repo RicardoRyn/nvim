@@ -1,17 +1,10 @@
 local asciiArts = require("utils.ascii_arts")
-local is_light = vim.opt.background:get() == "light"
-local flavor = is_light and "latte" or "mocha"
-local colors = require("catppuccin.palettes").get_palette(flavor)
 
 local M = {}
 
 M.asciiImg = asciiArts.frames["static"][1]
 
-local function updateHighlightColor(color)
-  vim.api.nvim_set_hl(0, "SnacksDashboardHeader", { fg = color, bold = true })
-end
-
-local function getColorForStage(stageName)
+local function getColorForStage(stageName, colors)
   if stageName == "static" then
     return colors.blue
   else
@@ -26,7 +19,11 @@ local function getColorForStage(stageName)
   end
 end
 
-local function playStage(stageName, duration, reverse, nextCallback)
+local function updateHighlightColor(color)
+  vim.api.nvim_set_hl(0, "SnacksDashboardHeader", { fg = color, bold = true })
+end
+
+local function playStage(stageName, duration, reverse, colors, nextCallback)
   local frames = asciiArts.frames[stageName]
   local totalFrames = #frames
 
@@ -38,7 +35,7 @@ local function playStage(stageName, duration, reverse, nextCallback)
       M.asciiImg = frames[math.min(index, totalFrames)]
     end
 
-    local currentColor = getColorForStage(stageName)
+    local currentColor = getColorForStage(stageName, colors)
     updateHighlightColor(currentColor)
 
     Snacks.dashboard.update()
@@ -53,14 +50,14 @@ local function playStage(stageName, duration, reverse, nextCallback)
   })
 end
 
-M.theAnimation = function(callback)
-  playStage("static", 50, false, function()
-    playStage("glitch", 20, false, function()
-      playStage("static", 200, false, function()
-        playStage("glitch", 10, true, function()
-          playStage("static", 250, false, function()
+M.theAnimation = function(callback, colors)
+  playStage("static", 50, false, colors, function()
+    playStage("glitch", 20, false, colors, function()
+      playStage("static", 200, false, colors, function()
+        playStage("glitch", 10, true, colors, function()
+          playStage("static", 250, false, colors, function()
             if callback then
-              M.theAnimation(callback)
+              M.theAnimation(callback, colors)
             end
           end)
         end)

@@ -1,48 +1,13 @@
 -- 安装gh
 -- gh auth login
--- gh extension install meiji163/gh-notify
--- 由于Windows上类Unix脚本的Shebang路径问题，可能需要修改gh-notify的脚本
-
-local dbAnim = require("utils.dashboardAnimation")
 
 return {
   "folke/snacks.nvim",
   cond = not vim.g.vscode,
   lazy = false,
-  priority = 1000,
-  ---@type snacks.Config
+  priority = 900,
   opts = {
     bigfile = { enabled = true },
-    dashboard = {
-      enabled = true,
-      preset = {
-        -- stylua: ignore
-        keys = {
-          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-          { icon = " ", key = "f", desc = "Find Files", action = ":lua Snacks.dashboard.pick('files')" },
-          { icon = " ", key = "w", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-          { icon = " ", key = "p", desc = "Projects", action = ":lua Snacks.dashboard.pick('projects')" },
-          { icon = "󰑓 ", key = "s", desc = "Session", section = "session" },
-          { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})", },
-          { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
-          { icon = " ", key = "b", desc = "Browse Repo", action = ":lua Snacks.gitbrowse()", },
-          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
-        },
-        header = false,
-      },
-      sections = {
-        {
-          section = "header",
-          function()
-            return { header = dbAnim.asciiImg }
-          end,
-          padding = 1,
-        },
-        { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-        { title = "  Talk is cheap. Show me the code.", align = "center", padding = 1 },
-      },
-    },
     explorer = { enabled = false },
     gh = { enabled = true },
     image = { enabled = false },
@@ -122,7 +87,6 @@ return {
     { "<C-_>", function() Snacks.terminal.open() end, desc = "Open Terminal" },
     { "<C-_>", function() Snacks.terminal.toggle(nil, { shell = "nu", cwd = nil }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     -- ui
-    { '<leader>h', function() Snacks.dashboard() end, desc = "Home Page" },
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
   },
   init = function()
@@ -149,10 +113,50 @@ return {
         Snacks.toggle.zoom():map("<leader>uZ")
       end,
     })
-
-    -- for dashboardAnimation
+  end,
+  config = function(_, opts)
+    require("snacks").setup(opts)
     vim.defer_fn(function()
-      dbAnim.theAnimation(dbAnim.theAnimation)
-    end, 100)
+      if vim.fn.argc() == 0 then -- 只在没有打开文件时才显示 dashboard
+        local flavor = require("catppuccin").flavour
+        local colors = require("catppuccin.palettes").get_palette(flavor)
+        local dbAnim = require("utils.dashboardAnimation")
+        local dashboard = {
+          enabled = true,
+          preset = {
+            keys = {
+              { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+              { icon = " ", key = "f", desc = "Find Files", action = ":lua Snacks.dashboard.pick('files')" },
+              { icon = " ", key = "w", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+              { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+              { icon = " ", key = "p", desc = "Projects", action = ":lua Snacks.dashboard.pick('projects')" },
+              { icon = "󰑓 ", key = "s", desc = "Session", section = "session" },
+              -- stylua: ignore
+              { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})", },
+              { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+              { icon = " ", key = "b", desc = "Browse Repo", action = ":lua Snacks.gitbrowse()" },
+              { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+            },
+            header = false,
+          },
+          sections = {
+            {
+              section = "header",
+              function()
+                return { header = dbAnim.asciiImg }
+              end,
+              padding = 1,
+            },
+            { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
+            { title = "  Talk is cheap. Show me the code.", align = "center", padding = 1 },
+          },
+        }
+        Snacks.dashboard(dashboard)
+        dbAnim.theAnimation(dbAnim.theAnimation, colors)
+        vim.keymap.set("n", "<leader>h", function()
+          Snacks.dashboard(dashboard)
+        end, { desc = "Home Page" })
+      end
+    end, 1)
   end,
 }
