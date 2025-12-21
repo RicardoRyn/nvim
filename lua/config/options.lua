@@ -10,7 +10,7 @@ vim.opt.clipboard = "" -- 禁止neovim寄存器和系统剪贴板共用
 -- vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- 同步系统的剪贴板
 
 -------------------- UI --------------------
-vim.opt.background = "light" -- 深/浅模式
+vim.opt.background = "light" -- 深/浅模式，Windows下不能自动识别主题，需要手动设置
 vim.opt.winborder = "single" -- 窗口边框
 vim.opt.signcolumn = "yes" -- 在行号左边显示警告、错误、Git 修改等标记的列
 vim.opt.smoothscroll = true -- 启用 平滑滚动（滚动时不会跳动，画面更流畅）
@@ -37,9 +37,9 @@ vim.opt.splitkeep = "screen" -- 保持当前窗口的内容位置不动，屏幕
 vim.opt.termguicolors = true -- 终端真彩色支持（24-bit RGB color）
 vim.opt.updatetime = 200 -- 光标停止不动多久触发事件，可以让一些插件（比如自动保存、LSP 文本高亮或诊断提示）更及时响应
 vim.opt.winminwidth = 5 -- 窗口的最小宽度为 5 列
--- vim.opt.colorcolumn = "120" -- 在编辑器中显示一个虚拟竖线（color column），通常用来提醒代码行不要太长
 vim.opt.list = true -- 显示不可见字符（空格、Tab、换行等）
-vim.opt.listchars = { tab = ">-", trail = "-" } -- 用>-表示tab
+vim.opt.listchars = { tab = ">·", trail = "·" } -- 用>-表示tab
+-- vim.opt.colorcolumn = "120" -- 在编辑器中显示一个虚拟竖线（color column），通常用来提醒代码行不要太长
 
 ----------------- Term -------------------
 vim.opt.shell = "nu" -- shell
