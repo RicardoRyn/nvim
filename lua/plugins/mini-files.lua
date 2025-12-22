@@ -20,10 +20,10 @@ return {
       go_in_plus = "l",
       go_out = "H",
       go_out_plus = "h",
-      synchronize = '<CR>',
+      synchronize = "<CR>",
     },
     windows = {
-      width_preview = 78,
+      width_preview = 120,
     },
   },
   config = function(_, opts)
@@ -343,11 +343,11 @@ return {
         end
       end,
     })
-  -- 定义Ignored高亮组
-  vim.api.nvim_create_autocmd("ColorScheme", {
-    callback = function()
-      vim.api.nvim_set_hl(0, "MiniDiffSignIgnored", { fg = "#6c7086" })
-    end,
-  })
+    -- 定义Ignored高亮组
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      callback = function()
+        vim.api.nvim_set_hl(0, "MiniDiffSignIgnored", { fg = "#6c7086" })
+      end,
+    })
   end,
 }
