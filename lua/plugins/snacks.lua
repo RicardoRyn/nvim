@@ -144,10 +144,10 @@ return {
       end,
     })
 
-    vim.defer_fn(function()
+    vim.schedule(function()
       local flavor = require("catppuccin").flavour
       local colors = require("catppuccin.palettes").get_palette(flavor)
       dbAnim.theAnimation(dbAnim.theAnimation, colors)
-    end, 100)
+    end)
   end,
 }
