@@ -34,7 +34,21 @@ return {
           gs.nav_hunk("next")
         end
       end, "Next Git Hunk")
+      map("n", "gh", function()
+        if vim.wo.diff then
+          vim.cmd.normal({ "]c", bang = true })
+        else
+          gs.nav_hunk("next")
+        end
+      end, "Next Git Hunk")
       map("n", "[g", function()
+        if vim.wo.diff then
+          vim.cmd.normal({ "[c", bang = true })
+        else
+          gs.nav_hunk("prev")
+        end
+      end, "Prev Git Hunk")
+      map("n", "gH", function()
         if vim.wo.diff then
           vim.cmd.normal({ "[c", bang = true })
         else
