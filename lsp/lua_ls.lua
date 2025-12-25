@@ -17,29 +17,6 @@ local custom_config = {
     )(fname) or vim.fn.getcwd()
     on_dir(root)
   end,
-
-  settings = {
-    Lua = {
-      runtime = {
-        version = "LuaJIT",
-      },
-      diagnostics = {
-        globals = { "vim", "Snacks" },
-      },
-      workspace = {
-        library = {
-          vim.env.VIMRUNTIME,
-        },
-        checkThirdParty = false,
-      },
-      telemetry = {
-        enable = false, -- 关闭遥测
-      },
-       format = {
-         enable = false,
-       },
-    },
-  },
 }
 local final_config = vim.tbl_deep_extend("force", default_config, custom_config)
 
