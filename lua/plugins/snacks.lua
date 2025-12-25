@@ -65,6 +65,8 @@ return {
     { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
     { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
     { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
+    { "<leader>ft", function() Snacks.picker.todo_comments({ buffers = true }) end, desc = "Todo (Buffers)" },
+    { "<leader>fT", function() Snacks.picker.todo_comments({ keywords = { "FIX", "TODO" }, buffers = true }) end, desc = "Todo/Fix (Buffers)" },
     -- grep
     { "<leader>//", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<leader>/l", function() Snacks.picker.lines() end, desc = "Lines" },
