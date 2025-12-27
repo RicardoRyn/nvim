@@ -1,5 +1,6 @@
 return {
   "jpalardy/vim-slime",
+  cond = not vim.g.vscode,
   init = function()
     -- these two should be set before the plugin loads
     vim.g.slime_target = "neovim"
