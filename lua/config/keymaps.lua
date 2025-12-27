@@ -23,6 +23,7 @@ if vim.g.vscode then
   -- Code
   vim.api.nvim_exec2("nmap j gj", { output = false })
   vim.api.nvim_exec2("nmap k gk", { output = false })
+  vim.keymap.set({ "n", "v" }, "<leader>aa", "<Cmd>lua require('vscode').call('workbench.action.toggleAuxiliaryBar')<CR>", { desc = "Toggle Auxiliary Bar" })
   vim.keymap.set("n", "u", "<Cmd>lua require('vscode').call('undo')<CR>", { desc = "Undo" })
   vim.keymap.set("n", "<C-r>", "<Cmd>lua require('vscode').call('redo')<CR>", { desc = "Redo" })
   vim.keymap.set("v", "<leader>lf", "<Cmd>lua require('vscode').call('editor.action.formatSelection')<CR>", { desc = "format selection" })
