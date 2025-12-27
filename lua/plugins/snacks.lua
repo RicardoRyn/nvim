@@ -115,9 +115,10 @@ return {
     { "<leader>ghp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
     { "<leader>ghP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
     -- terminal
-    { "<C-\\>", function() Snacks.terminal() end, mode = { "n", "t" }, desc = "Open Terminal" },
-    { "<C-/>", function() Snacks.terminal() end, mode = { "n", "t" }, desc = "Open Terminal" },
-    { "<C-_>", function() Snacks.terminal() end, mode = { "n", "t" }, desc = "Open Terminal" },
+    -- { "<C-/>", function() Snacks.terminal() end, mode = { "n", "t" }, desc = "Open Terminal" },
+    -- { "<C-_>", function() Snacks.terminal() end, mode = { "n", "t" }, desc = "Open Terminal" },
+    { "<C-/>", function() Snacks.terminal(nil, { win = { height = 0.3, position = "bottom", } }) end, mode = { "n", "t" }, desc = "Open Terminal" },
+    { "<C-_>", function() Snacks.terminal(nil, { win = { height = 0.3, position = "bottom", } }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     -- ui
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
   },
