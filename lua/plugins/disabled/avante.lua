@@ -73,7 +73,7 @@ return {
           max_tokens = 8192,
         },
         __inherited_from = "openai",
-        api_key_name = "AVANTE_QIANWEN_API_KEY",
+        api_key_name = "AVANTE_QWEN_API_KEY",
       },
       qwen3_max = {
         endpoint = "https://dashscope.aliyuncs.com/compatible-mode/v1",
@@ -84,7 +84,7 @@ return {
           max_tokens = 8192,
         },
         __inherited_from = "openai",
-        api_key_name = "AVANTE_QIANWEN_API_KEY",
+        api_key_name = "AVANTE_QWEN_API_KEY",
       },
     },
   },

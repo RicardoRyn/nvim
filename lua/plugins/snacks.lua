@@ -1,5 +1,7 @@
 -- 安装gh
 -- gh auth login
+-- gh extension install meiji163/gh-notify
+-- 由于Windows上类Unix脚本的Shebang路径问题，可能需要修改gh-notify的脚本
 local dbAnim = require("utils.dashboardAnimation")
 
 return {
@@ -12,6 +14,7 @@ return {
     dashboard = {
       enabled = true,
       preset = {
+        -- stylua: ignore
         keys = {
           { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
           { icon = " ", key = "f", desc = "Find Files", action = ":lua Snacks.dashboard.pick('files')" },
@@ -19,8 +22,7 @@ return {
           { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
           { icon = " ", key = "p", desc = "Projects", action = ":lua Snacks.dashboard.pick('projects')" },
           { icon = "󰑓 ", key = "s", desc = "Session", section = "session" },
-              -- stylua: ignore
-              { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})", },
+          { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})", },
           { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
           { icon = " ", key = "b", desc = "Browse Repo", action = ":lua Snacks.gitbrowse()" },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
@@ -115,8 +117,6 @@ return {
     { "<leader>ghp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
     { "<leader>ghP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
     -- terminal
-    -- { "<C-/>", function() Snacks.terminal() end, mode = { "n", "t" }, desc = "Open Terminal" },
-    -- { "<C-_>", function() Snacks.terminal() end, mode = { "n", "t" }, desc = "Open Terminal" },
     { "<C-/>", function() Snacks.terminal(nil, { win = { height = 0.3, position = "bottom", } }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     { "<C-_>", function() Snacks.terminal(nil, { win = { height = 0.3, position = "bottom", } }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     -- ui
@@ -142,15 +142,24 @@ return {
         Snacks.toggle.inlay_hints():map("<leader>uh")
         Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>ul")
         Snacks.toggle.line_number():map("<leader>uL")
+        Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
         Snacks.toggle.zen():map("<leader>uz")
         Snacks.toggle.zoom():map("<leader>uZ")
       end,
     })
 
-    vim.schedule(function()
-      local flavor = require("catppuccin").flavour
-      local colors = require("catppuccin.palettes").get_palette(flavor)
+    -- 等待 Catppuccin 加载完成后异步初始化动画配置
+    -- 延迟 10ms 以确保能够获取到当前 flavour 的正确色板 (Palette)
+    vim.defer_fn(function()
+      local flavour = require("catppuccin").flavour
+      local colors = require("catppuccin.palettes").get_palette(flavour)
       dbAnim.theAnimation(dbAnim.theAnimation, colors)
-    end)
+
+      -- 若非透明模式下为 latte 模式，则手动覆盖 CursorLine 背景色以优化视觉效果
+      local catppuccin = require("catppuccin")
+      if not catppuccin.options.transparent_background and catppuccin.flavour == "latte" then
+        vim.cmd([[highlight CursorLine guibg=#dce0e8]])
+      end
+    end, 10)
   end,
 }

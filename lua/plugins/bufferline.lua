@@ -13,7 +13,7 @@ return {
     { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
     { "<leader>bb", ":BufferLinePickClose<CR>", desc = "Delete Pick Buffer" },
     { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
-    { "<leader>ba", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
+    { "<leader>ba", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete All Buffers" },
     { "<leader>b<", "<cmd>BufferLineMovePrev<cr>", desc = "Move Buffer Prev" },
     { "<leader>b>", "<cmd>BufferLineMoveNext<cr>", desc = "Move Buffer Next" },
     { "<b",
@@ -43,9 +43,14 @@ return {
     { "<leader>ts", "<Cmd>tab split<CR>", desc = "Tab Split" },
     { "<leader>tn", "<Cmd>tabnew<CR>", desc = "New Tab" },
   },
+  -- stylua: ignore
   opts = {
     options = {
       always_show_bufferline = false,
+      indicator = {
+          icon = " ",
+          style = "icon",
+      },
       close_command = function(n) Snacks.bufdelete(n) end,
       right_mouse_command = function(n) Snacks.bufdelete(n) end,
       diagnostics = "nvim_lsp",

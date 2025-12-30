@@ -11,7 +11,7 @@ return {
         light = "latte",
         dark = "mocha",
       },
-      transparent_background = false,
+      transparent_background = vim.loop.os_uname().sysname ~= "Windows_NT",
       float = {
         transparent = true,
         solid = true,
@@ -19,11 +19,8 @@ return {
       auto_integrations = true,
       integrations = {
         avante = false,
-      }
+      },
     })
     vim.cmd.colorscheme("catppuccin")
-    if require("catppuccin").flavour == "latte" then
-      vim.cmd([[highlight CursorLine guibg=#dce0e8]])
-    end
   end,
 }

@@ -10,12 +10,11 @@ vim.opt.conceallevel = 0 -- 不隐藏任何文本
 vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- 同步系统的剪贴板
 
 -------------------- UI --------------------
-vim.opt.background = "light" -- 深/浅模式，Windows下不能自动识别主题，需要手动设置
 vim.opt.winborder = "single" -- 窗口边框
 vim.opt.signcolumn = "yes" -- 在行号左边显示警告、错误、Git 修改等标记的列
 vim.opt.smoothscroll = true -- 启用 平滑滚动（滚动时不会跳动，画面更流畅）
 vim.opt.scrolloff = 4 -- 上下至少保留 4 行可见内容
-vim.opt.laststatus = 3 -- 即使有多个窗口，底部只有一个统一状态栏
+vim.opt.laststatus = 3 -- 即使有多个窗口，底部只有一个统一状态栏，配合lualine使用
 vim.opt.shortmess:append({
   W = true, -- 禁止显示 “written” 消息（保存文件后的提示信息）
   I = true, -- 禁止显示启动时的 Neovim 版本信息
@@ -40,9 +39,12 @@ vim.opt.winminwidth = 5 -- 窗口的最小宽度为 5 列
 vim.opt.list = true -- 显示不可见字符（空格、Tab、换行等）
 vim.opt.listchars = { tab = ">·", trail = "·" } -- 用>-表示tab
 -- vim.opt.colorcolumn = "120" -- 在编辑器中显示一个虚拟竖线（color column），通常用来提醒代码行不要太长
+if vim.loop.os_uname().sysname == "Windows_NT" then
+  vim.opt.background = "light" -- 深/浅模式，Windows下不能自动识别主题，需要手动设置
+end
 
 ----------------- Term -------------------
-vim.opt.shell = "nu" -- shell
+vim.opt.shell = "nu" -- 外部 shell
 vim.opt.shellcmdflag = "-c" -- 当 Neovim 执行命令时，用 -c 调用命令
 vim.opt.shellquote = "" -- 无须用双引号包裹命令
 vim.opt.shellxquote = "" -- 不使用额外外层引用符

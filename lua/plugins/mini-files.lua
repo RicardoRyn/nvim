@@ -23,7 +23,7 @@ return {
       synchronize = "<CR>",
     },
     windows = {
-      width_preview = 120,
+      width_preview = vim.loop.os_uname().sysname == "Linux" and 120 or 80,
     },
   },
   config = function(_, opts)

@@ -3,7 +3,7 @@ return {
   cond = not vim.g.vscode,
   event = { "InsertEnter", "CmdlineEnter" },
   version = "1.*",
-  dependencies = { { "rafamadriz/friendly-snippets" } },
+  dependencies = { "rafamadriz/friendly-snippets" },
   -- stylua: ignore
   opts = {
     completion = {
