@@ -6,6 +6,7 @@
 return {
   "brenoprata10/nvim-highlight-colors",
   cond = not vim.g.vscode,
+  event = "VeryLazy",
   opts = {
     ---Render style
     ---@usage 'background'|'foreground'|'virtual'

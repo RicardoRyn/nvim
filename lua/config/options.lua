@@ -44,7 +44,7 @@ if vim.loop.os_uname().sysname == "Windows_NT" then
 end
 
 ----------------- Term -------------------
-vim.opt.shell = "nu" -- 外部 shell
+vim.opt.shell = "zsh" -- 外部 shell
 vim.opt.shellcmdflag = "-c" -- 当 Neovim 执行命令时，用 -c 调用命令
 vim.opt.shellquote = "" -- 无须用双引号包裹命令
 vim.opt.shellxquote = "" -- 不使用额外外层引用符

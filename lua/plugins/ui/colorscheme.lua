@@ -1,9 +1,9 @@
 return {
   "catppuccin/nvim",
   cond = not vim.g.vscode,
-  name = "catppuccin",
-  priority = 1000,
   lazy = false,
+  priority = 1000,
+  name = "catppuccin",
   config = function()
     require("catppuccin").setup({
       flavour = "auto", -- latte, frappe, macchiato, mocha, auto

@@ -1,8 +1,15 @@
 return {
   "hat0uma/csvview.nvim",
   cond = not vim.g.vscode,
-  ---@module "csvview"
-  ---@type CsvView.Options
+  cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
+  keys = {
+    {
+      "<leader>csv",
+      "<cmd>CsvViewToggle<CR>",
+      desc = "Toggle CSV View",
+      mode = "n",
+    },
+  },
   opts = {
     parser = { comments = { "#", "//" } },
     keymaps = {
@@ -17,15 +24,6 @@ return {
       jump_prev_field_end = { "<S-Tab>", mode = { "n", "v" } },
       jump_next_row = { "<Enter>", mode = { "n", "v" } },
       jump_prev_row = { "<S-Enter>", mode = { "n", "v" } },
-    },
-  },
-  cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
-  keys = {
-    {
-      "<leader>csv",
-      "<cmd>CsvViewToggle<CR>",
-      desc = "Toggle CSV View",
-      mode = "n",
     },
   },
 }

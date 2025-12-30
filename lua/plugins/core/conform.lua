@@ -2,28 +2,6 @@ return {
   "stevearc/conform.nvim",
   cond = not vim.g.vscode,
   cmd = { "ConformInfo" },
-  opts = {
-    notify_on_error = false,
-    format_on_save = false,
-    stop_after_first = false,
-    formatters_by_ft = {
-      -- LUA
-      lua = { "stylua" },
-      -- PYTHON
-      python = { "ruff_organize_imports", "ruff_format" },
-      -- BASH
-      bash = { "shfmt" },
-      sh = { "shfmt" },
-      -- RUST
-      rust = { "rustfmt" },
-      -- MARKDOWN
-      markdown = { "injected", "prettierd" },
-      quarto = { "injected" },
-      -- YAML
-      yaml = { "prettierd" },
-    },
-  },
-
   keys = {
     {
       "<leader>lf",
@@ -45,7 +23,27 @@ return {
       mode = { "n", "v" },
     },
   },
-
+  opts = {
+    notify_on_error = false,
+    format_on_save = false,
+    stop_after_first = false,
+    formatters_by_ft = {
+      -- LUA
+      lua = { "stylua" },
+      -- PYTHON
+      python = { "ruff_organize_imports", "ruff_format" },
+      -- BASH
+      bash = { "shfmt" },
+      sh = { "shfmt" },
+      -- RUST
+      rust = { "rustfmt" },
+      -- MARKDOWN
+      markdown = { "injected", "prettierd" },
+      quarto = { "injected" },
+      -- YAML
+      yaml = { "prettierd" },
+    },
+  },
   config = function(_, opts)
     require("conform").setup(opts)
     -- 支持markdown中的代码块的格式化

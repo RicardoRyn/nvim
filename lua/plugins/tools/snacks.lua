@@ -8,7 +8,7 @@ return {
   "folke/snacks.nvim",
   cond = not vim.g.vscode,
   lazy = false,
-  priority = 900,
+  priority = 1000,
   opts = {
     bigfile = { enabled = true },
     dashboard = {
@@ -38,7 +38,8 @@ return {
           padding = 1,
         },
         { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-        { title = "  Talk is cheap. Show me the code.", align = "center", padding = 1 },
+        { section = "startup" },
+        { title = "Talk is cheap. Show me the code.", align = "center", padding = 1 },
       },
     },
     explorer = { enabled = false },
@@ -160,6 +161,6 @@ return {
       if not catppuccin.options.transparent_background and catppuccin.flavour == "latte" then
         vim.cmd([[highlight CursorLine guibg=#dce0e8]])
       end
-    end, 10)
+    end, 1)
   end,
 }

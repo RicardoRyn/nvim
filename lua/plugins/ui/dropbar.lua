@@ -1,5 +1,6 @@
 return {
   "Bekaboo/dropbar.nvim",
+  cond = not vim.g.vscode,
   event = "LspAttach",
   config = function()
     local dropbar_api = require("dropbar.api")

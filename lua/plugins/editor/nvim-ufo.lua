@@ -1,7 +1,7 @@
 return {
   "kevinhwang91/nvim-ufo",
   cond = not vim.g.vscode,
-  event = "VeryLazy",
+  event = "BufReadPost",
   dependencies = { "kevinhwang91/promise-async" },
   opts = {
     preview = {

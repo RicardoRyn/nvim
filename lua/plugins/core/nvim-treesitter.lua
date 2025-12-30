@@ -1,8 +1,8 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   cond = not vim.g.vscode,
+  event = { "BufReadPost", "BufNewFile" },
   branch = "main",
-  lazy = false,
   build = ":TSUpdate",
   config = function()
     local languages = {

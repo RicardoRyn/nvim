@@ -1,5 +1,6 @@
 return {
   "mrdwarf7/lazyjui.nvim",
+  cond = not vim.g.vscode,
   dependencies = {
     "nvim-lua/plenary.nvim",
   },

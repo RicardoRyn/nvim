@@ -1,7 +1,7 @@
 return {
   "akinsho/bufferline.nvim",
   cond = not vim.g.vscode,
-  lazy = false,
+  event = "VeryLazy",
   -- stylua: ignore
   keys = {
     -- Buffer

@@ -25,7 +25,12 @@ local flavor = is_light and "catppuccin-latte" or "catppuccin-mocha"
 
 -- Setup lazy.nvim
 require("lazy").setup({
-  spec = { import = "plugins" },
+  spec = {
+    { import = "plugins.core" },
+    { import = "plugins.editor" },
+    { import = "plugins.tools" },
+    { import = "plugins.ui" },
+  },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { flavor } },
