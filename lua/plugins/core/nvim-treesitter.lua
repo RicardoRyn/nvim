@@ -23,6 +23,7 @@ return {
       "typst",
       "vue",
       "norg",
+      "regex",
     }
     require("nvim-treesitter").setup({})
     require("nvim-treesitter").install(languages)
