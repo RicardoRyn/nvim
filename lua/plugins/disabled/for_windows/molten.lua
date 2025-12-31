@@ -4,9 +4,7 @@ return {
   -- jupyter kernelspec list 列出来所有可用的kernel
   -- jupyter kernelspec remove <kernel_name> 移除安装的kernel
   "benlubas/molten-nvim",
-  cond = function()
-    return vim.loop.os_uname().sysname == "Windows_NT" and not vim.g.vscode
-  end,
+  cond = not vim.g.vscode and SYSTEM.is_win,
   event = "VeryLazy",
   version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
   dependencies = { "willothy/wezterm.nvim" },

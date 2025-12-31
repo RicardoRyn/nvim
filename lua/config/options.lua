@@ -39,7 +39,7 @@ vim.opt.winminwidth = 5 -- 窗口的最小宽度为 5 列
 vim.opt.list = true -- 显示不可见字符（空格、Tab、换行等）
 vim.opt.listchars = { tab = ">·", trail = "·" } -- 用>-表示tab
 -- vim.opt.colorcolumn = "120" -- 在编辑器中显示一个虚拟竖线（color column），通常用来提醒代码行不要太长
-if vim.loop.os_uname().sysname == "Windows_NT" then
+if SYSTEM.is_win then
   vim.opt.background = "light" -- 深/浅模式，Windows下不能自动识别主题，需要手动设置
 end
 

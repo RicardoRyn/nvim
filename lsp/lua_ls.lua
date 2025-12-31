@@ -1,6 +1,6 @@
 local lsp_name = "lua_ls"
 local default_config = dofile(vim.fn.stdpath("data") .. "/lazy/nvim-lspconfig/lsp/" .. lsp_name .. ".lua")
-if vim.loop.os_uname().sysname == "Windows_NT" then
+if SYSTEM.is_win then
   local custom_config = {
     -- HACK: 不写下面一段，会加载大量文件，耗尽内存
     root_dir = function(bufnr, on_dir)

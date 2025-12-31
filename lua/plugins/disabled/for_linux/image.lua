@@ -1,9 +1,7 @@
 return {
   -- 需要事先通过sudo apt install imagemagick安装magick_cli
   "3rd/image.nvim",
-  cond = function()
-    return vim.loop.os_uname().sysname == "Linux" and not vim.g.vscode
-  end,
+  cond = not vim.g.vscode and not SYSTEM.is_win,
   build = false, -- so that it doesn't build the rock https://github.com/3rd/image.nvim/issues/91#issuecomment-2453430239
   opts = {
     backend = "kitty", -- Kitty will provide the best experience, but you need a compatible terminal

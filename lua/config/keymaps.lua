@@ -65,7 +65,7 @@ else
   vim.keymap.set("i", "<C-v>", "<C-r>+", { noremap = true, silent = true, desc = "Paste from clipboard in insert mode" })
 
   -- 在非Windows上由vim-tmux-navigator.lua接管
-  if vim.loop.os_uname().sysname == "Windows_NT" then
+  if SYSTEM.is_win then
     vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
     vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
     vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })

@@ -4,9 +4,7 @@ return {
   -- jupyter kernelspec list 列出来所有可用的kernel
   -- jupyter kernelspec remove <kernel_name> 移除安装的kernel
   "benlubas/molten-nvim",
-  cond = function()
-    return vim.loop.os_uname().sysname == "Linux" and not vim.g.vscode
-  end,
+  cond = not vim.g.vscode and not SYSTEM.is_win,
   event = "VeryLazy",
   version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
   dependencies = { "3rd/image.nvim" },
@@ -57,6 +55,5 @@ return {
     vim.keymap.set("n", "<leader>od", ":MoltenDelete<CR>", { desc = "Molten Delete (current cell)", silent = true })
     vim.keymap.set("n", "<leader>oD", ":MoltenDelete!<CR>", { desc = "Molten Delete (all cells)", silent = true })
     vim.keymap.set("n", "<leader>ox", ":MoltenOpenInBrowser<CR>", { desc = "Output in Browser", silent = true })
-
   end,
 }

@@ -1,6 +1,6 @@
 return {
   "mikesmithgh/kitty-scrollback.nvim",
-  cond = not vim.g.vscode and vim.loop.os_uname().sysname ~= "Windows_NT",
+  cond = not vim.g.vscode and not SYSTEM.is_win,
   enabled = true,
   lazy = true,
   cmd = { "KittyScrollbackGenerateKittens", "KittyScrollbackCheckHealth", "KittyScrollbackGenerateCommandLineEditing" },

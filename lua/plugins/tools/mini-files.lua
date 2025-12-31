@@ -22,7 +22,7 @@ return {
       synchronize = "<CR>",
     },
     windows = {
-      width_preview = vim.loop.os_uname().sysname == "Windows_NT" and 120 or 80,
+      width_preview = SYSTEM.is_win and 120 or 80,
     },
   },
   config = function(_, opts)

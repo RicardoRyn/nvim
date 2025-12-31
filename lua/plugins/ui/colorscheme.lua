@@ -11,7 +11,7 @@ return {
         light = "latte",
         dark = "mocha",
       },
-      transparent_background = vim.loop.os_uname().sysname ~= "Windows_NT",
+      transparent_background = not SYSTEM.is_win,
       float = {
         transparent = true,
         solid = true,
