@@ -78,7 +78,7 @@ return {
     -- search
     { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>.", function() Snacks.scratch() end, desc = "Scratch" },
-    { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+    { "<leader>:", function() Snacks.picker.command_history() end, mode = { "n", "v" }, desc = "Command History" },
     { "<leader>z", function() Snacks.picker.zoxide() end, desc = "Zoxide" },
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
     { '<leader>s.', function() Snacks.scratch.select() end, desc = "Scratch" },

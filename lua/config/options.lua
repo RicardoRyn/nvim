@@ -6,7 +6,6 @@ vim.opt.relativenumber = false -- 相对行号
 vim.opt.wrap = true -- 软换行
 vim.opt.linebreak = true -- 软换行时，在合适位置换行
 vim.opt.conceallevel = 0 -- 不隐藏任何文本
--- vim.opt.clipboard = "" -- 禁止neovim寄存器和系统剪贴板共用
 vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- 同步系统的剪贴板
 
 -------------------- UI --------------------
@@ -25,6 +24,7 @@ vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "
 vim.opt.inccommand = "nosplit" -- 增量替换（substitute）预览
 vim.opt.jumpoptions = "view" -- 跳转后 恢复光标所在窗口的视图（例如滚动位置、折叠状态）
 vim.opt.cursorline = true -- 显示光标当前行
+vim.opt.guicursor = "n:block,i:ver25,v:hor20" -- 设置光标样式
 vim.opt.pumblend = 10 -- 弹出菜单 0（完全不透明）到 100（完全透明）
 vim.opt.pumheight = 10 -- 弹出菜单显示的最大条目数
 vim.opt.ruler = false -- 如果开启状态栏会显示类似 12,34，因为有statusline，不需要
