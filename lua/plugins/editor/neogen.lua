@@ -4,7 +4,7 @@ return {
   event = "VeryLazy",
   dependencies = "nvim-treesitter/nvim-treesitter",
   keys = {
-    { "<leader>d", function() require("neogen").generate() end, desc = "Generate docstring" },
+    { "<leader>D", function() require("neogen").generate() end, desc = "Generate docstring" },
   },
   config = function()
     require("neogen").setup({

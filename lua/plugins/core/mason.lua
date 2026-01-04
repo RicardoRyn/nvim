@@ -16,6 +16,7 @@ return {
       -- "pyright",
       "ty",
       "ruff",
+      "debugpy",
       -- BASH
       "bash-language-server",
       "shellcheck",
