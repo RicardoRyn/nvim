@@ -22,7 +22,6 @@ return {
       "tsx",
       "typst",
       "vue",
-      "norg",
       "regex",
     }
     require("nvim-treesitter").setup({})
