@@ -10,6 +10,8 @@ vim.keymap.set(
   { desc = "Redraw / Clear hlsearch / Diff Update" }
 )
 vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy" })
+vim.keymap.set({ "n", "v" }, "E", "$")
+vim.keymap.set({ "n", "v" }, "B", "^")
 
 -- stylua: ignore
 if vim.g.vscode then

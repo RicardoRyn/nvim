@@ -28,6 +28,7 @@ require("lazy").setup({
   spec = {
     { import = "plugins.core" },
     { import = "plugins.editor" },
+    { import = "plugins.git_jj" },
     { import = "plugins.tools" },
     { import = "plugins.ui" },
   },

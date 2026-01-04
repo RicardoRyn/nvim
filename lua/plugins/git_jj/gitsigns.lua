@@ -69,10 +69,10 @@ return {
         gs.blame()
       end, "Blame Buffer")
       -- diff
-      map("n", "<leader>gd", gs.diffthis, "Diff This") -- 当前:暂存区
-      map("n", "<leader>gD", function()
-        gs.diffthis("~")
-      end, "Diff This ~") -- 当前:上一个commit
+      map("n", "<leader>gd", gs.diffthis, "Diff (Current Buffer)") -- 当前:暂存区
+      -- map("n", "<leader>gD", function()
+      --   gs.diffthis("~")
+      -- end, "Diff This ~") -- 当前:上一个commit
       -- preview
       map("n", "<leader>gp", gs.preview_hunk_inline, "Preview Hunk")
       map("n", "<leader>gP", gs.preview_hunk, "Preview Hunk Float")
