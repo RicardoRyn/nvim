@@ -40,7 +40,4 @@ vim.keymap.set("n", "<leader>ld", function() vim.diagnostic.open_float() end, { 
 vim.keymap.set("n", "<leader>lD", ":Telescope diagnostics bufnr=0<CR>", { desc = "Show Diagnostics (buffer)" })
 
 -- 提示
--- 不显示指定K也可以显示悬浮信息，但是指定了有更多的信息，比如语言名称
-vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Hover Information" })
--- 函数签名会经过noice渲染，比如在此处指明{ border = "rounded" }，<C-k>才能正确进入该弹窗
 vim.keymap.set("i", "<C-k>", function() vim.lsp.buf.signature_help() end, { desc = "Show Signature Help" })
