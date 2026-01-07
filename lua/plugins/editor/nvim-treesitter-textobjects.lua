@@ -11,7 +11,10 @@ return {
         lookahead = true,
         selection_modes = {
           ["@parameter.outer"] = "v",
-          ["@function.outer"] = "V",
+          ["@function.outer"] = "v",
+          ["@class.outer"] = "v",
+          ["@conditional.outer"] = "v",
+          ["@loop.outer"] = "v",
         },
         include_surrounding_whitespace = false,
       },
