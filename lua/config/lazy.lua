@@ -27,6 +27,7 @@ local flavor = is_light and "catppuccin-latte" or "catppuccin-mocha"
 require("lazy").setup({
   spec = {
     { import = "plugins.core" },
+    { import = "plugins.dap" },
     { import = "plugins.editor" },
     { import = "plugins.tools" },
     { import = "plugins.ui" },
