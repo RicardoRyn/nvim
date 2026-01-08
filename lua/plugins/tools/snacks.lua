@@ -121,6 +121,7 @@ return {
     { "<C-/>", function() Snacks.terminal(nil, { win = { height = 0.3, position = "bottom", } }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     { "<C-_>", function() Snacks.terminal(nil, { win = { height = 0.3, position = "bottom", } }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     -- ui
+    { '<leader>h', function() Snacks.dashboard() end, desc = "Home Page" },
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
   },
   init = function()

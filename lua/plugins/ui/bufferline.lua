@@ -1,7 +1,7 @@
 return {
   "akinsho/bufferline.nvim",
   cond = not vim.g.vscode,
-  event = "VeryLazy",
+  event = "BufEnter",
   -- stylua: ignore
   keys = {
     -- Buffer
@@ -46,7 +46,7 @@ return {
   -- stylua: ignore
   opts = {
     options = {
-      always_show_bufferline = false,
+      always_show_bufferline = true,
       indicator = {
           icon = " ",
           style = "icon",
@@ -71,15 +71,6 @@ return {
         end
         return indicator
       end,
-      offsets = {
-        {
-          filetype = "neo-tree",
-          text = "󰙅 Neo-Tree",
-          highlight = "Directory",
-          text_align = "center",
-          separator = false,
-        },
-      },
     },
   },
 }
