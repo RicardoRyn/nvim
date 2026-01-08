@@ -95,7 +95,7 @@ return {
     { "<leader>sl", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
     { "<leader>sL", function() Snacks.picker.lsp_config() end, desc = "Lsp Info" },
     { "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks" },
-    { "<leader>so", function() Snacks.picker.lsp_outgoing_calls() end, desc = "Outgoing Calls" },
+    { "<leader>sO", function() Snacks.picker.lsp_outgoing_calls() end, desc = "Outgoing Calls" },
     { "<leader>sp", function() Snacks.picker.spelling() end, desc = "Spelling" },
     { "<leader>sP", function() Snacks.picker() end, desc = "Pickers" },
     { "<leader>sr", function() Snacks.picker.resume() end, desc = "Resume" },

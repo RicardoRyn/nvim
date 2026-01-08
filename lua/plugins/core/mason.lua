@@ -13,7 +13,7 @@ return {
       "lua-language-server",
       "stylua",
       -- PYTHON
-      -- "pyright",
+      "pyright",
       "ty",
       "ruff",
       "debugpy",
@@ -23,7 +23,7 @@ return {
       "shfmt",
       -- RUST
       "rust-analyzer",
-      "rustfmt",
+      -- "rustfmt", -- 应该用rustup来安装rustfmt
       -- MARKDOWN
       "marksman", -- LSP (语法高亮、补全、跳转)
       "markdownlint-cli2", -- 静态检查
