@@ -1,5 +1,5 @@
 if not _G.SYSTEM then
-    _G.SYSTEM = require("utils.system")
+  _G.SYSTEM = require("utils.system")
 end
 
 require("config.options")

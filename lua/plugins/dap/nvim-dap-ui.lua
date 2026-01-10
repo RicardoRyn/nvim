@@ -49,22 +49,11 @@ return {
         },
       },
     })
-    -- stylua: ignore
-    vim.fn.sign_define( "DapBreakpoint", { text = " ", texthl = "DapBreakpoint", linehl = "", numhl = "DapBreakpoint" })
-    vim.fn.sign_define("DapBreakpointCondition", {
-      text = " ",
-      texthl = "DapBreakpointCondition",
-      linehl = "DapBreakpointCondition",
-      numhl = "DapBreakpointCondition",
-    })
-    vim.fn.sign_define("DapStopped", {
-      text = " ",
-      texthl = "DapUIBreakpointsCurrentLine",
-      linehl = "DapUIBreakpointsCurrentLine",
-      numhl = "DapUIBreakpointsCurrentLine",
-    })
 
-    -- stylua: ignore
+    vim.fn.sign_define( "DapBreakpoint", { text = " ", texthl = "DapBreakpoint", linehl = "", numhl = "DapBreakpoint" })
+    vim.fn.sign_define("DapBreakpointCondition", { text = " ", texthl = "DapBreakpointCondition", linehl = "DapBreakpointCondition", numhl = "DapBreakpointCondition", })
+    vim.fn.sign_define("DapStopped", { text = " ", texthl = "DapUIBreakpointsCurrentLine", linehl = "DapUIBreakpointsCurrentLine", numhl = "DapUIBreakpointsCurrentLine", })
+
     vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Breakpoint" })
     vim.keymap.set("n", "<leader>dB", function() local input = vim.fn.input("Condition for breakpoint:") dap.set_breakpoint(input) end, { desc = "Conditional Breakpoint" })
     vim.keymap.set("n", "<leader>dc", dap.run_to_cursor, { desc = "Run to Cursor" })
