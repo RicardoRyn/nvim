@@ -15,10 +15,10 @@ return {
       filter = filter_hide,
     },
     mappings = {
-      go_in = "L",
-      go_in_plus = "l",
-      go_out = "H",
-      go_out_plus = "h",
+      go_in = "K",
+      go_in_plus = "L",
+      go_out = "J",
+      go_out_plus = "H",
       synchronize = "<CR>",
     },
     windows = {
