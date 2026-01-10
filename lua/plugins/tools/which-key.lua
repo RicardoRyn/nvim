@@ -24,6 +24,7 @@ return {
         { "<leader>gh", group = "GitHub" },
         { "<leader>gj", group = "JJui"},
         { "<leader>h", group = "Home", icon = { icon = " " } },
+        { "<leader>j", group = "Jujutsu", icon = { icon = " ", color = "blue" } },
         { "<leader>l", group = "LSP", icon = { icon = " ", color = "purple" } },
         { "<leader>L", group = "Lazy" },
         { "<leader>ls", group = "LSP", icon = { icon = " ", color = "purple" } },

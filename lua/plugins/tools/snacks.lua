@@ -90,7 +90,7 @@ return {
     { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
     { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
     { "<leader>sI", function() Snacks.picker.lsp_incoming_calls() end, desc = "Incoming Calls" },
-    { "<leader>sj", function() Snacks.picker.jumps() end, desc = "Jumps" },
+    { "<leader>sJ", function() Snacks.picker.jumps() end, desc = "Jumps" },
     { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
     { "<leader>sl", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
     { "<leader>sL", function() Snacks.picker.lsp_config() end, desc = "Lsp Info" },
