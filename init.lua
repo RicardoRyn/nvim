@@ -10,4 +10,3 @@ require("config.autocmds")
 if not vim.g.vscode then
   require("config.lsp")
 end
-print("hello world")

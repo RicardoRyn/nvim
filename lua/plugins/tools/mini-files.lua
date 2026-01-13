@@ -22,7 +22,7 @@ return {
       synchronize = "<CR>",
     },
     windows = {
-      width_preview = SYSTEM.is_win and 120 or 80,
+      width_preview = SYSTEM.distro == "arch" and 80 or 120,
     },
   },
   config = function(_, opts)
