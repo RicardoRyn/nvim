@@ -42,6 +42,11 @@ return {
       quarto = { "injected" },
       -- YAML
       yaml = { "prettierd" },
+      -- MATLAB
+      matlab = { "miss_hit" },
+    },
+    formatters = {
+      miss_hit = { command = "mh_style", args = { "--fix", "$FILENAME" }, stdin = false, exit_codes = { 0, 1 } },
     },
   },
   config = function(_, opts)

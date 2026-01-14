@@ -6,6 +6,7 @@ vim.lsp.enable("bashls")
 vim.lsp.enable("rust-analyzer")
 vim.lsp.enable("marksman")
 vim.lsp.enable("yamlls")
+vim.lsp.enable("matlab_ls")
 
 -- UI
 vim.g.diagnostics_visible = true

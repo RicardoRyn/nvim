@@ -31,6 +31,9 @@ return {
       -- YAML
       "yaml-language-server", -- LSP
       "yamllint", -- 静态检查
+      -- MATLAB
+      "matlab-language-server",
+      "miss_hit",
     },
   },
   config = function(_, opts)
