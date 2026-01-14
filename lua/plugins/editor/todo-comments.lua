@@ -4,30 +4,19 @@ return {
   event = "VeryLazy",
   dependencies = { "nvim-lua/plenary.nvim" },
   opts = {
-    signs = true, -- show icons in the signs column
-    sign_priority = 8, -- sign priority
+    signs = true,
+    sign_priority = 8,
     keywords = {
-      FIX = {
-        icon = require("utils.icons").comments.fix, -- icon used for the sign, and in search results
-        color = "error", -- can be a hex color, or a named color (see below)
-        alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
-        -- signs = false, -- configure signs for some keywords individually
-      },
-      TODO = { icon = require("utils.icons").comments.todo, color = "todo" },
-      HACK = { icon = require("utils.icons").comments.hack, color = "warning" },
-      WARN = { icon = require("utils.icons").comments.warn, color = "warning", alt = { "WARNING", "XXX" } },
-      PERF = {
-        icon = require("utils.icons").comments.perf,
-        color = "perf",
-        alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" },
-      },
+      FIX = { icon = require("utils.icons").comments.fix, color = "error", alt = { "FIXME", "BUG", "FIXIT", "ISSUE" } },
+      TODO = { icon = require("utils.icons").comments.todo, color = "todo", alt = { "WIP", "NEXT", "TASK" } },
+      WARN = { icon = require("utils.icons").comments.warn, color = "warning", alt = { "WARNING" } },
+      HACK = { icon = require("utils.icons").comments.hack, color = "warning", alt = { "XXX" } },
+      PERF = { icon = require("utils.icons").comments.perf, color = "perf", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
       TEST = { icon = require("utils.icons").comments.test, color = "info", alt = { "TESTING", "PASSED", "FAILED" } },
-      NOTE = { icon = require("utils.icons").comments.note, color = "hint", alt = { "INFO" } },
+      TOG = { icon = require("utils.icons").comments.tog, color = "info", alt = { "TOGGLE", "SETTING", "SWITCH", "CONFIG", "CONF" } },
+      NOTE = { icon = require("utils.icons").comments.note, color = "hint", alt = { "INFO", "NB", "REF", "DOCS" } },
     },
-    gui_style = {
-      fg = "ITALIC", -- The gui style to use for the fg highlight group.
-      bg = "BOLD", -- The gui style to use for the bg highlight group.
-    },
+    gui_style = { fg = "ITALIC", bg = "BOLD" },
     colors = {
       error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
       todo = { "#f55e44" },
@@ -35,7 +24,7 @@ return {
       perf = { "#6a2cbc" },
       info = { "DiagnosticInfo", "#2563EB" },
       hint = { "DiagnosticHint", "#10B981" },
-      default = { "#000000" },
+      default = { "#ff0000" },
     },
   },
 }

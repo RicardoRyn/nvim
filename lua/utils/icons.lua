@@ -33,6 +33,7 @@ icons.comments = {
   warn = " ",
   perf = "󱎫 ",
   test = " ",
+  tog = " ",
   note = "󰍨 ",
 }
 
@@ -53,6 +54,7 @@ icons.kind = {
   Array = " ",
   Boolean = "󰨙 ",
   Class = " ",
+  Codeium = "󰘦 ",
   Color = " ",
   Control = " ",
   Collapsed = " ",
@@ -82,10 +84,11 @@ icons.kind = {
   Snippet = "󱄽 ",
   String = " ",
   Struct = "󰆼 ",
+  Supermaven = " ",
+  TabNine = "󰏚 ",
   Text = " ",
   TypeParameter = " ",
   Unit = " ",
-  Unknown = " ",
   Value = " ",
   Variable = "󰀫 ",
 }
