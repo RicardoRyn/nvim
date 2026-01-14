@@ -44,11 +44,9 @@ icons.lsp = {
 }
 
 icons.dap = {
-  Stopped = "󰁕 ",
-  Breakpoint = " ",
-  BreakpointCondition = " ",
-  BreakpointRejected = " ",
-  LogPoint = ".>",
+  Stopped = " ",
+  BreakpointData = " ",
+  BreakpointConditional = " ",
 }
 
 icons.kind = {
