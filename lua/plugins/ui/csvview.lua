@@ -1,6 +1,7 @@
 return {
   "hat0uma/csvview.nvim",
   cond = not vim.g.vscode,
+  ft = { "csv", "tsv" },
   cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
   keys = {
     {
@@ -26,4 +27,14 @@ return {
       jump_prev_row = { "<S-Enter>", mode = { "n", "v" } },
     },
   },
+  config = function(_, opts)
+    require("csvview").setup(opts)
+
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "csv", "tsv" },
+      callback = function()
+        vim.cmd("CsvViewEnable display_mode=border header_lnum=1")
+      end,
+    })
+  end,
 }
