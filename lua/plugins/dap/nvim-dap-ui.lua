@@ -5,10 +5,10 @@ return {
   dependencies = {
     "mfussenegger/nvim-dap",
     "nvim-neotest/nvim-nio",
-    "theHamsta/nvim-dap-virtual-text",
+    -- "theHamsta/nvim-dap-virtual-text",
   },
   config = function()
-    require("nvim-dap-virtual-text").setup({})
+    -- require("nvim-dap-virtual-text").setup({})
     require("noice").setup()
 
     local dap, dapui = require("dap"), require("dapui")
@@ -51,7 +51,7 @@ return {
     })
 
     local icon = require("utils.icons").dap
-    vim.fn.sign_define("DapStopped", { text = icon.Stopped, texthl = "DapUIBreakpointsCurrentLine", linehl = "DapUIBreakpointsCurrentLine", numhl = "DapUIBreakpointsCurrentLine", })
+    vim.fn.sign_define("DapStopped", { text = icon.Stopped, texthl = "DapUIBreakpointsCurrentLine", linehl = "RedrawDebugComposed", numhl = "DapUIBreakpointsCurrentLine", })
     vim.fn.sign_define( "DapBreakpoint", { text = icon.BreakpointData, texthl = "DapBreakpoint", linehl = "", numhl = "DapBreakpoint" })
     vim.fn.sign_define("DapBreakpointCondition", { text = icon.BreakpointConditional, texthl = "DapBreakpointCondition", linehl = "DapBreakpointCondition", numhl = "DapBreakpointCondition", })
 

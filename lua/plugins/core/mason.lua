@@ -21,6 +21,7 @@ return {
       "bash-language-server",
       "shellcheck",
       "shfmt",
+      "bash-debug-adapter",
       -- RUST
       "rust-analyzer",
       -- "rustfmt", -- 应该用rustup来安装rustfmt
