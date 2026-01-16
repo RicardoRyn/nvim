@@ -7,8 +7,8 @@ return {
   },
   ft = "python",
   config = function()
-    local path = not SYSTEM.is_win and "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
-      or "C:/Users/RicardoRyn/AppData/Local/nvim-data/mason/packages/debugpy/venv/Scripts/python.exe"
+    local path = not SYSTEM.is_win and vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python"
+      or vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/Scripts/python.exe"
     require("dap-python").setup(path)
   end,
 }
