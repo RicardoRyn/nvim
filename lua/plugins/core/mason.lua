@@ -9,6 +9,7 @@ return {
   },
   opts = {
     ensure_installed = {
+      "copilot-language-server",
       -- LUA
       "lua-language-server",
       "stylua",

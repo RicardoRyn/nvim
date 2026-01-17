@@ -48,6 +48,21 @@ return {
       lualine_c = {
         {
           function()
+            return " "
+          end,
+          color = function()
+            local status = require("sidekick.status").get()
+            if status then
+              return status.kind == "Error" and "DiagnosticError" or status.busy and "DiagnosticWarn" or "Special"
+            end
+          end,
+          cond = function()
+            local status = require("sidekick.status")
+            return status.get() ~= nil
+          end,
+        },
+        {
+          function()
             return vim.fn.fnamemodify(vim.fn.expand("%:p"), ":~:h")
           end,
         },
@@ -83,6 +98,18 @@ return {
           require("lazy.status").updates,
           cond = require("lazy.status").has_updates,
           color = { fg = "#f38ba8", gui = "bold" },
+        },
+        {
+          function()
+            local status = require("sidekick.status").cli()
+            return " " .. (#status > 1 and #status or "")
+          end,
+          cond = function()
+            return #require("sidekick.status").cli() > 0
+          end,
+          color = function()
+            return "Special"
+          end,
         },
       },
       lualine_y = {

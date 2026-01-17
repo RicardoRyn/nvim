@@ -2,12 +2,17 @@ return {
   "folke/sidekick.nvim",
   cond = not vim.g.vscode,
   opts = {
+    nes = { enabled = false },
     cli = {
       win = {
         split = {
           width = 0.4, -- set to 0 for default split width
         },
         keys = {
+          buffers = false,
+          files = false,
+          hide_ctrl_dot = false,
+          hide_ctrl_z = false,
           prompt = false,
         },
       },
@@ -18,15 +23,6 @@ return {
       tools = {
         iflow = {
           cmd = { "iflow", "-c", "--default" },
-          -- Optional: custom keymaps for this tool
-          keys = {
-            submit = {
-              "<c-s>",
-              function(t)
-                t:send("\n")
-              end,
-            },
-          },
         },
       },
       prompts = {
@@ -81,13 +77,13 @@ return {
       desc = "Sidekick Toggle",
       mode = { "n", "t", "i", "x" },
     },
-    -- {
-    --   "<leader>aa",
-    --   function()
-    --     require("sidekick.cli").toggle()
-    --   end,
-    --   desc = "Sidekick Toggle CLI",
-    -- },
+    {
+      "<leader>aa",
+      function()
+        require("sidekick.cli").toggle()
+      end,
+      desc = "Sidekick Toggle CLI",
+    },
     {
       "<leader>as",
       function()
@@ -137,9 +133,23 @@ return {
     },
     -- Example of a keybinding to open Claude directly
     {
-      "<leader>aa",
+      "<leader>ac",
+      function()
+        require("sidekick.cli").toggle({ name = "copilot", focus = true })
+      end,
+      desc = "Sidekick Toggle Copilot",
+    },
+    {
+      "<leader>ai",
       function()
         require("sidekick.cli").toggle({ name = "iflow", focus = true })
+      end,
+      desc = "Sidekick Toggle iFlow",
+    },
+    {
+      "<leader>ao",
+      function()
+        require("sidekick.cli").toggle({ name = "opencode", focus = true })
       end,
       desc = "Sidekick Toggle iFlow",
     },

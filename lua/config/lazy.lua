@@ -26,6 +26,7 @@ local flavor = is_light and "catppuccin-latte" or "catppuccin-mocha"
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
+    { import = "plugins.ai" },
     { import = "plugins.core" },
     { import = "plugins.dap" },
     { import = "plugins.editor" },
