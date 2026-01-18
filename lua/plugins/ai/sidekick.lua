@@ -5,12 +5,14 @@ return {
     nes = { enabled = false },
     cli = {
       win = {
+        layout = "left",
         split = {
           width = 0.4, -- set to 0 for default split width
         },
         keys = {
           buffers = false,
           files = false,
+          hide_ctrl_q = false,
           hide_ctrl_dot = false,
           hide_ctrl_z = false,
           prompt = false,
