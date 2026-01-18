@@ -33,7 +33,7 @@ icons.comments = {
   warn = " ",
   perf = "󱎫 ",
   test = " ",
-  tog = " ",
+  tog = " ",
   note = "󰍨 ",
 }
 
