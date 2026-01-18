@@ -39,6 +39,13 @@ return {
         },
         view = "mini",
       },
+      {
+        filter = {
+          event = "notify",
+          find = "adapter `python`.*exited with 1",
+        },
+        opts = { skip = true },
+      },
     },
     presets = {
       bottom_search = false,
