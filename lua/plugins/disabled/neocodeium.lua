@@ -1,5 +1,6 @@
 return {
   "monkoose/neocodeium",
+  enabled = false,
   cond = not vim.g.vscode,
   event = "VeryLazy",
   -- stylua: ignore

@@ -71,6 +71,15 @@ return {
         end
         return indicator
       end,
+      offsets = {
+        {
+          filetype = "sidekick_terminal",
+          text = "  sidekick",
+          highlight = "Directory",
+          text_align = "center",
+          separator = true,
+        },
+      },
     },
   },
 }

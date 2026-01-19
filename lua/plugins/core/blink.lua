@@ -15,7 +15,13 @@ return {
       }
     },
     keymap = {
-      ['<Tab>'] = { 'accept', 'fallback' },
+      ["<Tab>"] = {
+        "accept",
+        function()
+          return require("sidekick").nes_jump_or_apply()
+        end,
+        "fallback",
+      },
       ['<CR>'] = { 'accept', 'fallback' },
       ['<C-y>'] = false,
     },
