@@ -42,7 +42,6 @@ return {
         { "<leader><space>", group = "Smart Files", icon = { icon = " " } },
         { "<leader>.", group = "Scratch", icon = {icon = " "}},
         { "<leader>:", group = "Command History", icon = {icon = " "}},
-        { "<leader>;", group = "Drop Bar", icon = {icon = "󰁊 "}},
         { "<leader>/", group = "Grep", icon = { icon = " " } },
       },
     },
