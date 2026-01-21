@@ -48,7 +48,7 @@ return {
     indent = { enabled = true, indent = { char = "▏" }, scope = { char = "▍", hl = "" } },
     input = { enabled = true },
     picker = { enabled = true },
-    notifier = { enabled = false, timeout = 3000 },
+    notifier = { enabled = true, timeout = 3000 },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = true },
@@ -122,7 +122,9 @@ return {
     { "<C-_>", function() Snacks.terminal(nil, { win = { height = 0.3, position = "bottom", } }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     -- ui
     { '<leader>h', function() Snacks.dashboard() end, desc = "Home Page" },
+    { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+    { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {

@@ -1,5 +1,6 @@
 return {
   "folke/noice.nvim",
+  enabled = false,
   cond = not vim.g.vscode,
   lazy = false,
   dependencies = {
