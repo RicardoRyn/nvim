@@ -18,9 +18,8 @@ return {
         enabled = false,
       },
       tools = {
-        iflow = {
-          cmd = { "iflow", "-c", "--default" },
-        },
+        iflow = { cmd = { "iflow", "-c" } },
+        copilot = { cmd = { "copilot", "--banner", "--resume" } },
       },
       prompts = {
         changes = "你能审查一下我的更改吗？",

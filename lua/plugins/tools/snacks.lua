@@ -147,8 +147,8 @@ return {
         Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>ul")
         Snacks.toggle.line_number():map("<leader>uL")
         Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-        Snacks.toggle.zen():map("<leader>uz")
-        Snacks.toggle.zoom():map("<leader>uZ")
+        Snacks.toggle.zoom():map("<leader>uz")
+        Snacks.toggle.zen():map("<leader>uZ")
       end,
     })
 

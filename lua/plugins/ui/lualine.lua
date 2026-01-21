@@ -13,10 +13,21 @@ return {
     },
     sections = {
       lualine_a = {
-        { "filename" },
+        "filename",
       },
       lualine_b = {
-        { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+        {
+          function()
+            return require('utils.jj_status').get()
+          end,
+          icon = '',
+          color = function()
+            return require('utils.jj_status').get_color()
+          end,
+          cond = function()
+            return require('utils.jj_status').get() ~= ""
+          end,
+        },
         {
           "diff",
           symbols = {
@@ -24,6 +35,7 @@ return {
             modified = require("utils.icons").git.modified,
             removed = require("utils.icons").git.deleted,
           },
+          separator = "",
           source = function()
             local gitsigns = vim.b.gitsigns_status_dict
             if gitsigns then
@@ -34,15 +46,6 @@ return {
               }
             end
           end,
-        },
-        {
-          "diagnostics",
-          symbols = {
-            error = require("utils.icons").diagnostics.error,
-            warn = require("utils.icons").diagnostics.warn,
-            info = require("utils.icons").diagnostics.info,
-            hint = require("utils.icons").diagnostics.hint,
-          },
         },
       },
       lualine_c = {
@@ -61,6 +64,7 @@ return {
             return status.get() ~= nil
           end,
         },
+        { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
         {
           function()
             return vim.fn.fnamemodify(vim.fn.expand("%:p"), ":~:h")
@@ -68,6 +72,15 @@ return {
         },
       },
       lualine_x = {
+        {
+          "diagnostics",
+          symbols = {
+            error = require("utils.icons").diagnostics.error,
+            warn = require("utils.icons").diagnostics.warn,
+            info = require("utils.icons").diagnostics.info,
+            hint = require("utils.icons").diagnostics.hint,
+          },
+        },
         {
           function()
             return require("noice").api.status.command.get()
@@ -122,7 +135,6 @@ return {
         { "location" },
       },
       lualine_z = {
-        "searchcount",
         "mode",
       },
     },
