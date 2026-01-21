@@ -22,15 +22,6 @@ return {
           dismiss = "<C-]>",
         },
       },
-      nes = {
-        enabled = true,
-        auto_trigger = true,
-        keymap = {
-          accept_and_goto = "<C-m>",
-          accept = "<c-q>",
-          dismiss = "<Esc>",
-        },
-      },
     })
   end,
 }
