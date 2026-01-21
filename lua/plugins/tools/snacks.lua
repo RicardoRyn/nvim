@@ -44,7 +44,7 @@ return {
     },
     explorer = { enabled = false },
     gh = { enabled = true },
-    image = { enabled = false },
+    image = { enabled = true },
     indent = { enabled = true, indent = { char = "▏" }, scope = { char = "▍", hl = "" } },
     input = { enabled = true },
     picker = { enabled = true },
