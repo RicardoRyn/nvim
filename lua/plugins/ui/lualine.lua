@@ -111,6 +111,11 @@ return {
             return "Special"
           end,
         },
+        {
+          require("ipynb.kernel").statusline,
+          cond = require("ipynb.kernel").statusline_visible,
+          color = require("ipynb.kernel").statusline_color,
+        },
       },
       lualine_y = {
         { "progress", separator = "", padding = { left = 1, right = 0 } },
