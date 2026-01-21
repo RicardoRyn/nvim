@@ -8,7 +8,8 @@ return {
   cond = not vim.g.vscode,
   version = false,
   keys = {
-    { "<leader>e", "<cmd>lua MiniFiles.open()<CR>", desc = "Mini Files" },
+    { "<leader>ee", "<CMD>lua MiniFiles.open()<CR>", desc = "Mini Files" },
+    { "<leader>ef", "<CMD>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>", desc = "Mini Files" },
   },
   opts = {
     content = {
