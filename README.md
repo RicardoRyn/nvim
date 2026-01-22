@@ -1,6 +1,6 @@
 <div align="center">
 
-![Neovim Config Banner](./assets/banner.png)
+![Neovim Config Banner](./assets/ui-preview.gif)
 
 # 🚀 My Neovim Configuration
 
@@ -179,10 +179,6 @@ After the first launch:
 ---
 
 <div align="center">
-
-<!-- TODO: 需要一个gif -->
-
-![Footer](./assets/footer.gif)
 
 **⭐ If you find this config helpful, please give it a star! ⭐**
 

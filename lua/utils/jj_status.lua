@@ -1,4 +1,3 @@
--- FIX: 导致hunk.nvim无法使用
 local M = {}
 
 local jj_cmd = [[jj log --revisions @ --no-graph --color never --limit 1 --template '
