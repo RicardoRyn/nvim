@@ -1,4 +1,4 @@
--- FIX: merge中有bug，会导致增加的部分消失
+-- FIX: 上游错误，merge中有bug，会导致增加的部分消失
 return {
   "esmuellert/codediff.nvim",
   cond = not vim.g.vscode,
