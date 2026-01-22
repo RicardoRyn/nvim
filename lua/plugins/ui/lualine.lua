@@ -18,14 +18,14 @@ return {
       lualine_b = {
         {
           function()
-            return require('utils.jj_status').get()
+            return require("utils.jj_status").get()
           end,
-          icon = '',
+          icon = "",
           color = function()
-            return require('utils.jj_status').get_color()
+            return require("utils.jj_status").get_color()
           end,
           cond = function()
-            return require('utils.jj_status').get() ~= ""
+            return require("utils.jj_status").get() ~= ""
           end,
         },
         {
@@ -73,6 +73,18 @@ return {
       },
       lualine_x = {
         {
+          function()
+            return require("noice").api.status.command.get()
+          end,
+          cond = function()
+            return package.loaded["noice"] and require("noice").api.status.command.has()
+          end,
+        },
+        {
+          require("noice").api.status.search.get,
+          cond = require("noice").api.status.search.has,
+        },
+        {
           "diagnostics",
           symbols = {
             error = require("utils.icons").diagnostics.error,
@@ -80,14 +92,6 @@ return {
             info = require("utils.icons").diagnostics.info,
             hint = require("utils.icons").diagnostics.hint,
           },
-        },
-        {
-          function()
-            return require("noice").api.status.command.get()
-          end,
-          cond = function()
-            return package.loaded["noice"] and require("noice").api.status.command.has()
-          end,
         },
         {
           function()
