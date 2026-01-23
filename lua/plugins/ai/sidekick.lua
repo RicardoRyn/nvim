@@ -18,7 +18,7 @@ return {
         enabled = false,
       },
       tools = {
-        iflow = { cmd = { "iflow", "-c" } },
+        iflow = { cmd = { "iflow", "-c", "--default", "--thinking" } },
         copilot = { cmd = { "copilot", "--banner", "--resume" } },
       },
       prompts = {
