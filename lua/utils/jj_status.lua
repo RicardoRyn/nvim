@@ -26,9 +26,25 @@ local cached_status = ""
 local is_exiting = false
 local running_job_id = nil
 
+local function is_diff_editor()
+  -- 检测是否作为 jj 的 diff-editor 运行
+  local args = vim.fn.argv()
+  for _, arg in ipairs(args) do
+    if arg:match("DiffEditor") then
+      return true
+    end
+  end
+  return false
+end
+
 local function update_status()
   -- 如果正在退出，不启动新的 jj 进程
   if is_exiting then
+    return
+  end
+
+  -- 如果作为 diff-editor 运行，不执行 jj 命令以避免嵌套冲突
+  if is_diff_editor() then
     return
   end
 
