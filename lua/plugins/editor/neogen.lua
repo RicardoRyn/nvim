@@ -4,13 +4,21 @@ return {
   event = "VeryLazy",
   dependencies = "nvim-treesitter/nvim-treesitter",
   keys = {
-    { "<leader>D", function() require("neogen").generate() end, desc = "Generate docstring" },
+    {
+      "<leader>ln",
+      function()
+        require("neogen").generate()
+      end,
+      desc = "Generate docstring",
+    },
   },
   config = function()
     require("neogen").setup({
-      enabled = true,
+      enable = true,
       snippet_engine = "luasnip",
+      languages = {
+        python = require("neogen.python"),
+      },
     })
   end,
 }
-
