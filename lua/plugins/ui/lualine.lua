@@ -72,6 +72,7 @@ return {
         },
       },
       lualine_x = {
+        -- 操作
         {
           function()
             return require("noice").api.status.command.get()
@@ -80,10 +81,12 @@ return {
             return package.loaded["noice"] and require("noice").api.status.command.has()
           end,
         },
+        -- 搜索信息
         {
           require("noice").api.status.search.get,
           cond = require("noice").api.status.search.has,
         },
+        -- 诊断信息
         {
           "diagnostics",
           symbols = {
@@ -93,6 +96,8 @@ return {
             hint = require("utils.icons").diagnostics.hint,
           },
         },
+        {"lsp_status"},
+        -- Record状态
         {
           function()
             return require("noice").api.status.mode.get()
@@ -102,6 +107,7 @@ return {
           end,
           color = { fg = "#8839ef", gui = "bold" },
         },
+        -- DAP状态
         {
           function()
             return "  " .. require("dap").status()
@@ -111,11 +117,13 @@ return {
           end,
           color = { fg = "#ff0000", gui = "bold" },
         },
+        -- lazy.nvim更新状态
         {
           require("lazy.status").updates,
           cond = require("lazy.status").has_updates,
           color = { fg = "#f38ba8", gui = "bold" },
         },
+        -- sidekick CLI状态
         {
           function()
             local status = require("sidekick.status").cli()
@@ -128,6 +136,7 @@ return {
             return "Special"
           end,
         },
+        -- ipynb内核
         {
           require("ipynb.kernel").statusline,
           cond = require("ipynb.kernel").statusline_visible,
