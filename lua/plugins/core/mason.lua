@@ -14,9 +14,9 @@ return {
       "lua-language-server",
       "stylua",
       -- PYTHON
-      "pyright",
       "ty",
       "ruff",
+      "pyright",
       "debugpy",
       -- BASH
       "bash-language-server",
