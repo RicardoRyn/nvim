@@ -1,6 +1,6 @@
-local asciiArts = require("utils.ascii_arts")
-
 local M = {}
+
+local asciiArts = require("utils.ascii_arts")
 
 M.asciiImg = asciiArts.frames["static"][1]
 

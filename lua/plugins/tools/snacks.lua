@@ -3,6 +3,8 @@
 -- gh extension install meiji163/gh-notify
 -- 由于Windows上类Unix脚本的Shebang路径问题，可能需要修改gh-notify的脚本
 local dbAnim = require("utils.dashboardAnimation")
+local snacks_dashboard = require("utils.snacks_dashboard")
+local snacks_explorer_preview = require("utils.snacks_explorer_preview")
 
 return {
   "folke/snacks.nvim",
@@ -11,54 +13,20 @@ return {
   priority = 1000,
   opts = {
     bigfile = { enabled = true },
-    dashboard = {
-      enabled = true,
-      preset = {
-        -- stylua: ignore
-        keys = {
-          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-          { icon = " ", key = "f", desc = "Find Files", action = ":lua Snacks.dashboard.pick('files')" },
-          { icon = " ", key = "w", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-          { icon = " ", key = "p", desc = "Projects", action = ":lua Snacks.dashboard.pick('projects')" },
-          { icon = "󰑓 ", key = "s", desc = "Session", section = "session" },
-          { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})", },
-          { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
-          { icon = " ", key = "b", desc = "Browse Repo", action = ":lua Snacks.gitbrowse()" },
-          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
-        },
-        header = false,
-      },
-      sections = {
-        {
-          section = "header",
-          function()
-            return { header = dbAnim.asciiImg }
-          end,
-          padding = 1,
-        },
-        { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-        { section = "startup" },
-        { title = "Talk is cheap. Show me the code.", align = "center", padding = 1 },
-      },
-    },
-    explorer = { enabled = false },
+    dashboard = snacks_dashboard,
+    explorer = { enabled = true },
     gh = { enabled = true },
     image = { enabled = true },
     indent = { enabled = true, indent = { char = "▏" }, scope = { char = "▍", hl = "" } },
     input = { enabled = true },
-    picker = { enabled = true },
+    picker = { enabled = true, sources = { explorer = snacks_explorer_preview } },
     notifier = { enabled = false, timeout = 3000 },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
-    styles = {
-      notification = {
-        wo = { wrap = true }, -- Wrap notifications
-      },
-    },
+    styles = { notification = { wo = { wrap = true } } },
   },
   -- stylua: ignore
   keys = {
@@ -121,6 +89,7 @@ return {
     { "<C-/>", function() Snacks.terminal(nil, { win = { height = 0.3, position = "bottom", } }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     { "<C-_>", function() Snacks.terminal(nil, { win = { height = 0.3, position = "bottom", } }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     -- ui
+    { "<leader>es", function() Snacks.explorer() end, desc = "File Explorer" },
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
     { '<leader>h', function() Snacks.dashboard() end, desc = "Home Page" },
   },
