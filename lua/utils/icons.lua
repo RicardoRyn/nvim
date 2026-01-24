@@ -1,6 +1,6 @@
-local icons = {}
+local M = {}
 
-icons.git = {
+M.git = {
   added = "󰜄 ",
   modified = "󰏭 ",
   deleted = "󰛲 ",
@@ -16,7 +16,7 @@ icons.git = {
   unmerged = " ",
 }
 
-icons.diagnostics = {
+M.diagnostics = {
   error = " ",
   warn = " ",
   warning = " ",
@@ -26,7 +26,7 @@ icons.diagnostics = {
   trace = " ",
 }
 
-icons.comments = {
+M.comments = {
   fix = " ",
   todo = " ",
   hack = " ",
@@ -37,20 +37,20 @@ icons.comments = {
   note = "󰍨 ",
 }
 
-icons.lsp = {
+M.lsp = {
   unavailable = "",
   enabled = " ",
   disabled = " ",
   attached = "󰖩 ",
 }
 
-icons.dap = {
+M.dap = {
   Stopped = " ",
   BreakpointData = " ",
   BreakpointConditional = " ",
 }
 
-icons.kind = {
+M.kind = {
   Array = " ",
   Boolean = "󰨙 ",
   Class = " ",
@@ -93,4 +93,4 @@ icons.kind = {
   Variable = "󰀫 ",
 }
 
-return icons
+return M
