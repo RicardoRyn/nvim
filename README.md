@@ -151,29 +151,34 @@ After the first launch:
 ├── init.lua                # Entry point
 ├── lazy-lock.json          # Plugin version lock file
 ├── stylua.toml             # Lua formatter config
+├── .luarc.json             # Lua language server config
 │
 ├── lua/
 │   ├── config/             # Core configuration
 │   │   ├── autocmds.lua    # Auto commands
 │   │   ├── keymaps.lua     # Key mappings
-│   │   ├── lazy.lua        # Lazy.nvim
+│   │   ├── lazy.lua        # Lazy.nvim loader
 │   │   ├── lsp.lua         # LSP configuration
 │   │   └── options.lua     # Neovim options
 │   │
 │   ├── plugins/            # Plugin specifications
 │   │   ├── ai/             # AI-related plugins
-│   │   ├── core/           # Core plugins
+│   │   ├── core/           # Core plugins (blink, conform, mason, etc.)
 │   │   ├── dap/            # Debug adapter protocol
+│   │   ├── disabled/       # Disabled plugin configs
 │   │   ├── editor/         # Editor enhancements
 │   │   ├── tools/          # Development tools
 │   │   ├── ui/             # UI plugins
-│   │   └── vcs/            # Version control
+│   │   └── vcs/            # Version control (git, jj)
 │   │
-│   └── utils/              # Utility functions
+│   ├── neogen/             # Neogen annotation templates
+│   │
+│   └── utils/              # Utility modules
 │
 ├── after/                  # After plugins loaded
-├── lsp/                    # LSP custom configs
-└── snippets/               # Custom snippets
+├── lsp/                    # LSP server custom configs
+├── snippets/               # Custom snippets
+└── assets/                 # Screenshots & images
 ```
 
 ---
