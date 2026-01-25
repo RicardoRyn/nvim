@@ -6,9 +6,9 @@ return {
     { "MunifTanjim/nui.nvim" },
     {
       "rcarriga/nvim-notify",
-      config = function()
-        require("notify").setup({ timeout = 1000 })
-      end,
+      opts = {
+        timeout = 1000,
+      },
     },
   },
   -- stylua: ignore
@@ -56,7 +56,7 @@ return {
           event = "notify",
           find = "Config Change Detected",
         },
-        view = "mini",
+        view = "notify",
       },
       {
         filter = {
