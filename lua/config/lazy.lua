@@ -34,6 +34,11 @@ require("lazy").setup({
     { import = "plugins.ui" },
     { import = "plugins.vcs" },
   },
+  dev = {
+    path = SYSTEM.is_win and "E:/git_repositories/nvim_dev" or "~/git_repositories/nvim_dev",
+    -- fallback: 如果本地找不到这个文件夹，是否去 GitHub 下载
+    fallback = true,
+  },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { flavor } },
