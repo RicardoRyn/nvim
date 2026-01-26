@@ -1,72 +1,64 @@
 return {
   "nicolasgb/jj.nvim",
   cond = not vim.g.vscode,
-  event = "VeryLazy",
+  version = "*", -- Use latest stable release
   dependencies = {
-    "folke/snacks.nvim", -- Optional only if you use picker's
+    "folke/snacks.nvim",
+    "esmuellert/codediff.nvim",
   },
-
-  config = function()
-    local jj = require("jj")
-    jj.setup({
-      terminal = {
-        cursor_render_delay = 10, -- Adjust if cursor position isn't restoring correctly
-      },
-      cmd = {
-        describe = {
-          editor = {
-            type = "buffer",
-            keymaps = {
-              close = { "q", "<Esc>", "<C-c>" },
-            }
-          }
-        },
-        bookmark = {
-            prefix = "feat/"
-        },
-        keymaps = {
-          log = {
-            checkout = "<CR>",
-            describe = "<S-d>",
-            diff = "d",
-            abandon = "<S-a>",
-            fetch = "<S-f>",
+  -- stylua: ignore
+  keys = {
+    { "<leader>ja", function() require("jj.annotate").file() end, desc = "JJ annotate file" },
+    { "<leader>jA", function() require("jj.cmd").abandon() end, desc = "JJ abandon" },
+    { "<leader>jbc", function() require("jj.cmd").bookmark_create() end, desc = "JJ bookmark create" },
+    { "<leader>jbd", function() require("jj.cmd").bookmark_delete() end, desc = "JJ bookmark delete" },
+    { "<leader>jbm", function() require("jj.cmd").bookmark_move() end, desc = "JJ bookmark move" },
+    { "<leader>jD", function() require("jj.cmd").describe() end, desc = "JJ describe" },
+    { "<leader>jd", function() require("jj.diff").open_vdiff() end, desc = "JJ diff current buffer" },
+    { "<leader>je", function() require("jj.cmd").edit() end, desc = "JJ edit" },
+    { "<leader>jf", function() require("jj.cmd").fetch() end, desc = "JJ fetch" },
+    { "<leader>jl", function() require("jj.cmd").log({ revisions = "::", limit = 1000 }) end, desc = "JJ log all", },
+    { "<leader>jL", function() require("jj.cmd").log() end, desc = "JJ log" },
+    { "<leader>jn", function() require("jj.cmd").new() end, desc = "JJ new" },
+    { "<leader>jp", function() require("jj.cmd").push() end, desc = "JJ push" },
+    { "<leader>jpr", function() require("jj.cmd").open_pr() end, desc = "JJ open PR from bookmark in current revision or parent", },
+    { "<leader>jpl", function() require("jj.cmd").open_pr({ list_bookmarks = true }) end, desc = "JJ open PR listing available bookmarks", },
+    { "<leader>jr", function() require("jj.cmd").rebase() end, desc = "JJ rebase" },
+    { "<leader>jR", function() require("jj.cmd").redo() end, desc = "JJ redo" },
+    { "<leader>js", function() require("jj.cmd").status() end, desc = "JJ status" },
+    { "<leader>jS", function() require("jj.cmd").squash() end, desc = "JJ squash" },
+    { "<leader>jt", function() local cmd = require("jj.cmd") cmd.j("tug") cmd.log({}) end, desc = "JJ tug", },
+    { "<leader>jU", function() require("jj.cmd").undo() end, desc = "JJ undo" },
+    { "<leader>sj", function() require("jj.picker").status() end, desc = "JJ Picker status" },
+  },
+  opts = {
+    picker = { snacks = {} },
+    terminal = { cursor_render_delay = 10 },
+    diff = { backend = "codediff" },
+    cmd = {
+      describe = {
+        editor = {
+          type = "buffer",
+          keymaps = {
+            close = { "q", "<Esc>", "<C-c>" },
           },
-          status = {
-            open_file = "<CR>",
-            restore_file = "<S-x>",
-          },
-          close = { "q", "<Esc>" },
         },
       },
-      highlights = {
-        -- Customize colors if desired
-        modified = { fg = "#89ddff" },
-      }
-    })
-
-    -- Core commands
-    local cmd = require("jj.cmd")
-    vim.keymap.set("n", "<leader>jd", cmd.describe, { desc = "JJ describe" })
-    vim.keymap.set("n", "<leader>jl", cmd.log, { desc = "JJ log" })
-    vim.keymap.set("n", "<leader>jL", "<cmd>J log -r ::<cr>", { desc = "JJ log all" })
-    vim.keymap.set("n", "<leader>je", cmd.edit, { desc = "JJ edit" })
-    vim.keymap.set("n", "<leader>jn", cmd.new, { desc = "JJ new" })
-    vim.keymap.set("n", "<leader>js", cmd.status, { desc = "JJ status" })
-    vim.keymap.set("n", "<leader>jS", cmd.squash, { desc = "JJ squash" })
-    vim.keymap.set("n", "<leader>ju", cmd.undo, { desc = "JJ undo" })
-    vim.keymap.set("n", "<leader>jr", cmd.rebase, { desc = "JJ rebase" })
-    vim.keymap.set("n", "<leader>jR", cmd.redo, { desc = "JJ redo" })
-    vim.keymap.set("n", "<leader>jbc", cmd.bookmark_create, { desc = "JJ bookmark create" })
-    vim.keymap.set("n", "<leader>jbd", cmd.bookmark_delete, { desc = "JJ bookmark delete" })
-    vim.keymap.set("n", "<leader>jbm", cmd.bookmark_move, { desc = "JJ bookmark move" })
-    vim.keymap.set("n", "<leader>ja", cmd.abandon, { desc = "JJ abandon" })
-    vim.keymap.set("n", "<leader>jf", cmd.fetch, { desc = "JJ fetch" })
-    vim.keymap.set("n", "<leader>jp", cmd.push, { desc = "JJ push" })
-
-    -- Pickers
-    local picker = require("jj.picker")
-    vim.keymap.set("n", "<leader>sj", function() picker.status() end, { desc = "JJ Picker status" })
-  end,
-
+      bookmark = { prefix = "" },
+      keymaps = {
+        log = {
+          checkout = "<CR>",
+          describe = "d",
+          diff = "<S-d>",
+          abandon = "<S-a>",
+          fetch = "<S-f>",
+        },
+        status = {
+          open_file = "<CR>",
+          restore_file = "<S-x>",
+        },
+        close = { "q", "<Esc>" },
+      },
+    },
+  },
 }

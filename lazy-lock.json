@@ -16,7 +16,7 @@
   "hop.nvim": { "branch": "master", "commit": "08ddca799089ab96a6d1763db0b8adc5320bf050" },
   "hunk.nvim": { "branch": "master", "commit": "029566b4414f79508e6763a80ab6c7eda4a6dd97" },
   "indent-blankline.nvim": { "branch": "master", "commit": "005b56001b2cb30bfa61b7986bc50657816ba4ba" },
-  "jj.nvim": { "branch": "main", "commit": "9a20b2484909dc50122ace28fe2f5e0d49959fb8" },
+  "jj.nvim": { "branch": "main", "commit": "470bc244e913d9e4b832609763933d230f4ce269" },
   "kitty-scrollback.nvim": { "branch": "main", "commit": "5574df779fbe03205a08af4d9154279ff491be75" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
   "lazydev.nvim": { "branch": "main", "commit": "5231c62aa83c2f8dc8e7ba957aa77098cda1257d" },
