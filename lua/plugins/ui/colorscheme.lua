@@ -11,7 +11,7 @@ return {
         light = "latte",
         dark = "mocha",
       },
-      transparent_background = not SYSTEM.is_win,
+      transparent_background = SYSTEM.distro == "archlinux" and true or false,
       float = {
         transparent = true,
         solid = true,
