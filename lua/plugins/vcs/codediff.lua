@@ -5,7 +5,7 @@ return {
   dependencies = { "MunifTanjim/nui.nvim" },
   cmd = "CodeDiff",
   keys = {
-    { "<leader>gD", "<cmd>CodeDiff<cr>", desc = "Diff (All)" },
+    { "<leader>jC", "<cmd>CodeDiff<cr>", desc = "Conflict" },
   },
   opts = {
     keymaps = {

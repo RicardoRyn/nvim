@@ -132,13 +132,6 @@ return {
       end,
       desc = "Sidekick Toggle iFlow",
     },
-    {
-      "<leader>ao",
-      function()
-        require("sidekick.cli").toggle({ name = "opencode", focus = true })
-      end,
-      desc = "Sidekick Toggle OpenCode",
-    },
   },
   dependencies = {
     {

@@ -103,10 +103,10 @@ return {
         vim.keymap.set("n", "_", set_cwd, { buffer = b, desc = "Set cwd" })
         vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id, desc = "Toggle dotfiles" })
         vim.keymap.set("n", "gX", ui_open, { buffer = b, desc = "OS open" })
-        vim.keymap.set("n", "<leader>cc", yank_path, { buffer = b, desc = "Yank absolute path" })
-        vim.keymap.set("n", "<leader>cd", yank_dir, { buffer = b, desc = "Yank directory path" })
-        vim.keymap.set("n", "<leader>cf", yank_fname, { buffer = b, desc = "Yank file name" })
-        vim.keymap.set("n", "<leader>cr", yank_relpath, { buffer = b, desc = "Yank relative path" })
+        vim.keymap.set("n", "<leader>cc", yank_path, { buffer = b, desc = "Copy absolute path" })
+        vim.keymap.set("n", "<leader>cd", yank_dir, { buffer = b, desc = "Copy directory path" })
+        vim.keymap.set("n", "<leader>cf", yank_fname, { buffer = b, desc = "Copy file name" })
+        vim.keymap.set("n", "<leader>cr", yank_relpath, { buffer = b, desc = "Copy relative path" })
       end,
     })
 
