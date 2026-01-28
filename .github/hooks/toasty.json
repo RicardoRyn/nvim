@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionEnd": [
+      {
+        "type": "command",
+        "bash": "toasty 'Copilot finished'",
+        "powershell": "toasty.exe 'Copilot finished'",
+        "timeoutSec": 5
+      }
+    ]
+  }
+}

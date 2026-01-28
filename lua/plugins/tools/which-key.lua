@@ -17,7 +17,7 @@ return {
         { "<leader>c", group = "Copy/CSV", icon = { icon = "󰆏 " } },
         { "<leader>cs", group = "CSV", icon = { icon = " " } },
         { "<leader>d", group = "Debug" },
-        { "<leader>D", group = "Docstrings", icon = { icon = "󰙆 " } },
+        { "<leader>D", group = "Dev", icon = { icon = " " } },
         { "<leader>e", group = "File Explorer", icon = { icon = "󰙅", color = "yellow" } },
         { "<leader>f", group = "Find" },
         { "<leader>g", group = "Git" },

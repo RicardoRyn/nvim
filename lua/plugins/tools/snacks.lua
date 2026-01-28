@@ -14,13 +14,14 @@ return {
   opts = {
     bigfile = { enabled = true },
     dashboard = snacks_dashboard,
+    debug = { enabled = true },
     explorer = { enabled = true },
     gh = { enabled = true },
     image = { enabled = true },
     indent = { enabled = true, indent = { char = "▏" }, scope = { char = "▍", hl = "" } },
     input = { enabled = true },
     picker = { enabled = true, sources = { explorer = snacks_explorer_preview } },
-    notifier = { enabled = false, timeout = 3000 },
+    notifier = { enabled = true, timeout = 3000 },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = true },
@@ -92,6 +93,8 @@ return {
     { "<leader>es", function() Snacks.explorer() end, desc = "File Explorer" },
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
     { '<leader>h', function() Snacks.dashboard() end, desc = "Home Page" },
+    -- dev
+    { "<leader>Dr", function() Snacks.debug.run() end, mode = {"n", "v"}, desc = "Run Lua" },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
