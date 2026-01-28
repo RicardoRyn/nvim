@@ -11,6 +11,7 @@ return {
   cond = not vim.g.vscode,
   lazy = false,
   priority = 1000,
+  -- stylua: ignore
   opts = {
     bigfile = { enabled = true },
     dashboard = snacks_dashboard,
@@ -21,13 +22,13 @@ return {
     indent = { enabled = true, indent = { char = "▏" }, scope = { char = "▍", hl = "" } },
     input = { enabled = true },
     picker = { enabled = true, sources = { explorer = snacks_explorer_preview } },
-    notifier = { enabled = true, timeout = 3000 },
+    notifier = { enabled = true, timeout = 3000, style = "fancy", date_format = "%H:%M:%S" },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
-    styles = { notification = { wo = { wrap = true } } },
+    styles = { notification = { wo = { wrap = true }, border = "rounded", } },
   },
   -- stylua: ignore
   keys = {
@@ -81,7 +82,7 @@ return {
     { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
     { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
     -- git
-    { "<leader>gg", function() require("snacks").lazygit.open() end, desc = "LazyGit", },
+    { "<leader>gg", function() Snacks.gitbrowse.open() end, desc = "Github Browse", },
     { "<leader>ghi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
     { "<leader>ghI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
     { "<leader>ghp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
@@ -123,7 +124,7 @@ return {
     })
 
     -- 等待 Catppuccin 加载完成后异步初始化动画配置
-    -- 延迟 10ms 以确保能够获取到当前 flavour 的正确色板 (Palette)
+    -- 延迟以确保能够获取到当前 flavour 的正确色板 (Palette)
     vim.defer_fn(function()
       local flavour = require("catppuccin").flavour
       local colors = require("catppuccin.palettes").get_palette(flavour)
