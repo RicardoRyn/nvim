@@ -6,6 +6,12 @@ return {
     "folke/snacks.nvim",
     "esmuellert/codediff.nvim",
   },
+  cmd = {
+    "J",
+    "Jdiff",
+    "Jhdiff",
+    "Jvdiff",
+  },
   -- stylua: ignore
   keys = {
     { "<leader>ja", function() require("jj.annotate").file() end, desc = "JJ annotate file" },
@@ -13,8 +19,8 @@ return {
     { "<leader>jbc", function() require("jj.cmd").bookmark_create() end, desc = "JJ bookmark create" },
     { "<leader>jbd", function() require("jj.cmd").bookmark_delete() end, desc = "JJ bookmark delete" },
     { "<leader>jbm", function() require("jj.cmd").bookmark_move() end, desc = "JJ bookmark move" },
+    { "<leader>jd", function() require("jj.diff").open_vdiff({ rev = "@-" }) end, desc = "JJ diff current buffer" },
     { "<leader>jD", function() require("jj.cmd").describe() end, desc = "JJ describe" },
-    { "<leader>jd", function() require("jj.diff").open_vdiff() end, desc = "JJ diff current buffer" },
     { "<leader>je", function() require("jj.cmd").edit() end, desc = "JJ edit" },
     { "<leader>jf", function() require("jj.cmd").fetch() end, desc = "JJ fetch" },
     { "<leader>jl", function() require("jj.cmd").log({ revisions = "::", limit = 1000 }) end, desc = "JJ log all", },
