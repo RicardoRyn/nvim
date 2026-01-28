@@ -4,12 +4,6 @@ return {
   event = "VeryLazy",
   dependencies = {
     { "MunifTanjim/nui.nvim" },
-    {
-      "rcarriga/nvim-notify",
-      opts = {
-        timeout = 1000,
-      },
-    },
   },
   -- stylua: ignore
   keys = {
