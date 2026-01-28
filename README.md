@@ -209,31 +209,31 @@ After the first launch:
 <leader>
 ├── <Space> (Smart Files)
 ├── a (AI)
-│   ├── a - Sidekick toggle CLI
-│   ├── c - Sidekick toggle Copilot
-│   ├── d - Detach CLI session
-│   ├── f - Send file
-│   ├── i - Sidekick toggle iFlow
-│   ├── p - Sidekick select prompt (including Visual mode)
+│   ├── a - Toggle Sidekick CLI
+│   ├── c - Toggle Sidekick Copilot
+│   ├── d - Detach CLI Session
+│   ├── f - Send File
+│   ├── i - Toggle Sidekick iFlow
+│   ├── p - Select Sidekick Prompt (including Visual mode)
 │   ├── s - Select CLI
-│   ├── t - Send this (including Visual mode)
-│   └── v - Send visual selection (including Visual mode)
+│   ├── t - Send This (including Visual mode)
+│   └── v - Send Visual Selection (including Visual mode)
 ├── b (Buffer)
-│   ├── a - Delete all buffers
-│   ├── b - Delete pick buffer
-│   ├── d - Delete buffer
-│   ├── l - Delete buffers to the left
-│   ├── o - Delete other buffers
-│   ├── p - Toggle pin
-│   ├── r - Delete buffers to the right
-│   ├── < - Move buffer left
-│   └── > - Move buffer right
+│   ├── a - Delete All Buffers
+│   ├── b - Delete Picked Buffer
+│   ├── d - Delete Buffer
+│   ├── l - Delete Buffers Left
+│   ├── o - Delete Other Buffers
+│   ├── p - Toggle Pin
+│   ├── r - Delete Buffers Right
+│   ├── < - Move Buffer Left
+│   └── > - Move Buffer Right
 ├── c (Copy/CSV)
-│   ├── c - Copy absolute path (in Mini Files)
-│   ├── d - Copy directory path (in Mini Files)
-│   ├── f - Copy file name (in Mini Files)
-│   ├── r - Copy relative path (in Mini Files)
-│   └── sv - Toggle CSV view
+│   ├── c - Copy Absolute Path (in Mini Files)
+│   ├── d - Copy Directory Path (in Mini Files)
+│   ├── f - Copy File Name (in Mini Files)
+│   ├── r - Copy Relative Path (in Mini Files)
+│   └── sv - Toggle CSV View
 ├── d (Debug)
 │   ├── b - Breakpoint
 │   ├── B - Conditional Breakpoint
@@ -242,11 +242,11 @@ After the first launch:
 │   ├── d - Disconnect
 │   ├── D - Disconnect (Terminate Debuggee)
 │   ├── h - Hover
-│   ├── i - Step into
-│   ├── k - Step back
-│   ├── o - Step over
-│   ├── O - Step out
-│   ├── q - Terminate session
+│   ├── i - Step Into
+│   ├── k - Step Back
+│   ├── o - Step Over
+│   ├── O - Step Out
+│   ├── q - Terminate Session
 │   ├── r - Restart
 │   ├── R - Toggle REPL
 │   ├── s - Start/Continue
@@ -258,65 +258,85 @@ After the first launch:
 │       ├── S - Float Sessions
 │       └── t - Float Threads
 ├── e (Explorer)
-│   ├── e - Mini files
-│   ├── f - Mini files (current file)
-│   └── s - File explorer (for Picture preview)
+│   ├── e - Mini Files
+│   ├── f - Mini Files (Current File)
+│   └── s - File Explorer (for Picture Preview)
 ├── f (Find)
-│   ├── c - Find config files
-│   ├── f - Find files
-│   ├── g - Find git files
+│   ├── c - Find Config Files
+│   ├── f - Find Files
+│   ├── g - Find Git Files
 │   ├── p - Projects
-│   ├── r - Recent files
-│   ├── t - Todo (buffers)
-│   └── T - Todo/Fix (buffers)
+│   ├── r - Recent Files
+│   ├── t - Todo (Buffers)
+│   └── T - Todo/Fix (Buffers)
 ├── g (Git)
-│   ├── b - Blame line
-│   ├── B - Blame buffer
-│   ├── p - Preview hunk inline
-│   ├── P - Preview hunk (float)
-│   ├── r - Reset hunk
-│   ├── R - Reset buffer
-│   ├── t - Toggle current line blame
-│   ├── w - Toggle word diff
+│   ├── b - Blame Line
+│   ├── B - Blame Buffer
+│   ├── p - Preview Hunk Inline
+│   ├── P - Preview Hunk (Float)
+│   ├── r - Reset Hunk
+│   ├── R - Reset Buffer
+│   ├── t - Toggle Current Line Blame
+│   ├── w - Toggle Word Diff
 │   ├── g - LazyGit
 │   └── h (Github)
-│       ├── i - GitHub Issues (open)
-│       ├── I - GitHub Issues (all)
-│       ├── p - GitHub Pull Requests (open)
-│       └── P - GitHub Pull Requests (all)
+│       ├── i - GitHub Issues (Open)
+│       ├── I - GitHub Issues (All)
+│       ├── p - GitHub Pull Requests (Open)
+│       └── P - GitHub Pull Requests (All)
 ├── h (Home)
 ├── j (Jujutsu)
-│   ├── a - JJ annotate file
-│   ├── b (bookmark)
-│   │   ├── c - JJ bookmark create
-│   │   ├── d - JJ bookmark delete
-│   │   └── m - JJ bookmark move
-│   ├── A - JJ abandon
-│   ├── C - Conflitc
-│   ├── d - JJ diff current buffer
-│   ├── D - JJ describe
-│   ├── e - JJ edit
-│   ├── f - JJ fetch
-│   ├── l - JJ log (all)
-│   ├── L - JJ log
-│   ├── n - JJ new
-│   ├── r - JJ rebase
-│   ├── R - JJ redo
-│   ├── s - JJ status
-│   ├── S - JJ squash
-│   ├── U - JJ undo
-│   ├── p - JJ push
-│   └── t - JJ tug
-├── k (Kernel) (only in jupyter notebook)
+│   ├── a - JJ Annotate File
+│   ├── b (Bookmark)
+│   │   ├── c - JJ Bookmark Create
+│   │   ├── d - JJ Bookmark Delete
+│   │   └── m - JJ Bookmark Move
+│   ├── A - JJ Abandon
+│   ├── C - Conflict
+│   ├── d - JJ Diff Current Buffer
+│   ├── D - JJ Describe
+│   ├── e - JJ Edit
+│   ├── f - JJ Fetch
+│   ├── l - JJ Log (All)
+│   ├── L - JJ Log
+│   ├── n - JJ New
+│   ├── r - JJ Rebase
+│   ├── R - JJ Redo
+│   ├── s - JJ Status
+│   ├── S - JJ Squash
+│   ├── U - JJ Undo
+│   ├── p - JJ Push
+│   └── t - JJ Tug
+├── k (Kernel) (Only in Jupyter Notebook)
+│   ├── 0 - Restart Kernel
+│   ├── a - Insert Cell Above
+│   ├── b - Insert Cell Below
+│   ├── c - Clear Current Cell Output
+│   ├── C - Clear All Outputs
+│   ├── f - Toggle Cell Fold
+│   ├── h - Inspect Variable at Cursor
+│   ├── H - Toggle Auto-Hover
+│   ├── i - Interrupt Kernel
+│   ├── j - Open Cell Picker
+│   ├── m - Convert to Markdown Cell
+│   ├── n - Show Kernel Info
+│   ├── o - Open Cell Output in Float
+│   ├── r - Convert to Raw Cell
+│   ├── s - Start Kernel
+│   ├── S - Shutdown Kernel
+│   ├── v - Show All Variables in Cell
+│   ├── x - Execute Cell (Menu)
+│   ├── X - Execute and Next (Menu)
+│   └── y - Convert to Code Cell
 ├── l (LSP)
 │   ├── a - Code Actions
-│   ├── d - Show Diagnostics (line)
-│   ├── D - Show Diagnostics (buffer)
+│   ├── d - Show Diagnostics (Line)
+│   ├── D - Show Diagnostics (Buffer)
 │   ├── f - Code Format
 │   ├── m - Toggle Code Block
-│   ├── n - Generate docstring
+│   ├── n - Generate Docstring
 │   ├── r - Rename Symbol
-│   ├── v - Virtual Env selector
+│   ├── v - Virtual Env Selector
 │   └── sp - Restart LSP
 ├── L (Lazy)
 ├── n (Noice)
@@ -331,75 +351,75 @@ After the first launch:
 ├── s (Search/System)
 │   ├── b - Buffers
 │   ├── c - Commands
-│   ├── d - Diagnostics (buffer)
+│   ├── d - Diagnostics (Buffer)
 │   ├── D - Diagnostics
-│   ├── h - Help pages
+│   ├── h - Help Pages
 │   ├── i - Icons
-│   ├── I - Incoming calls
-│   ├── j - JJ picker status
+│   ├── I - Incoming Calls
+│   ├── j - JJ Picker Status
 │   ├── J - Jumps
 │   ├── k - Keymaps
-│   ├── l - Search for plugin spec
-│   ├── L - LSP info
+│   ├── l - Search for Plugin Spec
+│   ├── L - LSP Info
 │   ├── m - Marks
-│   ├── O - Outgoing calls
+│   ├── O - Outgoing Calls
 │   ├── p - Spelling
 │   ├── P - Pickers
 │   ├── r - Resume
-│   ├── R - Search and replace (Grug-far)
-│   ├── s - LSP symbols (buffer)
-│   ├── S - LSP symbols (workspace)
-│   ├── t - Todo comments
-│   ├── T - Todo/Fix comments
+│   ├── R - Search and Replace (Grug-far)
+│   ├── s - LSP Symbols (Buffer)
+│   ├── S - LSP Symbols (Workspace)
+│   ├── t - Todo Comments
+│   ├── T - Todo/Fix Comments
 │   ├── u - Undotree
-│   ├── v - Clipboard history
+│   ├── v - Clipboard History
 │   ├── " - Registers
-│   ├── . - Scratch select
-│   └── / - Search history
+│   ├── . - Scratch Select
+│   └── / - Search History
 ├── S (Session)
-│   ├── d - Don't save current session
-│   ├── l - Restore last session
-│   ├── s - Restore session
-│   └── S - Select session
+│   ├── d - Don't Save Current Session
+│   ├── l - Restore Last Session
+│   ├── s - Restore Session
+│   └── S - Select Session
 ├── t (Tab/Toggle)
-│   ├── d - Close tab
-│   ├── n - New tab
-│   └── s - Tab split
+│   ├── d - Close Tab
+│   ├── n - New Tab
+│   └── s - Tab Split
 ├── u (UI Toggle)
-│   ├── b - Toggle dark background
+│   ├── b - Toggle Dark Background
 │   ├── c - Colorschemes
-│   ├── d - Toggle diagnostics
-│   ├── D - Toggle dim
-│   ├── g - Toggle git signs
-│   ├── h - Toggle inlay hints
-│   ├── l - Toggle relative number
-│   ├── L - Toggle line number
-│   ├── n - Noice dismiss
-│   ├── r - Redraw / clear hlsearch / Diff update
-│   ├── w - Toggle wrap
-│   ├── z - Toggle zoom
-│   └── Z - Toggle zen mode
+│   ├── d - Toggle Diagnostics
+│   ├── D - Toggle Dim
+│   ├── g - Toggle Git Signs
+│   ├── h - Toggle Inlay Hints
+│   ├── l - Toggle Relative Number
+│   ├── L - Toggle Line Number
+│   ├── n - Noice Dismiss
+│   ├── r - Redraw / Clear hlsearch / Diff Update
+│   ├── w - Toggle Wrap
+│   ├── z - Toggle Zoom
+│   └── Z - Toggle Zen Mode
 ├── x (Trouble/QuickFix)
-│   ├── l - LSP definitions/references (Trouble)
-│   ├── L - Location list (Trouble)
-│   ├── Q - Quickfix list (Trouble)
+│   ├── l - LSP Definitions/References (Trouble)
+│   ├── L - Location List (Trouble)
+│   ├── Q - Quickfix List (Trouble)
 │   ├── s - Symbols (Trouble)
 │   ├── x - Diagnostics (Trouble)
-│   └── X - Buffer diagnostics (Trouble)
+│   └── X - Buffer Diagnostics (Trouble)
 ├── z (Zoxide)
 ├── . - Scratch
 ├── : - Command History
 ├── ? - Buffer Local Keymaps
 └── / (Grep)
-    ├── b - Grep buffers
+    ├── b - Grep Buffers
     ├── l - Lines
-    ├── w - Grep word
+    ├── w - Grep Word
     └── / - Grep
 ```
 
 ### Other Keymaps
 
-**Motion & Navigation**
+**Motion**
 
 - `jk` - Exit insert mode
 - `s` / `S` / `r` / `R` - Flash jump/treesitter/search
