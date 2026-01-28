@@ -51,19 +51,29 @@ local function playStage(stageName, duration, reverse, colors, nextCallback)
 end
 
 M.theAnimation = function(callback, colors)
-  playStage("static", 50, false, colors, function()
-    playStage("glitch", 20, false, colors, function()
-      playStage("static", 200, false, colors, function()
-        playStage("glitch", 10, true, colors, function()
-          playStage("static", 250, false, colors, function()
-            if callback then
-              M.theAnimation(callback, colors)
-            end
-          end)
-        end)
-      end)
+  local sequence = {
+    { stage = "static", duration = 50, reverse = false },
+    { stage = "glitch", duration = 20, reverse = false },
+    { stage = "static", duration = 200, reverse = false },
+    { stage = "glitch", duration = 10, reverse = true },
+    { stage = "static", duration = 250, reverse = false },
+  }
+
+  local function playSequence(index)
+    if index > #sequence then
+      if callback then
+        M.theAnimation(callback, colors)
+      end
+      return
+    end
+
+    local current = sequence[index]
+    playStage(current.stage, current.duration, current.reverse, colors, function()
+      playSequence(index + 1)
     end)
-  end)
+  end
+
+  playSequence(1)
 end
 
 return M
