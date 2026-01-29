@@ -50,7 +50,7 @@ return {
           event = "notify",
           find = "Config Change Detected",
         },
-        view = "notify",
+        view = "mini",
       },
       {
         filter = {

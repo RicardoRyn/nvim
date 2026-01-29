@@ -19,7 +19,7 @@ return {
       },
       tools = {
         iflow = { cmd = { "iflow", "-c", "--default", "--thinking" } },
-        copilot = { cmd = { "copilot", "--banner", "--resume" } },
+        copilot = { cmd = { "copilot", "--banner" } },
       },
       prompts = {
         changes = "你能审查一下我的更改吗？",

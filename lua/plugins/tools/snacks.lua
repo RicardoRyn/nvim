@@ -96,6 +96,7 @@ return {
     { '<leader>h', function() Snacks.dashboard() end, desc = "Home Page" },
     -- dev
     { "<leader>Dr", function() Snacks.debug.run() end, mode = {"n", "v"}, desc = "Run Lua" },
+    { "<leader>r", function() Snacks.picker.notifications() end, mode = {"n", "v"}, desc = "Run Lua" },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
@@ -130,7 +131,7 @@ return {
       local colors = require("catppuccin.palettes").get_palette(flavour)
       dbAnim.theAnimation(dbAnim.theAnimation, colors)
 
-      -- 若非透明模式下为 latte 模式，则手动覆盖 CursorLine 背景色以优化视觉效果
+      -- 若非透明模式下启用 latte，则手动覆盖 CursorLine 背景色以优化视觉效果
       local catppuccin = require("catppuccin")
       if not catppuccin.options.transparent_background and catppuccin.flavour == "latte" then
         vim.cmd([[highlight CursorLine guibg=#dce0e8]])

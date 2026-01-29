@@ -36,6 +36,8 @@ return {
       -- MATLAB
       "matlab-language-server",
       "miss_hit",
+      -- LATEX
+      "latexindent",
     },
   },
   config = function(_, opts)

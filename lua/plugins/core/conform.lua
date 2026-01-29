@@ -44,9 +44,13 @@ return {
       yaml = { "prettierd" },
       -- MATLAB
       matlab = { "miss_hit" },
+      -- LATEX
+      tex = { "latexindent" },
+      plaintex = { "latexindent" },
     },
     formatters = {
       miss_hit = { command = "mh_style", args = { "--fix", "$FILENAME" }, stdin = false, exit_codes = { 0, 1 } },
+      latexindent = { prepend_args = { "-y=defaultIndent:'  '" } },
     },
   },
   config = function(_, opts)
