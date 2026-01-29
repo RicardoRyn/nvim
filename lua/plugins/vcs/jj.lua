@@ -1,7 +1,6 @@
 return {
   "nicolasgb/jj.nvim",
   cond = not vim.g.vscode,
-  version = "*", -- Use latest stable release
   dependencies = {
     "folke/snacks.nvim",
     "esmuellert/codediff.nvim",

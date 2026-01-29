@@ -37,6 +37,7 @@ return {
       "matlab-language-server",
       "miss_hit",
       -- LATEX
+      "texlab",
       "latexindent",
     },
   },

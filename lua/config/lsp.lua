@@ -8,6 +8,7 @@ vim.lsp.enable("rust-analyzer")
 vim.lsp.enable("marksman")
 vim.lsp.enable("yamlls")
 vim.lsp.enable("matlab_ls")
+vim.lsp.enable("texlab")
 
 -- UI
 vim.g.diagnostics_visible = true

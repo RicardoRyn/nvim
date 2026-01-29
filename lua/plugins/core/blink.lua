@@ -38,6 +38,9 @@ return {
     },
     sources = {
       default = { "lsp", "path", "snippets", "buffer", "lazydev" },
+      per_filetype = {
+        tex = { inherit_defaults = true, "omni" },
+      },
       providers = {
         lazydev = {
           name = "LazyDev",
