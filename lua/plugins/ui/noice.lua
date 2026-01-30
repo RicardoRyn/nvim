@@ -1,5 +1,8 @@
 return {
   "folke/noice.nvim",
+  branch = "main", -- 防止lazy.nvim无法识别jj分支
+  dev = true,
+
   cond = not vim.g.vscode,
   event = "VeryLazy",
   dependencies = {

@@ -1,8 +1,8 @@
 return {
-  "RicardoRyn/ipynb.nvim",
-  name = "ipynb.nvim",
-  dev = true,
+  "ajbuccin/ipynb.nvim",
   branch = "main",
+  dev = true,
+
   cond = not vim.g.vscode,
   event = "VeryLazy",
   dependencies = {

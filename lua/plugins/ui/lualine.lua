@@ -2,6 +2,7 @@ return {
   "nvim-lualine/lualine.nvim",
   cond = not vim.g.vscode,
   event = "VeryLazy",
+  dependencies = { "folke/noice.nvim" },
   opts = {
     options = {
       globalstatus = true,
@@ -83,8 +84,12 @@ return {
         },
         -- 搜索信息
         {
-          require("noice").api.status.search.get,
-          cond = require("noice").api.status.search.has,
+          function()
+            return require("noice").api.status.search.get()
+          end,
+          cond = function()
+            return package.loaded["noice"] and require("noice").api.status.search.has()
+          end,
         },
         -- 诊断信息
         {
