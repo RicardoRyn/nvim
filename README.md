@@ -4,7 +4,7 @@
 
 # 🚀 My Neovim Configuration
 
-_To be jj cake hand 🍰✋._
+_🍰 To be jj cake hand ✋._
 
 [![Neovim](https://img.shields.io/badge/Neovim-0.10+-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=white)](https://neovim.io)
 [![Lua](https://img.shields.io/badge/Made%20with%20Lua-2C2D72.svg?style=flat-square&logo=lua&logoColor=white)](https://lua.org)
