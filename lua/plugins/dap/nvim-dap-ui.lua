@@ -8,8 +8,6 @@ return {
     -- "theHamsta/nvim-dap-virtual-text",
   },
   config = function()
-    require("noice").setup()
-
     local dap, dapui = require("dap"), require("dapui")
     -- 启动调试时自动打开UI，关闭调试时自动关闭UI
     dap.listeners.before.attach.dapui_config = function()

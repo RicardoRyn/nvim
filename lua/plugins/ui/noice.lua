@@ -13,7 +13,7 @@ return {
     { "<leader>un", function() require("noice").cmd("dismiss") end, desc = "Noice Dismiss" },
     { "<leader>nn", function() require("noice").cmd("pick") end, desc = "Noice Picker" },
     { "<leader>na", function() require("noice").cmd("all") end, desc = "All" },
-    { "<leader>ne", function() require("noice").cmd("error") end, desc = "Error" },
+    { "<leader>ne", function() require("noice").cmd("errors") end, desc = "Error" },
     { "<leader>nh", function() require("noice").cmd("history") end, desc = "History" },
     { "<leader>nl", function() require("noice").cmd("last") end, desc = "Last Message" },
     { "<leader>nm", "<cmd>messages<CR>", desc = "Messages" },
@@ -65,6 +65,7 @@ return {
     },
     commands = {
       history = { view = "popup" },
+      last = { view = "popup" },
       errors = { view = "popup" },
       all = { view = "popup" },
     },
