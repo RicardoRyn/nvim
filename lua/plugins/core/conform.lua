@@ -40,8 +40,12 @@ return {
       -- MARKDOWN
       markdown = { "injected", "prettierd" },
       quarto = { "injected" },
+      -- JSON
+      json  = { "prettierd" },
+      jsonc = { "prettierd" },
       -- YAML
       yaml = { "prettierd" },
+      yml   = { "prettierd" },
       -- MATLAB
       matlab = { "miss_hit" },
       -- LATEX

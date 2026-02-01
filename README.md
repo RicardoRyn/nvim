@@ -80,17 +80,14 @@ _🍰 To be jj cake hand ✋._
   </tr>
 </table>
 
-### 🎯 Additional Highlights
+### 🌟 Highlights
 
-- **🔥 Performance**: Lazy loading with lazy.nvim for instant startup
-- **📝 Rich Editing**: Markdown preview, CSV viewer, and Jupyter notebook support
-- **🌳 JJ Integrated**: Fully compatible with Jujutsu (jj) and Git version control
-- **🔧 LSP & Formatting**: Full LSP support via Mason, plus conform.nvim and nvim-lint
-- **🎯 Code Navigation**: Symbols outline, Trouble, Flash, and Hop for seamless movement
-- **📦 Session Management**: Automatic session persistence
-- **🎨 Syntax Highlighting**: Treesitter with rainbow delimiters & indentation guides
-- **🔍 Search & Replace**: Powerful search via snacks.picker & Grug-far
-- **🐍 Python Development**: Virtual env selector and REPL integration with vim-slime
+- **💻 VSCode-Native Editing** - Bring Neovim's modal editing to VSCode with motion plugins (Flash, Hop) for Jupyter notebooks and other workflows
+- **🌳 JJ-Powered Version Control** - Deep integration with Jujutsu (jj), featuring animated status display with conflict detection, bookmark management, and seamless Git compatibility
+- **🔧 Cross-Platform Intelligence** - Auto-detects system environment (Windows/Mac/Linux) and adapts behavior accordingly
+- **✨ Dynamic Dashboard** - Animated ASCII art with glitch effects
+- **🐍 Python-First Documentation** - Custom Neogen templates with Chinese support, auto-extracting parameter defaults, type hints, and return values
+- **📓 Full Jupyter Notebook Support** - Complete .ipynb editing experience with cell management, kernel control, inline output preview, and REPL integration
 
 ---
 
@@ -137,37 +134,46 @@ _🍰 To be jj cake hand ✋._
 
 ```
 ~/.config/nvim/
-├── init.lua                # Entry point
-├── lazy-lock.json          # Plugin version lock file
-├── stylua.toml             # Lua formatter config
-├── .luarc.json             # Lua language server config
+├── init.lua                            # Entry point
+├── lazy-lock.json                      # Plugin version lock file
+├── stylua.toml                         # Lua formatter config
+├── .luarc.json                         # Lua language server config
 │
 ├── lua/
-│   ├── config/             # Core configuration
-│   │   ├── autocmds.lua    # Auto commands
-│   │   ├── keymaps.lua     # Key mappings
-│   │   ├── lazy.lua        # Lazy.nvim loader
-│   │   ├── lsp.lua         # LSP configuration
-│   │   └── options.lua     # Neovim options
+│   ├── config/                         # Core configuration
+│   │   ├── autocmds.lua                # Auto commands
+│   │   ├── keymaps.lua                 # Key mappings
+│   │   ├── lazy.lua                    # Lazy.nvim loader
+│   │   ├── lsp.lua                     # LSP configuration
+│   │   └── options.lua                 # Neovim options
 │   │
-│   ├── plugins/            # Plugin specifications
-│   │   ├── ai/             # AI-related plugins
-│   │   ├── core/           # Core plugins (blink, conform, mason, etc.)
-│   │   ├── dap/            # Debug adapter protocol
-│   │   ├── disabled/       # Disabled plugin configs
-│   │   ├── editor/         # Editor enhancements
-│   │   ├── tools/          # Development tools
-│   │   ├── ui/             # UI plugins
-│   │   └── vcs/            # Version control (git, jj)
+│   ├── plugins/                        # Plugin specifications
+│   │   ├── ai/                         # AI-related plugins
+│   │   ├── core/                       # Core plugins (blink, conform, mason, etc.)
+│   │   ├── dap/                        # Debug adapter protocol
+│   │   ├── disabled/                   # Disabled plugin configs
+│   │   ├── editor/                     # Editor enhancements
+│   │   ├── tools/                      # Development tools
+│   │   ├── ui/                         # UI plugins
+│   │   └── vcs/                        # Version control (git, jj)
 │   │
-│   ├── neogen/             # Neogen annotation templates
+│   ├── neogen/                         # Neogen annotation templates
+│   │   └── python/                     # Python-specific templates with Chinese support
 │   │
-│   └── utils/              # Utility modules
+│   └── utils/                          # Utility modules
+│       ├── ascii_arts.lua              # ASCII art for dashboard
+│       ├── dashboardAnimation.lua      # Dashboard glitch animation
+│       ├── debug.lua                   # Debug utilities
+│       ├── icons.lua                   # Icon mappings
+│       ├── jj_status.lua               # JJ status display
+│       ├── snacks_dashboard.lua        # Snacks dashboard config
+│       ├── snacks_explorer_preview.lua # Snacks explorer preview
+│       └── system.lua                  # System detection
 │
-├── after/                  # After plugins loaded
-├── lsp/                    # LSP server custom configs
-├── snippets/               # Custom snippets
-└── assets/                 # Screenshots & images
+├── after/                              # After plugins loaded
+├── lsp/                                # LSP server custom configs
+├── snippets/                           # Custom snippets
+└── assets/                             # Screenshots & images
 ```
 
 ---
@@ -292,6 +298,7 @@ For the complete list of VSCode-specific keymaps, see the **[VSCode Keymaps](#vs
 │   ├── l - Delete Buffers Left
 │   ├── o - Delete Other Buffers
 │   ├── p - Toggle Pin
+│   ├── P - Delete Unpined Buffers
 │   ├── r - Delete Buffers Right
 │   ├── < - Move Buffer Left
 │   └── > - Move Buffer Right
@@ -324,6 +331,8 @@ For the complete list of VSCode-specific keymaps, see the **[VSCode Keymaps](#vs
 │       ├── s - Float Scopes
 │       ├── S - Float Sessions
 │       └── t - Float Threads
+├── D (Dev)
+│   └── r (Run lua)
 ├── e (Explorer)
 │   ├── e - Mini Files
 │   ├── f - Mini Files (Current File)
@@ -354,11 +363,11 @@ For the complete list of VSCode-specific keymaps, see the **[VSCode Keymaps](#vs
 ├── h (Home)
 ├── j (Jujutsu)
 │   ├── a - JJ Annotate File
+│   ├── A - JJ Abandon
 │   ├── b (Bookmark)
 │   │   ├── c - JJ Bookmark Create
 │   │   ├── d - JJ Bookmark Delete
 │   │   └── m - JJ Bookmark Move
-│   ├── A - JJ Abandon
 │   ├── C - Conflict
 │   ├── d - JJ Diff Current Buffer
 │   ├── D - JJ Describe
@@ -372,7 +381,10 @@ For the complete list of VSCode-specific keymaps, see the **[VSCode Keymaps](#vs
 │   ├── s - JJ Status
 │   ├── S - JJ Squash
 │   ├── U - JJ Undo
-│   ├── p - JJ Push
+│   ├── p (Push/PR)
+│   │   ├── l - JJ open PR from bookmark in current revision or parent
+│   │   ├── p - JJ Push
+│   │   └── r - JJ open PR from bookmark in current revision or parent
 │   └── t - JJ Tug
 ├── k (Kernel) (Only in Jupyter Notebook)
 │   ├── 0 - Restart Kernel
@@ -413,7 +425,6 @@ For the complete list of VSCode-specific keymaps, see the **[VSCode Keymaps](#vs
 │   ├── l - Last Message
 │   ├── m - Messages
 │   └── n - Noice Picker
-├── o (Outline)
 ├── p (Paste)
 ├── s (Search/System)
 │   ├── b - Buffers
@@ -426,8 +437,8 @@ For the complete list of VSCode-specific keymaps, see the **[VSCode Keymaps](#vs
 │   ├── j - JJ Picker Status
 │   ├── J - Jumps
 │   ├── k - Keymaps
-│   ├── l - Search for Plugin Spec
-│   ├── L - LSP Info
+│   ├── l - LSP Info
+│   ├── L - Search for Plugin Spec
 │   ├── m - Marks
 │   ├── O - Outgoing Calls
 │   ├── p - Spelling
@@ -442,7 +453,8 @@ For the complete list of VSCode-specific keymaps, see the **[VSCode Keymaps](#vs
 │   ├── v - Clipboard History
 │   ├── " - Registers
 │   ├── . - Scratch Select
-│   └── / - Search History
+│   ├── / -
+│   └── : - Command Select
 ├── S (Session)
 │   ├── d - Don't Save Current Session
 │   ├── l - Restore Last Session
@@ -461,6 +473,7 @@ For the complete list of VSCode-specific keymaps, see the **[VSCode Keymaps](#vs
 │   ├── h - Toggle Inlay Hints
 │   ├── l - Toggle Relative Number
 │   ├── L - Toggle Line Number
+│   ├── m - Markdown Preview
 │   ├── n - Noice Dismiss
 │   ├── r - Redraw / Clear hlsearch / Diff Update
 │   ├── w - Toggle Wrap
