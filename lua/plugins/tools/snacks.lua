@@ -48,7 +48,7 @@ return {
     -- search
     { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>.", function() Snacks.scratch() end, desc = "Scratch" },
-    { "<leader>:", function() Snacks.picker.command_history() end, mode = { "n", "v" }, desc = "Command History" },
+    { "<leader>s:", function() Snacks.picker.command_history() end, mode = { "n", "v" }, desc = "Command History" },
     { "<leader>z", function() Snacks.picker.zoxide() end, desc = "Zoxide" },
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
     { '<leader>s.', function() Snacks.scratch.select() end, desc = "Scratch" },
@@ -96,7 +96,6 @@ return {
     { '<leader>h', function() Snacks.dashboard() end, desc = "Home Page" },
     -- dev
     { "<leader>Dr", function() Snacks.debug.run() end, mode = {"n", "v"}, desc = "Run Lua" },
-    { "<leader>r", function() Snacks.picker.notifications() end, mode = {"n", "v"}, desc = "Run Lua" },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {

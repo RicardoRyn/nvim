@@ -13,7 +13,7 @@ return {
     { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
     { "<leader>bo", function() Snacks.bufdelete.other() end, desc = "Delete Other Buffer", },
     { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
-    { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete All Buffers" },
+    { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Unpined Buffers" },
     { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
     { "<leader>b<", "<cmd>BufferLineMovePrev<cr>", desc = "Move Buffer Prev" },
     { "<leader>b>", "<cmd>BufferLineMoveNext<cr>", desc = "Move Buffer Next" },
