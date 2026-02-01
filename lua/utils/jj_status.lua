@@ -1,5 +1,31 @@
 local M = {}
 
+-- HACK: 尝试在特殊模式下禁用此模块，以避免冲突
+local function is_special_mode()
+  -- 检查命令行参数
+  local args = vim.fn.argv()
+  for _, arg in ipairs(args) do
+    if arg:match("DiffEditor") or arg:match("vimdiff") then
+      return true
+    end
+  end
+  -- 检查是否启动时就打开了多个窗口（merge-editor 特征）
+  if vim.fn.argc() > 2 then
+    return true
+  end
+  return false
+end
+
+if is_special_mode() then
+  M.get = function()
+    return ""
+  end
+  M.get_color = function()
+    return nil
+  end
+  return M
+end
+
 local jj_cmd = [[jj log --revisions @ --no-graph --color never --limit 1 --template '
   separate(" ",
     change_id.shortest(4),
@@ -26,25 +52,9 @@ local cached_status = ""
 local is_exiting = false
 local running_job_id = nil
 
-local function is_diff_editor()
-  -- 检测是否作为 jj 的 diff-editor 运行
-  local args = vim.fn.argv()
-  for _, arg in ipairs(args) do
-    if arg:match("DiffEditor") then
-      return true
-    end
-  end
-  return false
-end
-
 local function update_status()
   -- 如果正在退出，不启动新的 jj 进程
   if is_exiting then
-    return
-  end
-
-  -- 如果作为 diff-editor 运行，不执行 jj 命令以避免嵌套冲突
-  if is_diff_editor() then
     return
   end
 
@@ -78,8 +88,7 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
   -- 在退出前停止所有正在运行的 jj 进程，防止产生锁文件
   callback = function()
     is_exiting = true
-    -- 如果作为 diff-editor 运行，不要杀死 jj 进程，因为父进程 jj 正在等待
-    if not is_diff_editor() and running_job_id then
+    if running_job_id then
       vim.fn.jobstop(running_job_id)
       running_job_id = nil
     end
@@ -96,13 +105,13 @@ M.get_color = function()
   if cached_status == "" then
     return nil
   end
-  -- 根据图标判断颜色
+
   if cached_status:find("💥") or cached_status:find("🚧") or cached_status:find("🔒") then
-    return { fg = colors.red, gui = "bold" } -- 红色 (Conflict)
+    return { fg = colors.red, gui = "bold" }
   elseif string.find(cached_status, "󰱒") then
-    return { fg = colors.green, gui = "bold" } -- 绿色 (Empty/Clean)
+    return { fg = colors.green, gui = "bold" }
   else
-    return { fg = colors.yellow, gui = "bold" } -- 黄色 (WIP/Dirty)
+    return { fg = colors.yellow, gui = "bold" }
   end
 end
 
