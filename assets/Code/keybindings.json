@@ -1,0 +1,403 @@
+[
+    // ══════════════════════════════════════════════════════════════
+    // Notebook 导航快捷键 - 类 Vim 风格的标签页切换
+    // ══════════════════════════════════════════════════════════════
+
+    // 禁用 shift+l 的默认行为（切换行号显示），为自定义快捷键让路
+    {
+        "key": "shift+l",
+        "command": "-notebook.toggleLineNumbers",
+        "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"
+    },
+    // shift+l - 在 Notebook Cell List 聚焦时：切换到下一个编辑器标签页（类似 Vim 的 gt）
+    {
+        "key": "shift+l",
+        "command": "workbench.action.nextEditor",
+        "when": "notebookCellListFocused && !inputFocus"
+    },
+    {
+        "key": "ctrl+pagedown",
+        "command": "-workbench.action.nextEditor"
+    },
+    // shift+h - 在 Notebook Cell List 聚焦时：切换到上一个编辑器标签页（类似 Vim 的 gT）
+    {
+        "key": "shift+h",
+        "command": "workbench.action.previousEditor",
+        "when": "notebookCellListFocused && !inputFocus"
+    },
+    {
+        "key": "ctrl+pageup",
+        "command": "-workbench.action.previousEditor"
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // Notebook Cell 编辑 - Vim 风格的进入编辑模式
+    // ══════════════════════════════════════════════════════════════
+
+    // l 键 - 在 Notebook Cell List 聚焦时：进入当前 cell 的编辑模式（类似 Vim 的 i/a，但用 l 更符合向右移动的直觉）
+    {
+        "key": "l",
+        "command": "notebook.cell.edit",
+        "when": "notebookCellListFocused && !editorHoverFocused && !inputFocus && !notebookOutputInputFocused"
+    },
+    {
+        "key": "enter",
+        "command": "-notebook.cell.edit",
+        "when": "notebookCellListFocused && !editorHoverFocused && !inputFocus && !notebookOutputInputFocused"
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // Notebook 输出管理
+    // ══════════════════════════════════════════════════════════════
+
+    // ctrl+backspace - 清除 Notebook 中所有 cell 的输出（快速清理执行结果）
+    {
+        "key": "ctrl+backspace",
+        "command": "notebook.clearAllCellsOutputs"
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // 编辑器导航 - Vim 风格的跳转历史
+    // ══════════════════════════════════════════════════════════════
+
+    // ctrl+o/i - 在编辑器中前后跳转历史位置（与 Neovim 的 <C-o> 和 <C-i> 保持一致）
+    {
+        "key": "ctrl+o",
+        "command": "workbench.action.navigateBack",
+        "when": "editorTextFocus && neovim.mode == 'normal'"
+    },
+    {
+        "key": "ctrl+i",
+        "command": "workbench.action.navigateForward",
+        "when": "editorTextFocus && neovim.mode == 'normal'"
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // 行移动 - Alt+j/k 快速移动当前行/选区
+    // ══════════════════════════════════════════════════════════════
+
+    // alt+j - 将当前行或选中行向下移动（非 insert 模式）
+    {
+        "command": "vscode-neovim.send",
+        "key": "alt+j",
+        "when": "editorTextFocus && neovim.mode != insert",
+        "args": "<A-j>"
+    },
+    // alt+k - 将当前行或选中行向上移动（非 insert 模式）
+    {
+        "command": "vscode-neovim.send",
+        "key": "alt+k",
+        "when": "editorTextFocus && neovim.mode != insert",
+        "args": "<A-k>"
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // Notebook Cell 状态切换 - ctrl+j ctrl+k 多功能快捷键
+    // ══════════════════════════════════════════════════════════════
+
+    // ctrl+j ctrl+k - 退出 Notebook Cell 的编辑模式（回到 Cell List 导航模式，类似 Vim 的 <Esc>）
+    {
+        "key": "ctrl+j ctrl+k",
+        "command": "notebook.cell.quitEdit",
+        "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !inlineChatFocused && neovim.mode != insert"
+    },
+    {
+        "key": "escape",
+        "command": "-notebook.cell.quitEdit",
+        "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !inlineChatFocused"
+    },
+    // ctrl+j ctrl+k - 展开已折叠的 Cell 输入区域
+    {
+        "key": "ctrl+j ctrl+k",
+        "command": "notebook.cell.expandCellInput",
+        "when": "notebookCellInputIsCollapsed && notebookCellListFocused"
+    },
+    {
+        "key": "ctrl+k ctrl+c",
+        "command": "-notebook.cell.expandCellInput",
+        "when": "notebookCellInputIsCollapsed && notebookCellListFocused"
+    },
+    // ctrl+j ctrl+k - 折叠 Cell 输入区域（隐藏代码，只显示输出）
+    {
+        "key": "ctrl+j ctrl+k",
+        "command": "notebook.cell.collapseCellInput",
+        "when": "notebookCellListFocused && !inputFocus && !notebookCellInputIsCollapsed"
+    },
+    {
+        "key": "ctrl+k ctrl+c",
+        "command": "-notebook.cell.collapseCellInput",
+        "when": "notebookCellListFocused && !inputFocus && !notebookCellInputIsCollapsed"
+    },
+    // 禁用 ctrl+h 的查找替换功能（为窗口导航让路）
+    {
+        "key": "ctrl+h",
+        "command": "-editor.action.startFindReplaceAction",
+        "when": "editorFocus || editorIsOpen"
+    },
+    // ctrl+shift+alt+c - 折叠 Notebook 中所有 Cell 的输入区域（快速清理视图）
+    {
+        "key": "ctrl+shift+alt+c",
+        "command": "notebook.cell.collapseAllCellInputs"
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // 快速滚动 - 修改 Vim 的半屏滚动为小幅度移动
+    // ══════════════════════════════════════════════════════════════
+
+    // ctrl+d - 向下移动 5 行（替代 Vim 的半屏向下，更精确控制）
+    {
+        "key": "ctrl+d",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.mode != 'insert'",
+        "args": "5j"
+    },
+    // ctrl+u - 向上移动 5 行（替代 Vim 的半屏向上，更精确控制）
+    {
+        "key": "ctrl+u",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.mode != 'insert'",
+        "args": "5k"
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // 终端管理
+    // ══════════════════════════════════════════════════════════════
+
+    // 禁用 ctrl+j 切换面板（避免与 Nushell 等 Shell 的命令补全冲突）
+    {
+        "key": "ctrl+j",
+        "command": "-workbench.action.togglePanel"
+    },
+    // ctrl+` - 打开外部终端（系统默认终端，如 Windows Terminal）
+    {
+        "key": "ctrl+`",
+        "command": "workbench.action.terminal.openNativeConsole",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+c",
+        "command": "-workbench.action.terminal.openNativeConsole",
+        "when": "!terminalFocus"
+    },
+    // ctrl+/ - 切换内置终端的显示/隐藏
+    {
+        "key": "ctrl+/",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminal.active"
+    },
+    {
+        "key": "ctrl+`",
+        "command": "-workbench.action.terminal.toggleTerminal",
+        "when": "terminal.active"
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // Markdown 预览
+    // ══════════════════════════════════════════════════════════════
+
+    // 禁用 ctrl+shift+v 的 Markdown 预览（可能与其他功能冲突或使用其他预览方式）
+    {
+        "key": "ctrl+shift+v",
+        "command": "-markdown.showPreview",
+        "when": "!notebookEditorFocused && editorLangId == 'markdown'"
+    },
+    {
+        "key": "ctrl+shift+v",
+        "command": "-markdown-preview-enhanced.openPreview",
+        "when": "editorLangId == 'markdown'"
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // 代码折叠 - Vim 风格的 h/l（左/右）折叠/展开
+    // ══════════════════════════════════════════════════════════════
+
+    // alt+h - 折叠当前代码块（如函数、类、循环等）
+    {
+        "key": "alt+h",
+        "command": "editor.fold",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    {
+        "key": "ctrl+shift+[",
+        "command": "-editor.fold",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    // alt+l - 展开当前代码块
+    {
+        "key": "alt+l",
+        "command": "editor.unfold",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    {
+        "key": "ctrl+shift+]",
+        "command": "-editor.unfold",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // 文件操作
+    // ══════════════════════════════════════════════════════════════
+
+    // 禁用 ctrl+n 新建文件（可能与其他功能冲突或习惯使用其他方式）
+    {
+        "key": "ctrl+n",
+        "command": "-workbench.action.files.newUntitledFile"
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // 复制粘贴 - 增强 Vim Visual 模式的系统剪贴板支持
+    // ══════════════════════════════════════════════════════════════
+
+    // ctrl+c - 在 Vim Visual 模式下复制选中内容到系统剪贴板（增强原生 Vim 的 y）
+    {
+        "key": "ctrl+c",
+        "command": "editor.action.clipboardCopyAction",
+        "when": "editorTextFocus && neovim.mode == 'visual'"
+    },
+    // 禁用终端中的 ctrl+v 粘贴（避免与 Nushell 等 Shell 的补全提示冲突）
+    {
+        "key": "ctrl+v",
+        "command": "-workbench.action.terminal.paste",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    // ctrl+shift+= - 最大化/还原终端面板（快速全屏查看终端输出）
+    {
+        "key": "ctrl+shift+oem_plus",
+        "command": "workbench.action.toggleMaximizedPanel"
+    },
+    {
+        "key": "ctrl+shift+oem_plus",
+        "command": "-workbench.action.zoomIn"
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // Jupyter Notebook 内核管理
+    // ══════════════════════════════════════════════════════════════
+
+    // shift+alt+backspace - 重启 Jupyter Kernel（清除所有变量和状态，重新开始）
+    {
+        "key": "shift+alt+backspace",
+        "command": "jupyter.restartkernel"
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // Notebook Cell 操作 - Vim 风格的复制粘贴和类型切换
+    // ══════════════════════════════════════════════════════════════
+
+    // y - 复制当前 Cell（类似 Vim 的 yy 复制行）
+    {
+        "key": "y",
+        "command": "notebook.cell.copy",
+        "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"
+    },
+    {
+        "key": "c",
+        "command": "-notebook.cell.copy",
+        "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"
+    },
+    // c - 将 Markdown Cell 转换为 Code Cell（c = code）
+    {
+        "key": "c",
+        "command": "notebook.cell.changeToCode",
+        "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused && activeEditor == 'workbench.editor.notebook' && notebookCellType == 'markup'"
+    },
+    {
+        "key": "y",
+        "command": "-notebook.cell.changeToCode",
+        "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused && activeEditor == 'workbench.editor.notebook' && notebookCellType == 'markup'"
+    },
+    // p - 粘贴 Cell（类似 Vim 的 p 粘贴）
+    {
+        "key": "p",
+        "command": "notebook.cell.paste",
+        "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"
+    },
+    {
+        "key": "v",
+        "command": "-notebook.cell.paste",
+        "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // 窗口导航 - Vim 风格的分屏切换
+    // ══════════════════════════════════════════════════════════════
+    // 注意：这些快捷键需要与 Neovim 的 keymaps.lua 中的配置保持一致
+
+    // ctrl+h - 聚焦到左侧窗口/编辑器组（类似 Vim 的 <C-w>h）
+    {
+        "key": "ctrl+h",
+        "command": "workbench.action.navigateLeft",
+        "when": "!editorTextFocus && !terminalFocus && neovim.mode != 'cmdline'"
+    },
+    {
+        "key": "ctrl+w h",
+        "command": "-workbench.action.navigateLeft",
+        "when": "!editorTextFocus && !terminalFocus && neovim.mode != 'cmdline'"
+    },
+    // ctrl+l - 聚焦到右侧窗口/编辑器组（类似 Vim 的 <C-w>l）
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.navigateRight",
+        "when": "!editorTextFocus && !terminalFocus && neovim.mode != 'cmdline'"
+    },
+    {
+        "key": "ctrl+w l",
+        "command": "-workbench.action.navigateRight",
+        "when": "!editorTextFocus && !terminalFocus && neovim.mode != 'cmdline'"
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // Notebook 整体折叠 - 折叠/展开整个 Cell（包括输入和输出）
+    // ══════════════════════════════════════════════════════════════
+
+    // alt+l - 展开折叠的 Notebook Cell
+    {
+        "key": "alt+l",
+        "command": "notebook.unfold",
+        "when": "notebookEditorFocused && !inputFocus && activeEditor == 'workbench.editor.notebook'"
+    },
+    {
+        "key": "ctrl+shift+oem_6",
+        "command": "-notebook.unfold",
+        "when": "notebookEditorFocused && !inputFocus && activeEditor == 'workbench.editor.notebook'"
+    },
+    // alt+h - 折叠 Notebook Cell
+    {
+        "key": "alt+h",
+        "command": "notebook.fold",
+        "when": "notebookEditorFocused && !inputFocus && activeEditor == 'workbench.editor.notebook'"
+    },
+    {
+        "key": "ctrl+shift+oem_4",
+        "command": "-notebook.fold",
+        "when": "notebookEditorFocused && !inputFocus && activeEditor == 'workbench.editor.notebook'"
+    },
+
+    // alt+backspace - 清除当前 Notebook Cell 的输出（单个 Cell）
+    {
+        "key": "alt+backspace",
+        "command": "notebook.cell.clearOutputs",
+        "when": "notebookCellEditable && notebookCellHasOutputs && notebookEditable && notebookEditorFocused && !inputFocus"
+    },
+    {
+        "key": "alt+delete",
+        "command": "-notebook.cell.clearOutputs",
+        "when": "notebookCellEditable && notebookCellHasOutputs && notebookEditable && notebookEditorFocused && !inputFocus"
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // AI 代码补全
+    // ══════════════════════════════════════════════════════════════
+
+    // ctrl+y - 接受 AI 内联建议（如 GitHub Copilot，不受补全菜单影响，类似 Vim 的确认操作）
+    {
+        "key": "ctrl+y",
+        "command": "editor.action.inlineSuggest.commit",
+        "when": "inlineSuggestionVisible && editorTextFocus"
+    },
+    {
+        "key": "tab",
+        "command": "-editor.action.inlineSuggest.commit",
+        "when": "inInlineEditsPreviewEditor"
+    }
+]

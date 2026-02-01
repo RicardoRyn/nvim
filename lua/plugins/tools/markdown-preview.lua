@@ -1,5 +1,6 @@
 return {
   "iamcco/markdown-preview.nvim",
+  cond = not vim.g.vscode,
   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
   -- build = "try { cd app; npm install }",
   ft = { "markdown" },
