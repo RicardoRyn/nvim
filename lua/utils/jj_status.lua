@@ -78,7 +78,8 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
   -- 在退出前停止所有正在运行的 jj 进程，防止产生锁文件
   callback = function()
     is_exiting = true
-    if running_job_id then
+    -- 如果作为 diff-editor 运行，不要杀死 jj 进程，因为父进程 jj 正在等待
+    if not is_diff_editor() and running_job_id then
       vim.fn.jobstop(running_job_id)
       running_job_id = nil
     end
