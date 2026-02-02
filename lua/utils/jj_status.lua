@@ -1,17 +1,11 @@
 local M = {}
 
--- HACK: 尝试在特殊模式下禁用此模块，以避免冲突
+-- 尝试在特殊模式下禁用此模块，以避免冲突
 local function is_special_mode()
-  -- 检查命令行参数
-  local args = vim.fn.argv()
-  for _, arg in ipairs(args) do
-    if arg:match("DiffEditor") or arg:match("vimdiff") then
+  for _, arg in ipairs(vim.v.argv) do
+    if arg:match("DiffEditor") or arg:match("wincmd J") then
       return true
     end
-  end
-  -- 检查是否启动时就打开了多个窗口（merge-editor 特征）
-  if vim.fn.argc() > 2 then
-    return true
   end
   return false
 end

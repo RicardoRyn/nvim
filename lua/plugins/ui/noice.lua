@@ -1,7 +1,7 @@
 return {
   "folke/noice.nvim",
   cond = not vim.g.vscode,
-  event = "VeryLazy",
+  lazy = false,
   dependencies = {
     { "MunifTanjim/nui.nvim" },
   },
