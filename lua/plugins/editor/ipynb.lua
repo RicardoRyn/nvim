@@ -1,5 +1,5 @@
 return {
-  "ajbuccin/ipynb.nvim",
+  "ajbucci/ipynb.nvim",
   branch = "main",
   dev = true,
 
