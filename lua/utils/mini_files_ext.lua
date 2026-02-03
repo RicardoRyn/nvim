@@ -1,5 +1,3 @@
--- Mini Files utilities and enhancements
-
 local M = {}
 
 -- Filter for hiding dot files

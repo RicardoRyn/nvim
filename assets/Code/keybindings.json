@@ -73,25 +73,6 @@
   },
 
   // ══════════════════════════════════════════════════════════════
-  // 行移动 - Alt+j/k 快速移动当前行/选区
-  // ══════════════════════════════════════════════════════════════
-
-  // alt+j - 将当前行或选中行向下移动（非 insert 模式）
-  {
-    "command": "vscode-neovim.send",
-    "key": "alt+j",
-    "when": "editorTextFocus && neovim.mode != insert",
-    "args": "<A-j>"
-  },
-  // alt+k - 将当前行或选中行向上移动（非 insert 模式）
-  {
-    "command": "vscode-neovim.send",
-    "key": "alt+k",
-    "when": "editorTextFocus && neovim.mode != insert",
-    "args": "<A-k>"
-  },
-
-  // ══════════════════════════════════════════════════════════════
   // Notebook Cell 状态切换 - ctrl+j ctrl+k 多功能快捷键
   // ══════════════════════════════════════════════════════════════
 
@@ -389,15 +370,22 @@
   // AI 代码补全
   // ══════════════════════════════════════════════════════════════
 
-  // ctrl+y - 接受 AI 内联建议（如 GitHub Copilot，不受补全菜单影响，类似 Vim 的确认操作）
+  // ctrl+y - 接受内联 AI 建议（输入时的实时补全）
   {
     "key": "ctrl+y",
     "command": "editor.action.inlineSuggest.commit",
-    "when": "inlineSuggestionVisible && editorTextFocus"
+    "when": "inlineSuggestionVisible && !editorReadonly"
   },
+  // 禁用 Tab 键原有的内联建议接受功能（为 Next Edit Suggestion 让路）
   {
     "key": "tab",
     "command": "-editor.action.inlineSuggest.commit",
-    "when": "inInlineEditsPreviewEditor"
+    "when": "inlineSuggestionVisible && !editorReadonly && !suggestWidgetVisible"
+  },
+  // Tab - 接受 Next Edit Suggestion（停止输入时的下一步编辑建议）
+  {
+    "key": "tab",
+    "command": "editor.action.nextEditSuggestion.accept",
+    "when": "nextEditSuggestionVisible && !editorReadonly || nextEditSuggestionVisible && notebookEditorFocused && inputFocus"
   }
 ]

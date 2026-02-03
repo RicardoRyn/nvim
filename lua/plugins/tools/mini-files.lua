@@ -24,17 +24,17 @@ return {
   config = function(_, opts)
     require("mini.files").setup(opts)
 
-    local MiniFilesUtils = require("utils.mini_files_ext")
+    local MiniFilesExts = require("utils.mini_files_ext")
 
     -- Setup keymaps on buffer creation
     vim.api.nvim_create_autocmd("User", {
       pattern = "MiniFilesBufferCreate",
       callback = function(args)
-        MiniFilesUtils.setup_keymaps(args.data.buf_id)
+        MiniFilesExts.setup_keymaps(args.data.buf_id)
       end,
     })
 
     -- Setup git status
-    MiniFilesUtils.setup_git_status()
+    MiniFilesExts.setup_git_status()
   end,
 }
