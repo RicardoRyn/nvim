@@ -19,9 +19,11 @@ return {
           accept_line = false,
           next = "<M-]>",
           prev = "<M-[>",
-          dismiss = "<C-]>",
+          dismiss = "<Esc>",
         },
       },
+      -- 由sidekick接管NES
+      nes = { enabled = false },
     })
   end,
 }

@@ -2,7 +2,7 @@
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("pyright")
 -- vim.lsp.enable("ty")
-vim.lsp.enable("ruff")
+-- vim.lsp.enable("ruff")
 vim.lsp.enable("bashls")
 vim.lsp.enable("rust-analyzer")
 vim.lsp.enable("marksman")
