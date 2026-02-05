@@ -32,13 +32,13 @@ return {
           size = 0.2,
           elements = {
             { id = "stacks", size = 0.05 },
-            { id = "scopes", size = 0.5 },
+            { id = "scopes", size = 0.45 },
             { id = "watches", size = 0.4 },
-            { id = "breakpoints", size = 0.05 },
+            { id = "breakpoints", size = 0.1 },
           },
         },
         {
-          position = "bottom",
+          position = "right",
           size = 0.15,
           elements = {
             { id = "repl", size = 0.5 },
@@ -59,10 +59,10 @@ return {
     vim.keymap.set("n", "<leader>dC", dap.clear_breakpoints, { desc = "Clear Breakpoints" })
     vim.keymap.set("n", "<leader>dd", function() dap.disconnect({ terminateDebuggee = true }, function() dap.close() end) end, { desc = " Disconnect (Terminate Debuggee)" })
     vim.keymap.set("n", "<leader>dD", function() dap.disconnect({ terminateDebuggee = false }, function() dap.close() end) end, { desc = " Disconnect" })
+    vim.keymap.set("n", "<leader>dfe", function() local widgets = require("dap.ui.widgets") widgets.centered_float(widgets.expression) end, { desc = "Float Expression" })
+    vim.keymap.set("n", "<leader>dff", function() local widgets = require("dap.ui.widgets") widgets.centered_float(widgets.frames) end, { desc = "Float Frames" })
     vim.keymap.set("n", "<leader>dfs", function() local widgets = require("dap.ui.widgets") widgets.centered_float(widgets.scopes) end, { desc = "Float Scopes" })
     vim.keymap.set("n", "<leader>dfS", function() local widgets = require("dap.ui.widgets") widgets.centered_float(widgets.sessions) end, { desc = "Float Sessions" })
-    vim.keymap.set("n", "<leader>dff", function() local widgets = require("dap.ui.widgets") widgets.centered_float(widgets.frames) end, { desc = "Float Frames" })
-    vim.keymap.set("n", "<leader>dfe", function() local widgets = require("dap.ui.widgets") widgets.centered_float(widgets.expression) end, { desc = "Float Expression" })
     vim.keymap.set("n", "<leader>dft", function() local widgets = require("dap.ui.widgets") widgets.centered_float(widgets.threads) end, { desc = "Float Threads" })
     vim.keymap.set("n", "<leader>dh", require("dap.ui.widgets").hover, { desc = "Hover" })
     vim.keymap.set("n", "<leader>di", dap.step_into, { desc = " Step into" })
