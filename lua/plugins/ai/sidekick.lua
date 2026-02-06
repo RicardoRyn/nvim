@@ -2,6 +2,11 @@ return {
   "folke/sidekick.nvim",
   cond = not vim.g.vscode,
   opts = {
+    nes = {
+      diff = {
+        inline = "chars",
+      },
+    },
     cli = {
       win = {
         layout = "left",

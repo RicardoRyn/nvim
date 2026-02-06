@@ -75,7 +75,42 @@ return {
       offsets = {
         {
           filetype = "sidekick_terminal",
-          text = "  sidekick",
+          text = "  Sidekick",
+          highlight = "Directory",
+          text_align = "center",
+          separator = true,
+        },
+        {
+          filetype = "snacks_layout_box",
+          text = "󰙅  Explorer",
+          highlight = "Directory",
+          text_align = "center",
+          separator = true,
+        },
+        {
+          filetype = "dapui_stacks",
+          text = "  Debug UI",
+          highlight = "Directory",
+          text_align = "center",
+          separator = true,
+        },
+        {
+          filetype = "dapui_scopes",
+          text = "  Debug UI",
+          highlight = "Directory",
+          text_align = "center",
+          separator = true,
+        },
+        {
+          filetype = "dapui_watches",
+          text = "  Debug UI",
+          highlight = "Directory",
+          text_align = "center",
+          separator = true,
+        },
+        {
+          filetype = "dapui_breakpoints",
+          text = "  Debug UI",
           highlight = "Directory",
           text_align = "center",
           separator = true,

@@ -29,7 +29,7 @@ return {
       layouts = {
         {
           position = "left",
-          size = 0.2,
+          size = 0.25,
           elements = {
             { id = "stacks", size = 0.05 },
             { id = "scopes", size = 0.45 },
@@ -39,7 +39,7 @@ return {
         },
         {
           position = "right",
-          size = 0.15,
+          size = 0.25,
           elements = {
             { id = "repl", size = 0.5 },
             { id = "console", size = 0.5 },
@@ -55,8 +55,8 @@ return {
 
     vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Breakpoint" })
     vim.keymap.set("n", "<leader>dB", function() local input = vim.fn.input("Condition for breakpoint:") dap.set_breakpoint(input) end, { desc = "Conditional Breakpoint" })
-    vim.keymap.set("n", "<leader>dc", dap.run_to_cursor, { desc = "Run to Cursor" })
-    vim.keymap.set("n", "<leader>dC", dap.clear_breakpoints, { desc = "Clear Breakpoints" })
+    vim.keymap.set("n", "<leader>dc", dap.clear_breakpoints, { desc = "Clear Breakpoints" })
+    vim.keymap.set("n", "<leader>dC", dap.run_to_cursor, { desc = "Run to Cursor" })
     vim.keymap.set("n", "<leader>dd", function() dap.disconnect({ terminateDebuggee = true }, function() dap.close() end) end, { desc = " Disconnect (Terminate Debuggee)" })
     vim.keymap.set("n", "<leader>dD", function() dap.disconnect({ terminateDebuggee = false }, function() dap.close() end) end, { desc = " Disconnect" })
     vim.keymap.set("n", "<leader>dfe", function() local widgets = require("dap.ui.widgets") widgets.centered_float(widgets.expression) end, { desc = "Float Expression" })
