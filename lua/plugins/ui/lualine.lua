@@ -101,7 +101,6 @@ return {
             hint = require("utils.icons").diagnostics.hint,
           },
         },
-        {"lsp_status"},
         -- Record状态
         {
           function()
@@ -149,6 +148,7 @@ return {
         },
       },
       lualine_y = {
+        {"lsp_status"},
         { "progress", separator = "", padding = { left = 1, right = 0 } },
         { "location" },
       },
