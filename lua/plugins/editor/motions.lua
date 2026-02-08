@@ -25,6 +25,7 @@ return {
       prompt = {
         prefix = { { " FlashSearch: ", "FlashPromptIcon" } },
       },
+      search = { mode = "fuzzy" },
     },
     config = function(_, opts)
       require("flash").setup(opts)
