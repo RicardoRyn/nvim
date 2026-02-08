@@ -1,6 +1,6 @@
 <div align="center">
 
-![Neovim Config Preview](./assets/ui-preview.gif)
+![Neovim Config Preview](./docs/assets/ui-preview.gif)
 
 # 🚀 My Neovim Configuration
 
@@ -33,12 +33,12 @@ _🍰 To be jj cake hand ✋._
       </ul>
     </td>
     <td>
-      <img src="./assets/ui-preview.png" alt="UI Preview" />
+      <img src="./docs/assets/ui-preview.png" alt="UI Preview" />
     </td>
   </tr>
   <tr>
     <td>
-      <img src="./assets/editing.png" alt="Editing Experience" />
+      <img src="./docs/assets/editing.png" alt="Editing Experience" />
     </td>
     <td>
       <h3>⚡ Superior Editing Experience</h3>
@@ -61,12 +61,12 @@ _🍰 To be jj cake hand ✋._
       </ul>
     </td>
     <td>
-      <img src="./assets/ai-features.png" alt="AI Features" />
+      <img src="./docs/assets/ai-features.png" alt="AI Features" />
     </td>
   </tr>
   <tr>
     <td>
-      <img src="./assets/debugging.png" alt="Debugging" />
+      <img src="./docs/assets/debugging.png" alt="Debugging" />
     </td>
     <td>
       <h3>🔍 Professional Debugging</h3>
@@ -95,35 +95,35 @@ _🍰 To be jj cake hand ✋._
 
 <div align="center">
   <figure>
-    <img src="./assets/screenshot-1.png" width="100%" alt="AI Suggestions" />
+    <img src="./docs/assets/screenshot-1.png" width="100%" alt="AI Suggestions" />
     <figcaption>Copilot AI Intelligent Completion & Next Edit Suggestions</figcaption>
   </figure>
 
   <hr>
 
   <figure>
-    <img src="./assets/screenshot-2.png" width="100%" alt="File Picker" />
+    <img src="./docs/assets/screenshot-2.png" width="100%" alt="File Picker" />
     <figcaption>Snacks Picker Fuzzy File Search</figcaption>
   </figure>
 
   <hr>
 
   <figure>
-    <img src="./assets/screenshot-5.png" width="100%" alt="JJ Integration" />
+    <img src="./docs/assets/screenshot-5.png" width="100%" alt="JJ Integration" />
     <figcaption>Jujutsu Version Control System Integration</figcaption>
   </figure>
 
   <hr>
 
   <figure>
-    <img src="./assets/screenshot-3.png" width="100%" alt="Diff Viewer" />
+    <img src="./docs/assets/screenshot-3.png" width="100%" alt="Diff Viewer" />
     <figcaption>Visual Diff Viewer</figcaption>
   </figure>
 
   <hr>
 
   <figure>
-    <img src="./assets/screenshot-4.png" width="100%" alt="Jupyter Notebook" />
+    <img src="./docs/assets/screenshot-4.png" width="100%" alt="Jupyter Notebook" />
     <figcaption>Jupyter Notebook Integration (Bugs)</figcaption>
   </figure>
 </div>
@@ -173,7 +173,7 @@ _🍰 To be jj cake hand ✋._
 ├── after/                              # After plugins loaded
 ├── lsp/                                # LSP server custom configs
 ├── snippets/                           # Custom snippets
-└── assets/                             # Screenshots & images
+└── docs/                               # Screenshots & images
 ```
 
 ---
@@ -220,14 +220,14 @@ This configuration is fully compatible with [VSCode Neovim](https://github.com/v
 <div align="center">
 
   <figure>
-    <img src="./assets/vscode-1.png" width="100%" alt="Diff Viewer" />
+    <img src="./docs/assets/vscode-1.png" width="100%" alt="Diff Viewer" />
     <figcaption>Cursor Jumping in VSCode</figcaption>
   </figure>
 
   <hr>
 
   <figure>
-    <img src="./assets/vscode-2.png" width="100%" alt="Jupyter Notebook" />
+    <img src="./docs/assets/vscode-2.png" width="100%" alt="Jupyter Notebook" />
     <figcaption>Nvim Plugins in VSCode</figcaption>
   </figure>
 </div>
@@ -252,7 +252,7 @@ This configuration is fully compatible with [VSCode Neovim](https://github.com/v
    }
    ```
 
-3. For a better experience, some keybindings need to be configured in VSCode's `keybindings.json`. You can refer to my [settings](assets/Code/keybindings.json) for reference.
+3. For a better experience, some keybindings need to be configured in VSCode's `keybindings.json`. You can refer to my [settings](docs/Code/keybindings.json) for reference.
 
 #### Available Features in VSCode
 
