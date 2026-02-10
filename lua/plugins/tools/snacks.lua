@@ -4,6 +4,7 @@
 -- 由于Windows上类Unix脚本的Shebang路径问题，可能需要修改gh-notify的脚本
 local dbAnim = require("utils.dashboardAnimation")
 local snacks_dashboard = require("utils.snacks_dashboard")
+local snacks_indent = require("utils.snacks_indent")
 local snacks_explorer_preview = require("utils.snacks_explorer_preview")
 
 return {
@@ -11,7 +12,7 @@ return {
   cond = not vim.g.vscode,
   lazy = false,
   priority = 1000,
-  -- stylua: ignore
+  dependencies = { "HiPhish/rainbow-delimiters.nvim" },
   opts = {
     bigfile = { enabled = true },
     dashboard = snacks_dashboard,
@@ -19,16 +20,16 @@ return {
     explorer = { enabled = true },
     gh = { enabled = true },
     image = { enabled = true },
-    indent = { enabled = true, indent = { char = "▏" }, scope = { char = "▍", hl = "" } },
+    indent = snacks_indent,
     input = { enabled = true },
-    picker = { enabled = true, sources = { explorer = snacks_explorer_preview } },
+    picker = snacks_explorer_preview,
     notifier = { enabled = true, timeout = 3000, style = "fancy", date_format = "%H:%M:%S" },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
-    styles = { notification = { wo = { wrap = true }, border = "rounded", } },
+    styles = { notification = { wo = { wrap = true }, border = "rounded" } },
   },
   -- stylua: ignore
   keys = {
@@ -124,7 +125,6 @@ return {
     })
 
     -- 等待 Catppuccin 加载完成后异步初始化动画配置
-    -- 延迟以确保能够获取到当前 flavour 的正确色板 (Palette)
     vim.defer_fn(function()
       local flavour = require("catppuccin").flavour
       local colors = require("catppuccin.palettes").get_palette(flavour)
