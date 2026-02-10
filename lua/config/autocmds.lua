@@ -2,7 +2,7 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("ricardo_" .. name, { clear = true })
 end
 
--- 在lua, python, rust文件中，使用`o`和`O`时不会自动添加注释符号
+-- 使用`o`和`O`时不会自动添加注释符号
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("disable_o_comment"),
   pattern = { "lua", "python", "rust", "sh" },
@@ -17,10 +17,10 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   callback = function(event)
     local exclude = { "gitcommit" }
     local buf = event.buf
-    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].ricardo_last_loc then
       return
     end
-    vim.b[buf].lazyvim_last_loc = true
+    vim.b[buf].ricardo_last_loc = true
     local mark = vim.api.nvim_buf_get_mark(buf, '"')
     local lcount = vim.api.nvim_buf_line_count(buf)
     if mark[1] > 0 and mark[1] <= lcount then
