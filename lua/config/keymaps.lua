@@ -2,18 +2,14 @@
 -- General Keymaps (All Modes)
 -- ============================================================================
 
+-- stylua: ignore start
 vim.keymap.set("v", "<", "<gv", { desc = "Outdent and reselect" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent and reselect" })
 vim.keymap.set("v", "U", "<Nop>", { desc = "Disable U in visual mode" })
 vim.keymap.set("v", "u", "<Nop>", { desc = "Disable u in visual mode" })
-vim.keymap.set({ "n", "v" }, "x", "<Nop>", { desc = "Reserved for hop.nvim" })
-vim.keymap.set(
-  "n",
-  "<leader>ur",
-  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-  { desc = "Redraw / Clear hlsearch / Diff Update" }
-)
+vim.keymap.set( "n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "Redraw / Clear hlsearch / Diff Update" })
 vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy Plugin Manager" })
+vim.keymap.set({ "n", "v" }, "x", "<Nop>", { desc = "Reserved for hop.nvim" })
 vim.keymap.set({ "n", "v" }, "E", "$", { desc = "Go to end of line" })
 vim.keymap.set({ "n", "v" }, "B", "^", { desc = "Go to beginning of line" })
 
