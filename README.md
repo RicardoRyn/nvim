@@ -87,7 +87,7 @@ _🍰 To be jj cake hand ✋._
 - **🔧 Cross-Platform Intelligence** - Auto-detects system environment (Windows/Mac/Linux) and adapts behavior accordingly
 - **✨ Dynamic Dashboard** - Animated ASCII art with glitch effects
 - **🐍 Python-First Documentation** - Custom Neogen templates with Chinese support, auto-extracting parameter defaults, type hints, and return values
-- **📓 Full Jupyter Notebook Support** - Complete .ipynb editing experience with cell management, kernel control, inline output preview, and REPL integration
+- **📓 Full Jupyter Notebook Support (bugs)** - Complete .ipynb editing experience with cell management, kernel control, inline output preview, and REPL integration
 
 ---
 
