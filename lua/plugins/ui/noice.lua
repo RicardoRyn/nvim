@@ -59,6 +59,13 @@ return {
         },
         view = "mini",
       },
+      {
+        filter = {
+          event = "notify",
+          find = "Debug adapter didn't respond. Either the adapter is slow (then wait and ignore this) or there is a problem with your adapter or `python` configuration. Check the logs for errors (:help dap.set_log_level)",
+        },
+        view = "mini",
+      },
     },
     commands = {
       history = { view = "popup" },
