@@ -1,4 +1,3 @@
--- Load system utils
 if not _G.SYSTEM then
   _G.SYSTEM = require("utils.system")
 end

@@ -39,7 +39,7 @@ return {
         },
         {
           position = "right",
-          size = 0.25,
+          size = 0.3,
           elements = {
             { id = "repl", size = 0.5 },
             { id = "console", size = 0.5 },
