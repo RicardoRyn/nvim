@@ -26,6 +26,9 @@ return {
         prefix = { { " FlashSearch: ", "FlashPromptIcon" } },
       },
       search = { mode = "fuzzy" },
+      jump = {
+        pos = "end",
+      },
     },
     config = function(_, opts)
       require("flash").setup(opts)
