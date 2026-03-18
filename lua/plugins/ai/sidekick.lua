@@ -130,13 +130,6 @@ return {
       end,
       desc = "Sidekick Toggle Copilot",
     },
-    {
-      "<leader>ai",
-      function()
-        require("sidekick.cli").toggle({ name = "iflow", focus = true })
-      end,
-      desc = "Sidekick Toggle iFlow",
-    },
   },
   dependencies = {
     {
