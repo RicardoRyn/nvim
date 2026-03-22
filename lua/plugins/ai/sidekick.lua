@@ -24,7 +24,7 @@ return {
       },
       tools = {
         iflow = { cmd = { "iflow", "-c", "--default", "--thinking" } },
-        copilot = { cmd = { "copilot", "--banner" } },
+        copilot = { cmd = { "copilot", "--banner", "--resume" } },
       },
       prompts = {
         changes = "你能审查一下我的更改吗？",
