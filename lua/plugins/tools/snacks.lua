@@ -19,7 +19,7 @@ return {
     debug = { enabled = true },
     explorer = { enabled = true },
     gh = { enabled = true },
-    image = { enabled = true },
+    image = { enabled = not SYSTEM.is_win},
     indent = snacks_indent,
     input = { enabled = true },
     picker = snacks_explorer_preview,
