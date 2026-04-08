@@ -50,8 +50,8 @@ return {
 
     local icon = require("utils.icons").dap
     vim.fn.sign_define("DapStopped", { text = icon.Stopped, texthl = "DapUIBreakpointsCurrentLine", linehl = "RedrawDebugComposed", numhl = "DapUIBreakpointsCurrentLine", })
-    vim.fn.sign_define( "DapBreakpoint", { text = icon.BreakpointData, texthl = "DapBreakpoint", linehl = "", numhl = "DapBreakpoint" })
-    vim.fn.sign_define("DapBreakpointCondition", { text = icon.BreakpointConditional, texthl = "DapBreakpointCondition", linehl = "DapBreakpointCondition", numhl = "DapBreakpointCondition", })
+    vim.fn.sign_define( "DapBreakpoint", { text = icon.BreakpointData, texthl = "DapBreakpoint", linehl = "RedrawDebugRecompose", numhl = "DapBreakpoint" })
+    vim.fn.sign_define("DapBreakpointCondition", { text = icon.BreakpointConditional, texthl = "DapBreakpointCondition", linehl = "RedrawDebugClear", numhl = "DapBreakpointCondition", })
 
     vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Breakpoint" })
     vim.keymap.set("n", "<leader>dB", function() local input = vim.fn.input("Condition for breakpoint:") dap.set_breakpoint(input) end, { desc = "Conditional Breakpoint" })
