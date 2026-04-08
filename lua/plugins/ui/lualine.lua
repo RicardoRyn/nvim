@@ -140,6 +140,9 @@ return {
             return "Special"
           end,
         },
+        -- {
+        --   require("opencode").statusline,
+        -- },
         -- ipynb内核
         {
           require("ipynb.kernel").statusline,
@@ -148,7 +151,7 @@ return {
         },
       },
       lualine_y = {
-        {"lsp_status"},
+        { "lsp_status" },
         { "progress", separator = "", padding = { left = 1, right = 0 } },
         { "location" },
       },

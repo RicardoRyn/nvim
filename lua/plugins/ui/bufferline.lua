@@ -115,6 +115,13 @@ return {
           text_align = "center",
           separator = true,
         },
+        {
+          filetype = "snacks_terminal",
+          text = "  Opencode",
+          highlight = "Directory",
+          text_align = "center",
+          separator = true,
+        },
       },
     },
   },
