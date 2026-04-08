@@ -15,7 +15,6 @@
   "grug-far.nvim": { "branch": "main", "commit": "37d0eafc6a2dcf8641aa19fc2a8db5e391b7f16b" },
   "hop.nvim": { "branch": "master", "commit": "08ddca799089ab96a6d1763db0b8adc5320bf050" },
   "hunk.nvim": { "branch": "master", "commit": "a73c34934e87af4f2e615fea3a57ee28b2dceec8" },
-  "ipynb.nvim": { "branch": "main", "commit": "b9ec93f7c37a3a081810a733d6baf4973fc31f3d" },
   "jj.nvim": { "branch": "main", "commit": "2dbe2c73c599a29e86e4123b42e430828b1f01d9" },
   "kitty-scrollback.nvim": { "branch": "main", "commit": "9342a0e0e5556ce0b7f9dc41c4bdd39ae9dc85dd" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
