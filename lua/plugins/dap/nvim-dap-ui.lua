@@ -10,11 +10,53 @@ return {
   -- stylua: ignore
   config = function()
     local dap, dapui = require("dap"), require("dapui")
+    local left_layout = {
+      position = "left",
+      size = 0.1,
+      elements = {
+        { id = "stacks", size = 0.05 },
+        { id = "scopes", size = 0.45 },
+        { id = "watches", size = 0.4 },
+        { id = "breakpoints", size = 0.1 },
+      },
+    }
+    local right_layout_default = {
+      position = "right",
+      size = 0.4,
+      elements = {
+        { id = "repl", size = 0.2 },
+        { id = "console", size = 0.8 },
+      },
+    }
+    local right_layout_python = {
+      position = "right",
+      size = 0.4,
+      elements = {
+        { id = "repl", size = 0.8 },
+        { id = "console", size = 0.2 },
+      },
+    }
+
+    local function setup_layout_for_session(config)
+      local session = dap.session()
+      local session_type = session and session.config and session.config.type or nil
+      local config_type = config and config.type or nil
+      local is_python = session_type == "python" or config_type == "python" or vim.bo.filetype == "python"
+      dapui.setup({
+        layouts = {
+          left_layout,
+          is_python and right_layout_python or right_layout_default,
+        },
+      })
+    end
+
     -- 启动调试时自动打开UI，关闭调试时自动关闭UI
-    dap.listeners.before.attach.dapui_config = function()
+    dap.listeners.before.attach.dapui_config = function(config)
+      setup_layout_for_session(config)
       dapui.open()
     end
-    dap.listeners.before.launch.dapui_config = function()
+    dap.listeners.before.launch.dapui_config = function(config)
+      setup_layout_for_session(config)
       dapui.open()
     end
     dap.listeners.before.event_terminated.dapui_config = function()
@@ -25,28 +67,7 @@ return {
     end
 
     -- DAP UI显示窗格
-    dapui.setup({
-      layouts = {
-        {
-          position = "left",
-          size = 0.1,
-          elements = {
-            { id = "stacks", size = 0.05 },
-            { id = "scopes", size = 0.45 },
-            { id = "watches", size = 0.4 },
-            { id = "breakpoints", size = 0.1 },
-          },
-        },
-        {
-          position = "right",
-          size = 0.4,
-          elements = {
-            { id = "repl", size = 0.2 },
-            { id = "console", size = 0.8 },
-          },
-        },
-      },
-    })
+    setup_layout_for_session()
 
     local icon = require("utils.icons").dap
     vim.fn.sign_define("DapStopped", { text = icon.Stopped, texthl = "DapUIBreakpointsCurrentLine", linehl = "RedrawDebugComposed", numhl = "DapUIBreakpointsCurrentLine", })
