@@ -38,32 +38,6 @@ return {
   },
   opts = {
     picker = { snacks = {} },
-    terminal = { cursor_render_delay = 10 },
     diff = { backend = "codediff" },
-    cmd = {
-      describe = {
-        editor = {
-          type = "buffer",
-          keymaps = {
-            close = { "q", "<Esc>", "<C-c>" },
-          },
-        },
-      },
-      bookmark = { prefix = "" },
-      keymaps = {
-        log = {
-          checkout = "<CR>",
-          describe = "d",
-          diff = "<S-d>",
-          abandon = "<S-a>",
-          fetch = "<S-f>",
-        },
-        status = {
-          open_file = "<CR>",
-          restore_file = "<S-x>",
-        },
-        close = { "q", "<Esc>" },
-      },
-    },
   },
 }
