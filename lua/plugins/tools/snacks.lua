@@ -1,11 +1,13 @@
--- 安装gh
--- gh auth login
--- gh extension install meiji163/gh-notify
+-- NOTE:
+-- 安装gh后执行
+-- 1. `gh auth login`
+-- 2. `gh extension install meiji163/gh-notify`
 -- 由于Windows上类Unix脚本的Shebang路径问题，可能需要修改gh-notify的脚本
-local dbAnim = require("utils.dashboardAnimation")
+
 local snacks_dashboard = require("utils.snacks_dashboard")
 local snacks_indent = require("utils.snacks_indent")
 local snacks_explorer_preview = require("utils.snacks_explorer_preview")
+local dashboard_animation = require("utils.dashboard_animation")
 
 return {
   "folke/snacks.nvim",
@@ -19,7 +21,7 @@ return {
     debug = { enabled = true },
     explorer = { enabled = true },
     gh = { enabled = true },
-    image = { enabled = not SYSTEM.is_win},
+    image = { enabled = not SYSTEM.is_win },
     indent = snacks_indent,
     input = { enabled = true },
     picker = snacks_explorer_preview,
@@ -128,7 +130,7 @@ return {
     vim.defer_fn(function()
       local flavour = require("catppuccin").flavour
       local colors = require("catppuccin.palettes").get_palette(flavour)
-      dbAnim.theAnimation(dbAnim.theAnimation, colors)
+      dashboard_animation.theAnimation(dashboard_animation.theAnimation, colors)
 
       -- 若非透明模式下启用 latte，则手动覆盖 CursorLine 背景色以优化视觉效果
       local catppuccin = require("catppuccin")
