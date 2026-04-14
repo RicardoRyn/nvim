@@ -73,15 +73,6 @@ return {
         },
       },
       lualine_x = {
-        -- 操作
-        {
-          function()
-            return require("noice").api.status.command.get()
-          end,
-          cond = function()
-            return package.loaded["noice"] and require("noice").api.status.command.has()
-          end,
-        },
         -- 搜索信息
         {
           function()
@@ -89,6 +80,15 @@ return {
           end,
           cond = function()
             return package.loaded["noice"] and require("noice").api.status.search.has()
+          end,
+        },
+        -- 操作
+        {
+          function()
+            return require("noice").api.status.command.get()
+          end,
+          cond = function()
+            return package.loaded["noice"] and require("noice").api.status.command.has()
           end,
         },
         -- 诊断信息
