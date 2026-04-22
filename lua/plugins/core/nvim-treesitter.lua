@@ -1,9 +1,9 @@
 return {
-  "nvim-treesitter/nvim-treesitter",
+  "neovim-treesitter/nvim-treesitter",
   cond = not vim.g.vscode,
-  event = { "BufReadPost", "BufNewFile" },
-  branch = "main",
-  build = ":TSUpdate",
+  dependencies = { "neovim-treesitter/treesitter-parser-registry" },
+  lazy = false,
+  build = ':TSUpdate',
   config = function()
     local languages = {
       "lua",

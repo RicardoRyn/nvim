@@ -2,7 +2,7 @@ return {
   "MeanderingProgrammer/render-markdown.nvim",
   cond = not vim.g.vscode,
   ft = { "markdown", "norg", "rmd", "org", "codecompanion", 'Avante' },
-  dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" }, -- if you use standalone mini plugins
+  dependencies = { "neovim-treesitter/nvim-treesitter", "echasnovski/mini.icons" }, -- if you use standalone mini plugins
   ---@module 'render-markdown'
   ---@type render.md.UserConfig
   opts = {

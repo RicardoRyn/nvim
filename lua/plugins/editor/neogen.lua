@@ -2,7 +2,7 @@ return {
   "danymat/neogen",
   cond = not vim.g.vscode,
   event = "VeryLazy",
-  dependencies = "nvim-treesitter/nvim-treesitter",
+  dependencies = "neovim-treesitter/nvim-treesitter",
   keys = {
     {
       "<leader>ln",
