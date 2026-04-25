@@ -143,12 +143,12 @@ return {
         -- {
         --   require("opencode").statusline,
         -- },
-        -- ipynb内核
-        {
-          require("ipynb.kernel").statusline,
-          cond = require("ipynb.kernel").statusline_visible,
-          color = require("ipynb.kernel").statusline_color,
-        },
+        -- -- ipynb内核
+        -- {
+        --   require("ipynb.kernel").statusline,
+        --   cond = require("ipynb.kernel").statusline_visible,
+        --   color = require("ipynb.kernel").statusline_color,
+        -- },
       },
       lualine_y = {
         { "lsp_status" },
