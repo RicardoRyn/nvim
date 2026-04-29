@@ -1,6 +1,6 @@
 return {
   "Cannon07/code-preview.nvim",
-  cond = not vim.g.vscode,
+  cond = not vim.g.vscode and not SYSTEM.is_win,
   event = "VeryLazy",
   config = function()
     require("code-preview").setup({
@@ -12,7 +12,7 @@ return {
           DiffAdd = { bg = "#d0e2d1" },
           DiffDelete = { bg = "#eac8d3" },
           DiffChange = { bg = "#e0e7f5" },
-          DiffText = { bg ="#b0c7f5" },
+          DiffText = { bg = "#b0c7f5" },
         },
         proposed = { -- PROPOSED side — tab/vsplit layouts
           DiffAdd = { bg = "#d0e2d1" },

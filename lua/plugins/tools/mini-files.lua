@@ -33,8 +33,5 @@ return {
         MiniFilesExts.setup_keymaps(args.data.buf_id)
       end,
     })
-
-    -- Setup git status
-    MiniFilesExts.setup_git_status()
   end,
 }
