@@ -14,21 +14,24 @@ return {
     },
     sections = {
       lualine_a = {
+        -- 文件名
         "filename",
       },
       lualine_b = {
+        -- JJ状态
         {
           function()
-            return require("utils.jj_status").get()
+            return require("utils.jj_log").get()
           end,
           icon = "",
           color = function()
-            return require("utils.jj_status").get_color()
+            return require("utils.jj_log").get_color()
           end,
           cond = function()
-            return require("utils.jj_status").get() ~= ""
+            return require("utils.jj_log").get() ~= ""
           end,
         },
+        -- 文件修改状态
         {
           "diff",
           symbols = {
@@ -50,6 +53,7 @@ return {
         },
       },
       lualine_c = {
+        -- sidekick NES状态
         {
           function()
             return " "
@@ -65,7 +69,9 @@ return {
             return status.get() ~= nil
           end,
         },
+        -- 文件类型图标
         { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+        -- 文件所在目录
         {
           function()
             return vim.fn.fnamemodify(vim.fn.expand("%:p"), ":~:h")
@@ -73,15 +79,6 @@ return {
         },
       },
       lualine_x = {
-        -- 搜索信息
-        {
-          function()
-            return require("noice").api.status.search.get()
-          end,
-          cond = function()
-            return package.loaded["noice"] and require("noice").api.status.search.has()
-          end,
-        },
         -- 操作
         {
           function()
@@ -100,6 +97,15 @@ return {
             info = require("utils.icons").diagnostics.info,
             hint = require("utils.icons").diagnostics.hint,
           },
+        },
+        -- 搜索信息
+        {
+          function()
+            return require("noice").api.status.search.get()
+          end,
+          cond = function()
+            return package.loaded["noice"] and require("noice").api.status.search.has()
+          end,
         },
         -- Record状态
         {

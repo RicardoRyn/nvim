@@ -1,6 +1,6 @@
 local M = {}
 
--- 尝试在特殊模式下禁用此模块，以避免冲突
+-- Avoid jj process contention when Hunk.nvim or merge-tools.vimdiff triggers diff-related modes.
 local function is_special_mode()
   for _, arg in ipairs(vim.v.argv) do
     if arg:match("DiffEditor") or arg:match("wincmd J") then
@@ -42,12 +42,26 @@ local jj_cmd = [[jj log --revisions @ --no-graph --color never --limit 1 --templ
   )
 ']]
 
+local status_symbols = {
+  conflicted = "💥",
+  divergent = "🚧",
+  immutable = "🔒",
+  empty = "󰱒",
+}
+
 local cached_status = ""
 local is_exiting = false
 local running_job_id = nil
 
+local function fg_from_hl(name, fallback)
+  local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = name, link = false })
+  if ok and hl and hl.fg then
+    return string.format("#%06x", hl.fg)
+  end
+  return fallback
+end
+
 local function update_status()
-  -- 如果正在退出，不启动新的 jj 进程
   if is_exiting then
     return
   end
@@ -72,14 +86,17 @@ local function update_status()
   })
 end
 
+local augroup = vim.api.nvim_create_augroup("jj_log", { clear = true })
+
 vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
+  group = augroup,
   callback = function()
     update_status()
   end,
 })
 
 vim.api.nvim_create_autocmd("VimLeavePre", {
-  -- 在退出前停止所有正在运行的 jj 进程，防止产生锁文件
+  group = augroup,
   callback = function()
     is_exiting = true
     if running_job_id then
@@ -94,18 +111,20 @@ M.get = function()
 end
 
 M.get_color = function()
-  local flavour = require("catppuccin").flavour
-  local colors = require("catppuccin.palettes").get_palette(flavour)
   if cached_status == "" then
     return nil
   end
 
-  if cached_status:find("💥") or cached_status:find("🚧") or cached_status:find("🔒") then
-    return { fg = colors.red, gui = "bold" }
-  elseif string.find(cached_status, "󰱒") then
-    return { fg = colors.green, gui = "bold" }
+  if
+    cached_status:find(status_symbols.conflicted)
+    or cached_status:find(status_symbols.divergent)
+    or cached_status:find(status_symbols.immutable)
+  then
+    return { fg = fg_from_hl("DiagnosticError", "#ff0000"), gui = "bold" }
+  elseif cached_status:find(status_symbols.empty) then
+    return { fg = fg_from_hl("DiffAdded", "#00ff00"), gui = "bold" }
   else
-    return { fg = colors.yellow, gui = "bold" }
+    return { fg = fg_from_hl("DiagnosticWarn", "#ffff00"), gui = "bold" }
   end
 end
 
