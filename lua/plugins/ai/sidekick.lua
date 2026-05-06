@@ -24,6 +24,7 @@ return {
       },
       tools = {
         copilot = { cmd = { "copilot", "--banner" } },
+        deepseek = { cmd = { "deepseek" } },
       },
       prompts = {
         changes = "你能审查一下我的更改吗？",

@@ -39,5 +39,12 @@ return {
   opts = {
     picker = { snacks = {} },
     diff = { backend = "codediff" },
+    cmd = {
+      keymaps = {
+        log = {
+          edit_immutable = "E",
+        },
+      },
+    },
   },
 }
