@@ -19,7 +19,7 @@ return {
         },
       },
       mux = {
-        backend = "tmux",
+        backend = "zellij",
         enabled = false,
       },
       tools = {
