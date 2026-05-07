@@ -157,9 +157,8 @@ return {
         -- },
       },
       lualine_y = {
-        { "lsp_status" },
-        { "progress", separator = "", padding = { left = 1, right = 0 } },
         { "location" },
+        { "lsp_status" },
       },
       lualine_z = {
         "mode",
