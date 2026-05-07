@@ -1,6 +1,6 @@
 return {
   "Cannon07/code-preview.nvim",
-  cond = not vim.g.vscode and not SYSTEM.is_win,
+  cond = not vim.g.vscode,
   event = "VeryLazy",
   config = function()
     require("code-preview").setup({
