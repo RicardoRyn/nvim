@@ -99,30 +99,30 @@ _🍰 To be jj cake hand ✋._
     <figcaption>Copilot AI Intelligent Completion & Next Edit Suggestions</figcaption>
   </figure>
 
-  <hr>
+<hr>
 
-  <figure>
+<figure>
     <img src="./docs/assets/screenshot-2.png" width="100%" alt="File Picker" />
     <figcaption>Snacks Picker Fuzzy File Search</figcaption>
   </figure>
 
-  <hr>
+<hr>
 
-  <figure>
+<figure>
     <img src="./docs/assets/screenshot-5.png" width="100%" alt="JJ Integration" />
     <figcaption>Jujutsu Version Control System Integration</figcaption>
   </figure>
 
-  <hr>
+<hr>
 
-  <figure>
+<figure>
     <img src="./docs/assets/screenshot-3.png" width="100%" alt="Diff Viewer" />
     <figcaption>Visual Diff Viewer</figcaption>
   </figure>
 
-  <hr>
+<hr>
 
-  <figure>
+<figure>
     <img src="./docs/assets/screenshot-4.png" width="100%" alt="Jupyter Notebook" />
     <figcaption>Jupyter Notebook Integration (Bugs)</figcaption>
   </figure>
@@ -219,14 +219,14 @@ This configuration is fully compatible with [VSCode Neovim](https://github.com/v
 
 <div align="center">
 
-  <figure>
+<figure>
     <img src="./docs/assets/vscode-1.png" width="100%" alt="Diff Viewer" />
     <figcaption>Cursor Jumping in VSCode</figcaption>
   </figure>
 
-  <hr>
+<hr>
 
-  <figure>
+<figure>
     <img src="./docs/assets/vscode-2.png" width="100%" alt="Jupyter Notebook" />
     <figcaption>Nvim Plugins in VSCode</figcaption>
   </figure>
@@ -235,6 +235,7 @@ This configuration is fully compatible with [VSCode Neovim](https://github.com/v
 #### Setup
 
 1. **Install the `VSCode Neovim` extension** from the VSCode Marketplace.
+
 2. **Configure the extension** in your VSCode settings (`settings.json`):
 
    ```json

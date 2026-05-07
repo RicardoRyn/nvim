@@ -24,6 +24,7 @@ return {
       "bash-debug-adapter",
       -- RUST
       "rust-analyzer",
+      "codelldb",
       -- "rustfmt", -- 应该用rustup来安装rustfmt
       -- MARKDOWN
       "marksman", -- LSP (语法高亮、补全、跳转)
