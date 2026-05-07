@@ -1,7 +1,8 @@
 return {
   "mason-org/mason.nvim",
   cond = not vim.g.vscode,
-  event = { "BufReadPost", "BufNewFile", "VimEnter" },
+  cmd = "Mason",
+  event = { "BufReadPost", "BufNewFile", "VeryLazy" },
   dependencies = {
     "neovim/nvim-lspconfig",
   },

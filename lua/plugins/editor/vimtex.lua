@@ -1,7 +1,7 @@
 return {
   "lervag/vimtex",
   cond = not vim.g.vscode,
-  lazy = false,     -- we don't want to lazy load VimTeX
+  event = "VeryLazy",
   -- tag = "v2.15", -- uncomment to pin to a specific release
   init = function()
     -- Use SumatraPDF for Windows (supports inverse search)

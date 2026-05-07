@@ -1,8 +1,8 @@
 return {
   "neovim-treesitter/nvim-treesitter",
   cond = not vim.g.vscode,
+  event = "VeryLazy",
   dependencies = { "neovim-treesitter/treesitter-parser-registry" },
-  lazy = false,
   build = ':TSUpdate',
   config = function()
     local languages = {

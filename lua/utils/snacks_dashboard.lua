@@ -35,6 +35,7 @@ local M = {
     },
     { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
     { title = "Talk is cheap. Show me the code.", align = "center", padding = 1 },
+    { section = "startup" },
   },
 }
 

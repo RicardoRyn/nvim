@@ -14,6 +14,7 @@ return {
   cond = not vim.g.vscode,
   lazy = false,
   priority = 1000,
+  dependencies = "folke/noice.nvim",
   opts = {
     bigfile = { enabled = true },
     dashboard = snacks_dashboard,

@@ -1,5 +1,7 @@
 return {
   "saghen/blink.pairs",
+  cond = not vim.g.vscode,
+  event = "VeryLazy",
   version = "*", -- (recommended) only required with prebuilt binaries
 
   -- download prebuilt binaries from github releases

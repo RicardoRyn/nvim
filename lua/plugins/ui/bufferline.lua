@@ -1,7 +1,8 @@
 return {
   "akinsho/bufferline.nvim",
   cond = not vim.g.vscode,
-  event = "BufEnter",
+  -- event = "BufEnter",
+  event = { "BufReadPre", "BufNewFile" },
   -- stylua: ignore
   keys = {
     -- Buffer
