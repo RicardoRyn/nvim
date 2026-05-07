@@ -30,17 +30,17 @@ return {
       layouts = {
         {
           position = "left",
-          size = 0.1,
+          size = 0.2,
           elements = {
-            { id = "stacks", size = 0.05 },
-            { id = "scopes", size = 0.45 },
-            { id = "watches", size = 0.4 },
-            { id = "breakpoints", size = 0.1 },
+            { id = "stacks", size = 0.25 },
+            { id = "scopes", size = 0.25 },
+            { id = "watches", size = 0.25 },
+            { id = "breakpoints", size = 0.25 },
           },
         },
         {
           position = "right",
-          size = 0.4,
+          size = 0.35,
           elements = {
             { id = "repl", size = 0.3 },
             { id = "console", size = 0.7 },
@@ -68,6 +68,7 @@ return {
     vim.keymap.set("n", "<leader>dh", require("dap.ui.widgets").hover, { desc = "Hover" })
     vim.keymap.set("n", "<leader>di", dap.step_into, { desc = " Step into" })
     vim.keymap.set("n", "<leader>dk", dap.step_out, { desc = " Step back" })
+    vim.keymap.set("n", "<leader>dl", function() require("osv").launch({ port = 8086 }) end, { desc = "Launch OSV server" })
     vim.keymap.set("n", "<leader>do", dap.step_over, { desc = " Step over" })
     vim.keymap.set("n", "<leader>dO", dap.step_out, { desc = " Step out" })
     vim.keymap.set("n", "<leader>dq", dap.terminate, { desc = " Terminate session" })
