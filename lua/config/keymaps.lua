@@ -59,6 +59,10 @@ else
   vim.keymap.set({ "n", "v" }, "gk", "k", { desc = "Previous actual line" })
   vim.keymap.set("v", "<C-c>", '"+y', { desc = "Copy to system clipboard" })
   vim.keymap.set("i", "<C-v>", "<C-r>+", { noremap = true, silent = true, desc = "Paste from system clipboard" })
+  vim.keymap.set("n", "<C-Up>", "<Cmd>resize -2<CR>", { desc = "Decrease window height" })
+  vim.keymap.set("n", "<C-Down>", "<Cmd>resize +2<CR>", { desc = "Increase window height" })
+  vim.keymap.set("n", "<C-Left>", "<Cmd>vertical resize -2<CR>", { desc = "Decrease window width" })
+  vim.keymap.set("n", "<C-Right>", "<Cmd>vertical resize +2<CR>", { desc = "Increase window width" })
   if SYSTEM.is_win then
     vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Navigate Left", remap = true })
     vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Navigate Down", remap = true })

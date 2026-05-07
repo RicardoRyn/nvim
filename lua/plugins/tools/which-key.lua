@@ -2,6 +2,15 @@ return {
   "folke/which-key.nvim",
   cond = not vim.g.vscode,
   event = "VeryLazy",
+  keys = {
+    {
+      "<leader>?",
+      function()
+        require("which-key").show({ global = false })
+      end,
+      desc = "Buffer Local Keymaps (which-key)",
+    },
+  },
   opts = {
     preset = "helix",
     spec = {
@@ -22,14 +31,13 @@ return {
         { "<leader>f", group = "Find" },
         { "<leader>g", group = "Git" },
         { "<leader>gh", group = "GitHub" },
-        { "<leader>gj", group = "JJui"},
+        { "<leader>gj", group = "JJ UI" },
         { "<leader>h", group = "Home", icon = { icon = " " } },
         { "<leader>j", group = "Jujutsu", icon = { icon = "󱨎 ", color = "yellow" } },
         { "<leader>l", group = "LSP", icon = { icon = " ", color = "purple" } },
         { "<leader>L", group = "Lazy" },
-        { "<leader>lm", group = "Toggle Code Block" },
-        { "<leader>ls", group = "LSP", icon = { icon = " ", color = "purple" } },
-        { "<leader>lv", group = "Virtual Env", icon = { icon = " ", color = "purple" } },
+        { "<leader>lm", desc = "Toggle Code Block" },
+        { "<leader>lv", desc = "Virtual Env", icon = { icon = " ", color = "purple" } },
         { "<leader>n", group = "Noice" },
         { "<leader>o", group = "Outline", icon = { icon = " ", color = "green" } },
         { "<leader>s", group = "Search" },
@@ -38,28 +46,12 @@ return {
         { "<leader>u", group = "UI", icon = { icon = "󰙵 ", color = "cyan" } },
         { "<leader>w", group = "Windows", proxy = "<c-w>", expand = function() return require("which-key.extras").expand.win() end },
         { "<leader>x", group = "QuickFix", icon = { icon = "󱖫 ", color = "red" } },
-        { "<leader>z", icon = { icon = "󰙅"} },
+        { "<leader>z", desc = "Zoxide", icon = { icon = "󰙅" } },
         { "<leader><space>", group = "Smart Files", icon = { icon = " " } },
-        { "<leader>.", group = "Scratch", icon = {icon = " "}},
-        { "<leader>:", group = "Command History", icon = {icon = " "}},
+        { "<leader>.", group = "Scratch", icon = { icon = " " } },
+        { "<leader>:", group = "Command History", icon = { icon = " " } },
         { "<leader>/", group = "Grep", icon = { icon = " " } },
       },
-    },
-  },
-  keys = {
-    {
-      "<c-w><space>",
-      function()
-        require("which-key").show({ keys = "<c-w>", loop = true })
-      end,
-      desc = "Window Hydra Mode (which-key)",
-    },
-    {
-      "<leader>?",
-      function()
-        require("which-key").show({ global = false })
-      end,
-      desc = "Buffer Local Keymaps (which-key)",
     },
   },
 }
