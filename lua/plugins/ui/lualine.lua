@@ -14,6 +14,14 @@ return {
     },
     sections = {
       lualine_a = {
+        -- 是否位于工作目录
+        {
+          function()
+            local buf_path = vim.api.nvim_buf_get_name(0)
+            local cwd = vim.fn.getcwd()
+            return buf_path:find(cwd, 1, true) == 1 and "" or ""
+          end,
+        },
         -- 文件名
         "filename",
       },
@@ -53,21 +61,15 @@ return {
         },
       },
       lualine_c = {
-        -- sidekick NES状态
+        -- 诊断信息
         {
-          function()
-            return " "
-          end,
-          color = function()
-            local status = require("sidekick.status").get()
-            if status then
-              return status.kind == "Error" and "DiagnosticError" or status.busy and "DiagnosticWarn" or "Special"
-            end
-          end,
-          cond = function()
-            local status = require("sidekick.status")
-            return status.get() ~= nil
-          end,
+          "diagnostics",
+          symbols = {
+            error = require("utils.icons").diagnostics.error,
+            warn = require("utils.icons").diagnostics.warn,
+            info = require("utils.icons").diagnostics.info,
+            hint = require("utils.icons").diagnostics.hint,
+          },
         },
         -- 文件类型图标
         { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
@@ -87,16 +89,6 @@ return {
           cond = function()
             return package.loaded["noice"] and require("noice").api.status.command.has()
           end,
-        },
-        -- 诊断信息
-        {
-          "diagnostics",
-          symbols = {
-            error = require("utils.icons").diagnostics.error,
-            warn = require("utils.icons").diagnostics.warn,
-            info = require("utils.icons").diagnostics.info,
-            hint = require("utils.icons").diagnostics.hint,
-          },
         },
         -- 搜索信息
         {
@@ -133,6 +125,22 @@ return {
           cond = require("lazy.status").has_updates,
           color = { fg = "#f38ba8", gui = "bold" },
         },
+        -- sidekick NES状态
+        {
+          function()
+            return " "
+          end,
+          color = function()
+            local status = require("sidekick.status").get()
+            if status then
+              return status.kind == "Error" and "DiagnosticError" or status.busy and "DiagnosticWarn" or "Special"
+            end
+          end,
+          cond = function()
+            local status = require("sidekick.status")
+            return status.get() ~= nil
+          end,
+        },
         -- sidekick CLI状态
         {
           function()
@@ -157,11 +165,11 @@ return {
         -- },
       },
       lualine_y = {
-        { "location" },
         { "lsp_status" },
       },
       lualine_z = {
-        "mode",
+        { "mode" },
+        { "location" },
       },
     },
     extensions = { "neo-tree", "lazy", "fzf", "avante" },
