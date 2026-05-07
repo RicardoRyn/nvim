@@ -43,10 +43,10 @@ return {
     { "<leader>ft", function() Snacks.picker.todo_comments({ buffers = true }) end, desc = "Todo (Buffers)" },
     { "<leader>fT", function() Snacks.picker.todo_comments({ keywords = { "FIX", "TODO" }, buffers = true }) end, desc = "Todo/Fix (Buffers)" },
     -- grep
-    { "<leader>//", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<leader>/l", function() Snacks.picker.lines() end, desc = "Lines" },
     { "<leader>/b", function() Snacks.picker.grep_buffers() end, desc = "Buffers" },
     { "<leader>/w", function() Snacks.picker.grep_word() end, desc = "Word", mode = { "n", "x" } },
+    { "<leader>//", function() Snacks.picker.grep() end, desc = "Grep" },
     -- search
     { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>.", function() Snacks.scratch() end, desc = "Scratch" },

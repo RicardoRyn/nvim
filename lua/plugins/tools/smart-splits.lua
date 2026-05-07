@@ -2,7 +2,9 @@ return {
   "mrjones2014/smart-splits.nvim",
   cond = not vim.g.vscode,
   dependencies = { "hiasr/vim-zellij-navigator.nvim" },
-  opts = {},
+  opts = {
+    at_edge = "stop",
+  },
   config = function(_, opts)
     require("smart-splits").setup(opts)
 
