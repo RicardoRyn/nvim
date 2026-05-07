@@ -125,17 +125,26 @@ return {
       end,
     })
 
-    -- 等待 Catppuccin 加载完成后异步初始化动画配置
+    -- 异步初始化动画配置，通过读取原生高亮组解耦特定主题
     vim.defer_fn(function()
-      local flavour = require("catppuccin").flavour
-      local colors = require("catppuccin.palettes").get_palette(flavour)
-      dashboard_animation.theAnimation(dashboard_animation.theAnimation, colors)
-
-      -- 若非透明模式下启用 latte，则手动覆盖 CursorLine 背景色以优化视觉效果
-      local catppuccin = require("catppuccin")
-      if not catppuccin.options.transparent_background and catppuccin.flavour == "latte" then
-        vim.cmd([[highlight CursorLine guibg=#dce0e8]])
+      -- 获取高亮组的颜色，如果失败则提供默认值
+      local function get_hl_color(hl_name, fallback)
+        local hl = vim.api.nvim_get_hl(0, { name = hl_name, link = false })
+        -- Nvim 0.9.0+ 返回真实的 24-bit 颜色整数值
+        if hl and hl.fg then
+          return string.format("#%06x", hl.fg)
+        end
+        return fallback
       end
+
+      -- 为了保证 Dashboard 动画颜色鲜艳，这里取更加基础明显的高亮组，或者直接用备用色
+      local colors = {
+        blue = get_hl_color("Function", "#89b4fa"),
+        yellow = get_hl_color("WarningMsg", "#f9e2af"),
+        red = get_hl_color("ErrorMsg", "#f38ba8"),
+      }
+
+      dashboard_animation.theAnimation(dashboard_animation.theAnimation, colors)
     end, 1)
   end,
 }
