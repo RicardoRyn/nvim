@@ -92,6 +92,7 @@ return {
     -- terminal
     { "<C-/>", function() Snacks.terminal(nil, { win = { height = 0.3, position = "bottom", } }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     { "<C-_>", function() Snacks.terminal(nil, { win = { height = 0.3, position = "bottom", } }) end, mode = { "n", "t" }, desc = "Open Terminal" },
+    { "<leader>T", function() Snacks.terminal(nil, { win = { height = 0.3, position = "bottom", } }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     -- ui
     { "<leader>es", function() Snacks.explorer() end, desc = "File Explorer" },
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
