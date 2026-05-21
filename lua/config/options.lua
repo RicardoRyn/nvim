@@ -45,6 +45,7 @@ vim.opt.spelllang = { "en" } -- 拼写检查的语言为英语（English）
 -- UI
 -- ============================================================================
 
+vim.opt.cmdheight = 0
 vim.opt.winborder = "single" -- 窗口边框
 vim.opt.signcolumn = "yes" -- 在行号左边显示警告、错误、Git 修改等标记的列
 vim.opt.smoothscroll = true -- 启用 平滑滚动（滚动时不会跳动，画面更流畅）

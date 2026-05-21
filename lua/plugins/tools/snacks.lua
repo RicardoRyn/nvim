@@ -14,7 +14,6 @@ return {
   cond = not vim.g.vscode,
   lazy = false,
   priority = 1000,
-  dependencies = "folke/noice.nvim",
   opts = {
     bigfile = { enabled = true },
     dashboard = snacks_dashboard,
@@ -126,26 +125,27 @@ return {
       end,
     })
 
-    -- 异步初始化动画配置，通过读取原生高亮组解耦特定主题
-    vim.defer_fn(function()
-      -- 获取高亮组的颜色，如果失败则提供默认值
-      local function get_hl_color(hl_name, fallback)
-        local hl = vim.api.nvim_get_hl(0, { name = hl_name, link = false })
-        -- Nvim 0.9.0+ 返回真实的 24-bit 颜色整数值
-        if hl and hl.fg then
-          return string.format("#%06x", hl.fg)
-        end
-        return fallback
-      end
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "VeryLazy",
+      callback = function()
+        vim.defer_fn(function()
+          local function get_hl_color(hl_name, fallback)
+            local hl = vim.api.nvim_get_hl(0, { name = hl_name, link = false })
+            if hl and hl.fg then
+              return string.format("#%06x", hl.fg)
+            end
+            return fallback
+          end
 
-      -- 为了保证 Dashboard 动画颜色鲜艳，这里取更加基础明显的高亮组，或者直接用备用色
-      local colors = {
-        blue = get_hl_color("Function", "#89b4fa"),
-        yellow = get_hl_color("WarningMsg", "#f9e2af"),
-        red = get_hl_color("ErrorMsg", "#f38ba8"),
-      }
+          local colors = {
+            blue = get_hl_color("Function", "#89b4fa"),
+            yellow = get_hl_color("WarningMsg", "#f9e2af"),
+            red = get_hl_color("ErrorMsg", "#f38ba8"),
+          }
 
-      dashboard_animation.theAnimation(dashboard_animation.theAnimation, colors)
-    end, 1)
+          dashboard_animation.theAnimation(dashboard_animation.theAnimation, colors)
+        end, 500) -- 500ms 延迟，确保在启动切换主题之后执行
+      end,
+    })
   end,
 }
