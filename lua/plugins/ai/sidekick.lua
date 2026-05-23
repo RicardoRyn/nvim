@@ -24,7 +24,7 @@ return {
       },
       tools = {
         copilot = { cmd = { "copilot", "--banner" } },
-        deepseek = { cmd = { "deepseek" } },
+        codewhale = { cmd = { "codewhale", "-c" } },
         pi = { cmd = { "pi" } },
       },
       prompts = {

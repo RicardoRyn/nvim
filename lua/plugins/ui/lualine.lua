@@ -14,14 +14,6 @@ return {
     },
     sections = {
       lualine_a = {
-        -- 是否位于工作目录
-        {
-          function()
-            local buf_path = vim.api.nvim_buf_get_name(0)
-            local cwd = vim.fn.getcwd()
-            return buf_path:find(cwd, 1, true) == 1 and "" or ""
-          end,
-        },
         -- 文件名
         "filename",
       },
