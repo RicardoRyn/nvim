@@ -49,6 +49,14 @@ return {
                 removed = gitsigns.removed,
               }
             end
+            local minidiff = vim.b.minidiff_summary
+            if minidiff then
+              return {
+                added = minidiff.add,
+                modified = minidiff.change,
+                removed = minidiff.delete,
+              }
+            end
           end,
         },
       },
