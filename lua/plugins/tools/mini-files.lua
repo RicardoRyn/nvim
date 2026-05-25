@@ -4,7 +4,7 @@ return {
   version = false,
   keys = {
     { "<leader>ee", "<CMD>lua MiniFiles.open()<CR>", desc = "Mini Files" },
-    { "<leader>ef", "<CMD>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>", desc = "Mini Files" },
+    { "<leader>ef", "<CMD>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>", desc = "Mini Files (Current folder)" },
   },
   opts = {
     content = {

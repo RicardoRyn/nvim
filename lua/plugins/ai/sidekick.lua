@@ -25,7 +25,7 @@ return {
       tools = {
         copilot = { cmd = { "copilot", "--banner" } },
         codewhale = { cmd = { "codewhale", "-c" } },
-        pi = { cmd = { "pi" } },
+        pi = { cmd = { "pi", "-c" } },
       },
       prompts = {
         changes = "你能审查一下我的更改吗？",
