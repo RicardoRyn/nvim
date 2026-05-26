@@ -3,7 +3,6 @@ return {
   cond = not vim.g.vscode,
   dependencies = {
     "folke/snacks.nvim",
-    "esmuellert/codediff.nvim",
   },
   cmd = {
     "J",
@@ -32,13 +31,14 @@ return {
     { "<leader>jR", function() require("jj.cmd").redo() end, desc = "JJ redo" },
     { "<leader>js", function() require("jj.cmd").status() end, desc = "JJ status" },
     { "<leader>jS", function() require("jj.cmd").squash() end, desc = "JJ squash" },
-    { "<leader>jt", function() local cmd = require("jj.cmd") cmd.j("tug") cmd.log({}) end, desc = "JJ tug", },
+    { "<leader>jts", function() require("jj.cmd").tag_set() end, desc = "JJ tag set", },
+    { "<leader>jtd", function() require("jj.cmd").tag_delete() end, desc = "JJ tag delete", },
+    { "<leader>jtp", function() require("jj.cmd").tag_push() end, desc = "JJ tag push", },
     { "<leader>jU", function() require("jj.cmd").undo() end, desc = "JJ undo" },
     { "<leader>sj", function() require("jj.picker").status() end, desc = "JJ Picker status" },
   },
   opts = {
     picker = { snacks = {} },
-    diff = { backend = "codediff" },
     cmd = {
       keymaps = {
         log = {
