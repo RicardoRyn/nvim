@@ -20,17 +20,26 @@ return {
     debug = { enabled = true },
     explorer = { enabled = true },
     gh = { enabled = true },
+    gitbrowse = {
+      open = function(url)
+        if vim.fn.has("nvim-0.10") == 0 or SYSTEM.is_win then
+          require("lazy.util").open(url, { system = true })
+          return
+        end
+        vim.ui.open(url)
+      end,
+    },
     image = { enabled = not SYSTEM.is_win },
     indent = snacks_indent,
     input = { enabled = true },
-    picker = snacks_explorer_preview,
     notifier = { enabled = true, timeout = 3000, style = "fancy", date_format = "%H:%M:%S" },
+    picker = snacks_explorer_preview,
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
-    words = { enabled = true },
     styles = { notification = { wo = { wrap = true }, border = "rounded" } },
+    words = { enabled = true },
   },
   -- stylua: ignore
   keys = {
@@ -84,7 +93,7 @@ return {
     { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
     { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
     -- git
-    { "<leader>gg", function() Snacks.gitbrowse.open() end, desc = "Github Browse", },
+    { "<leader>gg", function() Snacks.gitbrowse.open() end, mode = { "n", "v" }, desc = "Github Browse", },
     { "<leader>ghi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
     { "<leader>ghI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
     { "<leader>ghp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },

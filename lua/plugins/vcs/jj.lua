@@ -1,9 +1,8 @@
 return {
   "nicolasgb/jj.nvim",
   cond = not vim.g.vscode,
-  dependencies = {
-    "folke/snacks.nvim",
-  },
+  branch = SYSTEM.is_win and "ngb/fix/windows" or "main",
+  dependencies = { "folke/snacks.nvim" },
   cmd = {
     "J",
     "Jdiff",
@@ -17,6 +16,8 @@ return {
     { "<leader>jbc", function() require("jj.cmd").bookmark_create() end, desc = "JJ bookmark create" },
     { "<leader>jbd", function() require("jj.cmd").bookmark_delete() end, desc = "JJ bookmark delete" },
     { "<leader>jbm", function() require("jj.cmd").bookmark_move() end, desc = "JJ bookmark move" },
+    { "<leader>jB", "<cmd>Jbrowse<cr>", mode = "n", desc = "JJ browse" },
+    { "<leader>jB", ":Jbrowse<cr>", mode = "v", desc = "JJ browse" },
     { "<leader>jd", function() require("jj.diff").open_vdiff() end, desc = "JJ diff current buffer" },
     { "<leader>jD", function() require("jj.cmd").describe() end, desc = "JJ describe" },
     { "<leader>je", function() require("jj.cmd").edit() end, desc = "JJ edit" },
