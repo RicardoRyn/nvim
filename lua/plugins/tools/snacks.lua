@@ -101,7 +101,9 @@ return {
     -- terminal
     { "<C-/>", function() Snacks.terminal(nil, { win = { height = 0.3, position = "bottom", } }) end, mode = { "n", "t" }, desc = "Open Terminal" },
     { "<C-_>", function() Snacks.terminal(nil, { win = { height = 0.3, position = "bottom", } }) end, mode = { "n", "t" }, desc = "Open Terminal" },
-    { "<leader>T", function() Snacks.terminal(nil, { win = { height = 0.3, position = "bottom", } }) end, mode = { "n", "t" }, desc = "Open Terminal" },
+    { "<leader>tt", function() Snacks.terminal(nil, { win = { height = 0.3, position = "bottom", } }) end, mode = { "n", "t" }, desc = "Open Terminal (Bottom)" },
+    { "<leader>tv", function() Snacks.terminal(nil, { win = { position = "right", } }) end, mode = { "n", "t" }, desc = "Open Terminal (Right)" },
+    { "<leader>tf", function() Snacks.terminal(nil, { win = { position = "float", } }) end, mode = { "n", "t" }, desc = "Open Terminal (Float)" },
     -- ui
     { "<leader>es", function() Snacks.explorer() end, desc = "File Explorer" },
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
@@ -120,10 +122,11 @@ return {
         Snacks.toggle({
           name = "Git Signs",
           get = function()
-            return require("gitsigns.config").config.signcolumn
+            return vim.g._minidiff_enabled ~= false
           end,
           set = function(state)
-            require("gitsigns").toggle_signs(state)
+            vim.g._minidiff_enabled = state
+            require("mini.diff").toggle()
           end,
         }):map("<leader>ug")
         Snacks.toggle.inlay_hints():map("<leader>uh")

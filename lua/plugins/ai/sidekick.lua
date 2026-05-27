@@ -26,6 +26,7 @@ return {
         copilot = { cmd = { "copilot", "--banner" } },
         codewhale = { cmd = { "codewhale", "-c" } },
         pi = { cmd = { "pi", "-c" } },
+        codex = { cmd = { "codex" } },
       },
       prompts = {
         changes = "你能审查一下我的更改吗？",

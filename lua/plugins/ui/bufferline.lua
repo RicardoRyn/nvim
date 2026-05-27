@@ -118,7 +118,7 @@ return {
         },
         {
           filetype = "snacks_terminal",
-          text = "  Opencode",
+          text = "󱥰 Snacks Terminal",
           highlight = "Directory",
           text_align = "center",
           separator = true,
