@@ -57,7 +57,7 @@ return {
     { "<leader>/w", function() Snacks.picker.grep_word() end, desc = "Word", mode = { "n", "x" } },
     { "<leader>//", function() Snacks.picker.grep() end, desc = "Grep" },
     -- search
-    { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+    -- { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>.", function() Snacks.scratch() end, desc = "Scratch" },
     { "<leader>s:", function() Snacks.picker.command_history() end, mode = { "n", "v" }, desc = "Command History" },
     { "<leader>z", function() Snacks.picker.zoxide() end, desc = "Zoxide" },
