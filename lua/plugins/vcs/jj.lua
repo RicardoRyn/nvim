@@ -11,7 +11,7 @@ return {
   },
   -- stylua: ignore
   keys = {
-    { "<leader>ja", function() require("jj.annotate").file() end, desc = "JJ annotate file" },
+    -- { "<leader>ja", function() require("jj.annotate").file() end, desc = "JJ annotate file" },
     { "<leader>jA", function() require("jj.cmd").abandon() end, desc = "JJ abandon" },
     { "<leader>jbc", function() require("jj.cmd").bookmark_create() end, desc = "JJ bookmark create" },
     { "<leader>jbd", function() require("jj.cmd").bookmark_delete() end, desc = "JJ bookmark delete" },
