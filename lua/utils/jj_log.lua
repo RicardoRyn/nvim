@@ -11,6 +11,9 @@ local function is_special_mode()
 end
 
 if is_special_mode() then
+  M.is_jj_repo = function()
+    return false
+  end
   M.get = function()
     return ""
   end
@@ -41,17 +44,30 @@ local jj_cmd = [[jj log --revisions @ --no-graph --color never --limit 1 --templ
     )
   )
 ']]
-
 local status_symbols = {
   conflicted = "💥",
   divergent = "🚧",
   immutable = "🔒",
   empty = "󰱒",
 }
-
 local cached_status = ""
 local is_exiting = false
 local running_job_id = nil
+local status_request_id = 0
+
+local function get_jj_root()
+  local path = vim.api.nvim_buf_get_name(0)
+  if path == "" then
+    path = (vim.uv or vim.loop).cwd()
+  end
+  return vim.fs.root(path, ".jj")
+end
+
+local function notify_status_updated()
+  vim.schedule(function()
+    vim.api.nvim_exec_autocmds("User", { pattern = "JjStatusUpdated" })
+  end)
+end
 
 local function fg_from_hl(name, fallback)
   local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = name, link = false })
@@ -66,8 +82,29 @@ local function update_status()
     return
   end
 
+  status_request_id = status_request_id + 1
+  local request_id = status_request_id
+  local jj_root = get_jj_root()
+  if not jj_root then
+    if running_job_id then
+      vim.fn.jobstop(running_job_id)
+      running_job_id = nil
+    end
+    if cached_status ~= "" then
+      cached_status = ""
+      notify_status_updated()
+    end
+    return
+  end
+
+  if running_job_id then
+    vim.fn.jobstop(running_job_id)
+    running_job_id = nil
+  end
+
   local output = {}
   running_job_id = vim.fn.jobstart(jj_cmd, {
+    cwd = jj_root,
     stdout_buffered = true,
     on_stdout = function(_, data)
       if data then
@@ -75,6 +112,10 @@ local function update_status()
       end
     end,
     on_exit = function(_, exit_code)
+      if request_id ~= status_request_id then
+        return
+      end
+
       running_job_id = nil
       if exit_code == 0 then
         local result = table.concat(output, "")
@@ -82,6 +123,7 @@ local function update_status()
       else
         cached_status = ""
       end
+      notify_status_updated()
     end,
   })
 end
@@ -105,6 +147,10 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
     end
   end,
 })
+
+M.is_jj_repo = function()
+  return get_jj_root() ~= nil
+end
 
 M.get = function()
   return cached_status

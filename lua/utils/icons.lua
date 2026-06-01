@@ -37,13 +37,6 @@ M.comments = {
   note = "󰍨 ",
 }
 
-M.lsp = {
-  unavailable = "",
-  enabled = " ",
-  disabled = " ",
-  attached = "󰖩 ",
-}
-
 M.dap = {
   Stopped = " ",
   BreakpointData = " ",

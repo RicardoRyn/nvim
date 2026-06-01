@@ -27,9 +27,7 @@ return {
           color = function()
             return require("utils.jj_log").get_color()
           end,
-          cond = function()
-            return require("utils.jj_log").get() ~= ""
-          end,
+          cond = require("utils.jj_log").is_jj_repo,
         },
         -- 文件修改状态
         {
