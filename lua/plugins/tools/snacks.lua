@@ -4,9 +4,9 @@
 -- 2. `gh extension install meiji163/gh-notify`
 -- 由于Windows上类Unix脚本的Shebang路径问题，可能需要修改gh-notify的脚本
 
-local snacks_dashboard = require("utils.snacks_dashboard")
-local snacks_indent = require("utils.snacks_indent")
-local snacks_explorer_preview = require("utils.snacks_explorer_preview")
+local snacks_dashboard = require("utils.snacks.dashboard")
+local snacks_indent = require("utils.snacks.indent")
+local snacks_explorer_preview = require("utils.snacks.explorer_preview")
 local dashboard_animation = require("utils.dashboard_animation")
 
 return {
