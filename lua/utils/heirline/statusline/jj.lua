@@ -1,6 +1,7 @@
 local colors = require("utils.heirline.colors")
 local jj_log = require("utils.jj_log")
 
+-- TODO: 如果只是git仓库而不是jj仓库，则应该显示git branch
 local JjLog = {
   condition = jj_log.is_jj_repo,
   provider = function()
@@ -40,19 +41,25 @@ local Diff = {
     provider = function(self)
       return self.s.add > 0 and ("+" .. self.s.add) or ""
     end,
-    hl = { fg = colors.git_add },
+    hl = function()
+      return { fg = colors.git_add }
+    end,
   },
   {
     provider = function(self)
       return self.s.delete > 0 and ("-" .. self.s.delete) or ""
     end,
-    hl = { fg = colors.git_del },
+    hl = function()
+      return { fg = colors.git_del }
+    end,
   },
   {
     provider = function(self)
       return self.s.change > 0 and ("~" .. self.s.change) or ""
     end,
-    hl = { fg = colors.git_change },
+    hl = function()
+      return { fg = colors.git_change }
+    end,
   },
   {
     provider = function(self)

@@ -4,7 +4,8 @@ return {
   dependencies = { "echasnovski/mini.icons" },
   config = function()
     local colors = require("utils.heirline.colors")
-    local Spacer = { provider = "%=" }
+    local Align = { provider = "%=" }
+
     local Statusline = require("utils.heirline.statusline")
 
     require("heirline").setup({
@@ -16,8 +17,9 @@ return {
         Statusline.file_others.FileIcon,
         Statusline.jj.JjLog,
         Statusline.jj.Diff,
+        Align,
         Statusline.work_dir.CurrentDir,
-        Spacer,
+        Align,
         Statusline.cmdline.SelectionCount,
         Statusline.cmdline.MacroRec,
         Statusline.cmdline.SearchCount,

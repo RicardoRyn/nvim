@@ -12,7 +12,9 @@ local WorkDir = {
     local trail = cwd:sub(-1) == "/" and "" or "/"
     return icon .. cwd .. trail
   end,
-  hl = { fg = colors.blue, bold = true },
+  hl = function()
+    return { fg = colors.blue, bold = true }
+  end,
 }
 
 local FlexWorkDir = {
@@ -21,7 +23,9 @@ local FlexWorkDir = {
     local cwd = vim.fn.getcwd(0)
     self.cwd = vim.fn.fnamemodify(cwd, ":~")
   end,
-  hl = { fg = colors.blue, bold = true },
+  hl = function()
+    return { fg = colors.blue, bold = true }
+  end,
 
   flexible = 1,
 

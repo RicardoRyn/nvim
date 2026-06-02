@@ -22,7 +22,9 @@ local MacroRec = {
     return vim.fn.reg_recording() ~= "" and vim.o.cmdheight == 0
   end,
   provider = " ",
-  hl = { fg = colors.purple, bold = true },
+  hl = function()
+    return { fg = colors.purple, bold = true }
+  end,
   utils.surround({ "[", "] " }, nil, {
     provider = function()
       return vim.fn.reg_recording()
@@ -41,7 +43,7 @@ local ShowCmd = {
   condition = function()
     return vim.o.cmdheight == 0
   end,
-  provider = ":%3.5(%S%)",
+  provider = ":%3.5(%S%) ",
 }
 
 local SelectionCount = {
@@ -69,7 +71,9 @@ local SelectionCount = {
       return string.format("[%dC]", math.abs(vim.fn.col(".") - vim.fn.col("v")) + 1) .. " "
     end
   end,
-  hl = { fg = colors.cyan, bold = true },
+  hl = function()
+    return { fg = colors.cyan, bold = true }
+  end,
   update = { "ModeChanged", "CursorMoved" },
 }
 

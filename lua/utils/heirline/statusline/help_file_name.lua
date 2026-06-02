@@ -8,7 +8,9 @@ local M = {
     local filename = vim.api.nvim_buf_get_name(0)
     return vim.fn.fnamemodify(filename, ":t")
   end,
-  hl = { fg = colors.blue },
+  hl = function()
+    return { fg = colors.blue }
+  end,
 }
 
 return M

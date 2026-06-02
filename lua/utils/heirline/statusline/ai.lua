@@ -8,7 +8,9 @@ local M = {
     local status = require("sidekick.status").cli()
     return " " .. (#status > 1 and #status or "") .. " "
   end,
-  hl = { fg = colors.cyan },
+  hl = function()
+    return { fg = colors.cyan }
+  end,
 }
 
 return M

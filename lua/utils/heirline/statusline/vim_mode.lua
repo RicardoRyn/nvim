@@ -8,18 +8,18 @@ local VimModeCore = {
     return " " .. self.mode_names[self.mode]
   end,
   hl = function(self)
-    return { fg = colors.background, bg = self.mode_colors[self.mode], bold = true }
+    return { fg = colors.background, bg = self.mode_color(self.mode), bold = true }
   end,
 }
 
 local WrappedVimModeCore = utils.surround({ "", "" }, function(self)
-  return self.mode_colors[self.mode]
+  return self.mode_color(self.mode)
 end, VimModeCore)
 
 local M = {
   init = function(self)
     self.mode = vim.fn.mode(1)
-    vim.g.heirline_vimode_bg = self.mode_colors[self.mode]
+    vim.g.heirline_vimode_bg = self.mode_color(self.mode)
   end,
   static = {
     mode_names = {
@@ -58,22 +58,24 @@ local M = {
       ["!"] = "SHELL",
       t = "TERMINAL",
     },
-    mode_colors = {
-      n = colors.blue,
-      nt = colors.blue,
-      i = colors.green,
-      v = colors.purple,
-      V = colors.purple,
-      ["\22"] = colors.purple,
-      c = colors.orange,
-      s = colors.purple,
-      S = colors.purple,
-      ["\19"] = colors.purple,
-      R = colors.red,
-      r = colors.red,
-      ["!"] = colors.green,
-      t = colors.green,
-    },
+    mode_color = function(mode)
+      return ({
+        n = colors.blue,
+        nt = colors.blue,
+        i = colors.green,
+        v = colors.purple,
+        V = colors.purple,
+        ["\22"] = colors.purple,
+        c = colors.orange,
+        s = colors.purple,
+        S = colors.purple,
+        ["\19"] = colors.purple,
+        R = colors.red,
+        r = colors.red,
+        ["!"] = colors.green,
+        t = colors.green,
+      })[mode]
+    end,
   },
   update = {
     "ModeChanged",
