@@ -20,7 +20,7 @@ local FileFlags = {
     condition = function()
       return vim.bo.modified
     end,
-    provider = "  ",
+    provider = "[+] ",
   },
   {
     condition = function()

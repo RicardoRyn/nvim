@@ -1,4 +1,5 @@
 local conditions = require("heirline.conditions")
+local colors = require("utils.heirline.colors")
 
 local LSPActive = {
   condition = conditions.lsp_attached,

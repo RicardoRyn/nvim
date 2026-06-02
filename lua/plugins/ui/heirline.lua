@@ -1,7 +1,6 @@
 return {
   "rebelot/heirline.nvim",
   event = "VeryLazy",
-  dependencies = { "echasnovski/mini.icons" },
   config = function()
     local colors = require("utils.heirline.colors")
     local Align = { provider = "%=" }
