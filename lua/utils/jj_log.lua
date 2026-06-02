@@ -77,6 +77,13 @@ local function fg_from_hl(name, fallback)
   return fallback
 end
 
+local function stop_running_job()
+  if running_job_id then
+    vim.fn.jobstop(running_job_id)
+    running_job_id = nil
+  end
+end
+
 local function update_status()
   if is_exiting then
     return
@@ -85,11 +92,11 @@ local function update_status()
   status_request_id = status_request_id + 1
   local request_id = status_request_id
   local jj_root = get_jj_root()
+
   if not jj_root then
-    if running_job_id then
-      vim.fn.jobstop(running_job_id)
-      running_job_id = nil
-    end
+    -- 取消旧任务
+    stop_running_job()
+
     if cached_status ~= "" then
       cached_status = ""
       notify_status_updated()
@@ -97,21 +104,23 @@ local function update_status()
     return
   end
 
-  if running_job_id then
-    vim.fn.jobstop(running_job_id)
-    running_job_id = nil
-  end
+  -- 取消旧任务
+  stop_running_job()
 
   local output = {}
+
   running_job_id = vim.fn.jobstart(jj_cmd, {
     cwd = jj_root,
     stdout_buffered = true,
+
     on_stdout = function(_, data)
       if data then
         vim.list_extend(output, data)
       end
     end,
+
     on_exit = function(_, exit_code)
+      -- 忽略旧回调
       if request_id ~= status_request_id then
         return
       end
@@ -141,12 +150,11 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
   group = augroup,
   callback = function()
     is_exiting = true
-    if running_job_id then
-      vim.fn.jobstop(running_job_id)
-      running_job_id = nil
-    end
+    stop_running_job()
   end,
 })
+
+vim.schedule(update_status)
 
 M.is_jj_repo = function()
   return get_jj_root() ~= nil
