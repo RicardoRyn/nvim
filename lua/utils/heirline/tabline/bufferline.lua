@@ -1,5 +1,3 @@
--- TODO: 指定次数执行bufferline移动
-
 local utils = require("heirline.utils")
 local colors = require("utils.heirline.colors")
 local FileIcon = require("utils.heirline.statusline.file_others").get_fileicon()

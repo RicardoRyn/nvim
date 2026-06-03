@@ -1,5 +1,3 @@
--- TODO: buffer order保存进session中
-
 local M = {}
 
 local api = vim.api
@@ -8,12 +6,84 @@ local fn = vim.fn
 ---@type number[]  当前所有 listed buffer，按期望顺序排列
 local buffer_order = {}
 
-local function init()
-  buffer_order = {}
-  for _, buf in ipairs(api.nvim_list_bufs()) do
-    if fn.buflisted(buf) == 1 then
-      table.insert(buffer_order, buf)
+--- 将 bufnr 映射为完整文件名（用于持久化）
+---@param buf number
+---@return string|nil
+local function buf_to_name(buf)
+  local name = api.nvim_buf_get_name(buf)
+  if name == "" then
+    return nil -- [No Name] 不持久化
+  end
+  return fn.fnamemodify(name, ":p")
+end
+
+--- 将 buffer_order 序列化到 g:BufferMove_Order（文件名 JSON 数组）
+local function save_order()
+  local names = {}
+  for _, buf in ipairs(buffer_order) do
+    local name = buf_to_name(buf)
+    if name then
+      names[#names + 1] = name
     end
+  end
+  vim.g.BufferMove_Order = vim.json.encode(names)
+end
+
+--- 从 g:BufferMove_Order 恢复 buffer_order
+--- 根据文件名匹配当前 bufnr，若找不到则跳过
+---@return boolean
+local function restore_order()
+  local raw = vim.g.BufferMove_Order
+  if not raw or raw == "" then
+    return false
+  end
+  local ok, names = pcall(vim.json.decode, raw)
+  if not ok or type(names) ~= "table" then
+    return false
+  end
+
+  -- 构建 filename → bufnr 映射表
+  local name_to_buf = {}
+  for _, buf in ipairs(api.nvim_list_bufs()) do
+    local name = buf_to_name(buf)
+    if name then
+      name_to_buf[name] = buf
+    end
+  end
+
+  local restored = {}
+  local seen = {}
+  for _, name in ipairs(names) do
+    local buf = name_to_buf[name]
+    if buf and fn.buflisted(buf) == 1 then
+      restored[#restored + 1] = buf
+      seen[buf] = true
+    end
+  end
+
+  -- 追加本次 session 才有的新 buffer（未出现在已保存顺序中的）
+  for _, buf in ipairs(api.nvim_list_bufs()) do
+    if not seen[buf] and fn.buflisted(buf) == 1 then
+      restored[#restored + 1] = buf
+      seen[buf] = true
+    end
+  end
+
+  buffer_order = restored
+  save_order() -- 补全缺失/新增的 buffer 到持久化内容
+  return true
+end
+
+--- 首次启动，还没有保存过顺序，从当前 buffer list 初始化
+local function init()
+  if not restore_order() then
+    buffer_order = {}
+    for _, buf in ipairs(api.nvim_list_bufs()) do
+      if fn.buflisted(buf) == 1 then
+        buffer_order[#buffer_order + 1] = buf
+      end
+    end
+    save_order()
   end
 end
 
@@ -29,6 +99,7 @@ local function add_buffer(buf)
     end
   end
   buffer_order[#buffer_order + 1] = buf
+  save_order()
 end
 
 --- 从顺序中移除一个 buffer
@@ -37,6 +108,7 @@ local function remove_buffer(buf)
   for i, b in ipairs(buffer_order) do
     if b == buf then
       table.remove(buffer_order, i)
+      save_order()
       return
     end
   end
@@ -52,7 +124,6 @@ local function cleanup()
   end
   buffer_order = valid
 end
-
 
 --- 将当前 buffer 向左或向右循环移动一位
 --- 到达边界时循环到另一端
@@ -109,8 +180,9 @@ function M.move(direction)
   -- 交换
   buffer_order[index], buffer_order[next_index] = buffer_order[next_index], buffer_order[index]
 
-  -- 通知其他插件（如 heirline）重建 buffer 缓存
-  vim.api.nvim_exec_autocmds("User", { pattern = "BufferMoveOrderChanged", modeline = false })
+  -- 持久化 + 通知 heirline 刷新
+  save_order()
+  api.nvim_exec_autocmds("User", { pattern = "BufferMoveOrderChanged", modeline = false })
 end
 
 --- 调试用：查看当前 buffer 顺序
@@ -140,11 +212,10 @@ api.nvim_create_autocmd("BufWipeout", {
   end,
 })
 
--- session 恢复后，所有 buffer 已加载，重新初始化 buffer_order
 api.nvim_create_autocmd("SessionLoadPost", {
   group = augroup,
   callback = function()
-    init()
+    restore_order()
   end,
 })
 
