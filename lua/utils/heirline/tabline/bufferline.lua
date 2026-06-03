@@ -1,3 +1,6 @@
+-- FIX: 不同buffer具有相同图标
+-- TODO: 指定次数执行bufferline移动
+
 local utils = require("heirline.utils")
 local colors = require("utils.heirline.colors")
 local FileIcon = require("utils.heirline.statusline.file_others").FileIcon
@@ -183,7 +186,7 @@ local schedule_rebuild = function()
   vim.schedule(rebuild_buflist_cache)
 end
 
-vim.api.nvim_create_autocmd({ "VimEnter", "UIEnter", "BufAdd", "BufDelete" }, {
+vim.api.nvim_create_autocmd({ "VimEnter", "UIEnter", "BufAdd", "BufDelete", "BufEnter" }, {
   callback = schedule_rebuild,
 })
 
@@ -197,6 +200,12 @@ vim.api.nvim_create_autocmd("User", {
 vim.api.nvim_create_autocmd("SessionLoadPost", {
   callback = rebuild_buflist_cache,
 })
+
+-- 模块加载时主动延迟重建，覆盖 SessionLoadPost 等事件在模块加载前已触发的情况
+-- （如 VeryLazy 加载的 heirline 在 session 恢复后才初始化）
+vim.schedule(function()
+  rebuild_buflist_cache()
+end)
 
 -- and here we go
 local M = utils.make_buflist(

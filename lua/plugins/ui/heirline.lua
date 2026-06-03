@@ -34,7 +34,6 @@ return {
         Statusline.cursor_position.ScrollBar,
         Statusline.vim_mode,
       },
-      -- TODO: 用heirline取代bufferline
       tabline = {
         Tabline.tabline_offset,
         Tabline.bufferline,
