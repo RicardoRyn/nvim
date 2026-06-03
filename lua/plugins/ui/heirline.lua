@@ -6,6 +6,8 @@ return {
     local Align = { provider = "%=" }
 
     local Statusline = require("utils.heirline.statusline")
+    vim.opt.showtabline = 2
+    local Tabline = require("utils.heirline.tabline")
 
     require("heirline").setup({
       opts = {
@@ -14,6 +16,7 @@ return {
       statusline = {
         Statusline.file_name_block,
         Statusline.file_others.FileIcon,
+        Statusline.file_others.FileType,
         Statusline.jj.JjLog,
         Statusline.jj.Diff,
         Align,
@@ -31,6 +34,35 @@ return {
         Statusline.cursor_position.ScrollBar,
         Statusline.vim_mode,
       },
+      -- TODO: 用heirline取代bufferline
+      tabline = {
+        Tabline.tabline_offset,
+        Tabline.bufferline,
+        Tabline.tabpages,
+      },
     })
+
+    vim.keymap.set("n", "<S-h>", "<Cmd>bprevious<CR>", { desc = "Prev Buffer" })
+    vim.keymap.set("n", "<S-l>", "<Cmd>bnext<CR>", { desc = "Next Buffer" })
+    vim.keymap.set("n", "<leader>ba", function()
+      Snacks.bufdelete.all()
+    end, { desc = "Delete All Buffers" })
+    vim.keymap.set("n", "<leader>bd", function()
+      Snacks.bufdelete()
+    end, { desc = "Delete Buffer" })
+    vim.keymap.set("n", "<leader>bo", function()
+      Snacks.bufdelete.other()
+    end, { desc = "Delete Other Buffer" })
+
+    vim.keymap.set("n", "<leader>b<", function()
+      require("utils.buffer_move").move(-1)
+    end, { desc = "Move buffer left" })
+    vim.keymap.set("n", "<leader>b>", function()
+      require("utils.buffer_move").move(1)
+    end, { desc = "Move buffer right" })
+
+    vim.keymap.set("n", "<leader>td", "<Cmd>tabclose<CR>", { desc = "Close Tab" })
+    vim.keymap.set("n", "<leader>ts", "<Cmd>tab split<CR>", { desc = "Tab Split" })
+    vim.keymap.set("n", "<leader>tn", "<Cmd>tabnew<CR>", { desc = "New Tab" })
   end,
 }

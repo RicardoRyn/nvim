@@ -51,12 +51,32 @@ local FlexWorkDir = {
 }
 
 local CurrentDir = {
-  provider = function()
-    return "  " .. vim.fn.fnamemodify(vim.fn.expand("%:p"), ":~:h")
+  init = function(self)
+    self.icon = "  "
+    self.cwd = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":~:h")
   end,
   hl = function()
     return { fg = vim.g.heirline_file_bg }
   end,
+
+  flexible = 1,
+
+  {
+    -- evaluates to the full-lenth path
+    provider = function(self)
+      return self.icon .. self.cwd
+    end,
+  },
+  {
+    -- evaluates to the shortened path
+    provider = function(self)
+      return self.icon .. vim.fn.pathshorten(self.cwd)
+    end,
+  },
+  {
+    -- evaluates to "", hiding the component
+    provider = "",
+  },
 }
 
 local M = {

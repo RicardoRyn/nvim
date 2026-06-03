@@ -1,5 +1,4 @@
 local utils = require("heirline.utils")
-local colors = require("utils.heirline.colors")
 
 local FileIcon = {
   init = function(self)
@@ -17,13 +16,35 @@ local FileIcon = {
     return vim.bo.filetype ~= ""
   end,
   provider = function(self)
-    return self.icon and (" " .. self.icon .. " " .. string.upper(vim.bo.filetype)) or ""
+    return self.icon and (" " .. self.icon) or ""
   end,
   hl = function(self)
     if not self.icon_hl then
       return
     end
     return { fg = utils.get_highlight(self.icon_hl).fg }
+  end,
+}
+
+local FileType = {
+  init = function(self)
+    local ok, icons = pcall(require, "mini.icons")
+    if not ok then
+      return
+    end
+    local _, hl, _ = icons.get("file", vim.fn.expand("%:t"))
+    if hl then
+      self.hl = hl
+    end
+  end,
+  provider = function()
+    return " " .. string.upper(vim.bo.filetype)
+  end,
+  hl = function(self)
+    if not self.icon_hl then
+      return
+    end
+    return { fg = utils.get_highlight(self.hl).fg }
   end,
 }
 
@@ -65,6 +86,7 @@ local FileLastModified = {
 
 local M = {
   FileIcon = FileIcon,
+  FileType = FileType,
   FileEncoding = FileEncoding,
   FileFormat = FileFormat,
   FileSize = FileSize,
