@@ -24,7 +24,11 @@ return {
   -- 有类型但无默认值的参数
   { { i.Parameter, i.Type }, "    %s (%s): $1", { required = i.Tparam, type = { "func" } } },
   -- 有类型且有默认值的参数
-  { { i.Parameter, i.Type, "default" }, "    %s (%s, 可选): $1。默认为 %s。", { required = "TparamWithDefault", type = { "func" } } },
+  {
+    { i.Parameter, i.Type, "default" },
+    "    %s (%s, 可选): $1。默认为 %s。",
+    { required = "TparamWithDefault", type = { "func" } },
+  },
   -- 可变参数
   { i.ArbitraryArgs, "    %s: $1", { type = { "func" } } },
   -- 关键字参数

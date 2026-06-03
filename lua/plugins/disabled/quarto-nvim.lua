@@ -75,7 +75,13 @@ return {
         { "j", keys("]c") },
         { "k", keys("[c") },
         { "r", ":QuartoSend<CR>" },
-        { "f", function() vim.api.nvim_command("normal vic") vim.api.nvim_command("normal zf") end, },
+        {
+          "f",
+          function()
+            vim.api.nvim_command("normal vic")
+            vim.api.nvim_command("normal zf")
+          end,
+        },
         { "R", ":QuartoSendAbove<CR>" },
         { "<esc>", nil, { exit = true } },
         { "q", nil, { exit = true } },

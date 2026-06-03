@@ -40,8 +40,8 @@ return {
       -- 赋值
       ["aa"] = { query = "@assignment.outer", desc = "around assignment" },
       ["ia"] = { query = "@assignment.inner", desc = "inner assignment" },
-      ["il"] = { query = "@assignment.lhs",   desc = "inner Left-Hand side" },
-      ["ir"] = { query = "@assignment.rhs",   desc = "inner Right-Hand side" },
+      ["il"] = { query = "@assignment.lhs", desc = "inner Left-Hand side" },
+      ["ir"] = { query = "@assignment.rhs", desc = "inner Right-Hand side" },
       -- 作用域
       ["as"] = { query = "@local.scope", desc = "around scope", source = "locals" },
       -- 折叠

@@ -9,7 +9,8 @@ return {
     -- 👇 in this section, choose your own keymappings!
     { "<leader>e", "<cmd>Yazi cwd<cr>", desc = "Yazi (cwd)" },
     { "<leader>cw", mode = { "n", "v" }, "<cmd>Yazi<cr>", desc = "Yazi (buffer directory)" },
-    { "<leader>=", "<cmd>Yazi toggle<cr>", desc = "Yazi (last session)", } },
+    { "<leader>=", "<cmd>Yazi toggle<cr>", desc = "Yazi (last session)" },
+  },
   ---@type YaziConfig | {}
   opts = {
     -- if you want to open yazi instead of netrw, see below for more info

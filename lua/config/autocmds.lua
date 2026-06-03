@@ -42,10 +42,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
     -- 5. 核心逻辑：如果当前文件路径不是以工作区路径开头，说明跳出去了！
     if not vim.startswith(filepath, cwd) then
       -- 触发 Snacks 弹窗
-      Snacks.notify.warn(
-        "Jump to:\n" .. filepath,
-        { title = "Jump out of workspace" }
-      )
+      Snacks.notify.warn("Jump to:\n" .. filepath, { title = "Jump out of workspace" })
       -- 标记该 buffer 已警告过
       vim.b[buf].out_of_workspace_warned = true
     end

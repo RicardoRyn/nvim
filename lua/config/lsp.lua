@@ -26,7 +26,11 @@ vim.keymap.set("n", "<leader>lsp", function()
 end, { desc = "Restart LSP" })
 vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code Actions" })
-vim.keymap.set("n", "<leader>ld", function() vim.diagnostic.open_float() end, { desc = "Show Diagnostics (line)" })
+vim.keymap.set("n", "<leader>ld", function()
+  vim.diagnostic.open_float()
+end, { desc = "Show Diagnostics (line)" })
 
 -- 提示
-vim.keymap.set("i", "<C-k>", function() vim.lsp.buf.signature_help() end, { desc = "Show Signature Help" })
+vim.keymap.set("i", "<C-k>", function()
+  vim.lsp.buf.signature_help()
+end, { desc = "Show Signature Help" })

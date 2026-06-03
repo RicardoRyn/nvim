@@ -3,7 +3,7 @@ return {
   cond = not vim.g.vscode,
   event = "VeryLazy",
   dependencies = { "neovim-treesitter/treesitter-parser-registry" },
-  build = ':TSUpdate',
+  build = ":TSUpdate",
   config = function()
     local languages = {
       "lua",

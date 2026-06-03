@@ -1,7 +1,7 @@
 return {
   "NStefan002/screenkey.nvim",
   cond = not vim.g.vscode,
-  cmd = {"Screenkey"},
+  cmd = { "Screenkey" },
   version = "*", -- or branch = "main", to use the latest commit
   opts = {
     win_opts = {

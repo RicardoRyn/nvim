@@ -8,5 +8,5 @@ return {
     vim.g.vimtex_view_method = "general"
     vim.g.vimtex_view_general_viewer = "SumatraPDF.exe"
     vim.g.vimtex_view_general_options = "-forward-search @tex @line @pdf"
-  end
+  end,
 }

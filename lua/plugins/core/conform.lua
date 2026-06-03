@@ -41,11 +41,11 @@ return {
       markdown = { "injected", "prettierd" },
       quarto = { "injected" },
       -- JSON
-      json  = { "prettierd" },
+      json = { "prettierd" },
       jsonc = { "prettierd" },
       -- YAML
       yaml = { "prettierd" },
-      yml   = { "prettierd" },
+      yml = { "prettierd" },
       -- MATLAB
       matlab = { "miss_hit" },
       -- LATEX
@@ -60,15 +60,9 @@ return {
   config = function(_, opts)
     require("conform").setup(opts)
     -- 支持markdown中的代码块的格式化
-    -- Customize the "injected" formatter
     require("conform").formatters.injected = {
-      -- Set the options field
       options = {
-        -- Set to true to ignore errors
-        ignore_errors = false,
-        -- Map of treesitter language to file extension
-        -- A temporary file name with this extension will be generated during formatting
-        -- because some formatters care about the filename.
+        ignore_errors = true,
         lang_to_ext = {
           bash = "sh",
           c_sharp = "cs",
@@ -84,8 +78,6 @@ return {
           r = "r",
           typescript = "ts",
         },
-        -- Map of treesitter language to formatters to use
-        -- (defaults to the value from formatters_by_ft)
         lang_to_formatters = {},
       },
     }

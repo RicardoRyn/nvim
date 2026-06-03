@@ -47,6 +47,5 @@ return {
     --     vim.treesitter.start()
     --   end,
     -- })
-
   end,
 }
