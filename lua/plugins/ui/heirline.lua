@@ -39,8 +39,12 @@ return {
       },
     })
 
-    vim.keymap.set("n", "<S-h>", "<Cmd>bprevious<CR>", { desc = "Prev Buffer" })
-    vim.keymap.set("n", "<S-l>", "<Cmd>bnext<CR>", { desc = "Next Buffer" })
+    vim.keymap.set("n", "<S-h>", function ()
+      require("utils.buffer_actions").cycle(-1)
+    end, { desc = "Prev Buffer" })
+    vim.keymap.set("n", "<S-l>", function ()
+      require("utils.buffer_actions").cycle(1)
+    end, { desc = "Next Buffer" })
     vim.keymap.set("n", "<leader>ba", function()
       Snacks.bufdelete.all()
     end, { desc = "Delete All Buffers" })
@@ -52,11 +56,29 @@ return {
     end, { desc = "Delete Other Buffer" })
 
     vim.keymap.set("n", "<leader>b<", function()
-      require("utils.buffer_move").move(-1)
+      require("utils.buffer_actions").move(-1)
     end, { desc = "Move buffer left" })
     vim.keymap.set("n", "<leader>b>", function()
-      require("utils.buffer_move").move(1)
+      require("utils.buffer_actions").move(1)
     end, { desc = "Move buffer right" })
+
+    vim.keymap.set("n", "<b", function()
+      local dir = -1
+      local moveBy = vim.v.count > 0 and vim.v.count or 1
+      local bm = require("utils.buffer_actions")
+      for _ = 1, moveBy do
+        bm.move(dir)
+      end
+    end, { desc = "Move current buffer to left" })
+
+    vim.keymap.set("n", ">b", function()
+      local dir = 1
+      local moveBy = vim.v.count > 0 and vim.v.count or 1
+      local bm = require("utils.buffer_actions")
+      for _ = 1, moveBy do
+        bm.move(dir)
+      end
+    end, { desc = "Move current buffer to right" })
 
     vim.keymap.set("n", "<leader>td", "<Cmd>tabclose<CR>", { desc = "Close Tab" })
     vim.keymap.set("n", "<leader>ts", "<Cmd>tab split<CR>", { desc = "Tab Split" })

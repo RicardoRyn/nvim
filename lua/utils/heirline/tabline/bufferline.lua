@@ -125,13 +125,13 @@ end
 
 local buflist_cache = {}
 
---- 从 buffer_move 模块获取 buffer 顺序，重建 buflist_cache
---- 若 buffer_move 未加载，回退到 Neovim 原生 buffer list
+--- 从 buffer_actions 模块获取 buffer 顺序，重建 buflist_cache
+--- 若 buffer_actions 未加载，回退到 Neovim 原生 buffer list
 local function rebuild_buflist_cache()
   local buffers = {}
 
-  -- 优先使用 buffer_move 维护的顺序
-  local ok, bm = pcall(require, "utils.buffer_move")
+  -- 优先使用 buffer_actions 维护的顺序
+  local ok, bm = pcall(require, "utils.buffer_actions")
   if ok then
     local order = bm.order()
     local seen = {}
@@ -141,7 +141,7 @@ local function rebuild_buflist_cache()
         seen[buf] = true
       end
     end
-    -- 追加 buffer_move 尚未追踪到的 buffer（防止竞态）
+    -- 追加 buffer_actions 尚未追踪到的 buffer（防止竞态）
     for _, buf in ipairs(get_bufs()) do
       if not seen[buf] then
         buffers[#buffers + 1] = buf
@@ -177,7 +177,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "UIEnter", "BufAdd", "BufDelete", "Buf
   callback = schedule_rebuild,
 })
 
--- 监听 buffer_move 模块发出的 buffer 顺序变更事件（同步执行，无延迟）
+-- 监听 buffer_actions 模块发出的 buffer 顺序变更事件（同步执行，无延迟）
 vim.api.nvim_create_autocmd("User", {
   pattern = "BufferMoveOrderChanged",
   callback = rebuild_buflist_cache,
