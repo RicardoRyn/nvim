@@ -1,9 +1,8 @@
--- FIX: 不同buffer具有相同图标
 -- TODO: 指定次数执行bufferline移动
 
 local utils = require("heirline.utils")
 local colors = require("utils.heirline.colors")
-local FileIcon = require("utils.heirline.statusline.file_others").FileIcon
+local FileIcon = require("utils.heirline.statusline.file_others").get_fileicon()
 
 local TablineBufnr = {
   provider = function(self)
@@ -14,10 +13,8 @@ local TablineBufnr = {
   end,
 }
 
--- we redefine the filename component, as we probably only want the tail and not the relative path
 local TablineFileName = {
   provider = function(self)
-    -- self.filename will be defined later, just keep looking at the example!
     local filename = self.filename
     filename = filename == "" and "[No Name]" or vim.fn.fnamemodify(filename, ":t")
     return " " .. filename
@@ -27,9 +24,6 @@ local TablineFileName = {
   end,
 }
 
--- this looks exactly like the FileFlags component that we saw in
--- #crash-course-part-ii-filename-and-friends, but we are indexing the bufnr explicitly
--- also, we are adding a nice icon for terminal buffers.
 local TablineFileFlags = {
   {
     condition = function(self)
@@ -58,7 +52,6 @@ local TablineFileFlags = {
   },
 }
 
--- Here the filename block finally comes together
 local TablineFileNameBlock = {
   init = function(self)
     self.filename = vim.api.nvim_buf_get_name(self.bufnr)
@@ -85,13 +78,12 @@ local TablineFileNameBlock = {
     end,
     name = "heirline_tabline_buffer_callback",
   },
-  -- TablineBufnr,
+  TablineBufnr,
   FileIcon,
   TablineFileName,
   TablineFileFlags,
 }
 
--- a nice "x" button to close the buffer
 local TablineCloseButton = {
   condition = function(self)
     return not vim.api.nvim_get_option_value("modified", { buf = self.bufnr })
@@ -117,23 +109,20 @@ local TablineCloseButton = {
   },
 }
 
--- The final touch!
 local TablineBufferBlock = utils.surround({ "", "" }, function(self)
   if self.is_active then
     return utils.get_highlight("TabLineSel").bg
   else
     return utils.get_highlight("TabLine").bg
   end
-end, { TablineBufnr, TablineFileNameBlock, TablineCloseButton })
+end, { TablineFileNameBlock, TablineCloseButton })
 
--- this is the default function used to retrieve buffers
 local get_bufs = function()
   return vim.tbl_filter(function(bufnr)
     return vim.api.nvim_get_option_value("buflisted", { buf = bufnr })
   end, vim.api.nvim_list_bufs())
 end
 
--- initialize the buflist cache
 local buflist_cache = {}
 
 --- 从 buffer_move 模块获取 buffer 顺序，重建 buflist_cache
@@ -170,14 +159,12 @@ local function rebuild_buflist_cache()
     buflist_cache[i] = nil
   end
 
-  -- check how many buffers we have and set showtabline accordingly
-  if #buflist_cache > 1 then
-    vim.o.showtabline = 2 -- always
-  elseif vim.o.showtabline ~= 1 then -- don't reset the option if it's already at default value
-    vim.o.showtabline = 1 -- only when #tabpages > 1
+  if vim.bo.filetype == "snacks_dashboard" then
+    vim.o.showtabline = 1
+  else
+    vim.o.showtabline = 2
   end
 
-  -- 缓存已更新，重绘 tabline
   vim.cmd.redrawtabline()
 end
 
@@ -196,18 +183,11 @@ vim.api.nvim_create_autocmd("User", {
   callback = rebuild_buflist_cache,
 })
 
--- session 恢复后，强制同步重建缓存（此时所有 buffer 已加载完毕）
-vim.api.nvim_create_autocmd("SessionLoadPost", {
-  callback = rebuild_buflist_cache,
-})
-
 -- 模块加载时主动延迟重建，覆盖 SessionLoadPost 等事件在模块加载前已触发的情况
--- （如 VeryLazy 加载的 heirline 在 session 恢复后才初始化）
 vim.schedule(function()
   rebuild_buflist_cache()
 end)
 
--- and here we go
 local M = utils.make_buflist(
   TablineBufferBlock,
   {

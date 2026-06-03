@@ -6,7 +6,6 @@ return {
     local Align = { provider = "%=" }
 
     local Statusline = require("utils.heirline.statusline")
-    vim.opt.showtabline = 2
     local Tabline = require("utils.heirline.tabline")
 
     require("heirline").setup({
@@ -15,8 +14,7 @@ return {
       },
       statusline = {
         Statusline.file_name_block,
-        Statusline.file_others.FileIcon,
-        Statusline.file_others.FileType,
+        Statusline.file_others,
         Statusline.jj.JjLog,
         Statusline.jj.Diff,
         Align,
