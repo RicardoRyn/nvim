@@ -6,7 +6,7 @@ M.filter_hide = function(fs_entry)
 end
 
 -- Filter for showing all files
-M.filter_show = function(fs_entry)
+M.filter_show = function()
   return true
 end
 

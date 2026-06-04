@@ -32,7 +32,7 @@ return {
       apply = "",
 
       -- Reset hunks inside a visual/operator region
-      reset = "gr",
+      reset = "<leader>gr",
 
       -- Hunk range textobject to be used inside operator
       -- Works also in Visual mode if mapping differs from apply and reset

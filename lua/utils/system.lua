@@ -17,10 +17,6 @@ if M.os == "Linux" then
   if f then
     local content = f:read("*all")
     f:close()
-    -- NOTE:
-    -- 这是一个通用的解析逻辑，提取 ID=xxx 里的值
-    -- 例如 ID=arch 或 ID=ubuntu
-    -- 未来更多发行版可能需要更严谨的测试
     M.distro = content:match("^ID=(%w+)") or content:match("\nID=(%w+)") or "other"
   end
 end
