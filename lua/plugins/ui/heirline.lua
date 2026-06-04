@@ -39,22 +39,30 @@ return {
       },
     })
 
-    vim.keymap.set("n", "<S-h>", function ()
+    vim.keymap.set("n", "<S-h>", function()
       require("utils.buffer_actions").cycle(-1)
-    end, { desc = "Prev Buffer" })
-    vim.keymap.set("n", "<S-l>", function ()
+    end, { desc = "Buffer prev" })
+    vim.keymap.set("n", "<S-l>", function()
       require("utils.buffer_actions").cycle(1)
-    end, { desc = "Next Buffer" })
+    end, { desc = "Buffer next" })
     vim.keymap.set("n", "<leader>ba", function()
       Snacks.bufdelete.all()
-    end, { desc = "Delete All Buffers" })
+    end, { desc = "Buffers delete all " })
+    vim.keymap.set("n", "<leader>bb", function()
+      require("utils.buffer_actions").pick_close()
+    end, { desc = "Buffer pick close" })
     vim.keymap.set("n", "<leader>bd", function()
       Snacks.bufdelete()
-    end, { desc = "Delete Buffer" })
+    end, { desc = "buffer delete" })
     vim.keymap.set("n", "<leader>bo", function()
       Snacks.bufdelete.other()
-    end, { desc = "Delete Other Buffer" })
-
+    end, { desc = "Buffer delete other" })
+    vim.keymap.set("n", "<leader>bl", function()
+      require("utils.buffer_actions").close_in_direction("left")
+    end, { desc = "Close Buffers to the Left" })
+    vim.keymap.set("n", "<leader>br", function()
+      require("utils.buffer_actions").close_in_direction("right")
+    end, { desc = "Close Buffers to the Right" })
     vim.keymap.set("n", "<leader>b<", function()
       require("utils.buffer_actions").move(-1)
     end, { desc = "Move buffer left" })
@@ -65,18 +73,18 @@ return {
     vim.keymap.set("n", "<b", function()
       local dir = -1
       local moveBy = vim.v.count > 0 and vim.v.count or 1
-      local bm = require("utils.buffer_actions")
+      local ba = require("utils.buffer_actions")
       for _ = 1, moveBy do
-        bm.move(dir)
+        ba.move(dir)
       end
     end, { desc = "Move current buffer to left" })
 
     vim.keymap.set("n", ">b", function()
       local dir = 1
       local moveBy = vim.v.count > 0 and vim.v.count or 1
-      local bm = require("utils.buffer_actions")
+      local ba = require("utils.buffer_actions")
       for _ = 1, moveBy do
-        bm.move(dir)
+        ba.move(dir)
       end
     end, { desc = "Move current buffer to right" })
 

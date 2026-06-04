@@ -4,9 +4,17 @@ local FileIcon = require("utils.heirline.statusline.file_others").get_fileicon()
 
 local TablineBufnr = {
   provider = function(self)
-    return tostring(self.bufnr) .. ". "
+    local ok, ba = pcall(require, "utils.buffer_actions")
+    if ok and ba.is_picking and ba.pick_letters[self.bufnr] then
+      return ba.pick_letters[self.bufnr].. "."
+    end
+    return tostring(self.bufnr) .. "."
   end,
-  hl = function()
+  hl = function(self)
+    local ok, ba = pcall(require, "utils.buffer_actions")
+    if ok and ba.is_picking and ba.pick_letters[self.bufnr] then
+      return { fg = colors.red, bold = true }
+    end
     return { fg = utils.get_highlight("Comment").fg }
   end,
 }
@@ -129,9 +137,9 @@ local function rebuild_buflist_cache()
   local buffers = {}
 
   -- 优先使用 buffer_actions 维护的顺序
-  local ok, bm = pcall(require, "utils.buffer_actions")
+  local ok, ba = pcall(require, "utils.buffer_actions")
   if ok then
-    local order = bm.order()
+    local order = ba.order()
     local seen = {}
     for _, buf in ipairs(order) do
       if vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_get_option_value("buflisted", { buf = buf }) then
