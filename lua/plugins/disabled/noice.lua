@@ -2,9 +2,7 @@ return {
   "folke/noice.nvim",
   cond = not vim.g.vscode,
   event = "VeryLazy",
-  dependencies = {
-    { "MunifTanjim/nui.nvim" },
-  },
+  dependencies = { "MunifTanjim/nui.nvim" },
   -- stylua: ignore
   keys = {
     { "<leader>un", function() require("noice").cmd("dismiss") end, desc = "Noice Dismiss" },

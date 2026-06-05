@@ -1,3 +1,4 @@
+-- require("vim._core.ui2").enable({})
 if not _G.SYSTEM then
   _G.SYSTEM = require("utils.system")
 end
@@ -11,3 +12,10 @@ require("utils.debug")
 if not vim.g.vscode then
   require("config.lsp")
 end
+
+vim.api.nvim_create_autocmd("CmdlineEnter", {
+  once = true,
+  callback = function()
+    require("utils.pretty_cmdline").setup()
+  end,
+})
