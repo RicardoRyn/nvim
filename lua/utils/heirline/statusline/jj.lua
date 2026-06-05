@@ -91,7 +91,7 @@ local JjLog = {
     vim.g.heirline_jjlog_bg = self.hl_color.bg
   end,
   hl = function()
-    return { fg = colors.background }
+    return { fg = colors.background, bold = true }
   end,
   utils.surround({ "", "" }, function(self)
     return self.hl_color.bg

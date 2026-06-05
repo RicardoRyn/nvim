@@ -24,7 +24,7 @@ return {
       },
       tools = {
         copilot = { cmd = { "copilot", "--banner" } },
-        pi = { cmd = { "pi", "-c" } },
+        pi = { cmd = { "pi", "-c", "--plan" } },
         codex = { cmd = { "codex" } },
       },
       prompts = {

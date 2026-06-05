@@ -29,7 +29,7 @@ local M = {
     {
       section = "header",
       function()
-        return { header = require("utils.dashboard_animation").asciiImg }
+        return { header = require("utils.dashboard.dashboard_animation").asciiImg }
       end,
       padding = 1,
     },

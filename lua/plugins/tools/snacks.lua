@@ -7,7 +7,7 @@
 local snacks_dashboard = require("utils.snacks.dashboard")
 local snacks_indent = require("utils.snacks.indent")
 local snacks_explorer_preview = require("utils.snacks.explorer_preview")
-local dashboard_animation = require("utils.dashboard_animation")
+local dashboard_animation = require("utils.dashboard.dashboard_animation")
 
 return {
   "folke/snacks.nvim",
@@ -31,7 +31,7 @@ return {
     },
     image = { enabled = not SYSTEM.is_win },
     indent = snacks_indent,
-    input = { enabled = true },
+    input = { enabled = false },
     notifier = { enabled = true, timeout = 3000, style = "fancy", date_format = "%H:%M:%S" },
     picker = snacks_explorer_preview,
     quickfile = { enabled = true },
@@ -105,6 +105,8 @@ return {
     { "<leader>tv", function() Snacks.terminal(nil, { win = { position = "right", } }) end, mode = { "n", "t" }, desc = "Open Terminal (Right)" },
     { "<leader>tf", function() Snacks.terminal(nil, { win = { position = "float", } }) end, mode = { "n", "t" }, desc = "Open Terminal (Float)" },
     -- ui
+    { "<leader>nn",  function() Snacks.notifier.show_history() end, desc = "Notification history" },
+    { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss all notifications" },
     { "<leader>es", function() Snacks.explorer() end, desc = "File Explorer" },
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
     { '<leader>h', function() Snacks.dashboard() end, desc = "Home Page" },
