@@ -5,14 +5,14 @@ vim.g.heirline_vimode_bg = colors.blue
 
 local VimModeCore = {
   provider = function(self)
-    return " " .. self.mode_names[self.mode]
+    return self.mode_names[self.mode] .. " "
   end,
   hl = function(self)
     return { fg = colors.background, bg = self.mode_color(self.mode), bold = true }
   end,
 }
 
-local WrappedVimModeCore = utils.surround({ "", "" }, function(self)
+local WrappedVimModeCore = utils.surround({ "", "" }, function(self)
   return self.mode_color(self.mode)
 end, VimModeCore)
 

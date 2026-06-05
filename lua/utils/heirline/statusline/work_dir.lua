@@ -56,7 +56,7 @@ local CurrentDir = {
     self.cwd = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":~:h")
   end,
   hl = function()
-    return { fg = vim.g.heirline_file_bg }
+    return { fg = vim.g.heirline_vimode_bg }
   end,
 
   flexible = 1,
@@ -64,13 +64,13 @@ local CurrentDir = {
   {
     -- evaluates to the full-lenth path
     provider = function(self)
-      return self.icon .. self.cwd
+      return self.icon .. self.cwd .. "/"
     end,
   },
   {
     -- evaluates to the shortened path
     provider = function(self)
-      return self.icon .. vim.fn.pathshorten(self.cwd)
+      return self.icon .. vim.fn.pathshorten(self.cwd) .. "/"
     end,
   },
   {

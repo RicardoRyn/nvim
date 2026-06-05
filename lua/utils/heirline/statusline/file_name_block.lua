@@ -6,12 +6,12 @@ local FileName = {
   provider = function(self)
     local filename = vim.fn.fnamemodify(self.filename, ":t")
     if filename == "" then
-      return "[No Name] "
+      return "[No Name]"
     end
     if not conditions.width_percent_below(#filename, 0.25) then
       filename = vim.fn.pathshorten(filename)
     end
-    return filename .. " "
+    return " " .. filename
   end,
 }
 
@@ -20,7 +20,7 @@ local FileFlags = {
     condition = function()
       return vim.bo.modified
     end,
-    provider = "[+] ",
+    provider = " [+]",
   },
   {
     condition = function()
@@ -32,13 +32,11 @@ local FileFlags = {
 
 local FileNameModifer = {
   hl = function(self)
-    return { fg = colors.background, bg = self.current_bg, bold = true, force = true }
+    return { fg = self.current_bg, bold = true, force = true }
   end,
 }
 
-local WrappedComponent = utils.surround({ "", "" }, function(self)
-  return self.current_bg
-end, utils.insert(FileNameModifer, FileName, FileFlags, { provider = "%<" }))
+local WrappedComponent = utils.insert(FileNameModifer, FileName, FileFlags, { provider = "%<" })
 
 local M = {
   init = function(self)

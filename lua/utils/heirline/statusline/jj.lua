@@ -1,5 +1,8 @@
 local colors = require("utils.heirline.colors")
 local jj_log = require("utils.jj_log")
+local utils = require("heirline.utils")
+
+vim.g.heirline_jjlog_bg = colors.blue
 
 local git_branch_cache = {}
 
@@ -47,18 +50,13 @@ local function get_git_branch()
   return branch
 end
 
-local JjLog = {
+local JjLogCore = {
   {
-    condition = jj_log.is_jj_repo,
-    provider = function()
-      return " " .. jj_log.get()
+    condition = function()
+      return jj_log.is_jj_repo()
     end,
-    hl = function()
-      local color_info = jj_log.get_color()
-      if color_info then
-        return { fg = color_info.fg, bold = (color_info.gui == "bold") }
-      end
-      return { fg = colors.gray }
+    provider = function()
+      return " " .. jj_log.get() .. " "
     end,
     update = {
       "User",
@@ -79,10 +77,25 @@ local JjLog = {
     provider = function(self)
       return "  " .. self.git_branch
     end,
-    hl = function()
-      return { fg = colors.gray }
-    end,
   },
+}
+
+local JjLog = {
+  init = function(self)
+    local color_info = jj_log.get_color()
+    if color_info then
+      self.hl_color = { fg = colors.background, bg = color_info.fg, bold = (color_info.gui == "bold") }
+    else
+      self.hl_color = { fg = colors.background, bg = colors.gray }
+    end
+    vim.g.heirline_jjlog_bg = self.hl_color.bg
+  end,
+  hl = function()
+    return { fg = colors.background }
+  end,
+  utils.surround({ "", "" }, function(self)
+    return self.hl_color.bg
+  end, JjLogCore),
 }
 
 local Diff = {
@@ -90,10 +103,10 @@ local Diff = {
     local s = vim.b.minidiff_summary
     return s ~= nil and s.add ~= nil
   end,
-  update = { "User", pattern = "MiniDiffUpdated" },
   init = function(self)
     self.s = vim.b.minidiff_summary
   end,
+  update = { "User", pattern = "MiniDiffUpdated" },
   {
     provider = function(self)
       return (self.s.add > 0 or self.s.delete > 0 or self.s.change > 0) and " ("

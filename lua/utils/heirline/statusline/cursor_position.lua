@@ -21,7 +21,7 @@ local ScrollBar = {
     return string.rep(self.sbar[i], 2) .. " "
   end,
   hl = function()
-    return { fg = vim.g.heirline_vimode_bg or colors.blue, bg = utils.get_highlight("StatusLine").bg }
+    return { fg = vim.g.heirline_jjlog_bg or colors.blue, bg = utils.get_highlight("StatusLine").bg }
   end,
 }
 

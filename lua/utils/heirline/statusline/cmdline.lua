@@ -21,11 +21,11 @@ local MacroRec = {
   condition = function()
     return vim.fn.reg_recording() ~= "" and vim.o.cmdheight == 0
   end,
-  provider = " ",
+  provider = "  ",
   hl = function()
     return { fg = colors.purple, bold = true }
   end,
-  utils.surround({ "[", "] " }, nil, {
+  utils.surround({ "[", "]" }, nil, {
     provider = function()
       return vim.fn.reg_recording()
     end,
