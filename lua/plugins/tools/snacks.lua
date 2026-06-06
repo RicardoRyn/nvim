@@ -32,7 +32,7 @@ return {
     image = { enabled = not SYSTEM.is_win },
     indent = snacks_indent,
     input = { enabled = false },
-    notifier = { enabled = true, timeout = 3000, style = "fancy", date_format = "%H:%M:%S" },
+    notifier = { enabled = true, timeout = 3000, top_down = false, style = "fancy", date_format = "%H:%M:%S" },
     picker = snacks_explorer_preview,
     quickfile = { enabled = true },
     scope = { enabled = true },

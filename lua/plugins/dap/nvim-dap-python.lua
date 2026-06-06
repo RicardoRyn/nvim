@@ -3,7 +3,6 @@ return {
   cond = not vim.g.vscode,
   dependencies = {
     "mfussenegger/nvim-dap",
-    "rcarriga/nvim-dap-ui",
   },
   ft = "python",
   config = function()
