@@ -31,8 +31,14 @@ return {
     },
     image = { enabled = not SYSTEM.is_win },
     indent = snacks_indent,
-    input = { enabled = false },
-    notifier = { enabled = true, timeout = 3000, top_down = false, style = "fancy", date_format = "%H:%M:%S" },
+    input = { enabled = false },  -- noice有自己的input框
+    notifier = {
+      enabled = true, -- noice中的notify将会使用Snacks.notifier作为后端
+      timeout = 3000,
+      top_down = true,
+      style = "fancy",
+      date_format = "%H:%M:%S",
+    },
     picker = snacks_explorer_preview,
     quickfile = { enabled = true },
     scope = { enabled = true },
@@ -105,8 +111,8 @@ return {
     { "<leader>tv", function() Snacks.terminal(nil, { win = { position = "right", } }) end, mode = { "n", "t" }, desc = "Open Terminal (Right)" },
     { "<leader>tf", function() Snacks.terminal(nil, { win = { position = "float", } }) end, mode = { "n", "t" }, desc = "Open Terminal (Float)" },
     -- ui
-    { "<leader>nn",  function() Snacks.notifier.show_history() end, desc = "Notification history" },
-    { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss all notifications" },
+    -- { "<leader>nn",  function() Snacks.notifier.show_history() end, desc = "Notification history" },
+    -- { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss all notifications" },
     { "<leader>es", function() Snacks.explorer() end, desc = "File Explorer" },
     { "<leader>uc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
     { '<leader>h', function() Snacks.dashboard() end, desc = "Home Page" },

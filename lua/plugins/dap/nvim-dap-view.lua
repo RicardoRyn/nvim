@@ -77,7 +77,7 @@ return {
     vim.keymap.set("n", "<leader>du", function () require("dap-view").toggle() end, { desc = "Toggle UI" })
     vim.keymap.set("n", "<leader>dv", function () require("dap-view").virtual_text_toggle() end, { desc = "Toggle Virtual Text" })
     vim.api.nvim_create_autocmd("FileType", {
-      pattern = { "dap-view", "dap-repl", "dap-view-term", "terminal" },
+      pattern = { "dap-view", "dap-repl", "terminal" },
       callback = function(ev)
         vim.keymap.set("n", "<S-h>", function () require("dap-view").navigate({count = -1, wrap = false, type = "views"}) end, { buffer = ev.buf, desc = "Views prev" })
         vim.keymap.set("n", "<S-l>", function () require("dap-view").navigate({count = 1, wrap = false, type = "views"}) end, { buffer = ev.buf, desc = "Views next" })

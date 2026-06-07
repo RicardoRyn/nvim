@@ -2,6 +2,14 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("ricardo_" .. name, { clear = true })
 end
 
+-- -- 使用pretty_cmdline
+-- vim.api.nvim_create_autocmd("CmdlineEnter", {
+--   once = true,
+--   callback = function()
+--     require("utils.pretty_cmdline").setup()
+--   end,
+-- })
+
 -- 当进入一个 buffer 时，检查是否跳出了工作区（即当前文件不在工作区目录下），如果是则弹出 Snacks 提示。
 vim.api.nvim_create_autocmd("BufEnter", {
   group = augroup("check_workspace_jump"),
