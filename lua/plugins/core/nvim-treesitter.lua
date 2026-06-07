@@ -10,6 +10,7 @@ return {
       "python",
       "bash",
       "rust",
+      "diff",
       "json",
       "markdown",
       "markdown_inline",
