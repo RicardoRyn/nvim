@@ -1,15 +1,3 @@
--- 启动
-vim.lsp.enable("lua_ls")
-vim.lsp.enable("pyright")
--- vim.lsp.enable("ty")
--- vim.lsp.enable("ruff")
-vim.lsp.enable("bashls")
-vim.lsp.enable("marksman")
-vim.lsp.enable("yamlls")
-vim.lsp.enable("matlab_ls")
-vim.lsp.enable("texlab")
-
--- UI
 vim.g.diagnostics_visible = true
 vim.diagnostic.config({
   virtual_text = true,
@@ -18,7 +6,6 @@ vim.diagnostic.config({
   signs = false,
 })
 
--- 功能
 vim.keymap.set("n", "<leader>lR", function()
   vim.notify("Restarting LSP...", vim.log.levels.INFO)
   vim.cmd("lsp restart")

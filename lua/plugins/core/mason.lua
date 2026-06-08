@@ -57,5 +57,15 @@ return {
     else
       ensure_installed()
     end
+    -- 启动
+    vim.lsp.enable("lua_ls")
+    vim.lsp.enable("pyright")
+    -- vim.lsp.enable("ty")
+    -- vim.lsp.enable("ruff")
+    vim.lsp.enable("bashls")
+    vim.lsp.enable("marksman")
+    vim.lsp.enable("yamlls")
+    vim.lsp.enable("matlab_ls")
+    vim.lsp.enable("texlab")
   end,
 }
