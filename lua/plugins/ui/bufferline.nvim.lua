@@ -48,6 +48,7 @@ return {
   -- stylua: ignore
   opts = {
     options = {
+      numbers = "buffer_id",
       always_show_bufferline = true,
       indicator = {
           icon = " ",
@@ -55,24 +56,7 @@ return {
       },
       close_command = function(n) Snacks.bufdelete(n) end,
       right_mouse_command = function(n) Snacks.bufdelete(n) end,
-      diagnostics = "nvim_lsp",
-      diagnostics_indicator = function(_, _, diagnostics_dict)
-        local indicator = "  "
-        for level, number in pairs(diagnostics_dict) do
-          local symbol
-          if level == "error" then
-            symbol = require("utils.icons").diagnostics.error .. " "
-          elseif level == "warning" then
-            symbol = require("utils.icons").diagnostics.warning .. " "
-          elseif level == "info" then
-            symbol = require("utils.icons").diagnostics.info .. " "
-          elseif level == "hint" then
-            symbol = require("utils.icons").diagnostics.hint .. " "
-          end
-          indicator = indicator .. number .. symbol
-        end
-        return indicator
-      end,
+      diagnostics = false,
       offsets = {
         {
           filetype = "sidekick_terminal",
