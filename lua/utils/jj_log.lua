@@ -1,16 +1,9 @@
 local M = {}
 
 -- Avoid jj process contention when Hunk.nvim or merge-tools.vimdiff triggers diff-related modes.
-local function is_special_mode()
-  for _, arg in ipairs(vim.v.argv) do
-    if arg:match("DiffEditor") or arg:match("wincmd J") then
-      return true
-    end
-  end
-  return false
-end
+local special_mode = require("utils.special_mode")
 
-if is_special_mode() then
+if special_mode.is_active() then
   M.is_jj_repo = function()
     return false
   end

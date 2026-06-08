@@ -1,7 +1,6 @@
 return {
     "nicolasgb/jj.nvim",
   cond = not vim.g.vscode,
-  branch = SYSTEM.is_win and "ngb/fix/windows" or "main",
   dependencies = { "folke/snacks.nvim" },
   cmd = {
     "J",

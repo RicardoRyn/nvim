@@ -60,7 +60,7 @@ vim.opt.shortmess:append({
   C = true, -- 禁止显示完成菜单中的消息提示（更进一步隐藏补全提示信息）
 })
 vim.opt.updatetime = 200 -- 光标停止不动多久触发事件，可以让一些插件（比如自动保存、LSP 文本高亮或诊断提示）更及时响应
-vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds", "globals" }
+vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 vim.opt.splitbelow = true -- 打开水平分屏时，新窗口会 出现在当前窗口的下方
 vim.opt.splitright = true -- 打开垂直分屏时，新窗口会 出现在当前窗口的右侧
 vim.opt.splitkeep = "screen" -- 保持当前窗口的内容位置不动，屏幕不会因为新窗口而上下或左右移动
