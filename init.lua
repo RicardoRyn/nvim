@@ -7,6 +7,4 @@ require("config.keymaps")
 require("config.autocmds")
 require("config.pack")
 
-require("utils.diff_signs")
-
 require("dev")

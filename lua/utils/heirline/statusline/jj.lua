@@ -1,3 +1,4 @@
+local conditions = require("heirline.conditions")
 local colors = require("utils.heirline.colors")
 local jj_log = require("utils.jj_log")
 
@@ -92,46 +93,43 @@ local JjLog = {
 }
 
 local Diff = {
-  condition = function()
-    local diff = require("utils.diff_signs.buffers").diff()
-    return diff ~= nil and diff.added ~= nil
-  end,
+  condition = conditions.is_git_repo,
   init = function(self)
-    self.diff = require("utils.diff_signs.buffers").diff()
+    self.status_dict = vim.b.gitsigns_status_dict
+    self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
   end,
   {
-    provider = function(self)
-      return (self.diff.added > 0 or self.diff.deleted > 0 or self.diff.changed > 0) and " ("
+    condition = function(self)
+      return self.has_changes
     end,
+    provider = "(",
   },
   {
     provider = function(self)
-      return self.diff.added > 0 and ("+" .. self.diff.added) or ""
+      local count = self.status_dict.added or 0
+      return count > 0 and ("+" .. count)
     end,
-    hl = function()
-      return { fg = colors.git_add }
-    end,
+    hl = { fg = "git_add" },
   },
   {
     provider = function(self)
-      return self.diff.deleted > 0 and ("-" .. self.diff.deleted) or ""
+      local count = self.status_dict.removed or 0
+      return count > 0 and ("-" .. count)
     end,
-    hl = function()
-      return { fg = colors.git_del }
-    end,
+    hl = { fg = "git_del" },
   },
   {
     provider = function(self)
-      return self.diff.changed > 0 and ("~" .. self.diff.changed) or ""
+      local count = self.status_dict.changed or 0
+      return count > 0 and ("~" .. count)
     end,
-    hl = function()
-      return { fg = colors.git_change }
-    end,
+    hl = { fg = "git_change" },
   },
   {
-    provider = function(self)
-      return (self.diff.added > 0 or self.diff.deleted > 0 or self.diff.changed > 0) and ")"
+    condition = function(self)
+      return self.has_changes
     end,
+    provider = ")",
   },
 }
 

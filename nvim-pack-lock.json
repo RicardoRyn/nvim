@@ -40,6 +40,10 @@
       "rev": "3dd25cb6103f88ce5a4300a382c389eeae7a0fdb",
       "src": "https://github.com/FylerOrg/fyler.nvim"
     },
+    "gitsigns.nvim": {
+      "rev": "eb60cc7b94c46005237fd34170d76f3a089a90aa",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
     "heirline.nvim": {
       "rev": "fae936abb5e0345b85c3a03ecf38525b0828b992",
       "src": "https://github.com/rebelot/heirline.nvim"

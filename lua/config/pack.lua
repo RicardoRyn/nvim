@@ -34,6 +34,7 @@ local active_specs = {
   { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
   { src = "https://github.com/OXY2DEV/markview.nvim" },
   -- VCS
+  { src = "https://github.com/lewis6991/gitsigns.nvim" },
   { src = "https://github.com/julienvincent/hunk.nvim", version = "jv/3-way-merge-tool" },
   { src = "https://github.com/nicolasgb/jj.nvim" },
   { src = "https://tangled.org/ronshavit.com/jjannotate.nvim" },
