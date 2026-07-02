@@ -106,7 +106,10 @@ end
 M.toggle_preview = function()
   local MiniFiles = require("mini.files")
   MiniFiles.config.windows.preview = not MiniFiles.config.windows.preview
-  MiniFiles.refresh({ windows = { preview = MiniFiles.config.windows.preview } })
+  MiniFiles.refresh({ windows = {
+    preview = MiniFiles.config.windows.preview,
+    width_preview = require("utils.system").distro == "archlinux" and 80 or 120,
+  } })
 end
 
 -- Setup keymaps for MiniFiles buffer
@@ -120,12 +123,10 @@ M.setup_keymaps = function(buf_id)
   vim.keymap.set("n", "<leader>cf", M.yank_fname, { buffer = buf_id, desc = "Copy file name" })
   vim.keymap.set("n", "<leader>cr", M.yank_relpath, { buffer = buf_id, desc = "Copy relative path" })
 
-  -- Split windows
   M.map_split(buf_id, "<C-s>", "belowright vertical")
-  M.map_split(buf_id, "<C-h>", "belowright horizontal")
+  -- M.map_split(buf_id, "<C-h>", "belowright horizontal")
   M.map_split(buf_id, "<C-t>", "tab")
 
-  -- Preview
   vim.keymap.set("n", "<C-p>", M.toggle_preview, { buffer = buf_id, desc = "Toggle preview" })
 end
 

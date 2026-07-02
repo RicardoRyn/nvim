@@ -1,56 +1,45 @@
-local function augroup(name)
-  return vim.api.nvim_create_augroup("ricardo_" .. name, { clear = true })
-end
+local special_mode = require("utils.special_mode")
 
--- -- 使用pretty_cmdline
--- vim.api.nvim_create_autocmd("CmdlineEnter", {
---   once = true,
---   callback = function()
---     require("utils.pretty_cmdline").setup()
---   end,
--- })
+local function augroup(name)
+  return vim.api.nvim_create_augroup("Init" .. name, { clear = true })
+end
 
 -- 当进入一个 buffer 时，检查是否跳出了工作区（即当前文件不在工作区目录下），如果是则弹出 Snacks 提示。
 vim.api.nvim_create_autocmd("BufEnter", {
-  group = augroup("check_workspace_jump"),
+  group = augroup("CheckWorkspaceJump"),
   callback = function(args)
     local buf = args.buf
-
     -- 1. 忽略非普通文件（例如终端、NvimTree、各种工具面板等）
     if vim.bo[buf].buftype ~= "" then
       return
     end
-
-    -- 2. 忽略悬浮窗（极度重要：防止你在 Snacks 列表上下滚动预览时疯狂弹窗）
+    -- 2. 忽略 diff/merge 工具模式（hunk.nvim 的 DiffEditor/MergeEditor）
+    if special_mode.is_active() then
+      return
+    end
+    -- 3. 忽略悬浮窗（极度重要：防止你在 Snacks 列表上下滚动预览时疯狂弹窗）
     local win = vim.api.nvim_get_current_win()
     local win_config = vim.api.nvim_win_get_config(win)
     if win_config.relative ~= "" then
       return
     end
-
-    -- 3. 防止同一个文件来回切换时反复弹窗（每个文件只弹一次）
+    -- 4. 防止同一个文件来回切换时反复弹窗（每个文件只弹一次）
     if vim.b[buf].out_of_workspace_warned then
       return
     end
-
     local filepath = vim.api.nvim_buf_get_name(buf)
     if filepath == "" then
       return
     end
-
-    -- 4. 规范化路径（统一斜杠，避免 Windows/Mac 差异）
+    -- 5. 规范化路径（统一斜杠，避免 Windows/Mac 差异）
     local cwd = vim.fs.normalize(vim.fn.getcwd())
     filepath = vim.fs.normalize(filepath)
-
-    -- 保证 cwd 以 / 结尾，防止错误匹配（如 /project 匹配到 /project_test）
     if cwd:sub(-1) ~= "/" then
       cwd = cwd .. "/"
     end
-
-    -- 5. 核心逻辑：如果当前文件路径不是以工作区路径开头，说明跳出去了！
+    -- 6. 核心逻辑：如果当前文件路径不是以工作区路径开头，说明跳出去了！
     if not vim.startswith(filepath, cwd) then
-      -- 触发 Snacks 弹窗
-      Snacks.notify.warn("Jump to:\n" .. filepath, { title = "Jump out of workspace" })
+      vim.notify("Jump to:\n" .. filepath, vim.log.levels.WARN, { title = "Jump out of workspace" })
       -- 标记该 buffer 已警告过
       vim.b[buf].out_of_workspace_warned = true
     end
@@ -59,7 +48,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 -- 使用`o`和`O`时不会自动添加注释符号
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("disable_o_comment"),
+  group = augroup("DisableOComment"),
   pattern = { "lua", "python", "rust", "sh" },
   callback = function()
     vim.opt.formatoptions:remove({ "o" })
@@ -68,7 +57,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- 再次打开文件，光标位于上次打开的地方
 vim.api.nvim_create_autocmd("BufReadPost", {
-  group = augroup("last_loc"),
+  group = augroup("LastLoc"),
   callback = function(event)
     local exclude = { "gitcommit" }
     local buf = event.buf
@@ -86,7 +75,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- 通用q来退出部分页面
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("close_with_q"),
+  group = augroup("CloseWithQ"),
   pattern = {
     "PlenaryTestPopup",
     "checkhealth",
@@ -122,7 +111,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- 当打开手册文件时，避免其出现在buffer列表中
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("man_unlisted"),
+  group = augroup("ManUnlisted"),
   pattern = { "man" },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -131,7 +120,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- 禁用 JSON 文件中的“隐藏显示”（conceal）功能，确保内容完全可见
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = augroup("json_conceal"),
+  group = augroup("JsonConceal"),
   pattern = { "json", "jsonc", "json5" },
   callback = function()
     vim.opt_local.conceallevel = 0
@@ -140,7 +129,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 -- 在保存文件之前，自动创建文件所在的目录（如果目录不存在），从而避免保存失败。
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  group = augroup("auto_create_dir"),
+  group = augroup("AutoCreateDir"),
   callback = function(event)
     if event.match:match("^%w%w+:[\\/][\\/]") then
       return

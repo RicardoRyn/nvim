@@ -6,7 +6,7 @@ local FileIcon = {
     self.icon, self.hl, _ = require("mini.icons").get("file", filename)
   end,
   provider = function(self)
-    return self.icon and (" " .. self.icon .. " ") or ""
+    return self.icon and (self.icon .. " ") or ""
   end,
   hl = function(self)
     if not self.icon_hl then

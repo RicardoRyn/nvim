@@ -10,7 +10,24 @@ _🍰 To be jj cake hand ✋._
 [![Lua](https://img.shields.io/badge/Made%20with%20Lua-2C2D72.svg?style=flat-square&logo=lua&logoColor=white)](https://lua.org)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
 
-> **⚠️ Important**: This is **NOT** a Neovim distribution.
+> [!ATTENTION]: This README is OUTDATED and only applies to commit `f717f44` and earlier.
+> refactor(config)!: migrate from lazy.nvim to native vim.pack plugin manager
+>
+> The configuration has been restructured to use Neovim's native vim.pack system instead of lazy.nvim.
+> Key changes:
+>
+> - Removed lazy.nvim bootstrap and plugin specs; plugins are now added via vim.pack.add() in lua/config/pack.lua.
+> - Plugin configurations are moved from lua/plugins/ directories to individual files under plugin/ for better separation and native lazy-loading.
+> - init.lua simplified: removed lazy.nvim loader and LSP config call; added pack setup and dev module.
+> - Removed many unused/disabled plugin specs (e.g. neo-tree, lualine, gitsigns, etc.) and associated utilities (dashboard, pretty_cmdline, snacks/dashboard).
+> - Added new utility modules: buffer_actions, csv_view, diff_signs (for JJ-based inline diff signs), heirline tabline components.
+> - Updated LSP and DAP configurations to work with pack-managed plugins (paths adjusted).
+> - Updated autocommands, keymaps, and options across the board.
+> - Updated .gitignore, removed LICENSE and README.md (repo cleanup).
+>
+> BREAKING CHANGE: Plugin management has switched from lazy.nvim to vim.pack. Users must reinstall plugins and update any custom plugin specifications.
+
+> [!IMPORTANT]: This is **NOT** a Neovim distribution.
 > It's my personal configuration that uses many plugins and custom settings.
 > I'm sharing it to inspire others to build their own Neovim setup.
 > Hope it helps!

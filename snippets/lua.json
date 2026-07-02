@@ -1,17 +1,25 @@
 {
-  "disable": {
-    "prefix": "disable",
-    "body": ["enabled = false,"],
-    "description": "Disable feature"
-  },
-  "notvscode": {
-    "prefix": "notvscode",
-    "body": ["cond = not vim.g.vscode,"],
-    "description": "Not in vscode"
-  },
   "styignore": {
-    "prefix": "styignore",
+    "prefix": "ignore",
     "body": ["-- stylua: ignore"],
     "description": "Stylua ignore"
+  },
+  "lazyload": {
+    "prefix": "lazyload",
+    "body": [
+      "require(\"utils.lazy\").load({",
+      "  setup = function()",
+      "    $1",
+      "  end,",
+      "  keys = { $2 },",
+      "  cmd = { $3 },",
+      "})"
+    ],
+    "description": "Lazy load plugin config"
+  },
+  "vscode": {
+    "prefix": "novscode",
+    "body": ["if vim.g.vscode then return end"],
+    "description": "Disable plugin in vscode"
   }
 }

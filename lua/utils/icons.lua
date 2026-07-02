@@ -1,29 +1,22 @@
 local M = {}
 
-M.git = {
-  added = "󰜄 ",
-  modified = "󰏭 ",
-  deleted = "󰛲 ",
-  renamed = "󰜶 ",
-  removed = "󰅘 ",
+M.diff = {
+  commit = "󰜘 ",
+  staged = "●",
+  added = "",
+  deleted = "",
   ignored = " ",
-  tracked = " ",
-  untracked = " ",
-  staged = "󰱒 ",
-  unstaged = "󰄱 ",
-  updated = " ",
-  conflict = "󱓌 ",
-  unmerged = " ",
+  modified = "○",
+  renamed = "",
+  unmerged = " ",
+  untracked = "?",
 }
 
 M.diagnostics = {
   error = " ",
   warn = " ",
-  warning = " ",
   info = " ",
   hint = " ",
-  debug = " ",
-  trace = " ",
 }
 
 M.comments = {

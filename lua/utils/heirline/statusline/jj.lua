@@ -1,6 +1,5 @@
 local colors = require("utils.heirline.colors")
 local jj_log = require("utils.jj_log")
-local utils = require("heirline.utils")
 
 vim.g.heirline_jjlog_bg = colors.blue
 
@@ -50,7 +49,19 @@ local function get_git_branch()
   return branch
 end
 
-local JjLogCore = {
+local JjLog = {
+  init = function(self)
+    local color_info = jj_log.get_color()
+    if color_info then
+      self.hl_color = { fg = colors.background, bg = color_info.fg, bold = (color_info.gui == "bold") }
+    else
+      self.hl_color = { fg = colors.background, bg = colors.gray }
+    end
+    vim.g.heirline_jjlog_bg = self.hl_color.bg
+  end,
+  hl = function(self)
+    return self.hl_color
+  end,
   {
     condition = function()
       return jj_log.is_jj_repo()
@@ -60,7 +71,7 @@ local JjLogCore = {
     end,
     update = {
       "User",
-      pattern = "JjStatusUpdated",
+      pattern = "JJStatusUpdated",
       callback = vim.schedule_wrap(function()
         vim.cmd("redrawstatus")
       end),
@@ -80,41 +91,22 @@ local JjLogCore = {
   },
 }
 
-local JjLog = {
-  init = function(self)
-    local color_info = jj_log.get_color()
-    if color_info then
-      self.hl_color = { fg = colors.background, bg = color_info.fg, bold = (color_info.gui == "bold") }
-    else
-      self.hl_color = { fg = colors.background, bg = colors.gray }
-    end
-    vim.g.heirline_jjlog_bg = self.hl_color.bg
-  end,
-  hl = function()
-    return { fg = colors.background, bold = true }
-  end,
-  utils.surround({ "", "" }, function(self)
-    return self.hl_color.bg
-  end, JjLogCore),
-}
-
 local Diff = {
   condition = function()
-    local s = vim.b.minidiff_summary
-    return s ~= nil and s.add ~= nil
+    local diff = require("utils.diff_signs.buffers").diff()
+    return diff ~= nil and diff.added ~= nil
   end,
   init = function(self)
-    self.s = vim.b.minidiff_summary
+    self.diff = require("utils.diff_signs.buffers").diff()
   end,
-  update = { "User", pattern = "MiniDiffUpdated" },
   {
     provider = function(self)
-      return (self.s.add > 0 or self.s.delete > 0 or self.s.change > 0) and " ("
+      return (self.diff.added > 0 or self.diff.deleted > 0 or self.diff.changed > 0) and " ("
     end,
   },
   {
     provider = function(self)
-      return self.s.add > 0 and ("+" .. self.s.add) or ""
+      return self.diff.added > 0 and ("+" .. self.diff.added) or ""
     end,
     hl = function()
       return { fg = colors.git_add }
@@ -122,7 +114,7 @@ local Diff = {
   },
   {
     provider = function(self)
-      return self.s.delete > 0 and ("-" .. self.s.delete) or ""
+      return self.diff.deleted > 0 and ("-" .. self.diff.deleted) or ""
     end,
     hl = function()
       return { fg = colors.git_del }
@@ -130,7 +122,7 @@ local Diff = {
   },
   {
     provider = function(self)
-      return self.s.change > 0 and ("~" .. self.s.change) or ""
+      return self.diff.changed > 0 and ("~" .. self.diff.changed) or ""
     end,
     hl = function()
       return { fg = colors.git_change }
@@ -138,7 +130,7 @@ local Diff = {
   },
   {
     provider = function(self)
-      return (self.s.add > 0 or self.s.delete > 0 or self.s.change > 0) and ")"
+      return (self.diff.added > 0 or self.diff.deleted > 0 or self.diff.changed > 0) and ")"
     end,
   },
 }

@@ -9,16 +9,16 @@ vim.opt.conceallevel = 0 -- 不隐藏任何文本
 vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- 同步系统的剪贴板
 vim.opt.undofile = true -- 即使关闭 Neovim，保留撤销历史
 vim.opt.undolevels = 10000 -- 最大可撤销操作数量
+vim.opt.backup = false -- 不使用备份文件
+vim.opt.isfname:append("@-@") -- 允许文件名中包含@
 
 -- Editor
-vim.g.autoformat = false -- 禁止自动格式化
-vim.g.markdown_recommended_style = 0 -- 不要强制 Markdown 的默认风格
 vim.opt.list = true -- 显示不可见字符（空格、Tab、换行等）
 vim.opt.listchars = { tab = ">·", trail = "·" } -- 用>-表示tab
 vim.opt.cursorline = true -- 显示光标当前行
-vim.opt.cursorlineopt = "both" -- 只在当前窗口显示光标行
-vim.opt.inccommand = "nosplit" -- 增量替换（substitute）预览
-vim.opt.jumpoptions = "view" -- 跳转后 恢复光标所在窗口的视图（例如滚动位置、折叠状态）
+vim.opt.cursorlineopt = "both" -- 光标当前行高亮显示整行和行号
+vim.opt.inccommand = "nosplit" -- 在命令行中输入替换命令时，实时预览替换结果，但不新增窗口
+vim.opt.jumpoptions = "view,stack" -- 跳转后 恢复光标所在窗口的视图（例如滚动位置、折叠状态）
 vim.opt.virtualedit = "block" -- 光标在可视块模式（Visual Block Mode）中移动到没有文本的位置
 vim.opt.expandtab = true -- 使用空格而不是真正的tab
 vim.opt.tabstop = 2 -- 控制 tab显示宽度
@@ -31,8 +31,6 @@ vim.opt.grepformat = "%f:%l:%c:%m" --解析 grep 命令的输出格式为 file_p
 vim.opt.ignorecase = true -- 如果输入没有大写，则大小写不敏感
 vim.opt.smartcase = true -- 如果输入有大写，则大小写敏感
 vim.opt.timeoutlen = vim.g.vscode and 1000 or 500 -- 触发键盘提示时长
-vim.opt.completeopt = "menu,menuone,noselect" -- 打开补全菜单时不自动选中第一项
-vim.opt.wildmode = "longest:full,full" -- 命令行补全模式,第一次按 Tab，会自动补全到 最长公共前缀,再按 Tab，会显示 完整匹配列表
 vim.opt.spelllang = { "en" } -- 拼写检查的语言为英语（English）
 
 -- UI
@@ -47,11 +45,9 @@ vim.opt.showmode = false -- 显示模式，因为有statusline，不需要
 vim.opt.ruler = false -- 如果开启状态栏会显示类似 12,34，因为有statusline，不需要
 vim.opt.guicursor = "n:block,i:ver25,v:hor20" -- 设置光标样式
 vim.opt.termguicolors = true -- 终端真彩色支持（24-bit RGB color）
-if SYSTEM.is_win then
+if require("utils.system").is_win then
   vim.opt.background = "light" -- 深/浅模式，Windows下不能自动识别主题，需要手动设置
 end
-vim.opt.pumblend = 10 -- 弹出菜单 0（完全不透明）到 100（完全透明）
-vim.opt.pumheight = 10 -- 弹出菜单显示的最大条目数
 vim.opt.winminwidth = 5 -- 窗口的最小宽度为 5 列
 vim.opt.shortmess:append({
   W = true, -- 禁止显示 "written" 消息（保存文件后的提示信息）
@@ -64,6 +60,13 @@ vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "
 vim.opt.splitbelow = true -- 打开水平分屏时，新窗口会 出现在当前窗口的下方
 vim.opt.splitright = true -- 打开垂直分屏时，新窗口会 出现在当前窗口的右侧
 vim.opt.splitkeep = "screen" -- 保持当前窗口的内容位置不动，屏幕不会因为新窗口而上下或左右移动
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  desc = "Highlight yanked text",
+  callback = function()
+    vim.highlight.on_yank({ timeout = 100 })
+  end,
+})
 
 -- Shell
 vim.opt.shell = "nu" -- 外部 shell

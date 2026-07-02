@@ -16,27 +16,36 @@ if special_mode.is_active() then
   return M
 end
 
-local jj_cmd = [[jj log --revisions @ --no-graph --color never --limit 1 --template '
-  separate(" ",
-    change_id.shortest(4),
-    bookmarks,
-    concat(
-      if(conflict, "💥"),
-      if(divergent, "🚧"),
-      if(hidden, "👻"),
-      if(immutable, "🔒"),
-    ),
-    if(
-      empty,
-      "󰱒",
-      "󰏭"
-    ),
-    coalesce(
-      truncate_end(29, description.first_line(), "…"),
-      "󰄱 "
-    )
+local jj_args = {
+  "jj", "log", "--revisions", "@",
+  "--no-graph",
+  "--color",
+  "never",
+  "--limit",
+  "1",
+  "--template", [[
+separate(" ",
+  change_id.shortest(4),
+  bookmarks,
+  concat(
+    if(conflict, "💥"),
+    if(divergent, "🚧"),
+    if(hidden, "👻"),
+    if(immutable, "🔒"),
+  ),
+  if(
+    empty,
+    "󰱒",
+    "󰏭"
+  ),
+  coalesce(
+    truncate_end(29, description.first_line(), "…"),
+    "󰄱 "
   )
-']]
+)
+]],
+}
+
 local status_symbols = {
   conflicted = "💥",
   divergent = "🚧",
@@ -58,7 +67,7 @@ end
 
 local function notify_status_updated()
   vim.schedule(function()
-    vim.api.nvim_exec_autocmds("User", { pattern = "JjStatusUpdated" })
+    vim.api.nvim_exec_autocmds("User", { pattern = "JJStatusUpdated" })
   end)
 end
 
@@ -72,7 +81,7 @@ end
 
 local function stop_running_job()
   if running_job_id then
-    vim.fn.jobstop(running_job_id)
+    pcall(running_job_id.kill, running_job_id)
     running_job_id = nil
   end
 end
@@ -100,37 +109,23 @@ local function update_status()
   -- 取消旧任务
   stop_running_job()
 
-  local output = {}
+  running_job_id = vim.system(jj_args, { cwd = jj_root, text = true }, function(result)
+    -- 忽略旧回调
+    if request_id ~= status_request_id then
+      return
+    end
 
-  running_job_id = vim.fn.jobstart(jj_cmd, {
-    cwd = jj_root,
-    stdout_buffered = true,
-
-    on_stdout = function(_, data)
-      if data then
-        vim.list_extend(output, data)
-      end
-    end,
-
-    on_exit = function(_, exit_code)
-      -- 忽略旧回调
-      if request_id ~= status_request_id then
-        return
-      end
-
-      running_job_id = nil
-      if exit_code == 0 then
-        local result = table.concat(output, "")
-        cached_status = " " .. vim.trim(result)
-      else
-        cached_status = ""
-      end
-      notify_status_updated()
-    end,
-  })
+    running_job_id = nil
+    if result.code == 0 then
+      cached_status = " " .. vim.trim(result.stdout)
+    else
+      cached_status = ""
+    end
+    notify_status_updated()
+  end)
 end
 
-local augroup = vim.api.nvim_create_augroup("jj_log", { clear = true })
+local augroup = vim.api.nvim_create_augroup("SetupJJLog", { clear = true })
 
 vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
   group = augroup,

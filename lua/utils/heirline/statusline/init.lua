@@ -14,5 +14,6 @@ M.vim_mode = require("utils.heirline.statusline.vim_mode")
 M.work_dir = require("utils.heirline.statusline.work_dir")
 M.lazy = require("utils.heirline.statusline.lazy")
 M.ai = require("utils.heirline.statusline.ai")
+M.python_venv = require("utils.heirline.statusline.python_venv")
 
 return M

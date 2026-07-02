@@ -1,28 +1,18 @@
 local M = {}
 
-local sysname = vim.uv.os_uname().sysname
-if sysname == "Linux" then
-  M.os = "Linux"
-elseif sysname == "Darwin" then
-  M.os = "Mac"
-elseif sysname == "Windows_NT" then
-  M.os = "Windows"
-else
-  M.os = "Other"
-end
+M.is_win = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
+M.is_mac = vim.fn.has("macunix") == 1
+M.is_linux = vim.fn.has("linux") == 1
 
-M.distro = "none"
-if M.os == "Linux" then
+M.distro = "unknown"
+if M.is_linux then
   local f = io.open("/etc/os-release", "r")
   if f then
     local content = f:read("*all")
     f:close()
-    M.distro = content:match("^ID=(%w+)") or content:match("\nID=(%w+)") or "other"
+    local id = content:match("^ID%s*=%s*[\"']?([^\"'\n]+)[\"']?") or content:match("\nID%s*=%s*[\"']?([^\"'\n]+)[\"']?")
+    M.distro = id or "unknown"
   end
 end
-
-M.is_win = M.os == "Windows"
-M.is_mac = M.os == "Mac"
-M.is_linux = M.os == "Linux"
 
 return M

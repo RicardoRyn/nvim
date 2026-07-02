@@ -1,3 +1,2 @@
-.crush/
-.deepseek/
-.codegraph/
+.codegraph/**/*
+PLAN.md

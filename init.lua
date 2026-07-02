@@ -1,14 +1,12 @@
--- require("vim._core.ui2").enable({})
-if not _G.SYSTEM then
-  _G.SYSTEM = require("utils.system")
+if not vim.g.vscode then
+  require("vim._core.ui2").enable({})
 end
 
-require("config.lazy")
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")
-require("utils.debug")
+require("config.pack")
 
-if not vim.g.vscode then
-  require("config.lsp")
-end
+require("utils.diff_signs")
+
+require("dev")

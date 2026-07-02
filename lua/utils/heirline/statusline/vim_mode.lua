@@ -1,20 +1,15 @@
 local colors = require("utils.heirline.colors")
-local utils = require("heirline.utils")
 
 vim.g.heirline_vimode_bg = colors.blue
 
 local VimModeCore = {
   provider = function(self)
-    return self.mode_names[self.mode] .. " "
+    return " " .. self.mode_names[self.mode] .. " "
   end,
   hl = function(self)
     return { fg = colors.background, bg = self.mode_color(self.mode), bold = true }
   end,
 }
-
-local WrappedVimModeCore = utils.surround({ "", "" }, function(self)
-  return self.mode_color(self.mode)
-end, VimModeCore)
 
 local M = {
   init = function(self)
@@ -61,8 +56,10 @@ local M = {
     mode_color = function(mode)
       return ({
         n = colors.blue,
+        no = colors.yellow,
         nt = colors.blue,
         i = colors.green,
+        ic = colors.green,
         v = colors.purple,
         V = colors.purple,
         ["\22"] = colors.purple,
@@ -71,6 +68,8 @@ local M = {
         S = colors.purple,
         ["\19"] = colors.purple,
         R = colors.red,
+        Rv = colors.red,
+        Rvc = colors.red,
         r = colors.red,
         ["!"] = colors.green,
         t = colors.green,
@@ -84,7 +83,7 @@ local M = {
       vim.cmd("redrawstatus")
     end),
   },
-  WrappedVimModeCore,
+  VimModeCore,
 }
 
 return M
