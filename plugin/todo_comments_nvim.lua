@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
   callback = function()
     require("todo-comments").setup({
       signs = true,
-      sign_priority = 199,
+      sign_priority = 8,
       keywords = {
         FIX = {
           icon = require("utils.icons").comments.fix,

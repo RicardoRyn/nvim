@@ -1,4 +1,6 @@
-if vim.g.vscode then return end
+if vim.g.vscode then
+  return
+end
 
 local dap
 local widgets
@@ -43,6 +45,11 @@ require("utils.lazy").load({
         },
       },
       auto_toggle = true,
+      render = {
+        sort_variables = function(a, b)
+          return a.name < b.name
+        end,
+      },
     })
   end,
   -- stylua: ignore
