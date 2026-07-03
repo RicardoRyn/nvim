@@ -5,7 +5,7 @@
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
     "blink.cmp": {
-      "rev": "bda905a4bf1b3edfa708b0be193b8c63d8620c96",
+      "rev": "67c9c3f9e3121df32d0eee406a76087a9f0a62eb",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.lib": {
@@ -25,7 +25,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "copilot.lua": {
-      "rev": "7df55b20b5b653941f0bcff87e559cabb6fafeb0",
+      "rev": "760912b5992e1d6437378a9c7f2b0cb950966cf5",
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "flash.nvim": {
@@ -37,7 +37,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "fyler.nvim": {
-      "rev": "3dd25cb6103f88ce5a4300a382c389eeae7a0fdb",
+      "rev": "70e1202434a21b45649dd59ec82dc3330f79125e",
       "src": "https://github.com/FylerOrg/fyler.nvim"
     },
     "gitsigns.nvim": {
@@ -54,7 +54,7 @@
       "version": "'jv/3-way-merge-tool'"
     },
     "jj.nvim": {
-      "rev": "f217b16699e714e32df5c7616c0f71b70d49e11f",
+      "rev": "c7242901418a05dc1d97ef1739585779bd326702",
       "src": "https://github.com/nicolasgb/jj.nvim"
     },
     "jjannotate.nvim": {
@@ -66,7 +66,7 @@
       "src": "https://github.com/folke/lazydev.nvim"
     },
     "markview.nvim": {
-      "rev": "301e431c7b618235f5447d54465c70934bd33668",
+      "rev": "c363dc67ca9549270dc7da8e50b504ba439418dd",
       "src": "https://github.com/OXY2DEV/markview.nvim"
     },
     "mason.nvim": {
@@ -74,7 +74,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.ai": {
-      "rev": "d73c36349aa7b0bab5f77ad71701a1d42211a1df",
+      "rev": "cb20f298ebf5ae91924cd0c6c310712de2ef4086",
       "src": "https://github.com/nvim-mini/mini.ai"
     },
     "mini.clue": {
@@ -82,7 +82,7 @@
       "src": "https://github.com/nvim-mini/mini.clue"
     },
     "mini.icons": {
-      "rev": "e56797f90192d81f1fda02e662fc3e8e3d775027",
+      "rev": "24dbea2195c477e57d581215839a6ab915f34b14",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.surround": {
@@ -114,7 +114,7 @@
       "src": "https://github.com/brenoprata10/nvim-highlight-colors"
     },
     "nvim-lspconfig": {
-      "rev": "3371bf298c1f56efc26771ee961f461176958fb5",
+      "rev": "292f44408498103c47996ff5c18fd366293840d8",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
@@ -150,7 +150,7 @@
       "src": "https://github.com/folke/snacks.nvim"
     },
     "tobira.nvim": {
-      "rev": "e986d22abfcee5a18c8e277229d4ccfdce5f377c",
+      "rev": "cd286ca662703b9d9082704892995565aac9f048",
       "src": "https://github.com/kamegoro/tobira.nvim"
     },
     "todo-comments.nvim": {
