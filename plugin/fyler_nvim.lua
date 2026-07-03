@@ -144,8 +144,8 @@ require("utils.lazy").load({
     })
   end,
   keys = {
-    { "n", "<leader>ee", function() require("fyler").toggle({ kind = "split_left_most" }) end, { desc = "Open fyler" }, },
-    { "n", "<leader>ef", function() require("fyler").toggle({ kind = "floating" }) end, { desc = "Open fyler (floating)" }, },
-    { "n", "<leader>er", function() require("fyler").toggle({ kind = "split_left_most", root_path = "~" }) end, { desc = "Open fyler (root path)" }, },
+    { "n", "<leader>ee", function() require("fyler").toggle({ kind = "split_left_most" }) end, { desc = "Fyler" }, },
+    { "n", "<leader>ef", function() require("fyler").toggle({ kind = "floating" }) end, { desc = "Fyler (floating)" }, },
+    { "n", "<leader>er", function() require("fyler").toggle({ kind = "split_left_most", root_path = "~" }) end, { desc = "Fyler (root path)" }, },
   },
 })

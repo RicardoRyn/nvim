@@ -27,6 +27,7 @@ local active_specs = {
   -- UI
   { src = "https://github.com/starbaser/codewindow.nvim" },
   { src = "https://github.com/rebelot/heirline.nvim" },
+  { src = "https://github.com/brianhuster/live-preview.nvim" },
   { src = "https://github.com/nvim-mini/mini.clue" },
   { src = "https://github.com/nvim-mini/mini.icons" },
   { src = "https://github.com/kevinhwang91/nvim-ufo" },

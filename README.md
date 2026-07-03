@@ -1,252 +1,51 @@
-<div align="center">
+# My Neovim Configuration
 
-![Neovim Config Preview](./docs/assets/ui-preview.gif)
-
-# 🚀 My Neovim Configuration
-
-_🍰 To be jj cake hand ✋._
-
-[![Neovim](https://img.shields.io/badge/Neovim-0.12+-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=white)](https://neovim.io)
-[![Lua](https://img.shields.io/badge/Made%20with%20Lua-2C2D72.svg?style=flat-square&logo=lua&logoColor=white)](https://lua.org)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
-
-</div>
-
-> [!ATTENTION]: This README is OUTDATED and only applies to commit `f717f44` and earlier.
+> [!IMPORTANT] This is NOT a Neovim distribution.
 >
-> refactor(config)!: migrate from lazy.nvim to native vim.pack plugin manager
+> It's my personal setup shared for reference and inspiration.
 >
-> The configuration has been restructured to use Neovim's native vim.pack system instead of lazy.nvim.
-> Key changes:
->
-> - Removed lazy.nvim bootstrap and plugin specs; plugins are now added via `vim.pack.add()` in `lua/config/pack.lua`.
-> - Plugin configurations are moved from `lua/plugins/` directories to individual files under `plugin/`.
-> - `init.lua` simplified: removed lazy.nvim loader and LSP config call; added pack setup and dev module.
-> - Removed many unused/disabled plugin specs (e.g. neo-tree, lualine, gitsigns, etc.) and associated utilities (pretty_cmdline, dashboard).
-> - Added new utility modules: buffer_actions, csv_view, diff_signs (for JJ-based inline diff signs), heirline tabline components.
-> - Updated LSP and DAP configurations to work with pack-managed plugins (paths adjusted).
-> - Updated autocommands, keymaps, and options across the board.
->
-> BREAKING CHANGE: Plugin management has switched from lazy.nvim to vim.pack. Users must reinstall plugins and update any custom plugin specifications.
+> Neovim 0.12+.
 
-> [!IMPORTANT]: This is **NOT** a Neovim distribution.
->
-> It's my personal configuration that uses many plugins and custom settings.
-> I'm sharing it to inspire others to build their own Neovim setup.
-> Hope it helps!
+![nvim](./docs/assets/nvim.png)
 
-## ✨ Features
+## Features
 
-<table>
-  <tr>
-    <td>
-      <h3>🎨 Beautiful UI</h3>
-      <ul>
-        <li>Catppuccin theme</li>
-        <li>Dashboard animations</li>
-        <li>Colorful window separators</li>
-        <li>Enhanced lualine</li>
-      </ul>
-    </td>
-    <td>
-      <img src="./docs/assets/ui-preview.png" alt="UI Preview" />
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="./docs/assets/editing.png" alt="Editing Experience" />
-    </td>
-    <td>
-      <h3>⚡ Superior Editing Experience</h3>
-      <ul>
-        <li>Autocompletion with blink.cmp</li>
-        <li>Code navigation with Treesitter</li>
-        <li>Motions with Flash & Hop</li>
-        <li>Text objects & Surround operations</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <h3>🤖 AI-Powered Development</h3>
-      <ul>
-        <li>AI code suggestions & NES</li>
-        <li>AI-assisted refactoring</li>
-        <li>AI snippet generation</li>
-        <li>AI sidekick integration</li>
-      </ul>
-    </td>
-    <td>
-      <img src="./docs/assets/ai-features.png" alt="AI Features" />
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="./docs/assets/debugging.png" alt="Debugging" />
-    </td>
-    <td>
-      <h3>🔍 Professional Debugging</h3>
-      <ul>
-        <li>DAP integration with UI</li>
-        <li>Python debugging support</li>
-        <li>Breakpoints & watch expressions</li>
-        <li>Step-through debugging</li>
-      </ul>
-    </td>
-  </tr>
-</table>
+### Plugin Management
 
-### 🌟 Highlights
+Plugins are managed via Neovim's built-in `vim.pack` system.
+Plugin specs are defined in `lua/config/pack.lua`.
 
-- **💻 VSCode-Native Editing** - Bring Neovim's modal editing to VSCode with motion plugins (Flash, Hop) for Jupyter notebooks and other workflows
-- **🌳 JJ-Powered Version Control** - Deep integration with Jujutsu (jj), featuring animated status display with conflict detection, bookmark management, and seamless Git compatibility
-- **🔧 Cross-Platform Intelligence** - Auto-detects system environment (Windows/Mac/Linux) and adapts behavior accordingly
-- **✨ Dynamic Dashboard** - Animated ASCII art with glitch effects
-- **🐍 Python-First Documentation** - Custom Neogen templates with Chinese support, auto-extracting parameter defaults, type hints, and return values
-- **📓 Full Jupyter Notebook Support (bugs)** - Complete .ipynb editing experience with cell management, kernel control, inline output preview, and REPL integration
+| Command          | Description                             |
+| ---------------- | --------------------------------------- |
+| `:PackStatus`    | Check plugin status without downloading |
+| `:PackUpdate`    | Check and update plugins (with dry-run) |
+| `:PackUpdate!`   | Update plugins (skip confirmation)      |
+| `:PackDel <...>` | Remove installed plugins                |
 
----
+### Custom Modules
 
-## 📸 Screenshots
+Some features are too simple to warrant a full plugin. These custom modules
+provide lightweight, self-contained logic:
 
-<div align="center">
-  <figure>
-    <img src="./docs/assets/screenshot-1.png" width="100%" alt="AI Suggestions" />
-    <figcaption>Copilot AI Intelligent Completion & Next Edit Suggestions</figcaption>
-  </figure>
+| Module           | Description                                               |
+| ---------------- | --------------------------------------------------------- |
+| `autopair`       | Auto-insert matching brackets, quotes, and backticks      |
+| `sessions`       | Auto-save/restore sessions per working directory          |
+| `buffer_actions` | Buffer cycle, move, close, pin — used by heirline tabline |
+| `csv_view`       | Tabular CSV viewer with aligned columns & sticky headers  |
+| `jj_log`         | Fetch `jj log` info for statusline display                |
+| `special_mode`   | Detect diff/merge-tool launch (e.g. jj, hunk.nvim)        |
+| `system`         | OS detection (Windows/macOS/Linux + distro)               |
 
-<hr>
+### VSCode Integration
 
-<figure>
-    <img src="./docs/assets/screenshot-2.png" width="100%" alt="File Picker" />
-    <figcaption>Snacks Picker Fuzzy File Search</figcaption>
-  </figure>
+This configuration is fully compatible with [VSCode Neovim](https://github.com/vscode-neovim/vscode-neovim),
+enabling Neovim-style modal editing in VSCode with compatible Neovim plugins.
 
-<hr>
-
-<figure>
-    <img src="./docs/assets/screenshot-5.png" width="100%" alt="JJ Integration" />
-    <figcaption>Jujutsu Version Control System Integration</figcaption>
-  </figure>
-
-<hr>
-
-<figure>
-    <img src="./docs/assets/screenshot-3.png" width="100%" alt="Diff Viewer" />
-    <figcaption>Visual Diff Viewer</figcaption>
-  </figure>
-
-<hr>
-
-<figure>
-    <img src="./docs/assets/screenshot-4.png" width="100%" alt="Jupyter Notebook" />
-    <figcaption>Jupyter Notebook Integration (Bugs)</figcaption>
-  </figure>
-</div>
-
----
-
-## 🗂️ Project Structure
-
-```
-~/.config/nvim/
-├── init.lua                            # Entry point
-├── lazy-lock.json                      # Plugin version lock file
-├── stylua.toml                         # Lua formatter config
-├── .luarc.json                         # Lua language server config
-│
-├── lua/
-│   ├── config/                         # Core configuration
-│   │   ├── autocmds.lua                # Auto commands
-│   │   ├── keymaps.lua                 # Key mappings
-│   │   ├── lazy.lua                    # Lazy.nvim loader
-│   │   ├── lsp.lua                     # LSP configuration
-│   │   └── options.lua                 # Neovim options
-│   │
-│   ├── plugins/                        # Plugin specifications
-│   │   ├── ai/                         # AI-related plugins
-│   │   ├── core/                       # Core plugins (blink, conform, mason, etc.)
-│   │   ├── dap/                        # Debug adapter protocol
-│   │   ├── disabled/                   # Disabled plugin configs
-│   │   ├── editor/                     # Editor enhancements
-│   │   ├── tools/                      # Development tools
-│   │   ├── ui/                         # UI plugins
-│   │   └── vcs/                        # Version control (git, jj)
-│   │
-│   ├── neogen/                         # Neogen annotation templates
-│   │   └── python/                     # Python-specific templates with Chinese support
-│   │
-│   └── utils/                          # Utility modules
-│       ├── ascii_arts.lua              # ASCII art for dashboard
-│       ├── dashboardAnimation.lua      # Dashboard glitch animation
-│       ├── debug.lua                   # Debug utilities
-│       ├── icons.lua                   # Icon mappings
-│       ├── jj_status.lua               # JJ status display
-│       ├── snacks_dashboard.lua        # Snacks dashboard config
-│       ├── snacks_explorer_preview.lua # Snacks explorer preview
-│       └── system.lua                  # System detection
-│
-├── after/                              # After plugins loaded
-├── lsp/                                # LSP server custom configs
-├── snippets/                           # Custom snippets
-└── docs/                               # Screenshots & images
-```
-
----
-
-## 💡 Installation & Usage
-
-### Try It
-
-If you want to try this configuration:
-
-```bash
-# required
-mv ~/.config/nvim{,.bak}
-
-# optional but recommended
-mv ~/.local/share/nvim{,.bak}
-mv ~/.local/state/nvim{,.bak}
-mv ~/.cache/nvim{,.bak}
-
-# Clone this configuration
-jj git clone https://github.com/RicardoRyn/nvim.git ~/.config/nvim
-
-# Start Neovim
-nvim
-```
-
-After the first launch:
-
-1. **Check plugins** with `:Lazy` to ensure all plugins are installed correctly
-2. **Check health** with `:checkhealth` to verify system dependencies and LSP configuration
-3. **Customize it** for your own needs!
-
-### 💻 VSCode Neovim Integration
-
-This configuration is fully compatible with [VSCode Neovim](https://github.com/vscode-neovim/vscode-neovim) (an extension of [VSCode](https://code.visualstudio.com/)), enabling Neovim-style modal editing in VSCode with compatible Neovim plugins.
-
-> Personally, I need to edit Jupyter Notebooks,
-> but Neovim's support for them is quite limited,
-> so I have to use VSCode for that purpose.
-> However, I've become so accustomed to Neovim's modal editing
-> that I can't work efficiently without it.
-> So I tried using Neovim within VSCode, and it works quite well.
-
-<div align="center">
-
-<figure>
-    <img src="./docs/assets/vscode-1.png" width="100%" alt="Diff Viewer" />
-    <figcaption>Cursor Jumping in VSCode</figcaption>
-  </figure>
-
-<hr>
-
-<figure>
-    <img src="./docs/assets/vscode-2.png" width="100%" alt="Jupyter Notebook" />
-    <figcaption>Nvim Plugins in VSCode</figcaption>
-  </figure>
-</div>
+> Personally, I need to edit Jupyter Notebooks, but Neovim's support for them is quite limited,
+> so I have to use VSCode for that purpose. However, I've become so accustomed to Neovim's
+> modal editing that I can't work efficiently without it. So I tried using Neovim within VSCode,
+> and it works quite well.
 
 #### Setup
 
@@ -257,260 +56,258 @@ This configuration is fully compatible with [VSCode Neovim](https://github.com/v
    ```json
    {
      // vscode-neovim
-     "vscode-neovim.neovimClean": false, // Don't clear Neovim configuration
+     "vscode-neovim.neovimClean": false,
      "extensions.experimental.affinity": {
-       "asvetliakov.vscode-neovim": 1 // Neovim extension affinity
+       "asvetliakov.vscode-neovim": 1
      },
      "vscode-neovim.compositeKeys": {
        "jk": {
-         "command": "vscode-neovim.escape" // Composite key jk mapped to Escape
+         "command": "vscode-neovim.escape"
        }
      }
    }
    ```
 
-3. For a better experience, some keybindings need to be configured in VSCode's `keybindings.json`. You can refer to my [settings](docs/Code/keybindings.json) for reference.
+3. For a better experience, some keybindings need to be configured in VSCode's
+   `keybindings.json`. See my [settings](docs/Code/keybindings.json) for reference.
 
-#### Available Features in VSCode
+#### Available Plugins in VSCode
 
-Since VSCode has its own built-in UI, terminal, and keybinding system, this configuration only enables efficiency-focused plugins that enhance the editing experience without conflicting with VSCode's native features:
+Since VSCode has its own built-in UI, terminal, and keybinding system, this
+configuration only enables efficiency-focused plugins that enhance the editing
+experience without conflicting with VSCode's native features:
 
-- **lazy.nvim** - Plugin manager for lazy loading
+- **flash.nvim** - Fast cursor jumping
 - **mini.ai** - Enhanced text objects for smarter editing
 - **mini.surround** - Quick surround operations (add/delete/change)
-- **nvim-spider** - Smart word-wise navigation
 - **nvim-treesitter-textobjects** - Treesitter-based text objects
-- **flash.nvim & hop.nvim** - Fast cursor jumping
 - **treesj** - Code splitting and joining utilities
-- **yanky.nvim** - Enhanced clipboard with history
 
-For the complete list of VSCode-specific keymaps, see the **[VSCode Keymaps](#vscode-keymaps)** section below.
+For the complete list of VSCode-specific keymaps, see [VSCode Keymaps](#vscode-keymaps) below.
 
----
+## Project Structure
 
-## ⌨️ Keymaps
+```text
+~/.config/nvim/
+├── init.lua                  # Entry point
+├── nvim-pack-lock.json       # Plugin version lock
+├── stylua.toml               # Lua formatter config
+├── .luarc.json               # Lua LSP config
+│
+├── lua/
+│   ├── config/               # Core configuration
+│   │   ├── autocmds.lua      # Auto commands
+│   │   ├── keymaps.lua       # Key mappings
+│   │   ├── options.lua       # Neovim options
+│   │   └── pack.lua          # vim.pack plugin specs
+│   │
+│   ├── dev/                  # Dev utilities (runtime path helpers, etc.)
+│   ├── neogen/               # Neogen annotation templates
+│   │   └── python/           # Python docstring templates
+│   └── utils/                # Utility modules
+│       ├── buffer_actions/   # Buffer management
+│       ├── csv_view/         # CSV column-aligned view
+│       ├── heirline/         # Heirline statusline/tabline components
+│       ├── lazy/             # Lightweight lazy-loading for vim.pack
+│       ├── snacks_nvim/      # Snacks.nvim configuration
+│       ├── icons.lua         # Icon mappings
+│       ├── jj_log.lua        # JJ log helpers
+│       ├── mini_files_ext.lua# Mini.files extensions
+│       ├── special_mode.lua  # Special mode detection (e.g. jj diff)
+│       └── system.lua        # System detection (Windows/Mac/Linux)
+│
+├── plugin/                   # Per-plugin configs + custom scripts
+│   ├── autopair.lua          # Autopair (custom)
+│   ├── sessions.lua          # Session manager (custom)
+│   └── ... (one file per plugin)
+│
+├── after/ftplugin/           # Filetype-specific settings (loaded after)
+├── lsp/                      # LSP server custom configs
+└── snippets/                 # Custom snippets
+```
+
+## Keymaps
+
+Leader key is `<Space>`, and local leader key is `\`.
 
 ### Leader Keymaps
 
 <details>
 <summary> Click this </summary>
 
-```
+```text
 <leader>
-├── <Space> (Smart Files)
+├── <Space> -- Smart find files
 ├── a (AI)
-│   ├── a - Toggle Sidekick CLI
-│   ├── c - Toggle Sidekick Copilot
-│   ├── d - Detach CLI Session
-│   ├── f - Send File
-│   ├── i - Toggle Sidekick iFlow
-│   ├── p - Select Sidekick Prompt (including Visual mode)
-│   ├── s - Select CLI
-│   ├── t - Send This (including Visual mode)
-│   └── v - Send Visual Selection (including Visual mode)
+│   ├── a - Sidekick toggle
+│   ├── d - Sidekick detach
+│   ├── f - Sidekick send file
+│   ├── p - Sidekick select prompt
+│   ├── s - Sidekick select
+│   ├── t - Sidekick send this
+│   └── v - Sidekick send visual selection
 ├── b (Buffer)
-│   ├── a - Delete All Buffers
-│   ├── b - Delete Picked Buffer
-│   ├── d - Delete Buffer
-│   ├── l - Delete Buffers Left
-│   ├── o - Delete Other Buffers
-│   ├── p - Toggle Pin
-│   ├── P - Delete Unpined Buffers
-│   ├── r - Delete Buffers Right
-│   ├── < - Move Buffer Left
-│   └── > - Move Buffer Right
-├── c (Copy/CSV)
-│   ├── c - Copy Absolute Path (in Mini Files)
-│   ├── d - Copy Directory Path (in Mini Files)
-│   ├── f - Copy File Name (in Mini Files)
-│   ├── r - Copy Relative Path (in Mini Files)
-│   └── sv - Toggle CSV View
-├── d (Debug)
-│   ├── b - Breakpoint
-│   ├── B - Conditional Breakpoint
-│   ├── c - Run to Cursor
-│   ├── C - Clear Breakpoints
-│   ├── d - Disconnect
-│   ├── D - Disconnect (Terminate Debuggee)
-│   ├── h - Hover
-│   ├── i - Step Into
-│   ├── k - Step Back
-│   ├── o - Step Over
-│   ├── O - Step Out
-│   ├── q - Terminate Session
-│   ├── r - Restart
-│   ├── R - Toggle REPL
-│   ├── s - Start/Continue
-│   ├── u - Toggle UI
+│   ├── a - Buffer delete all
+│   ├── b - Buffer delete pick
+│   ├── d - Buffer delete
+│   ├── l - Buffer delete left
+│   ├── o - Buffer delete other
+│   ├── p - Buffer pin toggle
+│   ├── r - Buffer delete right
+│   ├── < - Buffer move left
+│   └── > - Buffer move right
+├── d (Debug / DAP)
+│   ├── b - Debug breakpoint
+│   ├── B - Debug conditional breakpoint
+│   ├── c - Debug run to cursor
+│   ├── C - Debug clear breakpoints
+│   ├── d - Debug disconnect (terminate debuggee)
+│   ├── D - Debug disconnect
+│   ├── h - Debug hover
+│   ├── i - Debug step into
+│   ├── k - Debug step back
+│   ├── l - Debug launch OSV server
+│   ├── o - Debug step over
+│   ├── O - Debug step out
+│   ├── q - Debug terminate session
+│   ├── r - Debug restart
+│   ├── R - Debug toggle REPL
+│   ├── s - Debug start/continue
+│   ├── u - Debug toggle UI
+│   ├── v - Debug toggle virtual text
 │   └── f (Float)
-│       ├── e - Float Expression
-│       ├── f - Float Frames
-│       ├── s - Float Scopes
-│       ├── S - Float Sessions
-│       └── t - Float Threads
+│       ├── e - Debug float expression
+│       ├── f - Debug float frames
+│       ├── s - Debug float scopes
+│       ├── S - Debug float sessions
+│       └── t - Debug float threads
 ├── D (Dev)
-│   └── r (Run lua)
+│   ├── m - Snacks metrics
+│   ├── r - Snacks run lua
+│   └── s - Snacks size
 ├── e (Explorer)
-│   ├── e - Mini Files
-│   ├── f - Mini Files (Current File)
-│   └── s - File Explorer (for Picture Preview)
+│   ├── e - Fyler
+│   ├── f - Fyler (floating)
+│   ├── r - Fyler (root path)
+│   └── s - Files explorer
 ├── f (Find)
-│   ├── c - Find Config Files
-│   ├── f - Find Files
-│   ├── g - Find Git Files
-│   ├── p - Projects
-│   ├── r - Recent Files
-│   ├── t - Todo (Buffers)
-│   └── T - Todo/Fix (Buffers)
+│   ├── c - Find config file
+│   ├── f - Find files
+│   ├── g - Find git files
+│   ├── p - Find projects
+│   ├── r - Find recent files
+│   ├── t - Find todos in buffers
+│   └── T - Find Todo/Fix in buffers
 ├── g (Git)
-│   ├── b - Blame Line
-│   ├── B - Blame Buffer
-│   ├── p - Preview Hunk Inline
-│   ├── P - Preview Hunk (Float)
-│   ├── r - Reset Hunk
-│   ├── R - Reset Buffer
-│   ├── t - Toggle Current Line Blame
-│   ├── w - Toggle Word Diff
-│   ├── g - LazyGit
-│   └── h (Github)
-│       ├── i - GitHub Issues (Open)
-│       ├── I - GitHub Issues (All)
-│       ├── p - GitHub Pull Requests (Open)
-│       └── P - GitHub Pull Requests (All)
-├── h (Home)
+│   ├── b - Blame line
+│   ├── p - Preview hunk
+│   ├── P - Preview hunk (float)
+│   ├── r - Reset hunk
+│   ├── R - Reset buffer
+│   ├── t - Toggle blame line
+│   ├── w - Toggle word diff
+│   └── h (GitHub)
+│       ├── i - GitHub Issues (open)
+│       ├── I - GitHub Issues (all)
+│       ├── p - GitHub Pull Requests (open)
+│       └── P - GitHub Pull Requests (all)
 ├── j (Jujutsu)
-│   ├── a - JJ Annotate File
-│   ├── A - JJ Abandon
+│   ├── a - JJ annotate
+│   ├── A - JJ abandon
 │   ├── b (Bookmark)
-│   │   ├── c - JJ Bookmark Create
-│   │   ├── d - JJ Bookmark Delete
-│   │   └── m - JJ Bookmark Move
-│   ├── C - Conflict
-│   ├── d - JJ Diff Current Buffer
-│   ├── D - JJ Describe
-│   ├── e - JJ Edit
-│   ├── f - JJ Fetch
-│   ├── l - JJ Log (All)
-│   ├── L - JJ Log
-│   ├── n - JJ New
-│   ├── r - JJ Rebase
-│   ├── R - JJ Redo
-│   ├── s - JJ Status
-│   ├── S - JJ Squash
-│   ├── U - JJ Undo
-│   ├── p (Push/PR)
-│   │   ├── l - JJ open PR from bookmark in current revision or parent
-│   │   ├── p - JJ Push
+│   │   ├── c - JJ bookmark create
+│   │   ├── d - JJ bookmark delete
+│   │   └── m - JJ bookmark move
+│   ├── B - JJ browse
+│   ├── d - JJ diff current buffer
+│   ├── D - JJ describe
+│   ├── e - JJ edit
+│   ├── f - JJ fetch
+│   ├── l - JJ log all
+│   ├── L - JJ log
+│   ├── n - JJ new
+│   ├── r - JJ rebase
+│   ├── R - JJ redo
+│   ├── s - JJ status
+│   ├── S - JJ squash
+│   ├── U - JJ undo
+│   ├── p (Push / PR)
+│   │   ├── l - JJ open PR listing available bookmarks
+│   │   ├── p - JJ push
 │   │   └── r - JJ open PR from bookmark in current revision or parent
-│   └── t - JJ Tug
-├── k (Kernel) (Only in Jupyter Notebook)
-│   ├── 0 - Restart Kernel
-│   ├── a - Insert Cell Above
-│   ├── b - Insert Cell Below
-│   ├── c - Clear Current Cell Output
-│   ├── C - Clear All Outputs
-│   ├── f - Toggle Cell Fold
-│   ├── h - Inspect Variable at Cursor
-│   ├── H - Toggle Auto-Hover
-│   ├── i - Interrupt Kernel
-│   ├── j - Open Cell Picker
-│   ├── m - Convert to Markdown Cell
-│   ├── n - Show Kernel Info
-│   ├── o - Open Cell Output in Float
-│   ├── r - Convert to Raw Cell
-│   ├── s - Start Kernel
-│   ├── S - Shutdown Kernel
-│   ├── v - Show All Variables in Cell
-│   ├── x - Execute Cell (Menu)
-│   ├── X - Execute and Next (Menu)
-│   └── y - Convert to Code Cell
+│   └── t (Tag)
+│       ├── d - JJ tag delete
+│       ├── p - JJ tag push
+│       └── s - JJ tag set
 ├── l (LSP)
-│   ├── a - Code Actions
-│   ├── d - Show Diagnostics (Line)
-│   ├── D - Show Diagnostics (Buffer)
-│   ├── f - Code Format
-│   ├── m - Toggle Code Block
-│   ├── n - Generate Docstring
-│   ├── r - Rename Symbol
-│   ├── v - Virtual Env Selector
-│   └── sp - Restart LSP
-├── L (Lazy)
-├── n (Noice)
-│   ├── a - All
-│   ├── e - Error
-│   ├── h - History
-│   ├── l - Last Message
-│   ├── m - Messages
-│   └── n - Noice Picker
-├── p (Paste)
-├── s (Search/System)
-│   ├── b - Buffers
-│   ├── c - Commands
-│   ├── d - Diagnostics (Buffer)
-│   ├── D - Diagnostics
-│   ├── h - Help Pages
-│   ├── i - Icons
-│   ├── I - Incoming Calls
-│   ├── j - JJ Picker Status
-│   ├── J - Jumps
-│   ├── k - Keymaps
-│   ├── l - LSP Info
-│   ├── L - Search for Plugin Spec
-│   ├── m - Marks
-│   ├── O - Outgoing Calls
-│   ├── p - Spelling
-│   ├── P - Pickers
-│   ├── r - Resume
-│   ├── R - Search and Replace (Grug-far)
-│   ├── s - LSP Symbols (Buffer)
-│   ├── S - LSP Symbols (Workspace)
-│   ├── t - Todo Comments
-│   ├── T - Todo/Fix Comments
+│   ├── d - LSP diagnostics
+│   ├── f - LSP format
+│   ├── m - LSP toggle code block
+│   ├── n - Generate docstring
+│   ├── r - LSP restart
+│   └── v - Virtual Env
+├── m (Map)
+│   ├── f - Map
+│   └── m - Map
+├── n - Notification
+├── P (Pack)
+│   ├── s - Pack status
+│   ├── u - Pack update
+│   └── U - Pack update (no confirmation)
+├── s (Search)
+│   ├── b - Search buffers
+│   ├── c - Search commands
+│   ├── d - Search diagnostics (buffer)
+│   ├── D - Search diagnostics
+│   ├── h - Search help pages
+│   ├── i - Search icons
+│   ├── I - Search incoming calls
+│   ├── j - Search diff files
+│   ├── J - Search jumps
+│   ├── k - Search keymaps
+│   ├── l - Search LSP info
+│   ├── m - Search marks
+│   ├── O - Search outgoing calls
+│   ├── p - Search spelling
+│   ├── P - Search pickers
+│   ├── r - Search resume
+│   ├── s - Search LSP symbols
+│   ├── S - Search LSP Symbols in workspace
+│   ├── t - Search todos
+│   ├── T - Search todo/fix
 │   ├── u - Undotree
-│   ├── v - Clipboard History
-│   ├── " - Registers
-│   ├── . - Scratch Select
-│   ├── / -
-│   └── : - Command Select
-├── S (Session)
-│   ├── d - Don't Save Current Session
-│   ├── l - Restore Last Session
-│   ├── s - Restore Session
-│   └── S - Select Session
-├── t (Tab/Toggle)
-│   ├── d - Close Tab
-│   ├── n - New Tab
-│   └── s - Tab Split
-├── u (UI Toggle)
-│   ├── b - Toggle Dark Background
-│   ├── c - Colorschemes
-│   ├── d - Toggle Diagnostics
-│   ├── D - Toggle Dim
-│   ├── g - Toggle Git Signs
-│   ├── h - Toggle Inlay Hints
-│   ├── l - Toggle Relative Number
-│   ├── L - Toggle Line Number
-│   ├── m - Markdown Preview
-│   ├── n - Noice Dismiss
-│   ├── r - Redraw / Clear hlsearch / Diff Update
-│   ├── w - Toggle Wrap
-│   ├── z - Toggle Zoom
-│   └── Z - Toggle Zen Mode
-├── x (Trouble/QuickFix)
-│   ├── l - LSP Definitions/References (Trouble)
-│   ├── L - Location List (Trouble)
-│   ├── Q - Quickfix List (Trouble)
-│   ├── s - Symbols (Trouble)
-│   ├── x - Diagnostics (Trouble)
-│   └── X - Buffer Diagnostics (Trouble)
-├── z (Zoxide)
+│   ├── v - Search clipboard history
+│   ├── " - Search registers
+│   ├── . - Search scratch
+│   ├── / - Search history
+│   └── : - Search command history
+├── t (Tab/Terminal)
+│   ├── d - Tab delete
+│   ├── f - Terminal float
+│   ├── n - Tab new
+│   ├── s - Tab split
+│   ├── t - Terminal bottom
+│   └── v - Terminal split
+├── u (UI)
+│   ├── b - Toggle background
+│   ├── c - Select colorschemes
+│   ├── d - Toggle diagnostics
+│   ├── D - Toggle dim
+│   ├── h - Toggle inlay hints
+│   ├── l - Toggle relative number
+│   ├── L - Toggle number
+│   ├── m - Markdown preview
+│   ├── n - Dismiss notifications
+│   ├── r - UI redraw
+│   ├── w - Toggle wrap
+│   ├── z - Toggle zoom
+│   └── Z - Toggle zen
+├── z - Zoxide
 ├── . - Scratch
-├── : - Command History
-├── ? - Buffer Local Keymaps
 └── / (Grep)
-    ├── b - Grep Buffers
-    ├── l - Lines
-    ├── w - Grep Word
+    ├── b - Grep buffers
+    ├── l - Grep lines
+    ├── w - Grep word
     └── / - Grep
 ```
 
@@ -521,26 +318,23 @@ For the complete list of VSCode-specific keymaps, see the **[VSCode Keymaps](#vs
 **Motion & Navigation**
 
 - `jk` - Exit insert mode
-- `s` - Flash jump/search
-- `xw` / `xr` - Flash words/resume
-- `xj` / `xk` / `xl` / `xh` - Hop navigation
+- `s` - Flash search
+- `xw` / `xr` / `xj` / `xk` / `xl` / `xh` - Flash navigation
 - `Shift+h` / `Shift+l` - Previous/next buffer
 - `Ctrl+h` / `Ctrl+j` / `Ctrl+k` / `Ctrl+l` - Navigate tmux windows
-- `gd` / `gD` / `gr` / `gI` / `gy` - Goto definition/declaration/references/implementation/type
-- `]d` / `[d` - Next/previous diagnostic
-- `]g`/ `gh` / `[g` / `gH` - Next/previous git hunk
+- `]g` / `[g` / `gh` / `gH` `]G` / `[G` - Next/previous git hunk
 
-**Text Objects**
+**Text Objects & Editing**
 
-- `ciq`, `dab`, `yiw` - Enhanced text objects
-- `gsaiw"`, `gsr'"`, `gsd'` - Surround operations
+- `ciq`, `dab`, `yiw` - Enhanced text objects (mini.ai)
+- `gsaiw"`, `gsr'"`, `gsd'` - Surround operations (mini.surround)
+- `E` / `B` - Go to end/beginning of line
 
 **Copilot**
 
-- `Tab` - Goto/Apply next edit suggestion
-- `Ctrl+y` / `Ctrl+w` - Accept Copilot suggestion/word
-- `Alt+]` / `Alt+[` - Next/previous Copilot suggestion
-- `Ctrl+]` - Dismiss Copilot suggestion
+- `Tab` - Goto/apply next edit suggestion
+- `Ctrl+y` / `Ctrl+w` - Accept suggestion/word
+- `Esc` - Dismiss suggestion
 
 **Terminal**
 
@@ -550,8 +344,7 @@ For the complete list of VSCode-specific keymaps, see the **[VSCode Keymaps](#vs
 
 ```
 <leader>
-├── <Space> (Files) - Quick open file
-├── ff / <Space> (Files) - Quick open file
+├── <Space> / ff (Files) - Quick open file
 ├── aa (UI) - Toggle auxiliary bar
 ├── b (Buffer)
 │   ├── d - Close buffer
@@ -574,14 +367,11 @@ For the complete list of VSCode-specific keymaps, see the **[VSCode Keymaps](#vs
 
 - `s` - Flash jump/search
 - `xw` / `xr` - Flash words/resume
-- `xj` / `xk` / `xl` / `xh` - Hop navigation
+- `xj` / `xk` / `xl` / `xh` - Flash navigation
 - `Shift+h` - Previous buffer
 - `Shift+l` - Next buffer
-- `Ctrl+w Ctrl+h` / `Ctrl+w Ctrl+j` / `Ctrl+w Ctrl+k` /`Ctrl+w Ctrl+l` - Navigate left/right windows (requires VSCode keybinding config)
-- `Ctrl+o` - Navigate back
-- `Ctrl+i` - Navigate forward
-- `]d` - Go to next diagnostic
-- `[d` - Go to previous diagnostic
+- `Ctrl+h/j/k/l` - Navigate windows (requires VSCode keybinding config)
+- `Ctrl+o` / `Ctrl+i` - Navigate back/forward
 
 **Editing**
 
@@ -610,12 +400,30 @@ For the complete list of VSCode-specific keymaps, see the **[VSCode Keymaps](#vs
 - `Ctrl+/` - Toggle built-in terminal
 - `Ctrl+Shift+=` - Toggle maximized panel
 
+## Try?
+
+```bash
+# Backup existing config
+mv ~/.config/nvim{,.bak}
+
+# optional but recommended
+mv ~/.local/share/nvim{,.bak}
+mv ~/.local/state/nvim{,.bak}
+mv ~/.cache/nvim{,.bak}
+
+# Clone this configuration
+jj git clone https://github.com/RicardoRyn/nvim ~/.config/nvim
+
+# Start Neovim
+nvim
+```
+
+After first launch:
+
+1. Run `:checkhealth` to verify dependencies and LSP setup.
+2. Run `:Mason` to install language servers and formatters.
+3. Customize to your needs.
+
 ---
 
-<div align="center">
-
-**⭐ If you find this config helpful, please give it a star! ⭐**
-
-**💬 Feel free to open an [issue](https://github.com/RicardoRyn/nvim/issues) or submit a [PR](https://github.com/RicardoRyn/nvim/pulls) if you have any ideas or suggestions! 💬**
-
-</div>
+Feel free to open an [issue](https://github.com/RicardoRyn/nvim/issues) or submit a [PR](https://github.com/RicardoRyn/nvim/pulls) if you have suggestions.

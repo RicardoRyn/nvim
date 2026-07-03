@@ -1,5 +1,3 @@
-if vim.g.vscode then return end
-
 require("nvim-treesitter-textobjects").setup({
   select = {
     lookahead = true,
