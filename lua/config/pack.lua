@@ -22,7 +22,6 @@ local active_specs = {
   { src = "https://github.com/FylerOrg/fyler.nvim" },
   { src = "https://github.com/folke/sidekick.nvim" },
   { src = "https://github.com/linux-cultist/venv-selector.nvim" },
-  { src = "https://github.com/kamegoro/tobira.nvim" },
   { src = "https://github.com/Wansmer/treesj" },
   -- UI
   { src = "https://github.com/starbaser/codewindow.nvim" },
