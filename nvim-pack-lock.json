@@ -5,7 +5,7 @@
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
     "blink.cmp": {
-      "rev": "67c9c3f9e3121df32d0eee406a76087a9f0a62eb",
+      "rev": "9dcb1f3a9164f10c8950a790aace576f2e89dc78",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.lib": {
@@ -25,7 +25,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "copilot.lua": {
-      "rev": "760912b5992e1d6437378a9c7f2b0cb950966cf5",
+      "rev": "d521d3959f81f4fa58870ed329754f1dd5057511",
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "flash.nvim": {
@@ -37,7 +37,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "fyler.nvim": {
-      "rev": "70e1202434a21b45649dd59ec82dc3330f79125e",
+      "rev": "00edef7415b33908d7f7e0dbc2ccdbd77e939ac4",
       "src": "https://github.com/FylerOrg/fyler.nvim"
     },
     "gitsigns.nvim": {
@@ -70,7 +70,7 @@
       "src": "https://github.com/brianhuster/live-preview.nvim"
     },
     "markview.nvim": {
-      "rev": "c363dc67ca9549270dc7da8e50b504ba439418dd",
+      "rev": "a2a07154b495367e4d609dd83c73120f1d058c75",
       "src": "https://github.com/OXY2DEV/markview.nvim"
     },
     "mason.nvim": {
@@ -118,7 +118,7 @@
       "src": "https://github.com/brenoprata10/nvim-highlight-colors"
     },
     "nvim-lspconfig": {
-      "rev": "292f44408498103c47996ff5c18fd366293840d8",
+      "rev": "d224a1920728ba129880efc700d4a0180ac4ecbb",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
