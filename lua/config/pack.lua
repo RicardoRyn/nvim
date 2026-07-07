@@ -125,7 +125,6 @@ local function sync()
   end
   if #to_delete > 0 then
     vim.schedule(function()
-      vim.notify(" Clean Up Orphaned Plugins: " .. table.concat(to_delete, ", "), vim.log.levels.INFO)
       vim.pack.del(to_delete)
     end)
   end

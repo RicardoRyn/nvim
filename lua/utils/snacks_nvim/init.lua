@@ -18,7 +18,7 @@ require("snacks").setup({
   },
   image = { enabled = not sys.is_win },
   indent = snacks_indent,
-  input = { enabled = false },  -- for uniform ui
+  input = { enabled = true },
   notifier = {
     enabled = true,
     timeout = 3000,
