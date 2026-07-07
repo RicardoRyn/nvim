@@ -189,7 +189,7 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   ├── e - Fyler
 │   ├── f - Fyler (floating)
 │   ├── r - Fyler (root path)
-│   └── s - Files explorer
+│   └── s - Snacks explorer
 ├── f (Find)
 │   ├── c - Find config file
 │   ├── f - Find files
@@ -246,9 +246,7 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   ├── n - Generate docstring
 │   ├── r - LSP restart
 │   └── v - Virtual Env
-├── m (Map)
-│   ├── f - Map
-│   └── m - Map
+├── m - Map
 ├── n - Notification
 ├── P (Pack)
 │   ├── s - Pack status
@@ -275,7 +273,7 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   ├── S - Search LSP Symbols in workspace
 │   ├── t - Search todos
 │   ├── T - Search todo/fix
-│   ├── u - Undotree
+│   ├── u - Search undotree
 │   ├── v - Search clipboard history
 │   ├── " - Search registers
 │   ├── . - Search scratch

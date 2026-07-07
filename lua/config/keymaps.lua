@@ -84,7 +84,7 @@ if not vim.g.vscode then
   vim.keymap.set("n", "<leader>su", function()
     vim.cmd([[packadd nvim.undotree]])
     require("undotree").open()
-  end, { desc = "Undotree" })
+  end, { desc = "Search undotree" })
 else
   vim.keymap.set("n", "<leader>ff", "<Cmd>lua require('vscode').call('workbench.action.quickOpenWithModes')<CR>", { desc = "Find Files" })
   vim.keymap.set("n", "<leader><space>", "<Cmd>lua require('vscode').call('workbench.action.quickOpenWithModes')<CR>", { desc = "Find Files" })

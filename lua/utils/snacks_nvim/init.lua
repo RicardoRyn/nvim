@@ -99,7 +99,7 @@ vim.keymap.set("n", "<leader>tf", function() Snacks.terminal(nil, { win = { posi
 -- ui
 vim.keymap.set("n", "<leader>n", function() Snacks.notifier.show_history() end, { desc = "Notification" })
 vim.keymap.set("n", "<leader>un", function() Snacks.notifier.hide() end, { desc = "Dismiss notifications" })
-vim.keymap.set("n", "<leader>es", function() Snacks.explorer() end, { desc = "Files explorer" })
+vim.keymap.set("n", "<leader>es", function() Snacks.explorer() end, { desc = "Snacks explorer" })
 vim.keymap.set("n", "<leader>uc", function() Snacks.picker.colorschemes() end, { desc = "Select colorschemes" })
 -- dev
 vim.keymap.set({ "n", "v" }, "<leader>Dr", function() Snacks.debug.run() end, { desc = "Snacks run lua" })

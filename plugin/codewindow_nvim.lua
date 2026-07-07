@@ -8,7 +8,6 @@ require("utils.lazy").load({
   end,
   -- stylua: ignore
   keys = {
-    { "n", "<leader>mm", function() require("codewindow").toggle_minimap() end, { desc = "Map" }, },
-    { "n", "<leader>mf", function() require("codewindow").toggle_focus() end, { desc = "Map" }, },
+    { "n", "<leader>m", function() require("codewindow").toggle_minimap() end, { desc = "Map" }, },
   },
 })
