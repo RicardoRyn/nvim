@@ -138,6 +138,17 @@ vim.api.nvim_create_autocmd({ "WinResized", "VimResized" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd("BufLeave", {
+  group = augroup,
+  callback = function(args)
+    local bufnr = args.buf
+    local state = buffer_states[bufnr]
+    if state and state.enabled then
+      sticky_header.close_header_win_for(vim.api.nvim_get_current_win())
+    end
+  end,
+})
+
 vim.api.nvim_create_autocmd("WinClosed", {
   group = augroup,
   callback = function(args)
