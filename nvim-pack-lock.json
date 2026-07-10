@@ -5,7 +5,7 @@
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
     "blink.cmp": {
-      "rev": "9dcb1f3a9164f10c8950a790aace576f2e89dc78",
+      "rev": "71dc7545c1f399c7f76eeef80efa1d8bda0ff471",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.lib": {
@@ -54,7 +54,7 @@
       "version": "'jv/3-way-merge-tool'"
     },
     "jj.nvim": {
-      "rev": "b3ac14928cc76ee160776030e0e34512fbccf9ff",
+      "rev": "b7c17af6d2f4b48afb6f3041479871b0c3067638",
       "src": "https://github.com/nicolasgb/jj.nvim"
     },
     "jjannotate.nvim": {
@@ -78,7 +78,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.ai": {
-      "rev": "2f763720771e192bdf9d2e25bfae339930ba4231",
+      "rev": "6d43e74cae75771b780a7270fec1f160613ed873",
       "src": "https://github.com/nvim-mini/mini.ai"
     },
     "mini.clue": {
@@ -90,7 +90,7 @@
       "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.surround": {
-      "rev": "19b44c1bbe4eecaf191896b8bec657d5fdd549e4",
+      "rev": "5c2a99e43b959055311a4557875985142b672af0",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
     "neogen": {

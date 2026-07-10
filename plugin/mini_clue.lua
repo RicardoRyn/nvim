@@ -59,7 +59,7 @@ miniclue.setup({
     { mode = "n", keys = "<Leader>gh", desc = "Github" },
     { mode = "n", keys = "<Leader>j", desc = "JJ" },
     { mode = "n", keys = "<Leader>l", desc = "LSP" },
-    { mode = "n", keys = "<Leader>m", desc = "Map" },
+    { mode = "n", keys = "<Leader>n", desc = "Notification" },
     { mode = "n", keys = "<Leader>P", desc = "Pack" },
     { mode = "n", keys = "<Leader>s", desc = "Search" },
     { mode = "n", keys = "<Leader>t", desc = "Tab/Terminal" },

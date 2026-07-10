@@ -18,7 +18,7 @@ require("snacks").setup({
   },
   image = { enabled = not sys.is_win },
   indent = snacks_indent,
-  input = { enabled = true },
+  input = { enabled = false }, -- for the uniform input experience
   notifier = {
     enabled = true,
     timeout = 3000,
@@ -97,7 +97,8 @@ vim.keymap.set("n", "<leader>tt", function() Snacks.terminal(nil, { win = { heig
 vim.keymap.set("n", "<leader>tv", function() Snacks.terminal(nil, { win = { position = "right" } }) end, { desc = "Terminal split" })
 vim.keymap.set("n", "<leader>tf", function() Snacks.terminal(nil, { win = { position = "float" } }) end, { desc = "Terminal float" })
 -- ui
-vim.keymap.set("n", "<leader>n", function() Snacks.notifier.show_history() end, { desc = "Notification" })
+vim.keymap.set("n", "<leader>nn", function() Snacks.notifier.show_history() end, { desc = "Notification" })
+vim.keymap.set("n", "<leader>nm", "<cmd>messages<cr>", { desc = "Messages" })
 vim.keymap.set("n", "<leader>un", function() Snacks.notifier.hide() end, { desc = "Dismiss notifications" })
 vim.keymap.set("n", "<leader>es", function() Snacks.explorer() end, { desc = "Snacks explorer" })
 vim.keymap.set("n", "<leader>uc", function() Snacks.picker.colorschemes() end, { desc = "Select colorschemes" })
