@@ -38,7 +38,8 @@ require("snacks").setup({
 require("utils.snacks_nvim.debug")
 
 -- file
-vim.keymap.set("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find files" })
+vim.keymap.set("n", "<leader><space>", function() Snacks.picker.files() end, { desc = "Find files" })
+vim.keymap.set("n", "<leader>ff", function() Snacks.picker.smart() end, { desc = "Smart find files" })
 vim.keymap.set("n", "<leader>fr", function() Snacks.picker.recent() end, { desc = "Find recent files" })
 vim.keymap.set("n", "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find config file" })
 vim.keymap.set("n", "<leader>fp", function() Snacks.picker.projects() end, { desc = "Find projects" })
@@ -51,7 +52,6 @@ vim.keymap.set("n", "<leader>/b", function() Snacks.picker.grep_buffers() end, {
 vim.keymap.set({ "n", "x" }, "<leader>/w", function() Snacks.picker.grep_word() end, { desc = "Grep word" })
 vim.keymap.set("n", "<leader>//", function() Snacks.picker.grep() end, { desc = "Grep" })
 -- search
-vim.keymap.set("n", "<leader><space>", function() Snacks.picker.smart() end, { desc = "Smart find files" })
 vim.keymap.set("n", "<leader>sb", function() Snacks.picker.buffers() end, { desc = "Search buffers" })
 vim.keymap.set("n", "<leader>sc", function() Snacks.picker.commands() end, { desc = "Search commands" })
 vim.keymap.set("n", "<leader>sD", function() Snacks.picker.diagnostics() end, { desc = "Search diagnostics" })
@@ -100,7 +100,7 @@ vim.keymap.set("n", "<leader>tf", function() Snacks.terminal(nil, { win = { posi
 vim.keymap.set("n", "<leader>nn", function() Snacks.notifier.show_history() end, { desc = "Notification" })
 vim.keymap.set("n", "<leader>nm", "<cmd>messages<cr>", { desc = "Messages" })
 vim.keymap.set("n", "<leader>un", function() Snacks.notifier.hide() end, { desc = "Dismiss notifications" })
-vim.keymap.set("n", "<leader>es", function() Snacks.explorer() end, { desc = "Snacks explorer" })
+-- vim.keymap.set("n", "<leader>es", function() Snacks.explorer() end, { desc = "Snacks explorer" })
 vim.keymap.set("n", "<leader>uc", function() Snacks.picker.colorschemes() end, { desc = "Select colorschemes" })
 -- dev
 vim.keymap.set({ "n", "v" }, "<leader>Dr", function() Snacks.debug.run() end, { desc = "Snacks run lua" })

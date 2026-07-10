@@ -115,7 +115,7 @@ end
 -- Setup keymaps for MiniFiles buffer
 M.setup_keymaps = function(buf_id)
   -- Navigation and utility
-  vim.keymap.set("n", "_", M.set_cwd, { buffer = buf_id, desc = "Set cwd" })
+  vim.keymap.set("n", "+", M.set_cwd, { buffer = buf_id, desc = "Set cwd" })
   vim.keymap.set("n", "g.", M.toggle_dotfiles, { buffer = buf_id, desc = "Toggle dotfiles" })
   vim.keymap.set("n", "gX", M.ui_open, { buffer = buf_id, desc = "OS open" })
   vim.keymap.set("n", "<leader>cc", M.yank_path, { buffer = buf_id, desc = "Copy absolute path" })
@@ -123,8 +123,8 @@ M.setup_keymaps = function(buf_id)
   vim.keymap.set("n", "<leader>cf", M.yank_fname, { buffer = buf_id, desc = "Copy file name" })
   vim.keymap.set("n", "<leader>cr", M.yank_relpath, { buffer = buf_id, desc = "Copy relative path" })
 
-  M.map_split(buf_id, "<C-s>", "belowright vertical")
-  -- M.map_split(buf_id, "<C-h>", "belowright horizontal")
+  M.map_split(buf_id, "_", "belowright vertical")
+  M.map_split(buf_id, "<C-s>", "belowright horizontal")
   M.map_split(buf_id, "<C-t>", "tab")
 
   vim.keymap.set("n", "<C-p>", M.toggle_preview, { buffer = buf_id, desc = "Toggle preview" })

@@ -26,6 +26,7 @@ require("utils.lazy").load({
         tools = {
           pi = { cmd = { "pi", "-c", "--plan" } },
           qoder = { cmd = { "qoderclicn" } },
+          zaly = { cmd = { "zaly" } },
         },
         prompts = {
           changes = "你能审查一下我的更改吗？",

@@ -13,37 +13,37 @@ require("nvim-treesitter-textobjects").setup({
   move = { set_jumps = true },
 })
 
--- select
-local ts_select = require("nvim-treesitter-textobjects.select")
-local select_maps = {
-  -- base
-  ["af"] = { query = "@function.outer", desc = "around function" },
-  ["if"] = { query = "@function.inner", desc = "inner function" },
-  ["ac"] = { query = "@class.outer", desc = "around class" },
-  ["ic"] = { query = "@class.inner", desc = "inner class" },
-  -- logic
-  ["an"] = { query = "@conditional.outer", desc = "around co[n]ditional" },
-  ["in"] = { query = "@conditional.inner", desc = "inner co[n]ditional" },
-  ["ao"] = { query = "@loop.outer", desc = "around l[o]op" },
-  ["io"] = { query = "@loop.inner", desc = "inner l[o]op" },
-  -- markdown code block
-  ["ak"] = { query = "@code_cell.outer", desc = "around code cell" },
-  ["ik"] = { query = "@code_cell.inner", desc = "inner code cell" },
-  -- assignment
-  ["aa"] = { query = "@assignment.outer", desc = "around assignment" },
-  ["ia"] = { query = "@assignment.inner", desc = "inner assignment" },
-  ["il"] = { query = "@assignment.lhs", desc = "inner Left-Hand side" },
-  ["ir"] = { query = "@assignment.rhs", desc = "inner Right-Hand side" },
-  -- scope
-  ["as"] = { query = "@local.scope", desc = "around scope", source = "locals" },
-  -- fold
-  ["az"] = { query = "@fold", desc = "around fold", source = "folds" },
-}
-for lhs, opt in pairs(select_maps) do
-  vim.keymap.set({ "x", "o" }, lhs, function()
-    ts_select.select_textobject(opt.query, opt.source or "textobjects")
-  end, { desc = opt.desc })
-end
+-- -- select
+-- local ts_select = require("nvim-treesitter-textobjects.select")
+-- local select_maps = {
+--   -- base
+--   ["af"] = { query = "@function.outer", desc = "around function" },
+--   ["if"] = { query = "@function.inner", desc = "inner function" },
+--   ["ac"] = { query = "@class.outer", desc = "around class" },
+--   ["ic"] = { query = "@class.inner", desc = "inner class" },
+--   -- logic
+--   ["an"] = { query = "@conditional.outer", desc = "around co[n]ditional" },
+--   ["in"] = { query = "@conditional.inner", desc = "inner co[n]ditional" },
+--   ["ao"] = { query = "@loop.outer", desc = "around l[o]op" },
+--   ["io"] = { query = "@loop.inner", desc = "inner l[o]op" },
+--   -- markdown code block
+--   ["ak"] = { query = "@code_cell.outer", desc = "around code cell" },
+--   ["ik"] = { query = "@code_cell.inner", desc = "inner code cell" },
+--   -- assignment
+--   ["aa"] = { query = "@assignment.outer", desc = "around assignment" },
+--   ["ia"] = { query = "@assignment.inner", desc = "inner assignment" },
+--   ["il"] = { query = "@assignment.lhs", desc = "inner Left-Hand side" },
+--   ["ir"] = { query = "@assignment.rhs", desc = "inner Right-Hand side" },
+--   -- scope
+--   ["as"] = { query = "@local.scope", desc = "around scope", source = "locals" },
+--   -- fold
+--   ["az"] = { query = "@fold", desc = "around fold", source = "folds" },
+-- }
+-- for lhs, opt in pairs(select_maps) do
+--   vim.keymap.set({ "x", "o" }, lhs, function()
+--     ts_select.select_textobject(opt.query, opt.source or "textobjects")
+--   end, { desc = opt.desc })
+-- end
 
 -- move
 local ts_move = require("nvim-treesitter-textobjects.move")

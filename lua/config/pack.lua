@@ -13,13 +13,11 @@ local active_specs = {
   { src = "https://github.com/saghen/blink.cmp" },
   { src = "https://github.com/zbirenbaum/copilot.lua" },
   { src = "https://github.com/folke/lazydev.nvim" },
-  { src = "https://github.com/nvim-mini/mini.ai" },
-  { src = "https://github.com/nvim-mini/mini.surround" },
+  { src = "https://github.com/nvim-mini/mini.nvim" },
   { src = "https://github.com/danymat/neogen" },
   -- Tools
   { src = "https://github.com/stevearc/conform.nvim" },
   { src = "https://github.com/folke/flash.nvim" },
-  { src = "https://github.com/FylerOrg/fyler.nvim" },
   { src = "https://github.com/folke/sidekick.nvim" },
   { src = "https://github.com/linux-cultist/venv-selector.nvim" },
   { src = "https://github.com/Wansmer/treesj" },
@@ -27,8 +25,6 @@ local active_specs = {
   { src = "https://github.com/starbaser/codewindow.nvim" },
   { src = "https://github.com/rebelot/heirline.nvim" },
   { src = "https://github.com/brianhuster/live-preview.nvim" },
-  { src = "https://github.com/nvim-mini/mini.clue" },
-  { src = "https://github.com/nvim-mini/mini.icons" },
   { src = "https://github.com/kevinhwang91/nvim-ufo" },
   { src = "https://github.com/hedyhli/outline.nvim" },
   { src = "https://github.com/folke/todo-comments.nvim" },
@@ -51,8 +47,8 @@ local active_specs = {
 }
 
 local disabled_specs = {
+  -- { src = "https://github.com/FylerOrg/fyler.nvim" },
   -- { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
-  -- { src = "https://github.com/nvim-mini/mini.files" },
   -- { src = "https://github.com/tjgao/quickbuf.nvim" },
   -- { src = "https://github.com/nvim-mini/mini.diff" },
   -- { src = "https://github.com/CoreyKaylor/diffbandit.nvim" },

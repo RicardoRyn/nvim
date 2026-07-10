@@ -5,7 +5,7 @@
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
     "blink.cmp": {
-      "rev": "71dc7545c1f399c7f76eeef80efa1d8bda0ff471",
+      "rev": "db8ea0b7c7ab8c8f8faa3912833c1671381e6304",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.lib": {
@@ -29,16 +29,12 @@
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "flash.nvim": {
-      "rev": "fcea7ff883235d9024dc41e638f164a450c14ca2",
+      "rev": "b6346946d10d07998efee029fb0f7a593806d0cd",
       "src": "https://github.com/folke/flash.nvim"
     },
     "friendly-snippets": {
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
       "src": "https://github.com/rafamadriz/friendly-snippets"
-    },
-    "fyler.nvim": {
-      "rev": "d243f3127a3a54e709e61561bc042d5a6f3ff1ff",
-      "src": "https://github.com/FylerOrg/fyler.nvim"
     },
     "gitsigns.nvim": {
       "rev": "eb60cc7b94c46005237fd34170d76f3a089a90aa",
@@ -54,7 +50,7 @@
       "version": "'jv/3-way-merge-tool'"
     },
     "jj.nvim": {
-      "rev": "b7c17af6d2f4b48afb6f3041479871b0c3067638",
+      "rev": "2cbb69a91409958d63544f5f6cc5267a77064fe9",
       "src": "https://github.com/nicolasgb/jj.nvim"
     },
     "jjannotate.nvim": {
@@ -70,28 +66,16 @@
       "src": "https://github.com/brianhuster/live-preview.nvim"
     },
     "markview.nvim": {
-      "rev": "41ecde17c96941fb5b7c97995a10712738e85efe",
+      "rev": "2471f4097f8561a6880a0fe05ee0f21cbc82b374",
       "src": "https://github.com/OXY2DEV/markview.nvim"
     },
     "mason.nvim": {
       "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
       "src": "https://github.com/mason-org/mason.nvim"
     },
-    "mini.ai": {
-      "rev": "6d43e74cae75771b780a7270fec1f160613ed873",
-      "src": "https://github.com/nvim-mini/mini.ai"
-    },
-    "mini.clue": {
-      "rev": "4d506660e7030a15748ab073bebfe3ed03884000",
-      "src": "https://github.com/nvim-mini/mini.clue"
-    },
-    "mini.icons": {
-      "rev": "98faae31e9be1cc054ae63485e58ceb185efcad0",
-      "src": "https://github.com/nvim-mini/mini.icons"
-    },
-    "mini.surround": {
-      "rev": "5c2a99e43b959055311a4557875985142b672af0",
-      "src": "https://github.com/nvim-mini/mini.surround"
+    "mini.nvim": {
+      "rev": "05a80b0340a92136a93ab04346cf97de3f165948",
+      "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "neogen": {
       "rev": "23e7e9f883d01289ebd90e98025acc860ea26366",
@@ -118,7 +102,7 @@
       "src": "https://github.com/brenoprata10/nvim-highlight-colors"
     },
     "nvim-lspconfig": {
-      "rev": "d224a1920728ba129880efc700d4a0180ac4ecbb",
+      "rev": "d5b6e3db4c17b0146f63a2fc47e2027a754b2cb1",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
