@@ -4,6 +4,7 @@ require("utils.lazy").load({
   setup = function()
     require("fyler").setup({
       auto_confirm_simple_mutation = true,
+      follow_current_file = false,
       extensions = {
         git = {
           enabled = true,
