@@ -2,8 +2,8 @@ local active_specs = {
   -- Core
   { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
   { src = "https://github.com/mason-org/mason.nvim" },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
-  { src = "https://github.com/neovim-treesitter/nvim-treesitter" },
   { src = "https://github.com/folke/snacks.nvim" },
   -- Dap
   { src = "https://github.com/igorlfs/nvim-dap-view" },

@@ -1,6 +1,4 @@
-if vim.g.vscode then
-  return
-end
+if vim.g.vscode then return end
 
 local ensure_installed = {
   "lua",

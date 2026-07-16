@@ -7,22 +7,22 @@ require("utils.lazy").load({
       format_on_save = false,
       stop_after_first = false,
       formatters_by_ft = {
-        -- lua
+        -- LUA
         lua = { "stylua" },
-        -- python
+        -- PYTHON
         python = { "ruff_organize_imports", "ruff_format" },
-        -- bash
+        -- BASH
         bash = { "shfmt" },
         sh = { "shfmt" },
-        -- rust
+        -- RUST
         rust = { "rustfmt" },
-        -- markdown
+        -- MARKDOWN
         markdown = { "injected", "prettierd" },
         quarto = { "injected" },
-        -- json
+        -- JSON
         json = { "prettierd" },
         jsonc = { "prettierd" },
-        -- yaml
+        -- YAML
         yaml = { "prettierd" },
         yml = { "prettierd" },
       },

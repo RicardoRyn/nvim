@@ -21,9 +21,7 @@ local my_languages = {
   "prettierd", -- 格式化
 }
 
-require("mason").setup({
-  ensure_installed = my_languages,
-})
+require("mason").setup({ ensure_installed = my_languages })
 
 local mr = require("mason-registry")
 
