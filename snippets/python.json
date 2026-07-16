@@ -26,7 +26,16 @@
   },
   "fig and ax": {
     "prefix": "figandax",
-    "body": ["fig, ax = plt.subplots(1, 1, figsize=(3, 3), constrained_layout=True)"],
+    "body": ["fig, ax = plt.subplots(1, 1, figsize=(3, 3), gridspec_kw={'hspace': 0.1, 'wspace': 0.1}, constrained_layout=True)"],
     "description": "create a figure and axis with matplotlib"
+  },
+  "x_tick_rotation": {
+    "prefix": "x_tick_rotation",
+    "body": [
+      "x_tick_rotation=${1:15},",
+      "x_label_ha=\"${2:right}\",",
+      "x_label_va=\"${3:center}\","
+    ],
+    "description": "add x tick rotation parameters"
   }
 }
