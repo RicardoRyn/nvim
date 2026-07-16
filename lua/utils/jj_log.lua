@@ -17,13 +17,15 @@ if special_mode.is_active() then
 end
 
 local jj_args = {
-  "jj", "log", "--revisions", "@",
+  "jj",
+  "log",
+  "--revisions",
+  "@",
   "--no-graph",
-  "--color",
-  "never",
   "--limit",
   "1",
-  "--template", [[
+  "--template",
+  [[
 separate(" ",
   change_id.shortest(4),
   bookmarks,
@@ -52,17 +54,26 @@ local status_symbols = {
   immutable = "🔒",
   empty = "󰱒",
 }
+
 local cached_status = ""
 local is_exiting = false
 local running_job_id = nil
 local status_request_id = 0
+local debounce_timer = nil
+local last_jj_root = nil
+
+local root_cache = {}
 
 local function get_jj_root()
   local path = vim.api.nvim_buf_get_name(0)
   if path == "" then
-    path = (vim.uv or vim.loop).cwd()
+    path = vim.uv.cwd()
   end
-  return vim.fs.root(path, ".jj")
+  local dir = vim.fs.dirname(path)
+  if root_cache[dir] == nil then
+    root_cache[dir] = vim.fs.root(path, ".jj") or false
+  end
+  return root_cache[dir] or nil
 end
 
 local function notify_status_updated()
@@ -86,31 +97,34 @@ local function stop_running_job()
   end
 end
 
-local function update_status()
+local function update_status(force)
   if is_exiting then
     return
   end
 
-  status_request_id = status_request_id + 1
-  local request_id = status_request_id
   local jj_root = get_jj_root()
 
   if not jj_root then
-    -- 取消旧任务
     stop_running_job()
-
     if cached_status ~= "" then
       cached_status = ""
+      last_jj_root = nil
       notify_status_updated()
     end
     return
   end
 
-  -- 取消旧任务
+  if not force and jj_root == last_jj_root then
+    return
+  end
+  last_jj_root = jj_root
+
+  status_request_id = status_request_id + 1
+  local request_id = status_request_id
+
   stop_running_job()
 
   running_job_id = vim.system(jj_args, { cwd = jj_root, text = true }, function(result)
-    -- 忽略旧回调
     if request_id ~= status_request_id then
       return
     end
@@ -125,12 +139,28 @@ local function update_status()
   end)
 end
 
+local function debounced_update(force)
+  if debounce_timer then
+    debounce_timer:stop()
+  end
+  debounce_timer = vim.defer_fn(function()
+    update_status(force)
+  end, 100)
+end
+
 local augroup = vim.api.nvim_create_augroup("SetupJJLog", { clear = true })
 
-vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
+vim.api.nvim_create_autocmd("BufWritePost", {
   group = augroup,
   callback = function()
-    update_status()
+    debounced_update(true)
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = augroup,
+  callback = function()
+    debounced_update(false)
   end,
 })
 
@@ -142,7 +172,9 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
   end,
 })
 
-vim.schedule(update_status)
+vim.schedule(function()
+  update_status(true)
+end)
 
 M.is_jj_repo = function()
   return get_jj_root() ~= nil

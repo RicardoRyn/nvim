@@ -14,7 +14,7 @@ require("heirline").setup({
     Statusline.work_dir.CurrentDir,
     Statusline.file_others,
     Statusline.file_name_block,
-    Statusline.jj.Diff,
+    Statusline.diff,
     Statusline.cmdline.MacroRec,
     Align,
     Align,
@@ -27,7 +27,7 @@ require("heirline").setup({
     Statusline.diagnostics,
     Statusline.cursor_position.Ruler,
     Statusline.cursor_position.ScrollBar,
-    Statusline.jj.JjLog,
+    Statusline.jj,
   },
   tabline = {
     Tabline.tabline_offset,
