@@ -10,7 +10,6 @@ local active_specs = {
   { src = "https://github.com/mfussenegger/nvim-dap" },
   { src = "https://github.com/mfussenegger/nvim-dap-python" },
   -- Edit
-  { src = "https://github.com/saghen/blink.cmp" },
   { src = "https://github.com/zbirenbaum/copilot.lua" },
   { src = "https://github.com/folke/lazydev.nvim" },
   { src = "https://github.com/nvim-mini/mini.nvim" },
@@ -23,7 +22,6 @@ local active_specs = {
   { src = "https://github.com/Wansmer/treesj" },
   { src = "https://github.com/NStefan002/screenkey.nvim" },
   -- UI
-  { src = "https://github.com/starbaser/codewindow.nvim" },
   { src = "https://github.com/rebelot/heirline.nvim" },
   { src = "https://github.com/brianhuster/live-preview.nvim" },
   { src = "https://github.com/kevinhwang91/nvim-ufo" },
@@ -39,15 +37,16 @@ local active_specs = {
   -- No config
   { src = "https://github.com/jbyuki/one-small-step-for-vimkind" },
   { src = "https://github.com/L3MON4D3/LuaSnip" },
-  { src = "https://github.com/rafamadriz/friendly-snippets" },
-  { src = "https://github.com/saghen/blink.lib" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/MunifTanjim/nui.nvim" },
   { src = "https://github.com/kevinhwang91/promise-async" },
-  { src = "https://github.com/neovim-treesitter/treesitter-parser-registry" },
 }
 
 local disabled_specs = {
+  -- { src = "https://github.com/saghen/blink.cmp" },
+  -- { src = "https://github.com/saghen/blink.lib" },
+  -- { src = "https://github.com/rafamadriz/friendly-snippets" },
+  -- { src = "https://github.com/starbaser/codewindow.nvim" },
   -- { src = "https://github.com/FylerOrg/fyler.nvim" },
   -- { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
   -- { src = "https://github.com/tjgao/quickbuf.nvim" },

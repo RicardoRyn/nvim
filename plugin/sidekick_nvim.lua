@@ -10,7 +10,7 @@ require("utils.lazy").load({
       },
       cli = {
         win = {
-          layout = "right",
+          layout = "left",
           split = {
             width = 0.34, -- set to 0 for default split width
           },
