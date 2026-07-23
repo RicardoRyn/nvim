@@ -53,7 +53,7 @@ vim.opt.shortmess:append({
   -- W = true, -- 禁止显示 "written" 消息（保存文件后的提示信息）
   -- I = true, -- 禁止显示启动时的 Neovim 版本信息
   -- C = true, -- 禁止显示完成菜单中的消息提示（更进一步隐藏补全提示信息）
-  -- c = true, -- 在使用 completion-menu 时，不显示额外的完成信息（比如 "match 1 of 2"）
+  c = true, -- 在使用 completion-menu 时，不显示额外的完成信息（比如 "match 1 of 2"）
 })
 vim.opt.updatetime = 200 -- 光标停止不动多久触发事件，可以让一些插件（比如自动保存、LSP 文本高亮或诊断提示）更及时响应
 vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
