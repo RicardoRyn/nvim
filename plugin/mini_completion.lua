@@ -3,13 +3,19 @@ require("mini.icons").tweak_lsp_kind()
 
 local MiniSnippets = require("mini.snippets")
 MiniSnippets.setup({
-    snippets = {
-        MiniSnippets.gen_loader.from_lang(),
-    },
+  snippets = {
+    MiniSnippets.gen_loader.from_lang(),
+  },
+  -- expand = {
+  --   insert = function(snippet)
+  --     return MiniSnippets.default_insert(snippet, { empty_tabstop = "" })
+  --   end,
+  -- },
 })
 MiniSnippets.start_lsp_server()
 
 require("mini.completion").setup()
+require("mini.cmdline").setup()
 
 -- -- Nvim built-in complete
 -- vim.opt.completeopt = { "fuzzy", "menuone", "noselect", "popup" }
@@ -34,14 +40,16 @@ vim.opt.pumblend = 0 -- menu transparency
 vim.opt.pumheight = 10 -- max number of items in the popup menu
 vim.opt.pumborder = "single"
 
--- Nvim built-in cmdline complete
-vim.opt.wildoptions = "fuzzy,pum"
-vim.opt.wildmode = "noselect:lastused"
-local cmdline_cmp_group = vim.api.nvim_create_augroup("NativeCmdlineCmp", { clear = true })
-vim.api.nvim_create_autocmd("CmdlineChanged", {
-  group = cmdline_cmp_group,
-  pattern = { ":", "/", "?" },
-  callback = function()
-    vim.fn.wildtrigger()
-  end,
-})
+-- -- Nvim built-in cmdline complete
+-- vim.opt.wildoptions = "fuzzy,pum"
+-- vim.opt.wildmode = "noselect:lastused"
+-- local cmdline_cmp_group = vim.api.nvim_create_augroup("NativeCmdlineCmp", { clear = true })
+-- vim.api.nvim_create_autocmd("CmdlineChanged", {
+--   group = cmdline_cmp_group,
+--   pattern = { ":", "/", "?" },
+--   callback = function()
+--     vim.fn.wildtrigger()
+--   end,
+-- })
+vim.keymap.set("c", "<Up>", "<C-p>")
+vim.keymap.set("c", "<Down>", "<C-n>")

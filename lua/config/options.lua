@@ -9,7 +9,8 @@ vim.opt.conceallevel = 0 -- 不隐藏任何文本
 vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- 同步系统的剪贴板
 vim.opt.undofile = true -- 即使关闭 Neovim，保留撤销历史
 vim.opt.undolevels = 10000 -- 最大可撤销操作数量
-vim.opt.backup = false -- 不使用备份文件
+vim.opt.backup = false -- 禁止创建备份文件
+vim.opt.writebackup = true -- 写入文件时创建备份文件
 vim.opt.isfname:append("@-@") -- 允许文件名中包含@
 
 -- Editor

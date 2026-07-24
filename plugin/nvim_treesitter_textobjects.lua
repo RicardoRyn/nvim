@@ -13,7 +13,40 @@ require("nvim-treesitter-textobjects").setup({
   move = { set_jumps = true },
 })
 
--- -- select
+-- MOVE
+local ts_move = require("nvim-treesitter-textobjects.move")
+local move_maps = {
+  ["f"] = { query = "@function.outer", desc = "function" },
+  ["c"] = { query = "@class.outer", desc = "class" },
+  ["n"] = { query = { "@conditional.inner", "@conditional.outer" }, desc = "co[n]ditional" },
+  ["o"] = { query = { "@loop.inner", "@loop.outer" }, desc = "l[o]op" },
+  ["k"] = { query = "@code_cell.outer", desc = "code cell" },
+  ["s"] = { query = "@local.scope", desc = "scope", source = "locals" },
+  ["z"] = { query = "@fold", desc = "fold", source = "folds" },
+}
+for char, opt in pairs(move_maps) do
+  local source = opt.source or "textobjects"
+  vim.keymap.set({ "n", "x", "o" }, "]" .. char, function()
+    ts_move.goto_next_start(opt.query, source)
+  end, { desc = "Next " .. opt.desc .. " start" })
+  vim.keymap.set({ "n", "x", "o" }, "]" .. char:upper(), function()
+    ts_move.goto_next_end(opt.query, source)
+  end, { desc = "Next " .. opt.desc .. " end" })
+  vim.keymap.set({ "n", "x", "o" }, "[" .. char, function()
+    ts_move.goto_previous_start(opt.query, source)
+  end, { desc = "Prev " .. opt.desc .. " start" })
+  vim.keymap.set({ "n", "x", "o" }, "[" .. char:upper(), function()
+    ts_move.goto_previous_end(opt.query, source)
+  end, { desc = "Prev " .. opt.desc .. " end" })
+end
+
+-- REPEAT
+-- f/F/t/T are handled by mini.jump
+local ts_repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
+vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
+vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
+
+-- -- SELECT
 -- local ts_select = require("nvim-treesitter-textobjects.select")
 -- local select_maps = {
 --   -- base
@@ -44,39 +77,6 @@ require("nvim-treesitter-textobjects").setup({
 --     ts_select.select_textobject(opt.query, opt.source or "textobjects")
 --   end, { desc = opt.desc })
 -- end
-
--- move
-local ts_move = require("nvim-treesitter-textobjects.move")
-local move_maps = {
-  ["f"] = { query = "@function.outer", desc = "function" },
-  ["c"] = { query = "@class.outer", desc = "class" },
-  ["n"] = { query = { "@conditional.inner", "@conditional.outer" }, desc = "co[n]ditional" },
-  ["o"] = { query = { "@loop.inner", "@loop.outer" }, desc = "l[o]op" },
-  ["k"] = { query = "@code_cell.outer", desc = "code cell" },
-  ["s"] = { query = "@local.scope", desc = "scope", source = "locals" },
-  ["z"] = { query = "@fold", desc = "fold", source = "folds" },
-}
-for char, opt in pairs(move_maps) do
-  local source = opt.source or "textobjects"
-  vim.keymap.set({ "n", "x", "o" }, "]" .. char, function()
-    ts_move.goto_next_start(opt.query, source)
-  end, { desc = "Next " .. opt.desc .. " start" })
-  vim.keymap.set({ "n", "x", "o" }, "]" .. char:upper(), function()
-    ts_move.goto_next_end(opt.query, source)
-  end, { desc = "Next " .. opt.desc .. " end" })
-  vim.keymap.set({ "n", "x", "o" }, "[" .. char, function()
-    ts_move.goto_previous_start(opt.query, source)
-  end, { desc = "Prev " .. opt.desc .. " start" })
-  vim.keymap.set({ "n", "x", "o" }, "[" .. char:upper(), function()
-    ts_move.goto_previous_end(opt.query, source)
-  end, { desc = "Prev " .. opt.desc .. " end" })
-end
-
--- repeat
-local ts_repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
-vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
-vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
--- f/F/t/T are handled by flash.nvim char mode (see plugin/flash_nvim.lua)
 
 -- -- ============================================================
 -- -- Custom: bracket & quote textobjects  ib/ab  iq/aq

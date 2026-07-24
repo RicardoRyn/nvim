@@ -16,11 +16,10 @@ local active_specs = {
   { src = "https://github.com/danymat/neogen" },
   -- Tools
   { src = "https://github.com/stevearc/conform.nvim" },
-  { src = "https://github.com/folke/flash.nvim" },
   { src = "https://github.com/folke/sidekick.nvim" },
   { src = "https://github.com/linux-cultist/venv-selector.nvim" },
-  { src = "https://github.com/Wansmer/treesj" },
   { src = "https://github.com/NStefan002/screenkey.nvim" },
+  { src = "https://github.com/folke/flash.nvim" },
   -- UI
   { src = "https://github.com/rebelot/heirline.nvim" },
   { src = "https://github.com/brianhuster/live-preview.nvim" },

@@ -23,8 +23,8 @@ if not vim.g.vscode then
   vim.keymap.set({ "n", "v" }, "k", "gk", { desc = "Previous visual line" })
   vim.keymap.set({ "n", "v" }, "gj", "j", { desc = "Next actual line" })
   vim.keymap.set({ "n", "v" }, "gk", "k", { desc = "Previous actual line" })
-  vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move lines down in visual mode" })
-  vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv", { desc = "Move lines up in visual mode" })
+  -- vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move lines down in visual mode" })
+  -- vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv", { desc = "Move lines up in visual mode" })
 
   -- Navigate
   vim.keymap.set("n", "<C-Up>", "<Cmd>resize -2<CR>", { desc = "Decrease window height" })

@@ -18,7 +18,7 @@ require("snacks").setup({
   },
   image = { enabled = not sys.is_win },
   indent = snacks_indent,
-  input = { enabled = false }, -- for the uniform input experience
+  input = { enabled = false },
   notifier = {
     enabled = true,
     timeout = 3000,
@@ -82,9 +82,9 @@ vim.keymap.set("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, { 
 vim.keymap.set("n", "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "Search LSP Symbols in workspace" })
 vim.keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Snacks goto definition" })
 vim.keymap.set("n", "gD", function() Snacks.picker.lsp_declarations() end, { desc = "Snacks goto declaration" })
-vim.keymap.set("n", "grr", function() Snacks.picker.lsp_references() end, { nowait = true, desc = "Snacks goto references" })
--- vim.keymap.set("n", "gri", function() Snacks.picker.lsp_implementations() end, { desc = "Snacks goto implementation" })
--- vim.keymap.set("n", "grt", function() Snacks.picker.lsp_type_definitions() end, { desc = "Snacks goto type definition" })
+vim.keymap.set("n", "<leader>lr", function() Snacks.picker.lsp_references() end, { nowait = true, desc = "Snacks goto references" })
+vim.keymap.set("n", "<leader>li", function() Snacks.picker.lsp_implementations() end, { desc = "Snacks goto implementation" })
+vim.keymap.set("n", "<leader>lt", function() Snacks.picker.lsp_type_definitions() end, { desc = "Snacks goto type definition" })
 -- git
 vim.keymap.set("n", "<leader>ghi", function() Snacks.picker.gh_issue() end, { desc = "GitHub Issues (open)" })
 vim.keymap.set("n", "<leader>ghI", function() Snacks.picker.gh_issue({ state = "all" }) end, { desc = "GitHub Issues (all)" })

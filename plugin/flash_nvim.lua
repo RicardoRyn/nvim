@@ -182,7 +182,9 @@ require("utils.lazy").load({
       prompt = {
         prefix = { { " FlashSearch: ", "FlashPromptIcon" } },
       },
-      search = { mode = "fuzzy" },
+      search = {
+        -- mode = "fuzzy"
+      },
       jump = {
         pos = "end",
       },
@@ -190,12 +192,8 @@ require("utils.lazy").load({
   end,
   -- stylua: ignore
   keys = {
-    { { "n", "x", "o" }, "f", "f", { remap = true } },
-    { { "n", "x", "o" }, "F", "F", { remap = true } },
-    { { "n", "x", "o" }, "t", "t", { remap = true } },
-    { { "n", "x", "o" }, "T", "T", { remap = true } },
-    { { "n", "x", "o" }, "s", function() require("flash").jump() end, { desc = "Flash" } },
-    { { "n", "x", "o" }, "S", function() require("flash").treesitter() end, { desc = "Flash Treesitter" } },
+    { { "n", "x", "o" }, "xx", function() require("flash").jump() end, { desc = "Flash" } },
+    { { "n", "x", "o" }, "X", function() require("flash").treesitter() end, { desc = "Flash Treesitter" } },
     { "o", "r", function() require("flash").remote() end, { desc = "Remote Flash" } },
     { { "o", "x" }, "R", function() require("flash").treesitter_search() end, { desc = "Treesitter Search" } },
     { { "c" }, "<c-s>", function() require("flash").toggle() end, { desc = "Toggle Flash Search" } },

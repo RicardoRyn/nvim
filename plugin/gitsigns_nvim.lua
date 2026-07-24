@@ -56,12 +56,10 @@ require("gitsigns").setup({
     -- Selection
     map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
     -- Navigation
-    map("n", "]g", function() if vim.wo.diff then vim.cmd.normal({ "]c", bang = true }) else gs.nav_hunk("next") end end, "Next hunk")
-    map("n", "gh", function() if vim.wo.diff then vim.cmd.normal({ "]c", bang = true }) else gs.nav_hunk("next") end end, "Next hunk")
-    map("n", "[g", function() if vim.wo.diff then vim.cmd.normal({ "[c", bang = true }) else gs.nav_hunk("prev") end end, "Prev hunk")
-    map("n", "gH", function() if vim.wo.diff then vim.cmd.normal({ "[c", bang = true }) else gs.nav_hunk("prev") end end, "Prev hunk")
-    map("n", "]G", function() gs.nav_hunk("last") end, "Last hunk")
-    map("n", "[G", function() gs.nav_hunk("first") end, "First hunk")
+    map("n", "]h", function() if vim.wo.diff then vim.cmd.normal({ "]c", bang = true }) else gs.nav_hunk("next") end end, "Next hunk")
+    map("n", "[h", function() if vim.wo.diff then vim.cmd.normal({ "[c", bang = true }) else gs.nav_hunk("prev") end end, "Prev hunk")
+    map("n", "]H", function() gs.nav_hunk("last") end, "Last hunk")
+    map("n", "[H", function() gs.nav_hunk("first") end, "First hunk")
     -- Blame
     map("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "Blame line")
     -- map("n", "<leader>gB", function() gs.blame() end, "Blame Buffer")
