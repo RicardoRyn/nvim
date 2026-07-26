@@ -14,11 +14,11 @@ require("utils.lazy").load({
         -- BASH
         bash = { "shfmt" },
         sh = { "shfmt" },
-        -- RUST
-        rust = { "rustfmt" },
         -- MARKDOWN
         markdown = { "injected", "prettierd" },
         quarto = { "injected" },
+        -- RUST
+        rust = { "rustfmt" },
         -- JSON
         json = { "prettierd" },
         jsonc = { "prettierd" },

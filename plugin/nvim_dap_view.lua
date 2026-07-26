@@ -1,6 +1,4 @@
-if vim.g.vscode then
-  return
-end
+if vim.g.vscode then return end
 
 local dap
 local widgets
@@ -80,18 +78,24 @@ require("utils.lazy").load({
   },
 })
 
+-- Keymaps for navigating between dap-view windows or cycling buffers if not in a dap-view window
+local function navigate_or_cycle(direction)
+  local ok, state = pcall(require, "dap-view.state")
+  if ok and state.winnr and vim.api.nvim_win_is_valid(state.winnr) then
+    require("dap-view").navigate({ count = direction, wrap = false, type = "views" })
+  else
+    require("utils.buffer_actions.order").cycle(direction)
+  end
+end
+
 local augroup = vim.api.nvim_create_augroup("SetupNvimDAPView", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup,
   pattern = { "dap-view", "dap-repl", "terminal" },
   callback = function(ev)
-    vim.keymap.set("n", "<S-h>", function()
-      require("dap-view").navigate({ count = -1, wrap = false, type = "views" })
-    end, { buffer = ev.buf, desc = "Views prev" })
-    vim.keymap.set("n", "<S-l>", function()
-      require("dap-view").navigate({ count = 1, wrap = false, type = "views" })
-    end, { buffer = ev.buf, desc = "Views next" })
+    vim.keymap.set("n", "<S-h>", function() navigate_or_cycle(-1) end, { buffer = ev.buf, desc = "Views prev" })
+    vim.keymap.set("n", "<S-l>", function() navigate_or_cycle(1) end, { buffer = ev.buf, desc = "Views next" })
   end,
 })
 
@@ -100,12 +104,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
   pattern = "*",
   callback = function(ev)
     if vim.bo[ev.buf].buftype == "terminal" then
-      vim.keymap.set("n", "<S-h>", function()
-        require("dap-view").navigate({ count = -1, wrap = false, type = "views" })
-      end, { buffer = ev.buf })
-      vim.keymap.set("n", "<S-l>", function()
-        require("dap-view").navigate({ count = 1, wrap = false, type = "views" })
-      end, { buffer = ev.buf })
+      vim.keymap.set("n", "<S-h>", function() navigate_or_cycle(-1) end, { buffer = ev.buf })
+      vim.keymap.set("n", "<S-l>", function() navigate_or_cycle(1) end, { buffer = ev.buf })
     end
   end,
 })

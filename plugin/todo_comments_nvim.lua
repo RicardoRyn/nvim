@@ -42,3 +42,13 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
     })
   end,
 })
+
+--  FIX: aaa bbb ccc
+--  TODO: aaa bbb ccc
+--  WARN: aaa bbb ccc
+--  HACK: aaa bbb ccc
+--  PERF: aaa bbb ccc
+--  TEST: aaa bbb ccc
+--  TOG: aaa bbb ccc
+--  SETTING: aaa bbb ccc
+--  NOTE: aaa bbb ccc
