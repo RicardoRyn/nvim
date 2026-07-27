@@ -1,3 +1,5 @@
+local snacks_todo = require("utils.snacks_nvim.todo")
+
 local M = {
   enabled = true,
   sources = {
@@ -71,6 +73,8 @@ local M = {
         end,
       },
     },
+    all_todos = snacks_todo.source(),
+    core_todos = snacks_todo.source({ "FIX", "TODO", "WARN", "HACK" }),
   },
 }
 

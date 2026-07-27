@@ -1,5 +1,5 @@
 local snacks_indent = require("utils.snacks_nvim.indent")
-local snacks_explorer_preview = require("utils.snacks_nvim.explorer_preview")
+local snacks_picker = require("utils.snacks_nvim.picker")
 local sys = require("utils.system")
 
 require("snacks").setup({
@@ -27,7 +27,7 @@ require("snacks").setup({
     style = "fancy",
     date_format = "%H:%M:%S",
   },
-  picker = snacks_explorer_preview,
+  picker = snacks_picker,
   quickfile = { enabled = true },
   scope = { enabled = true },
   scroll = { enabled = true },
@@ -44,8 +44,8 @@ vim.keymap.set("n", "<leader>fr", function() Snacks.picker.recent() end, { desc 
 vim.keymap.set("n", "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find config files" })
 vim.keymap.set("n", "<leader>fp", function() Snacks.picker.projects() end, { desc = "Find projects" })
 vim.keymap.set("n", "<leader>fg", function() Snacks.picker.git_files() end, { desc = "Find git files" })
-vim.keymap.set("n", "<leader>fT", function() Snacks.picker.todo_comments({ keywords = { "FIX", "TODO" }, buffers = true }) end, { desc = "Find FIX/TODO etc" })
-vim.keymap.set("n", "<leader>ft", function() Snacks.picker.todo_comments({ buffers = true }) end, { desc = "Find todo comments" })
+vim.keymap.set("n", "<leader>fT", function() Snacks.picker.pick("core_todos", { buffers = true }) end, { desc = "Find core todos" })
+vim.keymap.set("n", "<leader>ft", function() Snacks.picker.pick("all_todos", { buffers = true }) end, { desc = "Find all todos" })
 
 -- GREP
 vim.keymap.set("n", "<leader>/l", function() Snacks.picker.lines() end, { desc = "Grep lines" })
@@ -74,8 +74,8 @@ vim.keymap.set("n", "<leader>sp", function() Snacks.picker.spelling() end, { des
 vim.keymap.set("n", "<leader>sr", function() Snacks.picker.resume() end, { desc = "Search resume" })
 vim.keymap.set("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "Search symbols" })
 vim.keymap.set("n", "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "Search symbols (workspace)" })
-vim.keymap.set("n", "<leader>sT", function() Snacks.picker.todo_comments({ keywords = { "FIX", "TODO", "HACK", "WARN" } }) end, { desc = "Search FIX/TODO etc" })
-vim.keymap.set("n", "<leader>st", function() Snacks.picker.todo_comments() end, { desc = "Search todo comments" })
+vim.keymap.set("n", "<leader>sT", function() Snacks.picker.pick("core_todos") end, { desc = "Search core todos" })
+vim.keymap.set("n", "<leader>st", function() Snacks.picker.pick("all_todos") end, { desc = "Search all todos" })
 -- vim.keymap.set("n", "<leader>su", function() Snacks.picker.undo() end, { desc = "Search undotree" })
 vim.keymap.set("n", "<leader>sv", function() Snacks.picker.cliphist() end, { desc = "Search clipcliphistboard history" })
 vim.keymap.set("n", "<leader>sx", function() Snacks.picker.qflist() end, { desc = "Search qflist" })

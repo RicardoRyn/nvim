@@ -17,7 +17,6 @@ local active_specs = {
   { src = "https://github.com/zbirenbaum/copilot.lua" },
   { src = "https://github.com/folke/sidekick.nvim" },
   { src = "https://github.com/folke/flash.nvim" },
-  { src = "https://github.com/folke/todo-comments.nvim" },
   { src = "https://github.com/stevearc/conform.nvim" },
   { src = "https://github.com/linux-cultist/venv-selector.nvim" },
   { src = "https://github.com/kevinhwang91/nvim-ufo" },
@@ -38,6 +37,7 @@ local active_specs = {
 }
 
 local disabled_specs = {
+  -- { src = "https://github.com/folke/todo-comments.nvim" },
   -- { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
   -- { src = "https://tangled.org/ronshavit.com/jjannotate.nvim" },
   -- { src = "https://github.com/saghen/blink.cmp" },
