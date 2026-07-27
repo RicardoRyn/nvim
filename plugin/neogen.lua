@@ -1,6 +1,6 @@
 if vim.g.vscode then return end
 
-require("utils.lazy").load({
+require("utils.lazy").safely({
   setup = function()
     dd("Neogen setup")
     require("neogen").setup({
@@ -13,6 +13,6 @@ require("utils.lazy").load({
   end,
   -- stylua: ignore
   keys = {
-    { "n", "<leader>ln", function() require("neogen").generate() end, { desc = "Generate docstring" } },
+    { "n", "<leader>lN", function() require("neogen").generate() end, { desc = "Generate docstring" } },
   },
 })

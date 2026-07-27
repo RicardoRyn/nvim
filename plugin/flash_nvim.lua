@@ -174,9 +174,10 @@ local function two_char_jump(opts)
   })
 end
 
-require("utils.lazy").load({
+require("utils.lazy").safely({
   setup = function()
     vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#ff007c", bold = true })
+    vim.api.nvim_set_hl(0, "FlashMatch", { fg = "#7287fd" })
     require("flash").setup({
       labels = "asdghklqwertyuiopzxcvbnmfj",
       prompt = {

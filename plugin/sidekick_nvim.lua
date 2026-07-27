@@ -1,6 +1,8 @@
-if vim.g.vscode then return end
+if vim.g.vscode then
+  return
+end
 
-require("utils.lazy").load({
+require("utils.lazy").safely({
   setup = function()
     require("sidekick").setup({
       nes = {
@@ -50,80 +52,16 @@ require("utils.lazy").load({
       },
     })
   end,
+  -- stylua: ignore
   keys = {
-    {
-      "n",
-      "<tab>",
-      function()
-        if not require("sidekick").nes_jump_or_apply() then
-          return "<Tab>"
-        end
-      end,
-      { expr = true, desc = "Goto/Apply Next Edit Suggestion" },
-    },
-    {
-      { "n", "t", "i", "x" },
-      "<c-.>",
-      function()
-        require("sidekick.cli").toggle()
-      end,
-      { desc = "Sidekick toggle" },
-    },
-    {
-      "n",
-      "<leader>aa",
-      function()
-        require("sidekick.cli").toggle()
-      end,
-      { desc = "Sidekick toggle" },
-    },
-    {
-      "n",
-      "<leader>as",
-      function()
-        require("sidekick.cli").select({ filter = { installed = true } })
-      end,
-      { desc = "Sidekick select" },
-    },
-    {
-      "n",
-      "<leader>ad",
-      function()
-        require("sidekick.cli").close()
-      end,
-      { desc = "Sidekick detach" },
-    },
-    {
-      { "x", "n" },
-      "<leader>at",
-      function()
-        require("sidekick.cli").send({ msg = "{this}" })
-      end,
-      { desc = "Sidekick send this" },
-    },
-    {
-      "n",
-      "<leader>af",
-      function()
-        require("sidekick.cli").send({ msg = "{file}" })
-      end,
-      { desc = "Sidekick send file" },
-    },
-    {
-      "x",
-      "<leader>av",
-      function()
-        require("sidekick.cli").send({ msg = "{selection}" })
-      end,
-      { desc = "Sidekick send visual selection" },
-    },
-    {
-      { "n", "x" },
-      "<leader>ap",
-      function()
-        require("sidekick.cli").prompt()
-      end,
-      { desc = "Sidekick select prompt" },
-    },
+    { "n", "<tab>", function() if not require("sidekick").nes_jump_or_apply() then return "<Tab>" end end, { expr = true, desc = "Goto/Apply Next Edit Suggestion" }, },
+    { { "n", "t", "i", "x" }, "<c-.>", function() require("sidekick.cli").toggle() end, { desc = "Sidekick toggle" }, },
+    { "n", "<leader>aa", function() require("sidekick.cli").toggle() end, { desc = "Sidekick toggle" }, },
+    { "n", "<leader>as", function() require("sidekick.cli").select({ filter = { installed = true } }) end, { desc = "Sidekick select" }, },
+    { "n", "<leader>ad", function() require("sidekick.cli").close() end, { desc = "Sidekick detach" }, },
+    { { "x", "n" }, "<leader>at", function() require("sidekick.cli").send({ msg = "{this}" }) end, { desc = "Sidekick send this" }, },
+    { "n", "<leader>af", function() require("sidekick.cli").send({ msg = "{file}" }) end, { desc = "Sidekick send file" }, },
+    { "x", "<leader>av", function() require("sidekick.cli").send({ msg = "{selection}" }) end, { desc = "Sidekick send visual selection" }, },
+    { { "n", "x" }, "<leader>ap", function() require("sidekick.cli").prompt() end, { desc = "Sidekick select prompt" }, },
   },
 })

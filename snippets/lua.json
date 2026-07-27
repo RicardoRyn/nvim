@@ -1,8 +1,17 @@
 {
   "styignore": {
-    "prefix": "ignore",
+    "prefix": "styignore",
     "body": ["-- stylua: ignore"],
     "description": "Stylua ignore"
+  },
+  "safely": {
+    "prefix": "safely",
+    "body": [
+      "require(\"mini.misc\").safely(\"event:$1\", function()",
+      "  require(\"$2\").setup($3)",
+      "end)"
+    ],
+    "description": "safely"
   },
   "lazyload": {
     "prefix": "lazyload",

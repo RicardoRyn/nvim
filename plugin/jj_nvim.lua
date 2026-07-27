@@ -1,9 +1,9 @@
-if vim.g.vscode then return end
+if vim.g.vscode then
+  return
+end
 
-require("utils.lazy").load({
-  setup = function()
+require("utils.lazy").safely({ setup = function()
     require("jj").setup({
-      picker = { snacks = {} },
       cmd = {
         keymaps = {
           log = {
@@ -15,7 +15,7 @@ require("utils.lazy").load({
   end,
   -- stylua: ignore
   keys = {
-    -- { "n", "<leader>ja", function() require("jj.annotate").file() end, { desc = "JJ annotate file" } },
+    { "n", "<leader>ja", function() require("jj.annotate").file() end, { desc = "JJ annotate file" } },
     { "n", "<leader>jA", function() require("jj.cmd").abandon() end, {desc = "JJ abandon"} },
     { "n", "<leader>jbc", function() require("jj.cmd").bookmark_create() end, { desc = "JJ bookmark create" } },
     { "n", "<leader>jbd", function() require("jj.cmd").bookmark_delete() end, { desc = "JJ bookmark delete" } },

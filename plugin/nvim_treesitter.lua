@@ -1,44 +1,48 @@
-if vim.g.vscode then return end
+if vim.g.vscode then
+  return
+end
 
-local ensure_installed = {
-  "lua",
-  "python",
-  "bash",
-  "rust",
-  "markdown",
-  "markdown_inline",
-  "diff",
-  "json",
-  "css",
-  "html",
-  "javascript",
-  "latex",
-  "scss",
-  "svelte",
-  "tsx",
-  "typst",
-  "vue",
-  "regex",
-}
+require("mini.misc").safely("now", function()
+  local ensure_installed = {
+    "lua",
+    "python",
+    "bash",
+    "rust",
+    "markdown",
+    "markdown_inline",
+    "diff",
+    "json",
+    "css",
+    "html",
+    "javascript",
+    "latex",
+    "scss",
+    "svelte",
+    "tsx",
+    "typst",
+    "vue",
+    "regex",
+  }
+  require("nvim-treesitter").install(ensure_installed)
 
-require("nvim-treesitter").install(ensure_installed)
+  vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("SetupTreesitter", { clear = true }),
+    pattern = "*",
+    callback = function(args)
+      local buf = args.buf
+      local ft = vim.bo[buf].filetype
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function(args)
-    local buf = args.buf
-    local ft = vim.bo[buf].filetype
+      local lang = vim.treesitter.language.get_lang(ft)
+      if not lang then
+        return
+      end
 
-    local lang = vim.treesitter.language.get_lang(ft)
-    if not lang then
-      return
-    end
+      local ok_add, _ = pcall(vim.treesitter.language.add, lang)
+      if not ok_add then
+        return
+      end
 
-    local ok_add, _ = pcall(vim.treesitter.language.add, lang)
-    if not ok_add then
-      return
-    end
-
-    pcall(vim.treesitter.start, buf, lang)
-  end,
-})
+      pcall(vim.treesitter.start, buf, lang)
+    end,
+  })
+end)

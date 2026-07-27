@@ -1,4 +1,6 @@
-if vim.g.vscode then return end
+if vim.g.vscode then
+  return
+end
 
 local special_mode = require("utils.special_mode")
 

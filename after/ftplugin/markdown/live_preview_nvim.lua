@@ -1,4 +1,4 @@
-require("utils.lazy").load({
+require("utils.lazy").safely({
   setup = function()
     require("livepreview.config").set({
       port = 5500,

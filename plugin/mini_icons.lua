@@ -1,9 +1,7 @@
-if vim.g.vscode then return end
-
-local MiniIcons = require("mini.icons")
-MiniIcons.setup()
-
-package.preload["nvim-web-devicons"] = function()
-  MiniIcons.mock_nvim_web_devicons()
-  return package.loaded["nvim-web-devicons"]
+if vim.g.vscode then
+  return
 end
+
+require("mini.misc").safely("later", function()
+  require("mini.icons").setup()
+end)

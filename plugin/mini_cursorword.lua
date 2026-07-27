@@ -3,5 +3,5 @@ if vim.g.vscode then
 end
 
 require("mini.misc").safely("later", function()
-  require("mini.input").setup()
+  require("mini.cursorword").setup()
 end)

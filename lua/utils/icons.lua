@@ -26,7 +26,8 @@ M.comments = {
   warn = " ",
   perf = "󱎫 ",
   test = " ",
-  tog = " ",
+  tog = " ",
+  setting = " ",
   note = "󰍨 ",
 }
 

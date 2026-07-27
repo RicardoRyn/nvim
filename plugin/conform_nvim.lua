@@ -1,6 +1,8 @@
-if vim.g.vscode then return end
+if vim.g.vscode then
+  return
+end
 
-require("utils.lazy").load({
+require("utils.lazy").safely({
   setup = function()
     require("conform").setup({
       notify_on_error = false,
@@ -31,6 +33,7 @@ require("utils.lazy").load({
         latexindent = { prepend_args = { "-y=defaultIndent:'  '" } },
       },
     })
+
     require("conform").formatters.injected = {
       -- Set the options field
       options = {

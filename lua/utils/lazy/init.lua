@@ -47,7 +47,7 @@ end
 --- All triggers share a single `load` guard so setup() only runs once.
 ---
 --- Usage:
----   require("utils.lazy").load({
+---   require("utils.lazy").safely({
 ---     setup = function() require("telescope").setup({ ... }) end,
 ---     keys  = { { "n", "<leader>ff", function() ... end, { desc = "Find files" } } },
 ---     cmd   = { "Telescope" },
@@ -55,7 +55,7 @@ end
 ---
 ---@param spec LazySpec
 ---@return fun() load  Call this to force eager-loading.
-function M.load(spec)
+function M.safely(spec)
   local loaded = false
 
   local function load()

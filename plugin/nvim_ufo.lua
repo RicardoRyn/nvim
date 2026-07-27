@@ -1,11 +1,13 @@
-if vim.g.vscode then return end
+if vim.g.vscode then
+  return
+end
 
 vim.o.foldcolumn = "0"
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
-local load = require("utils.lazy").load({
+local nvim_ufo_load = require("utils.lazy").safely({
   setup = function()
     require("ufo").setup({
       preview = {
@@ -64,5 +66,5 @@ local load = require("utils.lazy").load({
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
   group = vim.api.nvim_create_augroup("SetupNvimUfo", { clear = true }),
   once = true,
-  callback = load,
+  callback = nvim_ufo_load,
 })

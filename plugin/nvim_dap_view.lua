@@ -1,9 +1,11 @@
-if vim.g.vscode then return end
+if vim.g.vscode then
+  return
+end
 
 local dap
 local widgets
 
-require("utils.lazy").load({
+require("utils.lazy").safely({
   setup = function()
     dap = require("dap")
     widgets = require("dap.ui.widgets")
@@ -34,7 +36,7 @@ require("utils.lazy").load({
       },
       windows = {
         position = "right",
-        size = 0.34,
+        size = 0.4,
         terminal = {
           position = function(pos)
             return pos == "below" and "right" or "below"

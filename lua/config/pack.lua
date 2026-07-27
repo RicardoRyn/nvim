@@ -1,47 +1,45 @@
 local active_specs = {
-  -- Core
+  -- CORE
   { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
-  { src = "https://github.com/mason-org/mason.nvim" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
+  { src = "https://github.com/mason-org/mason.nvim" },
+  { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/folke/snacks.nvim" },
-  -- Dap
-  { src = "https://github.com/igorlfs/nvim-dap-view" },
-  { src = "https://github.com/mfussenegger/nvim-dap" },
-  { src = "https://github.com/mfussenegger/nvim-dap-python" },
-  -- Edit
-  { src = "https://github.com/zbirenbaum/copilot.lua" },
-  { src = "https://github.com/folke/lazydev.nvim" },
   { src = "https://github.com/nvim-mini/mini.nvim" },
-  { src = "https://github.com/danymat/neogen" },
-  -- Tools
-  { src = "https://github.com/stevearc/conform.nvim" },
+  { src = "https://github.com/folke/lazydev.nvim" },
+  -- DAP
+  { src = "https://github.com/mfussenegger/nvim-dap" },
+  { src = "https://github.com/igorlfs/nvim-dap-view" },
+  { src = "https://github.com/mfussenegger/nvim-dap-python" },
+  { src = "https://github.com/jbyuki/one-small-step-for-vimkind" },
+  -- TOOLS
+  { src = "https://github.com/zbirenbaum/copilot.lua" },
   { src = "https://github.com/folke/sidekick.nvim" },
-  { src = "https://github.com/linux-cultist/venv-selector.nvim" },
-  { src = "https://github.com/NStefan002/screenkey.nvim" },
   { src = "https://github.com/folke/flash.nvim" },
+  { src = "https://github.com/folke/todo-comments.nvim" },
+  { src = "https://github.com/stevearc/conform.nvim" },
+  { src = "https://github.com/linux-cultist/venv-selector.nvim" },
+  { src = "https://github.com/kevinhwang91/nvim-ufo" },
+  { src = "https://github.com/kevinhwang91/promise-async" }, -- dependency for nvim-ufo
+  { src = "https://github.com/NStefan002/screenkey.nvim" },
+  { src = "https://github.com/danymat/neogen" },
+  { src = "https://github.com/L3MON4D3/LuaSnip" }, -- dependency for neogen
   -- UI
   { src = "https://github.com/rebelot/heirline.nvim" },
-  { src = "https://github.com/brianhuster/live-preview.nvim" },
-  { src = "https://github.com/kevinhwang91/nvim-ufo" },
   { src = "https://github.com/hedyhli/outline.nvim" },
-  { src = "https://github.com/folke/todo-comments.nvim" },
-  { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
+  { src = "https://github.com/brianhuster/live-preview.nvim" },
   { src = "https://github.com/OXY2DEV/markview.nvim" },
   -- VCS
   { src = "https://github.com/lewis6991/gitsigns.nvim" },
-  { src = "https://github.com/julienvincent/hunk.nvim", version = "jv/3-way-merge-tool" },
   { src = "https://github.com/nicolasgb/jj.nvim" },
-  { src = "https://tangled.org/ronshavit.com/jjannotate.nvim" },
-  -- No config
-  { src = "https://github.com/jbyuki/one-small-step-for-vimkind" },
-  { src = "https://github.com/L3MON4D3/LuaSnip" },
-  { src = "https://github.com/neovim/nvim-lspconfig" },
-  { src = "https://github.com/MunifTanjim/nui.nvim" },
-  { src = "https://github.com/kevinhwang91/promise-async" },
+  { src = "https://github.com/julienvincent/hunk.nvim", version = "jv/3-way-merge-tool" },
+  { src = "https://github.com/MunifTanjim/nui.nvim" }, -- dependency for hunk.nvim
 }
 
 local disabled_specs = {
+  -- { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
+  -- { src = "https://tangled.org/ronshavit.com/jjannotate.nvim" },
   -- { src = "https://github.com/saghen/blink.cmp" },
   -- { src = "https://github.com/saghen/blink.lib" },
   -- { src = "https://github.com/rafamadriz/friendly-snippets" },

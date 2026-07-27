@@ -1,4 +1,6 @@
-if vim.g.vscode then return end
+if vim.g.vscode then
+  return
+end
 
 local dap = require("dap")
 local dap_python = require("dap-python")
