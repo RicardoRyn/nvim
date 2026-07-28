@@ -35,7 +35,6 @@ require("mini.misc").safely("later", function()
       setting = { pattern = "() SETTING():", group = "MiniHipatternsSetting" },
       tog = { pattern = "() TOG():", group = "MiniHipatternsTog" },
       note = { pattern = "() NOTE():", group = "MiniHipatternsNote" },
-
       fix_colon = { pattern = " FIX():()", group = "MiniHipatternsFix" },
       todo_colon = { pattern = " TODO():()", group = "MiniHipatternsTodo" },
       warn_colon = { pattern = " WARN():()", group = "MiniHipatternsWarn" },
@@ -45,7 +44,6 @@ require("mini.misc").safely("later", function()
       setting_colon = { pattern = " SETTING():()", group = "MiniHipatternsSetting" },
       tog_colon = { pattern = " TOG():()", group = "MiniHipatternsTog" },
       note_colon = { pattern = " NOTE():()", group = "MiniHipatternsNote" },
-
       fix_body = { pattern = " FIX:().*()", group = "MiniHipatternsFixBody" },
       todo_body = { pattern = " TODO:().*()", group = "MiniHipatternsTodoBody" },
       warn_body = { pattern = " WARN:().*()", group = "MiniHipatternsWarnBody" },
@@ -55,7 +53,6 @@ require("mini.misc").safely("later", function()
       setting_body = { pattern = " SETTING:().*()", group = "MiniHipatternsSettingBody" },
       tog_body = { pattern = " TOG:().*()", group = "MiniHipatternsTogBody" },
       note_body = { pattern = " NOTE:().*()", group = "MiniHipatternsNoteBody" },
-
       -- Highlight hex color strings (`#rrggbb`) using that color
       hex_color = hipatterns.gen_highlighter.hex_color(),
     },

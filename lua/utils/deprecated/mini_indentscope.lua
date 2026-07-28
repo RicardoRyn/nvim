@@ -29,5 +29,5 @@ require("mini.misc").safely("later", function()
     end,
   })
 
-  require("utils.rainbow_indent").setup()
+  require("utils.mini_nvim.rainbow_indent").setup()
 end)

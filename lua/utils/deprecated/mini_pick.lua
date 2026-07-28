@@ -4,7 +4,7 @@ end
 
 require("mini.misc").safely("later", function()
   local MiniMisc = require("mini.misc")
-  local MiniPickExt = require("utils.mini_pick_ext")
+  local MiniPickExt = require("utils.mini.nvim.mini_pick")
 
   require("mini.pick").setup({
     mappings = {

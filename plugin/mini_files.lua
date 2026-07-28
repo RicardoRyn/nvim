@@ -4,7 +4,7 @@ end
 
 require("utils.lazy").safely({
   setup = function()
-    local MiniFilesExts = require("utils.mini_files_ext")
+    local MiniFilesExts = require("utils.mini_nvim.mini_files")
 
     require("mini.files").setup({
       content = {
