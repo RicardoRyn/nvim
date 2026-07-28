@@ -24,7 +24,7 @@ local M = {
   condition = function()
     return #vim.api.nvim_list_tabpages() >= 2
   end,
-  { provider = "%=" },
+  -- { provider = "%=" },
   utils.make_tablist(Tabpage),
   TabpageClose,
 }

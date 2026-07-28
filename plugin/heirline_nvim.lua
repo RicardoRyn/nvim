@@ -34,8 +34,10 @@ require("mini.misc").safely("now", function()
     },
     tabline = {
       Tabline.tabline_offset,
-      Tabline.bufferline,
       Tabline.tabpages,
+      -- TODO: 优化写法
+      { provider = "▏", hl = { fg = colors.background, bg = colors.background } },
+      Tabline.bufferline,
     },
   })
 end)

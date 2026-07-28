@@ -1,3 +1,4 @@
+-- TODO: 为每个buffer添加tab标签，实现仅在当前tab中展示
 local M = {}
 
 local special_mode = require("utils.special_mode")

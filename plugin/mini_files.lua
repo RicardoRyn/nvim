@@ -26,6 +26,8 @@ require("utils.lazy").safely({
         MiniFilesExts.setup_keymaps(args.data.buf_id)
       end,
     })
+
+    require("utils.mini_nvim.files_clue").setup()
   end,
   -- stylua: ignore
   keys = {

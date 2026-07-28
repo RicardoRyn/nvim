@@ -16,6 +16,7 @@ vim.keymap.set({ "n", "v" }, "B", "^", { desc = "Go to beginning of line" })
 
 if not vim.g.vscode then
   -- General
+  vim.keymap.set("n", "<C-s>", "<cmd>:w<cr>", { desc = "Save file" })
   vim.keymap.set("v", "<C-c>", '"+y', { desc = "Copy to system clipboard" })
   vim.keymap.set("i", "<C-v>", "<C-r>+", { noremap = true, silent = true, desc = "Paste from system clipboard" })
   vim.keymap.set({ "i" }, "jk", "<Esc>", { desc = "Exit insert mode" })
