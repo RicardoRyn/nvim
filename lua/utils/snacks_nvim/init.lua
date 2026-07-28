@@ -44,8 +44,8 @@ vim.keymap.set("n", "<leader>fr", function() Snacks.picker.recent() end, { desc 
 vim.keymap.set("n", "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find config files" })
 vim.keymap.set("n", "<leader>fp", function() Snacks.picker.projects() end, { desc = "Find projects" })
 vim.keymap.set("n", "<leader>fg", function() Snacks.picker.git_files() end, { desc = "Find git files" })
-vim.keymap.set("n", "<leader>fT", function() Snacks.picker.pick("core_todos", { buffers = true }) end, { desc = "Find core todos" })
-vim.keymap.set("n", "<leader>ft", function() Snacks.picker.pick("all_todos", { buffers = true }) end, { desc = "Find all todos" })
+vim.keymap.set("n", "<leader>fT", function() Snacks.picker.pick("core_todos", { dirs = { vim.api.nvim_buf_get_name(0) } }) end, { desc = "Find core todos" })
+vim.keymap.set("n", "<leader>ft", function() Snacks.picker.pick("all_todos", { dirs = { vim.api.nvim_buf_get_name(0) } }) end, { desc = "Find all todos" })
 
 -- GREP
 vim.keymap.set("n", "<leader>/l", function() Snacks.picker.lines() end, { desc = "Grep lines" })

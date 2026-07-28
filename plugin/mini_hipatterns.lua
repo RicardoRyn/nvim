@@ -60,11 +60,29 @@ require("mini.misc").safely("later", function()
 end)
 
 --  FIX: aaa bbb ccc
+-- aaa bbb ccc
+-- aaa bbb ccc
 --  TODO: aaa bbb ccc
+-- aaa bbb ccc
+-- aaa bbb ccc
 --  WARN: aaa bbb ccc
+-- aaa bbb ccc
+-- aaa bbb ccc
 --  HACK: aaa bbb ccc
+-- aaa bbb ccc
+-- aaa bbb ccc
 --  PERF: aaa bbb ccc
+-- aaa bbb ccc
+-- aaa bbb ccc
 --  TEST: aaa bbb ccc
+-- aaa bbb ccc
+-- aaa bbb ccc
 --  TOG: aaa bbb ccc
+-- aaa bbb ccc
+-- aaa bbb ccc
 --  SETTING: aaa bbb ccc
+-- aaa bbb ccc
+-- aaa bbb ccc
 --  NOTE: aaa bbb ccc
+-- aaa bbb ccc
+-- aaa bbb ccc
