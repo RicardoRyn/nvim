@@ -1,7 +1,8 @@
 require("mini.misc").safely("later", function()
+  local MiniAi = require("mini.ai")
   local MiniExtra = require("mini.extra")
 
-  require("mini.ai").setup({
+  MiniAi.setup({
     custom_textobjects = {
       B = MiniExtra.gen_ai_spec.buffer(),
       D = MiniExtra.gen_ai_spec.diagnostic(),
