@@ -27,7 +27,8 @@ require("utils.lazy").safely({
         },
         tools = {
           pi = { cmd = { "pi", "-c", "--plan" } },
-          qoder = { cmd = { "qoderclicn" } },
+          qoder = { cmd = { "qodercli" } },
+          qodercn = { cmd = { "qoderclicn" } },
         },
         prompts = {
           changes = "你能审查一下我的更改吗？",

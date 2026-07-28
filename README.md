@@ -29,7 +29,6 @@ provide lightweight, self-contained logic:
 
 | Module           | Description                                               |
 | ---------------- | --------------------------------------------------------- |
-| `autopair`       | Auto-insert matching brackets, quotes, and backticks      |
 | `sessions`       | Auto-save/restore sessions per working directory          |
 | `buffer_actions` | Buffer cycle, move, close, pin — used by heirline tabline |
 | `csv_view`       | Tabular CSV viewer with aligned columns & sticky headers  |

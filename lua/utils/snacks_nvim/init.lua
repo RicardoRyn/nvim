@@ -1,5 +1,5 @@
-local snacks_indent = require("utils.snacks_nvim.indent")
-local snacks_picker = require("utils.snacks_nvim.picker")
+local indent = require("utils.snacks_nvim.indent")
+local picker = require("utils.snacks_nvim.picker")
 local sys = require("utils.system")
 
 require("snacks").setup({
@@ -17,7 +17,7 @@ require("snacks").setup({
     end,
   },
   image = { enabled = not sys.is_win },
-  indent = snacks_indent,
+  indent = indent,
   input = { enabled = false },
   notifier = {
     enabled = true,
@@ -27,7 +27,7 @@ require("snacks").setup({
     style = "fancy",
     date_format = "%H:%M:%S",
   },
-  picker = snacks_picker,
+  picker = picker,
   quickfile = { enabled = true },
   scope = { enabled = true },
   scroll = { enabled = true },
@@ -72,8 +72,8 @@ vim.keymap.set("n", "<leader>sO", function() Snacks.picker.lsp_outgoing_calls() 
 vim.keymap.set("n", "<leader>sP", function() Snacks.picker() end, { desc = "Search pickers" })
 vim.keymap.set("n", "<leader>sp", function() Snacks.picker.spelling() end, { desc = "Search spelling" })
 vim.keymap.set("n", "<leader>sr", function() Snacks.picker.resume() end, { desc = "Search resume" })
-vim.keymap.set("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "Search symbols" })
 vim.keymap.set("n", "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "Search symbols (workspace)" })
+vim.keymap.set("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "Search symbols" })
 vim.keymap.set("n", "<leader>sT", function() Snacks.picker.pick("core_todos") end, { desc = "Search core todos" })
 vim.keymap.set("n", "<leader>st", function() Snacks.picker.pick("all_todos") end, { desc = "Search all todos" })
 -- vim.keymap.set("n", "<leader>su", function() Snacks.picker.undo() end, { desc = "Search undotree" })

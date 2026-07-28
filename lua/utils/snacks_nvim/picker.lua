@@ -1,4 +1,4 @@
-local snacks_todo = require("utils.snacks_nvim.todo")
+local todo = require("utils.snacks_nvim.todo")
 
 local M = {
   enabled = true,
@@ -10,7 +10,7 @@ local M = {
         local clamp_width = function(value)
           return value
         end
-        --
+
         local position = picker.resolved_layout.layout.position
         local rel = picker.layout.root
         local update = function(win) ---@param win snacks.win
@@ -67,14 +67,13 @@ local M = {
         preview = false, ---@diagnostic disable-line
       },
       actions = {
-        -- `<A-p>`
-        toggle_preview = function(picker) --[[Override]]
+        toggle_preview = function(picker)
           picker.preview.win:toggle()
         end,
       },
     },
-    all_todos = snacks_todo.source(),
-    core_todos = snacks_todo.source({ "FIX", "TODO", "WARN", "HACK" }),
+    all_todos = todo.source(),
+    core_todos = todo.source({ "FIX", "TODO", "WARN", "HACK" }),
   },
 }
 
