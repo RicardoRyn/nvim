@@ -4,7 +4,8 @@ end
 
 require("mini.misc").safely("now", function()
   local colors = require("utils.heirline.colors")
-  local Align = { provider = "%=" }
+  local align = { provider = "%=" }
+  local separator = { provider = "▏", hl = { fg = colors.gray, bg = colors.background  } }
   local Statusline = require("utils.heirline.statusline")
   local Tabline = require("utils.heirline.tabline")
 
@@ -19,8 +20,8 @@ require("mini.misc").safely("now", function()
       Statusline.file_name_block,
       Statusline.diff,
       Statusline.cmdline.MacroRec,
-      Align,
-      Align,
+      align,
+      align,
       Statusline.cmdline.SelectionCount,
       Statusline.cmdline.SearchCount,
       Statusline.dap_messages,
@@ -35,8 +36,7 @@ require("mini.misc").safely("now", function()
     tabline = {
       Tabline.tabline_offset,
       Tabline.tabpages,
-      -- TODO: 优化写法
-      { provider = "▏", hl = { fg = colors.background, bg = colors.background } },
+      separator,
       Tabline.bufferline,
     },
   })
