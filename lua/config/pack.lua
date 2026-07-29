@@ -154,6 +154,9 @@ if not vim.g.vscode then
   vim.keymap.set("n", "<leader>Ps", "<cmd>PackStatus<cr>", { desc = "Pack status" })
   vim.keymap.set("n", "<leader>Pu", "<cmd>PackUpdate<cr>", { desc = "Pack update" })
   vim.keymap.set("n", "<leader>PU", "<cmd>PackUpdate!<cr>", { desc = "Pack update (no confirmation)" })
+
   -- Snacks is special, load it here for debug functionality
-  require("utils.snacks_nvim")
+  require("mini.misc").safely("now", function()
+    require("utils.snacks_nvim")
+  end)
 end

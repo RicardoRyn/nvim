@@ -23,14 +23,4 @@ function M.buf_to_name(bufnr)
   return vim.fn.fnamemodify(name, ":p")
 end
 
----@param bufnr number
-function M.close_buffer(bufnr)
-  local ok_snacks, snacks_bufdelete = pcall(Snacks, "bufdelete")
-  if ok_snacks then
-    snacks_bufdelete(bufnr)
-  else
-    pcall(vim.api.nvim_buf_delete, bufnr, { force = false })
-  end
-end
-
 return M

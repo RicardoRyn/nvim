@@ -2,7 +2,6 @@ if vim.g.vscode then return end
 
 require("utils.lazy").safely({
   setup = function()
-    dd("Neogen setup")
     require("neogen").setup({
       enable = true,
       snippet_engine = "luasnip",

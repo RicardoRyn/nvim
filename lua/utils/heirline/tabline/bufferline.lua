@@ -6,15 +6,15 @@ local FileIcon = require("utils.heirline.statusline.file_others").get_fileicon()
 local TablineBufnr = {
   provider = function(self)
     local ok, _ = pcall(require, "utils.buffer_actions")
-    if ok and require("utils.buffer_actions.state").state.is_picking then
-      return " " .. require("utils.buffer_actions.state").state.pick_labels[self.bufnr] .. ". "
+    if ok and require("utils.buffer_actions.state").is_picking then
+      return " " .. require("utils.buffer_actions.state").pick_labels[self.bufnr] .. ". "
     else
       return " " .. tostring(self.bufnr) .. ". "
     end
   end,
   hl = function()
     local ok, _ = pcall(require, "utils.buffer_actions")
-    if ok and require("utils.buffer_actions.state").state.is_picking then
+    if ok and require("utils.buffer_actions.state").is_picking then
       return { fg = colors.red, bold = true }
     else
       return { fg = utils.get_highlight("Comment").fg }
@@ -89,7 +89,7 @@ local TablineFileNameBlock = {
     callback = function(_, minwid, _, button)
       if button == "m" then -- close on mouse middle click
         vim.schedule(function()
-          vim.api.nvim_buf_delete(minwid, { force = false })
+          require("utils.buffer_actions").close(minwid)
         end)
       else
         vim.api.nvim_win_set_buf(0, minwid)
@@ -119,8 +119,7 @@ local TablineCloseButton = {
     on_click = {
       callback = function(_, minwid)
         vim.schedule(function()
-          vim.api.nvim_buf_delete(minwid, { force = false })
-          vim.cmd.redrawtabline()
+          require("utils.buffer_actions").close(minwid)
         end)
       end,
       minwid = function(self)
@@ -145,9 +144,23 @@ local bufferline_cache = {}
 
 -- this is the default function used to retrieve buffers
 local function get_bufs()
-  return vim.tbl_filter(function(bufnr)
-    return vim.api.nvim_get_option_value("buflisted", { buf = bufnr })
-  end, vim.api.nvim_list_bufs())
+  local bufs = {}
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local bufnr = vim.api.nvim_win_get_buf(win)
+    if vim.api.nvim_get_option_value("buflisted", { buf = bufnr }) then
+      local found = false
+      for _, b in ipairs(bufs) do
+        if b == bufnr then
+          found = true
+          break
+        end
+      end
+      if not found then
+        bufs[#bufs + 1] = bufnr
+      end
+    end
+  end
+  return bufs
 end
 
 local function rebuild_bufferline_cache()
@@ -176,7 +189,7 @@ local function rebuild_bufferline_cache()
 end
 
 -- setup an autocmd that updates the buflist_cache every time that buffers are added/removed
-vim.api.nvim_create_autocmd({ "VimEnter", "UIEnter", "BufAdd", "BufDelete" }, {
+vim.api.nvim_create_autocmd({ "VimEnter", "UIEnter", "BufAdd", "BufDelete", "TabEnter" }, {
   callback = function()
     vim.schedule(function()
       local bufferline = get_bufs()

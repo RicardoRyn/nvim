@@ -49,6 +49,9 @@ local Tabpage = {
 }
 
 local TabpageClose = {
+  condition = function()
+    return #vim.api.nvim_list_tabpages() >= 2
+  end,
   provider = "%999X  %X",
   hl = function()
     return { fg = utils.get_highlight("TabLine").fg }
@@ -56,10 +59,6 @@ local TabpageClose = {
 }
 
 local M = {
-  condition = function()
-    return #vim.api.nvim_list_tabpages() >= 2
-  end,
-  -- { provider = "%=" },
   utils.make_tablist(Tabpage),
   TabpageClose,
 }
