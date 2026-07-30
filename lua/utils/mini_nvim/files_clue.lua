@@ -1,4 +1,3 @@
--- TODO: 并不显示 mark 的文件路径
 ---@diagnostic disable: undefined-global, inject-field
 -- This 'extra' enables showing bookmarks and 'g' mappings from MiniFiles with MiniClue
 -- See https://github.com/nvim-mini/mini.nvim/discussions/2519
@@ -57,7 +56,9 @@ end
 local add_mark_mappings = function(buf_id)
   local state = MiniFiles.get_explorer_state()
   vim.iter(pairs(state.bookmarks)):each(function(id, bookmark)
-    local opts = { buf = buf_id, desc = bookmark.desc }
+    local path = type(bookmark.path) == 'string' and bookmark.path or ''
+    local desc = bookmark.desc and (bookmark.desc .. ' -> ' .. path) or path
+    local opts = { buf = buf_id, desc = desc }
     vim.keymap.set('n', "'" .. id, function() mark_goto(id) end, opts)
   end)
 end

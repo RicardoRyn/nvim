@@ -180,7 +180,6 @@ function M.close(bufnr)
     return
   end
 
-  -- FIX: 删除完当前buffer，就会跳到第一个buffer，而不是前一个buffer
   replace_windows_in_tab(bufnr, cur_tab)
 
   local ok_snacks, _ = pcall(Snacks.bufdelete, bufnr)

@@ -85,6 +85,7 @@ vim.keymap.set("n", '<leader>s/', function() Snacks.picker.search_history() end,
 vim.keymap.set("n", "<leader>.", function() Snacks.scratch() end, { desc = "Scratch" })
 vim.keymap.set({ "n", "v" }, "<leader>s:", function() Snacks.picker.command_history() end, { desc = "Search command history" })
 vim.keymap.set("n", "<leader>z", function() Snacks.picker.zoxide() end, { desc = "Zoxide" })
+vim.keymap.set("n", "<leader>tz", function() Snacks.picker.zoxide({ confirm = "tcd" }) end, { desc = "Tab zoxide" })
 
 -- LSP
 vim.keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Snacks goto definition" })
