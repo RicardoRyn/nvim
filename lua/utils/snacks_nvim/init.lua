@@ -22,7 +22,7 @@ require("snacks").setup({
   notifier = {
     enabled = true,
     timeout = 3000,
-    margin = { top = 1, right = 1, bottom = 1 },
+    margin = { top = 1, right = 0, bottom = 14 },
     top_down = false,
     style = "fancy",
     date_format = "%H:%M:%S",

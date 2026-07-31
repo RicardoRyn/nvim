@@ -13,33 +13,36 @@ require("mini.misc").safely("now", function()
     },
   })
   MiniSnippets.start_lsp_server()
-  local augroup = vim.api.nvim_create_augroup("SetupMiniSnippets", { clear = true })
-  vim.api.nvim_create_autocmd("User", {
-    group = augroup,
-    pattern = "MiniSnippetsSessionJump",
-    callback = function(args)
-      if args.data.tabstop_to == "0" then
-        MiniSnippets.session.stop()
-      end
-    end,
-  })
-  vim.api.nvim_create_autocmd("ColorScheme", {
-    group = augroup,
-    callback = function()
-      local clear =
-        { underline = false, underdouble = false, undercurl = false, underdashed = false, underdotted = false }
-      vim.api.nvim_set_hl(0, "MiniSnippetsCurrent", clear)
-      vim.api.nvim_set_hl(0, "MiniSnippetsCurrentReplace", clear)
-      vim.api.nvim_set_hl(0, "MiniSnippetsFinal", clear)
-      vim.api.nvim_set_hl(0, "MiniSnippetsUnvisited", clear)
-      vim.api.nvim_set_hl(0, "MiniSnippetsVisited", clear)
-    end,
-  })
-  local snippet_insert = function(snippet_body)
-    MiniSnippets.default_insert({ body = snippet_body }, { empty_tabstop = "", empty_tabstop_final = "" })
-  end
+
+  -- local augroup = vim.api.nvim_create_augroup("SetupMiniSnippets", { clear = true })
+  -- vim.api.nvim_create_autocmd("User", {
+  --   group = augroup,
+  --   pattern = "MiniSnippetsSessionJump",
+  --   callback = function(args)
+  --     if args.data.tabstop_to == "0" then
+  --       MiniSnippets.session.stop()
+  --     end
+  --   end,
+  -- })
+  -- vim.api.nvim_create_autocmd("ColorScheme", {
+  --   group = augroup,
+  --   callback = function()
+  --     local clear =
+  --       { underline = false, underdouble = false, undercurl = false, underdashed = false, underdotted = false }
+  --     vim.api.nvim_set_hl(0, "MiniSnippetsCurrent", clear)
+  --     vim.api.nvim_set_hl(0, "MiniSnippetsCurrentReplace", clear)
+  --     vim.api.nvim_set_hl(0, "MiniSnippetsFinal", clear)
+  --     vim.api.nvim_set_hl(0, "MiniSnippetsUnvisited", clear)
+  --     vim.api.nvim_set_hl(0, "MiniSnippetsVisited", clear)
+  --   end,
+  -- })
+
+  -- local snippet_insert = function(snippet_body)
+  --   MiniSnippets.default_insert({ body = snippet_body }, { empty_tabstop = "", empty_tabstop_final = "" })
+  -- end
+
   require("mini.completion").setup({
-    lsp_completion = { snippet_insert = snippet_insert },
+    -- lsp_completion = { snippet_insert = snippet_insert },
   })
   require("mini.cmdline").setup({
     autocorrect = {
