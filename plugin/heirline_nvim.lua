@@ -52,7 +52,7 @@ require("mini.misc").safely("now", function()
   vim.keymap.set("n", "<leader>bd", function()
     local ba = require("utils.buffer_actions")
     ba.close(vim.api.nvim_get_current_buf())
-  end, { desc = "Buffer delete (tab-local)" })
+  end, { desc = "Buffer delete" })
 
   vim.keymap.set("n", "<leader>ba", function()
     local ba = require("utils.buffer_actions")
@@ -61,7 +61,7 @@ require("mini.misc").safely("now", function()
         ba.close(b)
       end
     end
-  end, { desc = "Buffer delete all (current tab)" })
+  end, { desc = "Buffer delete all" })
 
   vim.keymap.set("n", "<leader>bo", function()
     local ba = require("utils.buffer_actions")
@@ -70,7 +70,7 @@ require("mini.misc").safely("now", function()
         ba.close(b)
       end
     end
-  end, { desc = "Buffer delete other (current tab)" })
+  end, { desc = "Buffer delete others" })
 
   vim.keymap.set("n", "<leader>bb", function() require("utils.buffer_actions").pick_close() end, { desc = "Buffer delete pick" })
   vim.keymap.set("n", "<leader>bl", function() require("utils.buffer_actions").close_in_direction("left") end, { desc = "Buffer delete left" })

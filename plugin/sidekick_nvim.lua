@@ -63,6 +63,6 @@ require("utils.lazy").safely({
     { { "x", "n" }, "<leader>at", function() require("sidekick.cli").send({ msg = "{this}" }) end, { desc = "Sidekick send this" }, },
     { "n", "<leader>af", function() require("sidekick.cli").send({ msg = "{file}" }) end, { desc = "Sidekick send file" }, },
     { "x", "<leader>av", function() require("sidekick.cli").send({ msg = "{selection}" }) end, { desc = "Sidekick send visual selection" }, },
-    { { "n", "x" }, "<leader>ap", function() require("sidekick.cli").prompt() end, { desc = "Sidekick select prompt" }, },
+    { { "n", "x" }, "<leader>ap", function() require("sidekick.cli").prompt() end, { desc = "Sidekick prompt" }, },
   },
 })

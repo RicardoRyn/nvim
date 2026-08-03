@@ -12,6 +12,6 @@ require("utils.lazy").safely({
     })
   end,
   keys = {
-    { "n", "<leader>us", "<cmd>Screenkey<cr>", { desc = "Screenkey" } },
+    { "n", "<leader>us", "<cmd>Screenkey<cr>", { desc = "Toggle screenkey" } },
   },
 })
