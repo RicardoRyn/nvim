@@ -27,7 +27,6 @@ require("utils.lazy").safely({
         },
         tools = {
           pi = { cmd = { "pi", "-c" } },
-          qoder = { cmd = { "qodercli" } },
           qodercn = { cmd = { "qoderclicn" } },
         },
         prompts = {
