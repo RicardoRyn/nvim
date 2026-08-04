@@ -1,36 +1,31 @@
 local M = {}
 
--- Filter for hiding dot files
-M.filter_hide = function(fs_entry)
-  return not vim.startswith(fs_entry.name, ".")
-end
-
 -- Filter for showing all files
-M.filter_show = function()
+local function filter_show()
   return true
 end
 
--- Toggle dotfiles visibility
-M.toggle_dotfiles = function()
-  local MiniFiles = require("mini.files")
-  local show_dotfiles = not M.get_dotfiles_state()
-  local new_filter = show_dotfiles and M.filter_show or M.filter_hide
-  MiniFiles.refresh({ content = { filter = new_filter } })
-  M.set_dotfiles_state(show_dotfiles)
-end
-
 -- Get current dotfiles state
-M.get_dotfiles_state = function()
+local function get_dotfiles_state()
   return _G.mini_files_dotfiles_state or false
 end
 
 -- Set dotfiles state
-M.set_dotfiles_state = function(state)
+local function set_dotfiles_state(state)
   _G.mini_files_dotfiles_state = state
 end
 
+-- Toggle dotfiles visibility
+local function toggle_dotfiles()
+  local MiniFiles = require("mini.files")
+  local show_dotfiles = not get_dotfiles_state()
+  local new_filter = show_dotfiles and filter_show or M.filter_hide
+  MiniFiles.refresh({ content = { filter = new_filter } })
+  set_dotfiles_state(show_dotfiles)
+end
+
 -- Set current working directory to entry's parent
-M.set_cwd = function()
+local function set_cwd()
   local MiniFiles = require("mini.files")
   local path = (MiniFiles.get_fs_entry() or {}).path
   if path == nil then
@@ -40,33 +35,42 @@ M.set_cwd = function()
 end
 
 -- Open entry with system default application
-M.ui_open = function()
+local function ui_open()
   local MiniFiles = require("mini.files")
-  vim.ui.open(MiniFiles.get_fs_entry().path)
+  local entry = MiniFiles.get_fs_entry()
+  if entry == nil then
+    return vim.notify("Cursor is not on valid entry", vim.log.levels.WARN)
+  end
+  local path = vim.fs.normalize(entry.path)
+  if require("utils.system").is_win then
+    os.execute('start "" "' .. path .. '"')
+  else
+    vim.ui.open(path)
+  end
 end
 
--- Copy absolute path to register
-M.yank_path = function()
+-- Copy absolute path
+local function yank_path()
   local MiniFiles = require("mini.files")
   local entry = MiniFiles.get_fs_entry() or {}
   if not entry.path then
     return vim.notify("Cursor is not on valid entry")
   end
-  vim.fn.setreg(vim.v.register, entry.path)
+  vim.fn.setreg(vim.v.register, vim.fs.normalize(entry.path))
 end
 
--- Copy directory path to register
-M.yank_dir = function()
+-- Copy directory path
+local function yank_dir()
   local MiniFiles = require("mini.files")
   local entry = MiniFiles.get_fs_entry() or {}
   if not entry.path then
     return vim.notify("Cursor is not on valid entry")
   end
-  vim.fn.setreg(vim.v.register, vim.fs.dirname(entry.path))
+  vim.fn.setreg(vim.v.register, vim.fs.normalize(vim.fs.dirname(entry.path)))
 end
 
--- Copy file name to register
-M.yank_fname = function()
+-- Copy file name
+local function yank_fname()
   local MiniFiles = require("mini.files")
   local entry = MiniFiles.get_fs_entry() or {}
   if not entry.name then
@@ -75,20 +79,28 @@ M.yank_fname = function()
   vim.fn.setreg(vim.v.register, entry.name)
 end
 
--- Copy relative path to register
-M.yank_relpath = function()
+-- Copy file name without extension
+local function yank_fname_no_ext()
+  local MiniFiles = require("mini.files")
+  local entry = MiniFiles.get_fs_entry() or {}
+  if not entry.name then
+    return vim.notify("Cursor is not on valid entry")
+  end
+  vim.fn.setreg(vim.v.register, vim.fn.fnamemodify(entry.name, ":r"))
+end
+
+-- Copy relative path
+local function yank_relpath()
   local MiniFiles = require("mini.files")
   local entry = MiniFiles.get_fs_entry() or {}
   if not entry.path then
     return vim.notify("Cursor is not on valid entry")
   end
-  local cwd = vim.fn.getcwd()
-  local rel = vim.fn.fnamemodify(entry.path, ":.")
-  vim.fn.setreg(vim.v.register, rel)
+  vim.fn.setreg(vim.v.register, vim.fn.fnamemodify(vim.fs.normalize(entry.path), ":."))
 end
 
 -- Split window helper
-M.map_split = function(buf_id, lhs, direction)
+local function map_split(buf_id, lhs, direction)
   local MiniFiles = require("mini.files")
   local rhs = function()
     local cur_target = MiniFiles.get_explorer_state().target_window
@@ -103,7 +115,7 @@ M.map_split = function(buf_id, lhs, direction)
 end
 
 -- Toggle preview
-M.toggle_preview = function()
+local function toggle_preview ()
   local MiniFiles = require("mini.files")
   MiniFiles.config.windows.preview = not MiniFiles.config.windows.preview
   MiniFiles.refresh({ windows = {
@@ -112,22 +124,28 @@ M.toggle_preview = function()
   } })
 end
 
+-- Filter for hiding dot files
+M.filter_hide = function(fs_entry)
+  return not vim.startswith(fs_entry.name, ".")
+end
+
 -- Setup keymaps for MiniFiles buffer
 M.setup_keymaps = function(buf_id)
   -- Navigation and utility
-  vim.keymap.set("n", "+", M.set_cwd, { buffer = buf_id, desc = "Set cwd" })
-  vim.keymap.set("n", "g.", M.toggle_dotfiles, { buffer = buf_id, desc = "Toggle dotfiles" })
-  vim.keymap.set("n", "gX", M.ui_open, { buffer = buf_id, desc = "OS open" })
-  vim.keymap.set("n", "<leader>cc", M.yank_path, { buffer = buf_id, desc = "Copy absolute path" })
-  vim.keymap.set("n", "<leader>cd", M.yank_dir, { buffer = buf_id, desc = "Copy directory path" })
-  vim.keymap.set("n", "<leader>cf", M.yank_fname, { buffer = buf_id, desc = "Copy file name" })
-  vim.keymap.set("n", "<leader>cr", M.yank_relpath, { buffer = buf_id, desc = "Copy relative path" })
+  vim.keymap.set("n", "+", set_cwd, { buffer = buf_id, desc = "Set cwd" })
+  vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id, desc = "Toggle dotfiles" })
+  vim.keymap.set("n", "gX", ui_open, { buffer = buf_id, desc = "OS open" })
+  vim.keymap.set("n", "<leader>cc", yank_path, { buffer = buf_id, desc = "Copy absolute path" })
+  vim.keymap.set("n", "<leader>cd", yank_dir, { buffer = buf_id, desc = "Copy directory path" })
+  vim.keymap.set("n", "<leader>cf", yank_fname, { buffer = buf_id, desc = "Copy file name" })
+  vim.keymap.set("n", "<leader>cn", yank_fname_no_ext, { buffer = buf_id, desc = "Copy file name without extension" })
+  vim.keymap.set("n", "<leader>cr", yank_relpath, { buffer = buf_id, desc = "Copy relative path" })
 
-  M.map_split(buf_id, "_", "belowright vertical")
-  M.map_split(buf_id, "<C-s>", "belowright horizontal")
-  M.map_split(buf_id, "<C-t>", "tab")
+  map_split(buf_id, "_", "belowright vertical")
+  map_split(buf_id, "<C-s>", "belowright horizontal")
+  map_split(buf_id, "<C-t>", "tab")
 
-  vim.keymap.set("n", "<C-p>", M.toggle_preview, { buffer = buf_id, desc = "Toggle preview" })
+  vim.keymap.set("n", "<C-p>", toggle_preview, { buffer = buf_id, desc = "Toggle preview" })
 end
 
 return M
