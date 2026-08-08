@@ -4,7 +4,9 @@
 >
 > It's my personal setup shared for reference and inspiration.
 >
-> Neovim 0.12+.
+> Neovim 0.12+. This config relies on features introduced in 0.12:
+> the built-in `vim.pack` plugin manager and
+> the built-in `vim._core.ui2` notification UI.
 
 ![nvim](./docs/assets/nvim.png)
 
@@ -14,6 +16,8 @@
 
 Plugins are managed via Neovim's built-in `vim.pack` system.
 Plugin specs are defined in `lua/config/pack.lua`.
+Orphan plugins (installed but not declared in any spec) are
+automatically removed on startup.
 
 | Command          | Description                             |
 | ---------------- | --------------------------------------- |
@@ -22,19 +26,35 @@ Plugin specs are defined in `lua/config/pack.lua`.
 | `:PackUpdate!`   | Update plugins (skip confirmation)      |
 | `:PackDel <...>` | Remove installed plugins                |
 
+### Pre-configured LSP
+
+Five language servers are pre-configured in `lsp/` and enabled via
+`vim.lsp.enable()` (`lua/config/lsp.lua`). Install them with Mason:
+
+- `lua_ls`
+- `pyright`
+- `bashls`
+- `marksman`
+- `rust_analyzer`
+
 ### Custom Modules
 
 Some features are too simple to warrant a full plugin. These custom modules
 provide lightweight, self-contained logic:
 
-| Module           | Description                                               |
-| ---------------- | --------------------------------------------------------- |
-| `sessions`       | Auto-save/restore sessions per working directory          |
-| `buffer_actions` | Buffer cycle, move, close, pin — used by heirline tabline |
-| `csv_view`       | Tabular CSV viewer with aligned columns & sticky headers  |
-| `jj_log`         | Fetch `jj log` info for statusline display                |
-| `special_mode`   | Detect diff/merge-tool launch (e.g. jj, hunk.nvim)        |
-| `system`         | OS detection (Windows/macOS/Linux + distro)               |
+| Module           | Description                                                                 |
+| ---------------- | --------------------------------------------------------------------------- |
+| `sessions`       | Auto-save/restore sessions per working directory                            |
+| `buffer_actions` | Buffer cycle, move, close, pin — used by heirline tabline                   |
+| `csv_view`       | Tabular CSV viewer with aligned columns & sticky headers                    |
+| `heirline`       | Statusline (15+ components) & tabline (bufferline/tabpages) building blocks |
+| `lazy`           | Lightweight lazy-loading for `vim.pack` specs (keys/cmd triggers)           |
+| `mini_nvim`      | mini.nvim extensions — mini.files, mini.pick                                |
+| `snacks_nvim`    | snacks.nvim setup/extensions — pickers, indent, todos, debug tools          |
+| `icons.lua`      | Icon glyph mappings (diff, diagnostics, DAP, etc.)                          |
+| `jj_log`         | Fetch `jj log` info for statusline display                                  |
+| `special_mode`   | Detect diff/merge-tool launch (e.g. jj, hunk.nvim)                          |
+| `system`         | OS detection (Windows/macOS/Linux + distro)                                 |
 
 ### VSCode Integration
 
@@ -78,9 +98,14 @@ experience without conflicting with VSCode's native features:
 
 - **flash.nvim** - Fast cursor jumping
 - **mini.ai** - Enhanced text objects for smarter editing
+- **mini.bracketed** - Jump to previous/next targets with `[` / `]`
+- **mini.jump** - Enhanced `f`/`t` jumping with target highlighting
+- **mini.move** - Move selections and lines in any direction
+- **mini.operators** - Sort, replace, multiply, evaluate text
+- **mini.pairs** - Auto-close brackets and quotes
+- **mini.splitjoin** - Code splitting and joining
 - **mini.surround** - Quick surround operations (add/delete/change)
 - **nvim-treesitter-textobjects** - Treesitter-based text objects
-- **treesj** - Code splitting and joining utilities
 
 For the complete list of VSCode-specific keymaps, see [VSCode Keymaps](#vscode-keymaps) below.
 
@@ -97,6 +122,7 @@ For the complete list of VSCode-specific keymaps, see [VSCode Keymaps](#vscode-k
 │   ├── config/               # Core configuration
 │   │   ├── autocmds.lua      # Auto commands
 │   │   ├── keymaps.lua       # Key mappings
+│   │   ├── lsp.lua           # LSP servers enable + LspAttach keymaps
 │   │   ├── options.lua       # Neovim options
 │   │   └── pack.lua          # vim.pack plugin specs
 │   │
@@ -108,19 +134,19 @@ For the complete list of VSCode-specific keymaps, see [VSCode Keymaps](#vscode-k
 │       ├── csv_view/         # CSV column-aligned view
 │       ├── heirline/         # Heirline statusline/tabline components
 │       ├── lazy/             # Lightweight lazy-loading for vim.pack
+│       ├── mini_nvim/        # mini.nvim extensions (mini.files, mini.pick)
 │       ├── snacks_nvim/      # Snacks.nvim configuration
 │       ├── icons.lua         # Icon mappings
 │       ├── jj_log.lua        # JJ log helpers
-│       ├── mini_files_ext.lua# Mini.files extensions
-│       ├── special_mode.lua  # Special mode detection (e.g. jj diff)
+│       ├── special_mode.lua  # Special mode detection (e.g. jj desc, jj split by hunk.nvim)
 │       └── system.lua        # System detection (Windows/Mac/Linux)
 │
 ├── plugin/                   # Per-plugin configs + custom scripts
-│   ├── autopair.lua          # Autopair (custom)
 │   ├── sessions.lua          # Session manager (custom)
 │   └── ... (one file per plugin)
 │
-├── after/ftplugin/           # Filetype-specific settings (loaded after)
+├── ftplugin/                 # Filetype-specific settings (simple)
+├── after/                    # Filetype settings & treesitter query overrides
 ├── lsp/                      # LSP server custom configs
 └── snippets/                 # Custom snippets
 ```
@@ -160,39 +186,36 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   ├── B - Debug conditional breakpoint
 │   ├── c - Debug run to cursor
 │   ├── C - Debug clear breakpoints
-│   ├── d - Debug disconnect (terminate debuggee)
-│   ├── D - Debug disconnect
 │   ├── h - Debug hover
 │   ├── i - Debug step into
 │   ├── k - Debug step back
 │   ├── l - Debug launch OSV server
 │   ├── o - Debug step over
 │   ├── O - Debug step out
-│   ├── q - Debug terminate session
 │   ├── r - Debug restart
 │   ├── R - Debug toggle REPL
 │   ├── s - Debug start/continue
+│   ├── t - Debug terminate session
 │   ├── u - Debug toggle UI
 │   ├── v - Debug toggle virtual text
 │   └── f (Float)
 │       ├── e - Debug float expression
 │       ├── f - Debug float frames
-│       ├── s - Debug float scopes
-│       ├── S - Debug float sessions
+│       ├── s - Debug float sessions
+│       ├── S - Debug float scopes
 │       └── t - Debug float threads
 ├── D (Dev)
 │   ├── m - Snacks metrics
 │   ├── r - Snacks run lua
 │   └── s - Snacks size
 ├── e (Explorer)
-│   ├── e - Fyler
-│   ├── f - Fyler (floating)
-│   ├── r - Fyler (root path)
-│   └── s - Snacks explorer
+│   ├── e - Files (mini.files)
+│   └── f - Files in current folder
 ├── f (Find)
 │   ├── c - Find config file
 │   ├── f - Find files
 │   ├── g - Find git files
+│   ├── m - Find smart (recent + fuzzy)
 │   ├── p - Find projects
 │   ├── r - Find recent files
 │   ├── t - Find todos in buffers
@@ -239,12 +262,15 @@ Leader key is `<Space>`, and local leader key is `\`.
 │       ├── p - JJ tag push
 │       └── s - JJ tag set
 ├── l (LSP)
-│   ├── d - LSP diagnostics
+│   ├── a - LSP code action
+│   ├── d - LSP diagnostics (float)
 │   ├── f - LSP format
-│   ├── m - LSP toggle code block
-│   ├── n - Generate docstring
-│   ├── r - LSP restart
-│   └── v - Virtual Env
+│   ├── m - Toggle split/join (mini.splitjoin)
+│   ├── n - LSP rename
+│   ├── N - Generate docstring
+│   ├── R - LSP restart
+│   ├── v - Virtual Env (Python only)
+│   └── x - LSP codelens
 ├── m - Map
 ├── n - Notification
 ├── P (Pack)
@@ -315,16 +341,16 @@ Leader key is `<Space>`, and local leader key is `\`.
 **Motion & Navigation**
 
 - `jk` - Exit insert mode
-- `s` - Flash search
+- `xx` - Flash search
 - `xw` / `xr` / `xj` / `xk` / `xl` / `xh` - Flash navigation
 - `Shift+h` / `Shift+l` - Previous/next buffer
 - `Ctrl+h` / `Ctrl+j` / `Ctrl+k` / `Ctrl+l` - Navigate tmux windows
-- `]g` / `[g` / `gh` / `gH` `]G` / `[G` - Next/previous git hunk
+- `]h` / `[h` / `gh` / `gH` `]H` / `[H` - Next/previous git hunk
 
 **Text Objects & Editing**
 
 - `ciq`, `dab`, `yiw` - Enhanced text objects (mini.ai)
-- `gsaiw"`, `gsr'"`, `gsd'` - Surround operations (mini.surround)
+- `saiw"`, `sr'"`, `sd'` - Surround operations (mini.surround)
 - `E` / `B` - Go to end/beginning of line
 
 **Copilot**
@@ -335,13 +361,14 @@ Leader key is `<Space>`, and local leader key is `\`.
 
 **Terminal**
 
-- `Ctrl+/` / `Ctrl+_` - Open terminal
+- `Ctrl+/` - Open terminal
 
 ### VSCode Keymaps
 
 ```
 <leader>
 ├── <Space> / ff (Files) - Quick open file
+├── a - Toggle activity bar
 ├── aa (UI) - Toggle auxiliary bar
 ├── b (Buffer)
 │   ├── d - Close buffer
@@ -351,34 +378,40 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   ├── r - Close buffers to the right
 │   ├── < - Move buffer left
 │   └── > - Move buffer right
+├── e - Toggle sidebar
 ├── l (LSP)
 │   ├── f - Format code
 │   ├── r - Rename symbol
 │   └── a - Code actions
-└── o (Outline)
-    ├── o - Focus outline
-    └── v - Toggle outline visibility
+├── o (Outline)
+│   ├── o - Focus outline
+│   └── v - Toggle outline visibility
+└── u (UI)
+    └── z - Toggle zen mode
 ```
 
 **Motion & Navigation**
 
-- `s` - Flash jump/search
+- `xx` - Flash jump/search
 - `xw` / `xr` - Flash words/resume
 - `xj` / `xk` / `xl` / `xh` - Flash navigation
 - `Shift+h` - Previous buffer
 - `Shift+l` - Next buffer
 - `Ctrl+h/j/k/l` - Navigate windows (requires VSCode keybinding config)
 - `Ctrl+o` / `Ctrl+i` - Navigate back/forward
+- `]d` / `[d` - Next/previous diagnostic
+- `za` - Toggle fold
 
 **Editing**
 
+- `u` / `Ctrl+r` - Undo/redo
 - `Ctrl+d` / `Ctrl+u` - Move cursor down/up 5 lines
-- `Ctrl+y` - Accept inline suggestion
+- `Ctrl+y` - Accept inline suggestion (VSCode native)
 
 **Text Objects**
 
 - `ciq`, `dab`, `yiw` - Enhanced text objects
-- `gsaiw"`, `gsr'"`, `gsd'` - Surround operations
+- `saiw"`, `sr'"`, `sd'` - Surround operations
 
 **Jupyter Notebook Cell Operations**
 
@@ -415,12 +448,21 @@ jj git clone https://github.com/RicardoRyn/nvim ~/.config/nvim
 nvim
 ```
 
+> If GitHub is slow for you, mirrors are available on
+> [Codeberg](https://codeberg.org/RicardoRyn/nvim),
+> [Tangled](https://tangled.org/ricardoryn.tngl.sh/nvim) and
+> [Gitee](https://gitee.com/RicardoRyn/nvim).
+
 After first launch:
 
 1. Run `:checkhealth` to verify dependencies and LSP setup.
 2. Run `:Mason` to install language servers and formatters.
 3. Customize to your needs.
 
+## License
+
+[MIT](LICENSE)
+
 ---
 
-Feel free to open an [issue](https://github.com/RicardoRyn/nvim/issues) or submit a [PR](https://github.com/RicardoRyn/nvim/pulls) if you have suggestions.
+Feel free to open an [issue](https://github.com/RicardoRyn/nvim/issues) or submit a [PR](https://github.com/RicardoRyn/nvim/pulls) if you have suggestions. :)
