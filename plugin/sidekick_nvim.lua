@@ -26,6 +26,7 @@ require("utils.lazy").safely({
           enabled = false,
         },
         tools = {
+          dsh = { cmd = { "dsh", "--profile", "dsh-tui" } },
           pi = { cmd = { "pi", "-c" } },
           qodercn = { cmd = { "qoderclicn" } },
         },

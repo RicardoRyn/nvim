@@ -3,7 +3,7 @@ local picker = require("utils.snacks_nvim.picker")
 local sys = require("utils.system")
 
 require("snacks").setup({
-  bigfile = { enabled = true },
+  bigfile = { enabled = false },
   debug = { enabled = true },
   explorer = { enabled = false },
   gh = { enabled = true },

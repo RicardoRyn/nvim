@@ -47,5 +47,15 @@
       "################################################################################"
     ],
     "description": "Setting section"
+  },
+  "savefig": {
+    "prefix": "savefig",
+    "body": ["fig.savefig(rf'$1', dpi=300)"],
+    "description": "Setting section"
+  },
+  "to_csv": {
+    "prefix": "tocsv",
+    "body": ["df.to_csv('rm_rjx.csv', index=False)"],
+    "description": "Save dataframe to csv"
   }
 }

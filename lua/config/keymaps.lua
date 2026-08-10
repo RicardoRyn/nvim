@@ -2,8 +2,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- Disable
-vim.keymap.set({ "n", "v" }, "x", "<Nop>", { desc = "Reserved for hop.nvim" })
-vim.keymap.set({ "n", "v" }, "s", "<Nop>", { desc = "Reserved for persistence.nvim" })
+vim.keymap.set({ "n", "v" }, "x", "<Nop>", { desc = "Disable x in normal mode" })
+vim.keymap.set({ "n", "v" }, "s", "<Nop>", { desc = "Disable s in normal mode" })
 vim.keymap.set("v", "U", "<Nop>", { desc = "Disable U in visual mode" })
 vim.keymap.set("v", "u", "<Nop>", { desc = "Disable u in visual mode" })
 
