@@ -47,7 +47,6 @@ local disabled_specs = {
   -- { src = "https://github.com/FylerOrg/fyler.nvim" },
   -- { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
   -- { src = "https://github.com/tjgao/quickbuf.nvim" },
-  -- { src = "https://github.com/nvim-mini/mini.diff" },
   -- { src = "https://github.com/CoreyKaylor/diffbandit.nvim" },
 }
 

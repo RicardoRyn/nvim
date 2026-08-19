@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       virtual_lines = false,
       underline = true,
       update_in_insert = true,
-      signs = false,
+      signs = true,
     })
 
     -- mapping
