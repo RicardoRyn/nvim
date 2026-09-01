@@ -15,6 +15,7 @@ require("mini.misc").safely("now", function()
     },
     statusline = {
       Statusline.vim_mode,
+      { provider = " " },
       Statusline.work_dir.CurrentDir,
       Statusline.file_others,
       Statusline.file_name_block,

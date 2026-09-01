@@ -52,7 +52,7 @@ local FlexWorkDir = {
 
 local CurrentDir = {
   init = function(self)
-    self.icon = "  "
+    self.icon = " "
     self.cwd = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":~:h")
   end,
   hl = function()
