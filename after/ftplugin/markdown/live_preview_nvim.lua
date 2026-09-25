@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 require("utils.lazy").safely({
   setup = function()
     require("livepreview.config").set({

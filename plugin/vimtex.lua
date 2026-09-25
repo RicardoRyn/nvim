@@ -5,6 +5,7 @@ end
 vim.g.vimtex_view_method = "general"
 vim.g.vimtex_view_general_viewer = "SumatraPDF.exe"
 vim.g.vimtex_view_general_options = "-forward-search @tex @line @pdf"
+vim.g.vimtex_syntax_enabled = 0
 
 -- vimtex 创建映射时不带 desc，mini.clue 无法显示说明。
 -- 这里在其映射建立后，从 <Plug>(vimtex-xxx) 名称自动生成 desc 并重新注册。
