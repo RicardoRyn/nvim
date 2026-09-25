@@ -3,6 +3,7 @@ vim.lsp.enable("pyright")
 vim.lsp.enable("bashls")
 vim.lsp.enable("marksman")
 vim.lsp.enable("rust_analyzer")
+vim.lsp.enable("texlab")
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)

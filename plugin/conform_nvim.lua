@@ -27,6 +27,9 @@ require("utils.lazy").safely({
         -- YAML
         yaml = { "prettierd" },
         yml = { "prettierd" },
+        -- LATEX
+        tex = { "latexindent" },
+        plaintex = { "latexindent" },
       },
       formatters = {
         miss_hit = { command = "mh_style", args = { "--fix", "$FILENAME" }, stdin = false, exit_codes = { 0, 1 } },

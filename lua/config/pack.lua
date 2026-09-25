@@ -24,6 +24,7 @@ local active_specs = {
   { src = "https://github.com/NStefan002/screenkey.nvim" },
   { src = "https://github.com/danymat/neogen" },
   { src = "https://github.com/L3MON4D3/LuaSnip" }, -- dependency for neogen
+  { src = "https://github.com/lervag/vimtex" },
   -- UI
   { src = "https://github.com/rebelot/heirline.nvim" },
   { src = "https://github.com/hedyhli/outline.nvim" },

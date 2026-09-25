@@ -22,6 +22,9 @@ require("mini.misc").safely("now", function()
     -- RUST
     "rust-analyzer",
     "codelldb",
+    -- LATEX
+    "texlab",
+    "latexindent",
   }
 
   require("mason").setup({ ensure_installed = my_languages })

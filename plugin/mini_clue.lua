@@ -14,6 +14,7 @@ require("mini.misc").safely("later", function()
       },
     },
     triggers = {
+      { mode = "n", keys = "<Localleader>" },
       -- Leader triggers
       { mode = { "n", "x" }, keys = "<Leader>" },
       -- `[` and `]` keys

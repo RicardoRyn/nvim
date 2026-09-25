@@ -120,6 +120,10 @@
     "venv-selector.nvim": {
       "rev": "cc4bb3975de8835291f9bb45889e96c6b2795fc4",
       "src": "https://github.com/linux-cultist/venv-selector.nvim"
+    },
+    "vimtex": {
+      "rev": "42dcf1699e45725bd3b366ecab2ae06f6e0f8118",
+      "src": "https://github.com/lervag/vimtex"
     }
   }
 }
