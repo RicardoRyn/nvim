@@ -71,7 +71,6 @@ local SelectionCount = {
 local M = {
   SearchCount = SearchCount,
   MacroRec = MacroRec,
-  ShowCmd = ShowCmd,
   SelectionCount = SelectionCount,
 }
 
