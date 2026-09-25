@@ -26,9 +26,7 @@ require("utils.lazy").safely({
           enabled = false,
         },
         tools = {
-          dsh = { cmd = { "dsh", "--profile", "cli" } },
           pi = { cmd = { "pi", "-c" } },
-          qodercn = { cmd = { "qoderclicn" } },
         },
         prompts = {
           changes = "你能审查一下我的更改吗？",
