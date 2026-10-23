@@ -3,6 +3,9 @@ if vim.g.vscode then
 end
 
 require("markview").setup({
+  latex = {
+    enable = false,
+  },
   markdown_inline = {
     inline_codes = {
       enable = true,
