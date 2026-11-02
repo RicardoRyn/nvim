@@ -33,6 +33,7 @@ vim.opt.ignorecase = true -- 如果输入没有大写，则大小写不敏感
 vim.opt.smartcase = true -- 如果输入有大写，则大小写敏感
 vim.opt.timeoutlen = vim.g.vscode and 1000 or 500 -- 触发键盘提示时长
 vim.opt.spelllang = { "en" } -- 拼写检查的语言为英语（English）
+vim.opt.diffopt:append('followwrap') -- diff模式下，跟随软换行
 
 -- UI
 vim.opt.cmdheight = 0
