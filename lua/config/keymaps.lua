@@ -32,10 +32,10 @@ if not vim.g.vscode then
   vim.keymap.set("n", "<C-Down>", "<Cmd>resize +2<CR>", { desc = "Increase window height" })
   vim.keymap.set("n", "<C-Left>", "<Cmd>vertical resize -2<CR>", { desc = "Decrease window width" })
   vim.keymap.set("n", "<C-Right>", "<Cmd>vertical resize +2<CR>", { desc = "Increase window width" })
-  vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Navigate Left", remap = true })
-  vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Navigate Down", remap = true })
-  vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Navigate Up", remap = true })
-  vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Navigate Right", remap = true })
+  -- vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Navigate Left", remap = true })
+  -- vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Navigate Down", remap = true })
+  -- vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Navigate Up", remap = true })
+  -- vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Navigate Right", remap = true })
 
   -- Scroll
   local function scroll_mode(initial_key)

@@ -22,7 +22,7 @@ require("utils.lazy").safely({
           },
         },
         mux = {
-          backend = "zellij",
+          backend = "tmux",
           enabled = false,
         },
         tools = {
