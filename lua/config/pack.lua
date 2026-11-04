@@ -30,7 +30,6 @@ local active_specs = {
   { src = "https://github.com/rebelot/heirline.nvim" },
   { src = "https://github.com/hedyhli/outline.nvim" },
   { src = "https://github.com/brianhuster/live-preview.nvim" },
-  { src = "https://github.com/OXY2DEV/markview.nvim" },
   -- VCS
   { src = "https://github.com/lewis6991/gitsigns.nvim" },
   { src = "https://github.com/nicolasgb/jj.nvim" },
@@ -39,6 +38,7 @@ local active_specs = {
 }
 
 local disabled_specs = {
+  { src = "https://github.com/OXY2DEV/markview.nvim" },
   -- { src = "https://github.com/folke/todo-comments.nvim" },
   -- { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
   -- { src = "https://tangled.org/ronshavit.com/jjannotate.nvim" },

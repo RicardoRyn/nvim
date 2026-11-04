@@ -16,7 +16,10 @@ require("snacks").setup({
       vim.ui.open(url)
     end,
   },
-  image = { enabled = not sys.is_win },
+  image = {
+    enabled = not sys.is_win,
+    math = { enabled = false}
+  },
   indent = indent,
   input = { enabled = false },
   notifier = {
