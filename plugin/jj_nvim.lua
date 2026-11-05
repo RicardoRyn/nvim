@@ -2,7 +2,8 @@ if vim.g.vscode then
   return
 end
 
-require("utils.lazy").safely({ setup = function()
+require("utils.lazy").safely({
+  setup = function()
     require("jj").setup({
       cmd = {
         keymaps = {

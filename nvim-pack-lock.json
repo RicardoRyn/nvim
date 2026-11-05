@@ -13,7 +13,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "copilot.lua": {
-      "rev": "20ffcd5f1c902ad4efddfbe694f4261607fa6dcb",
+      "rev": "192b297ef37d9f6a8b889c07fb9a3dd16f1cb86f",
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "flash.nvim": {
@@ -36,6 +36,10 @@
     "jj.nvim": {
       "rev": "79be2ec0c8ba79d3e24184fc31d611245528fc67",
       "src": "https://github.com/nicolasgb/jj.nvim"
+    },
+    "kitty-scrollback.nvim": {
+      "rev": "4994c85e0f291598d0748488653c83cb698fd281",
+      "src": "https://github.com/mikesmithgh/kitty-scrollback.nvim"
     },
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
@@ -74,11 +78,11 @@
       "src": "https://github.com/mfussenegger/nvim-dap-python"
     },
     "nvim-dap-view": {
-      "rev": "b4486a6e83c45db4712849c09a76ef95b41a2133",
+      "rev": "8cfadf9e6784f0af5d5efa1e435e77d51ca14741",
       "src": "https://github.com/igorlfs/nvim-dap-view"
     },
     "nvim-lspconfig": {
-      "rev": "adfbb74472f6c231b651b650a89f414c2680fb31",
+      "rev": "cc404d425c7752f56b8eaa269107be44d888ea51",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
