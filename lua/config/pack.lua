@@ -28,6 +28,7 @@ local active_specs = {
   { src = "https://github.com/christoomey/vim-tmux-navigator" },
   { src = "https://github.com/mikesmithgh/kitty-scrollback.nvim" },
   -- UI
+  { src = "https://github.com/OXY2DEV/markview.nvim" },
   { src = "https://github.com/rebelot/heirline.nvim" },
   { src = "https://github.com/hedyhli/outline.nvim" },
   { src = "https://github.com/brianhuster/live-preview.nvim" },
@@ -39,7 +40,6 @@ local active_specs = {
 }
 
 local disabled_specs = {
-  { src = "https://github.com/OXY2DEV/markview.nvim" },
   -- { src = "https://github.com/folke/todo-comments.nvim" },
   -- { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
   -- { src = "https://tangled.org/ronshavit.com/jjannotate.nvim" },
