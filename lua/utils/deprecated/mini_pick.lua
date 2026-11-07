@@ -8,20 +8,6 @@ require("mini.misc").safely("later", function()
 
   require("mini.pick").setup({
     mappings = {
-      move_down_arrow = {
-        char = "<Down>",
-        func = function()
-          MiniPickExt.feedkeys("<C-n>")
-          vim.schedule(MiniPickExt.preview.update)
-        end,
-      },
-      move_up_arrow = {
-        char = "<Up>",
-        func = function()
-          MiniPickExt.feedkeys("<C-p>")
-          vim.schedule(MiniPickExt.preview.update)
-        end,
-      },
       scroll_side_preview_down = { char = "<S-Down>", func = function() MiniPickExt.preview.scroll("down") end },
       scroll_side_preview_up = { char = "<S-Up>", func = function() MiniPickExt.preview.scroll("up") end },
       toggle_preview = "",

@@ -1,20 +1,48 @@
 local M = {}
 
 M.preview = (function()
-  local config = { orientation = "vertical", ratio = 0.6 }
-  local state = { win_id = nil, buf_id = nil, last_item = nil, is_hidden = false }
+  local config = { orientation = "vertical", ratio = 0.6, poll_ms = 50 }
+  local state = {
+    win_id = nil,
+    buf_id = nil,
+    last_item = nil,
+    last_signature = nil,
+    is_hidden = false,
+    preview_func = nil,
+    has_preview_func = false,
+  }
   local cache = { win_config = {} }
   local scroll_map = { up = "<C-b>", down = "<C-f>", left = "zH", right = "zL" }
+  local timer = vim.uv.new_timer()
+
+  local function stop_poll()
+    if timer:is_active() then
+      timer:stop()
+    end
+  end
 
   local function reset()
+    stop_poll()
     state.win_id = nil
     state.buf_id = nil
     state.last_item = nil
+    state.last_signature = nil
     state.is_hidden = false
+    state.preview_func = nil
+    state.has_preview_func = false
     cache.win_config = {}
   end
 
   local function has_win() return state.win_id ~= nil and vim.api.nvim_win_is_valid(state.win_id) end
+
+  local function main_win()
+    local picker_state = MiniPick.get_picker_state()
+    local win_id = picker_state and picker_state.windows and picker_state.windows.main
+    if win_id == nil or not vim.api.nvim_win_is_valid(win_id) then
+      return nil
+    end
+    return win_id
+  end
 
   local function create_buf()
     state.buf_id = vim.api.nvim_create_buf(false, true)
@@ -52,16 +80,37 @@ M.preview = (function()
     close_win()
     close_buf()
     state.last_item = nil
+    state.last_signature = nil
+  end
+
+  -- `MiniPick.get_picker_opts()` deep copies the whole `opts` table (including
+  -- `source.items`), so resolve the preview function only once per picker.
+  local function get_preview_func()
+    if not state.has_preview_func then
+      local opts = MiniPick.get_picker_opts()
+      state.preview_func = opts and opts.source and opts.source.preview or nil
+      state.has_preview_func = true
+    end
+    return state.preview_func
   end
 
   ---@param item table | nil
   local function show_preview(item)
-    if item ~= nil then
-      local preview_func = MiniPick.get_picker_opts().source.preview
+    local preview_func = get_preview_func()
+    if item ~= nil and preview_func ~= nil then
       pcall(preview_func, state.buf_id, item)
     else
       vim.api.nvim_buf_set_lines(state.buf_id, 0, -1, false, {})
     end
+  end
+
+  local function render_item(item)
+    create_buf()
+    if not has_win() then
+      return
+    end
+    vim.api.nvim_win_set_buf(state.win_id, state.buf_id)
+    show_preview(item)
   end
 
   local function compute_border_size(border)
@@ -105,15 +154,72 @@ M.preview = (function()
   end
 
   local function cache_win_config()
-    local picker_state = MiniPick.get_picker_state()
-    if not (picker_state.windows and picker_state.windows.main) then
+    local win_id = main_win()
+    if win_id == nil then
       return
     end
-    local window_config = vim.api.nvim_win_get_config(picker_state.windows.main)
+    local window_config = vim.api.nvim_win_get_config(win_id)
     local keys = { "anchor", "border", "col", "height", "relative", "row", "width", "zindex" }
     for _, key in ipairs(keys) do
       cache.win_config[key] = window_config[key]
     end
+  end
+
+  local function layout()
+    local win_id = main_win()
+    if win_id == nil then
+      return
+    end
+
+    local window_config = vim.deepcopy(cache.win_config)
+    local preview_config = vim.deepcopy(cache.win_config)
+    compute_layout(window_config, preview_config)
+
+    vim.api.nvim_win_set_config(win_id, window_config)
+
+    if not has_win() then
+      create_buf()
+      create_win(preview_config)
+    else
+      vim.api.nvim_win_set_config(state.win_id, preview_config)
+    end
+  end
+
+  -- Moving focus inside a picker fires no event (`MiniPickMatch` only covers
+  -- query/match updates), so detect the current item from what mini.pick
+  -- renders: it keeps the window cursor on the current item's line and
+  -- re-renders the buffer on every move. The row alone is not enough, because
+  -- it stops changing once the visible range starts scrolling.
+  local function current_signature(win_id)
+    local buf_id = vim.api.nvim_win_get_buf(win_id)
+    local row = vim.api.nvim_win_get_cursor(win_id)[1]
+    local line = vim.api.nvim_buf_get_lines(buf_id, row - 1, row, false)[1] or ""
+    return row .. "|" .. line
+  end
+
+  local function refresh_item()
+    if state.is_hidden then
+      return
+    end
+    local win_id = main_win()
+    if win_id == nil or not has_win() then
+      return
+    end
+
+    local signature = current_signature(win_id)
+    if signature == state.last_signature then
+      return
+    end
+    state.last_signature = signature
+
+    local matches = MiniPick.get_picker_matches()
+    local current_item = matches and matches.current or nil
+    if current_item == state.last_item then
+      return
+    end
+    state.last_item = current_item
+
+    render_item(current_item)
   end
 
   local function update()
@@ -122,32 +228,28 @@ M.preview = (function()
       close()
       return
     end
+    layout()
+    refresh_item()
+  end
 
-    local picker_state = MiniPick.get_picker_state()
-    if not (picker_state.windows and picker_state.windows.main) then
-      return
-    end
+  -- Timers and scheduled callbacks do run while mini.pick blocks in
+  -- `getcharstr()`, which is what makes polling viable here.
+  local function start_poll()
+    stop_poll()
+    local tick = vim.schedule_wrap(function()
+      if not MiniPick.is_picker_active() then
+        stop_poll()
+        return
+      end
+      refresh_item()
+    end)
+    timer:start(config.poll_ms, config.poll_ms, tick)
+  end
 
-    local window_config = vim.deepcopy(cache.win_config)
-    local preview_config = vim.deepcopy(cache.win_config)
-    compute_layout(window_config, preview_config)
-
-    vim.api.nvim_win_set_config(picker_state.windows.main, window_config)
-
-    if not has_win() then
-      create_buf()
-      create_win(preview_config)
-    else
-      vim.api.nvim_win_set_config(state.win_id, preview_config)
-    end
-
-    local current_item = MiniPick.get_picker_matches().current
-    if current_item ~= state.last_item then
-      state.last_item = current_item
-      create_buf()
-      vim.api.nvim_win_set_buf(state.win_id, state.buf_id)
-      show_preview(current_item)
-    end
+  local function start()
+    cache_win_config()
+    update()
+    start_poll()
   end
 
   local function toggle()
@@ -177,7 +279,9 @@ M.preview = (function()
     scroll = scroll,
     cache_win_config = cache_win_config,
     update = update,
+    refresh_item = refresh_item,
     toggle = toggle,
+    start = start,
     stop = stop,
   }
 end)()
@@ -187,10 +291,7 @@ local group = vim.api.nvim_create_augroup("SetupMiniPick", { clear = true })
 vim.api.nvim_create_autocmd("User", {
   pattern = "MiniPickStart",
   group = group,
-  callback = function()
-    M.preview.cache_win_config()
-    M.preview.update()
-  end,
+  callback = M.preview.start,
 })
 
 vim.api.nvim_create_autocmd("User", {
@@ -204,12 +305,6 @@ vim.api.nvim_create_autocmd("User", {
   group = group,
   callback = M.preview.stop,
 })
-
----@param keys string
-function M.feedkeys(keys)
-  keys = vim.api.nvim_replace_termcodes(keys, true, true, true)
-  vim.api.nvim_input(keys)
-end
 
 --- Project-wide grep for TODO-like keywords, rendered with a colored keyword
 --- prefix (like `MiniExtra.pickers.hipatterns`) on top of `MiniPick.builtin.grep`.
