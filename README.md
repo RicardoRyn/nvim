@@ -28,7 +28,7 @@ automatically removed on startup.
 
 ### Pre-configured LSP
 
-Five language servers are pre-configured in `lsp/` and enabled via
+Six language servers are pre-configured in `lsp/` and enabled via
 `vim.lsp.enable()` (`lua/config/lsp.lua`). Install them with Mason:
 
 - `lua_ls`
@@ -36,6 +36,7 @@ Five language servers are pre-configured in `lsp/` and enabled via
 - `bashls`
 - `marksman`
 - `rust_analyzer`
+- `texlab`
 
 ### Custom Modules
 
@@ -44,17 +45,20 @@ provide lightweight, self-contained logic:
 
 | Module           | Description                                                                 |
 | ---------------- | --------------------------------------------------------------------------- |
-| `sessions`       | Auto-save/restore sessions per working directory                            |
+| `sessions`       | Auto-save/restore sessions per working directory (lives in `plugin/`)       |
 | `buffer_actions` | Buffer cycle, move, close, pin — used by heirline tabline                   |
 | `csv_view`       | Tabular CSV viewer with aligned columns & sticky headers                    |
 | `heirline`       | Statusline (15+ components) & tabline (bufferline/tabpages) building blocks |
 | `lazy`           | Lightweight lazy-loading for `vim.pack` specs (keys/cmd triggers)           |
-| `mini_nvim`      | mini.nvim extensions — mini.files, mini.pick                                |
+| `mini_nvim`      | mini.nvim extensions — mini.files (+ clue), mini.pick, rainbow indent       |
 | `snacks_nvim`    | snacks.nvim setup/extensions — pickers, indent, todos, debug tools          |
 | `icons.lua`      | Icon glyph mappings (diff, diagnostics, DAP, etc.)                          |
 | `jj_log`         | Fetch `jj log` info for statusline display                                  |
 | `special_mode`   | Detect diff/merge-tool launch (e.g. jj, hunk.nvim)                          |
 | `system`         | OS detection (Windows/macOS/Linux + distro)                                 |
+
+Configs for plugins that were removed are kept under `lua/utils/deprecated/`
+for reference and are not loaded.
 
 ### VSCode Integration
 
@@ -100,10 +104,12 @@ experience without conflicting with VSCode's native features:
 - **mini.ai** - Enhanced text objects for smarter editing
 - **mini.bracketed** - Jump to previous/next targets with `[` / `]`
 - **mini.jump** - Enhanced `f`/`t` jumping with target highlighting
+- **mini.misc** - Helper utilities (`safely` deferred/lazy setup)
 - **mini.move** - Move selections and lines in any direction
 - **mini.operators** - Sort, replace, multiply, evaluate text
 - **mini.pairs** - Auto-close brackets and quotes
 - **mini.splitjoin** - Code splitting and joining
+- **mini.statuscolumn** - Custom statuscolumn (signs, folds, line numbers)
 - **mini.surround** - Quick surround operations (add/delete/change)
 - **nvim-treesitter-textobjects** - Treesitter-based text objects
 
@@ -117,6 +123,7 @@ For the complete list of VSCode-specific keymaps, see [VSCode Keymaps](#vscode-k
 ├── nvim-pack-lock.json       # Plugin version lock
 ├── stylua.toml               # Lua formatter config
 ├── .luarc.json               # Lua LSP config
+├── .github/                  # CI workflows
 │
 ├── lua/
 │   ├── config/               # Core configuration
@@ -132,9 +139,10 @@ For the complete list of VSCode-specific keymaps, see [VSCode Keymaps](#vscode-k
 │   └── utils/                # Utility modules
 │       ├── buffer_actions/   # Buffer management
 │       ├── csv_view/         # CSV column-aligned view
+│       ├── deprecated/       # Configs of removed plugins (not loaded)
 │       ├── heirline/         # Heirline statusline/tabline components
 │       ├── lazy/             # Lightweight lazy-loading for vim.pack
-│       ├── mini_nvim/        # mini.nvim extensions (mini.files, mini.pick)
+│       ├── mini_nvim/        # mini.nvim extensions (files, pick, rainbow indent)
 │       ├── snacks_nvim/      # Snacks.nvim configuration
 │       ├── icons.lua         # Icon mappings
 │       ├── jj_log.lua        # JJ log helpers
@@ -145,6 +153,7 @@ For the complete list of VSCode-specific keymaps, see [VSCode Keymaps](#vscode-k
 │   ├── sessions.lua          # Session manager (custom)
 │   └── ... (one file per plugin)
 │
+├── docs/                     # Screenshot assets + VSCode keybindings reference
 ├── ftplugin/                 # Filetype-specific settings (simple)
 ├── after/                    # Filetype settings & treesitter query overrides
 ├── lsp/                      # LSP server custom configs
@@ -162,7 +171,7 @@ Leader key is `<Space>`, and local leader key is `\`.
 
 ```text
 <leader>
-├── <Space> -- Smart find files
+├── <Space> -- Find files
 ├── a (AI)
 │   ├── a - Sidekick toggle
 │   ├── d - Sidekick detach
@@ -218,8 +227,8 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   ├── m - Find smart (recent + fuzzy)
 │   ├── p - Find projects
 │   ├── r - Find recent files
-│   ├── t - Find todos in buffers
-│   └── T - Find Todo/Fix in buffers
+│   ├── t - Find all todos (current file)
+│   └── T - Find core todos (current file)
 ├── g (Git)
 │   ├── b - Blame line
 │   ├── p - Preview hunk
@@ -265,14 +274,18 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   ├── a - LSP code action
 │   ├── d - LSP diagnostics (float)
 │   ├── f - LSP format
+│   ├── i - LSP implementation
 │   ├── m - Toggle split/join (mini.splitjoin)
 │   ├── n - LSP rename
 │   ├── N - Generate docstring
+│   ├── r - LSP references
 │   ├── R - LSP restart
+│   ├── t - LSP type definition
 │   ├── v - Virtual Env (Python only)
 │   └── x - LSP codelens
-├── m - Map
-├── n - Notification
+├── n (Notification)
+│   ├── m - Messages
+│   └── n - Notification history
 ├── P (Pack)
 │   ├── s - Pack status
 │   ├── u - Pack update
@@ -283,23 +296,27 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   ├── d - Search diagnostics (buffer)
 │   ├── D - Search diagnostics
 │   ├── h - Search help pages
+│   ├── H - Search highlights
 │   ├── i - Search icons
 │   ├── I - Search incoming calls
-│   ├── j - Search diff files
+│   ├── j - Search jj changed files
 │   ├── J - Search jumps
 │   ├── k - Search keymaps
 │   ├── l - Search LSP info
+│   ├── L - Search locations (loclist)
 │   ├── m - Search marks
+│   ├── M - Search man pages
 │   ├── O - Search outgoing calls
 │   ├── p - Search spelling
 │   ├── P - Search pickers
 │   ├── r - Search resume
 │   ├── s - Search LSP symbols
 │   ├── S - Search LSP Symbols in workspace
-│   ├── t - Search todos
-│   ├── T - Search todo/fix
+│   ├── t - Search all todos
+│   ├── T - Search core todos
 │   ├── u - Search undotree
 │   ├── v - Search clipboard history
+│   ├── x - Search qflist
 │   ├── " - Search registers
 │   ├── . - Search scratch
 │   ├── / - Search history
@@ -310,19 +327,26 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   ├── n - Tab new
 │   ├── s - Tab split
 │   ├── t - Terminal bottom
-│   └── v - Terminal split
+│   ├── v - Terminal split
+│   └── z - Tab zoxide (tcd)
 ├── u (UI)
+│   ├── a - Toggle animate
 │   ├── b - Toggle background
 │   ├── c - Select colorschemes
 │   ├── d - Toggle diagnostics
 │   ├── D - Toggle dim
 │   ├── h - Toggle inlay hints
+│   ├── i - Toggle indent
 │   ├── l - Toggle relative number
 │   ├── L - Toggle number
 │   ├── m - Markdown preview
 │   ├── n - Dismiss notifications
 │   ├── r - UI redraw
+│   ├── s - Toggle screenkey
+│   ├── S - Toggle scroll
+│   ├── t - Toggle treesitter
 │   ├── w - Toggle wrap
+│   ├── W - Toggle words
 │   ├── z - Toggle zoom
 │   └── Z - Toggle zen
 ├── z - Zoxide
@@ -341,10 +365,16 @@ Leader key is `<Space>`, and local leader key is `\`.
 **Motion & Navigation**
 
 - `jk` - Exit insert mode
-- `xx` - Flash search
-- `xw` / `xr` / `xj` / `xk` / `xl` / `xh` - Flash navigation
+- `xx` - Flash jump
+- `X` - Flash treesitter search
+- `xw` / `xr` - Flash jump to word under cursor / resume last search
+- `xh` / `xl` - Flash jump to word start / word end
+- `xj` / `xk` - Flash jump to a line below / above
+- `r` / `R` (operator-pending) - Remote flash / treesitter search
+- `Ctrl+s` (cmdline) - Toggle flash search
+- `;` / `,` - Repeat last textobject move
 - `Shift+h` / `Shift+l` - Previous/next buffer
-- `Ctrl+h` / `Ctrl+j` / `Ctrl+k` / `Ctrl+l` - Navigate tmux windows
+- `Ctrl+h` / `Ctrl+j` / `Ctrl+k` / `Ctrl+l` - Navigate kitty windows (vim-kitty-navigator)
 - `]h` / `[h` / `gh` / `gH` `]H` / `[H` - Next/previous git hunk
 
 **Text Objects & Editing**
@@ -353,11 +383,12 @@ Leader key is `<Space>`, and local leader key is `\`.
 - `saiw"`, `sr'"`, `sd'` - Surround operations (mini.surround)
 - `E` / `B` - Go to end/beginning of line
 
-**Copilot**
+**AI**
 
-- `Tab` - Goto/apply next edit suggestion
-- `Ctrl+y` / `Ctrl+w` - Accept suggestion/word
-- `Esc` - Dismiss suggestion
+- `Tab` - Goto/apply next edit suggestion (sidekick.nvim NES)
+- `Ctrl+y` / `Ctrl+w` - Accept Copilot suggestion/word
+- `Alt+]` / `Alt+[` - Next/previous Copilot suggestion
+- `Esc` - Dismiss Copilot suggestion
 
 **Terminal**
 
@@ -380,9 +411,8 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   └── > - Move buffer right
 ├── e - Toggle sidebar
 ├── l (LSP)
-│   ├── f - Format code
-│   ├── r - Rename symbol
-│   └── a - Code actions
+│   ├── f - Format document (normal) / format selection (visual)
+│   └── r - Rename symbol
 ├── o (Outline)
 │   ├── o - Focus outline
 │   └── v - Toggle outline visibility
@@ -392,12 +422,14 @@ Leader key is `<Space>`, and local leader key is `\`.
 
 **Motion & Navigation**
 
-- `xx` - Flash jump/search
-- `xw` / `xr` - Flash words/resume
-- `xj` / `xk` / `xl` / `xh` - Flash navigation
+- `xx` - Flash jump
+- `X` - Flash treesitter search
+- `xw` / `xr` - Flash jump to word under cursor / resume
+- `xh` / `xl` - Flash jump to word start / word end
+- `xj` / `xk` - Flash jump to a line below / above
 - `Shift+h` - Previous buffer
 - `Shift+l` - Next buffer
-- `Ctrl+h/j/k/l` - Navigate windows (requires VSCode keybinding config)
+- `Ctrl+h` / `Ctrl+l` - Navigate windows left/right (also wired in VSCode keybindings)
 - `Ctrl+o` / `Ctrl+i` - Navigate back/forward
 - `]d` / `[d` - Next/previous diagnostic
 - `za` - Toggle fold

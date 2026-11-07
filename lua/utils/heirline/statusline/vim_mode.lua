@@ -7,7 +7,7 @@ local VimModeCore = {
     return " " .. self.mode_names[self.mode] .. " "
   end,
   hl = function(self)
-    return { fg = colors.background, bg = self.mode_color(self.mode), bold = true }
+    return { fg = "white", bg = self.mode_color(self.mode), bold = true }
   end,
 }
 

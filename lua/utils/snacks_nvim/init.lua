@@ -80,7 +80,7 @@ vim.keymap.set("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, { 
 vim.keymap.set("n", "<leader>sT", function() Snacks.picker.pick("core_todos") end, { desc = "Search core todos" })
 vim.keymap.set("n", "<leader>st", function() Snacks.picker.pick("all_todos") end, { desc = "Search all todos" })
 -- vim.keymap.set("n", "<leader>su", function() Snacks.picker.undo() end, { desc = "Search undotree" })
-vim.keymap.set("n", "<leader>sv", function() Snacks.picker.cliphist() end, { desc = "Search clipcliphistboard history" })
+vim.keymap.set("n", "<leader>sv", function() Snacks.picker.cliphist() end, { desc = "Search clipboard history" })
 vim.keymap.set("n", "<leader>sx", function() Snacks.picker.qflist() end, { desc = "Search qflist" })
 vim.keymap.set("n", '<leader>s"', function() Snacks.picker.registers() end, { desc = "Search registers" })
 vim.keymap.set("n", '<leader>s.', function() Snacks.scratch.select() end, { desc = "Search scratch" })

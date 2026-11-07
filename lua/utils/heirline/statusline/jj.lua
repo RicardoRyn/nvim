@@ -53,9 +53,9 @@ local M = {
   init = function(self)
     local color_info = jj_log.get_color()
     if color_info then
-      self.hl_color = { fg = colors.background, bg = color_info.fg, bold = (color_info.gui == "bold") }
+      self.hl_color = { fg = "white", bg = color_info.fg, bold = (color_info.gui == "bold") }
     else
-      self.hl_color = { fg = colors.background, bg = colors.gray }
+      self.hl_color = { fg = "white", bg = colors.gray }
     end
     vim.g.heirline_jjlog_bg = self.hl_color.bg
   end,
