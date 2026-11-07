@@ -125,9 +125,9 @@
       "rev": "cc4bb3975de8835291f9bb45889e96c6b2795fc4",
       "src": "https://github.com/linux-cultist/venv-selector.nvim"
     },
-    "vim-tmux-navigator": {
-      "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
-      "src": "https://github.com/christoomey/vim-tmux-navigator"
+    "vim-kitty-navigator": {
+      "rev": "c40c7d6181fa44fade771980952c60c1d89c28ea",
+      "src": "https://github.com/knubie/vim-kitty-navigator.git"
     },
     "vimtex": {
       "rev": "3f96503904db6acdb7108cd93a9580dd41e88555",

@@ -9,6 +9,7 @@ require("mini.misc").safely("now", function()
       light = "latte",
       dark = "mocha",
     },
+    transparent_background = true, -- disables setting the background color.
     auto_integrations = true,
   })
 
