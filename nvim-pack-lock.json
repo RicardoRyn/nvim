@@ -37,6 +37,10 @@
       "rev": "79be2ec0c8ba79d3e24184fc31d611245528fc67",
       "src": "https://github.com/nicolasgb/jj.nvim"
     },
+    "kitty-scrollback.nvim": {
+      "rev": "4994c85e0f291598d0748488653c83cb698fd281",
+      "src": "https://github.com/mikesmithgh/kitty-scrollback.nvim"
+    },
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
@@ -120,10 +124,6 @@
     "venv-selector.nvim": {
       "rev": "cc4bb3975de8835291f9bb45889e96c6b2795fc4",
       "src": "https://github.com/linux-cultist/venv-selector.nvim"
-    },
-    "vim-kitty-navigator": {
-      "rev": "c40c7d6181fa44fade771980952c60c1d89c28ea",
-      "src": "https://github.com/knubie/vim-kitty-navigator.git"
     },
     "vim-tmux-navigator": {
       "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
