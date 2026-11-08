@@ -13,7 +13,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "copilot.lua": {
-      "rev": "192b297ef37d9f6a8b889c07fb9a3dd16f1cb86f",
+      "rev": "1d674b416df08e5c54e442503b7703a0df462acf",
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "flash.nvim": {
@@ -21,7 +21,7 @@
       "src": "https://github.com/folke/flash.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "4bcd99167c265f135886b282baad77afe06206b2",
+      "rev": "ef707fb93301a9b856f36eae4c8f56f5b988a794",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "heirline.nvim": {
@@ -36,10 +36,6 @@
     "jj.nvim": {
       "rev": "79be2ec0c8ba79d3e24184fc31d611245528fc67",
       "src": "https://github.com/nicolasgb/jj.nvim"
-    },
-    "kitty-scrollback.nvim": {
-      "rev": "4994c85e0f291598d0748488653c83cb698fd281",
-      "src": "https://github.com/mikesmithgh/kitty-scrollback.nvim"
     },
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
@@ -58,7 +54,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "a321b535c75ca88ba7fddfd8eb5b583fbda50dd6",
+      "rev": "f9550dd81d0514927b7ad1794fd8eb8606ca28cd",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "neogen": {
@@ -78,15 +74,15 @@
       "src": "https://github.com/mfussenegger/nvim-dap-python"
     },
     "nvim-dap-view": {
-      "rev": "8cfadf9e6784f0af5d5efa1e435e77d51ca14741",
+      "rev": "bfaf50b3f513f78d8ab3e5fe02128dda05be4945",
       "src": "https://github.com/igorlfs/nvim-dap-view"
     },
     "nvim-lspconfig": {
-      "rev": "cc404d425c7752f56b8eaa269107be44d888ea51",
+      "rev": "993d048db0d83d8e8ba3f9cb376456321acdcce3",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "610734c5d3e59761d5f79318d120633374537fa5",
+      "rev": "19bdfc04f40ed2ccb3340591d125f759b0406875",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-textobjects": {
@@ -129,8 +125,12 @@
       "rev": "c40c7d6181fa44fade771980952c60c1d89c28ea",
       "src": "https://github.com/knubie/vim-kitty-navigator.git"
     },
+    "vim-tmux-navigator": {
+      "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
+      "src": "https://github.com/christoomey/vim-tmux-navigator"
+    },
     "vimtex": {
-      "rev": "3f96503904db6acdb7108cd93a9580dd41e88555",
+      "rev": "9745f3b467f5c24d0d5133e82537a74434da8ae3",
       "src": "https://github.com/lervag/vimtex"
     }
   }

@@ -26,7 +26,7 @@ local active_specs = {
   { src = "https://github.com/L3MON4D3/LuaSnip" }, -- dependency for neogen
   { src = "https://github.com/lervag/vimtex" },
   { src = "https://github.com/knubie/vim-kitty-navigator.git" },
-  { src = "https://github.com/mikesmithgh/kitty-scrollback.nvim" },
+  { src = "https://github.com/christoomey/vim-tmux-navigator" },
   -- UI
   { src = "https://github.com/OXY2DEV/markview.nvim" },
   { src = "https://github.com/rebelot/heirline.nvim" },
