@@ -24,6 +24,10 @@
       "rev": "ef707fb93301a9b856f36eae4c8f56f5b988a794",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
+    "grug-far.nvim": {
+      "rev": "91b7e58b6ffc6ddad5acb7a7c1df21257724449e",
+      "src": "https://github.com/MagicDuck/grug-far.nvim"
+    },
     "heirline.nvim": {
       "rev": "fae936abb5e0345b85c3a03ecf38525b0828b992",
       "src": "https://github.com/rebelot/heirline.nvim"
@@ -109,6 +113,10 @@
       "rev": "119e8961014c9bfaf1487bf3c2a393d254f337e2",
       "src": "https://github.com/kevinhwang91/promise-async"
     },
+    "rex-navigator.nvim": {
+      "rev": "69c035110dd47423b1a672db943216de28da5784",
+      "src": "https://github.com/baggiponte/rex-navigator.nvim"
+    },
     "screenkey.nvim": {
       "rev": "740e238d1f143cb5f3a9d932f9c5142d3581b986",
       "src": "https://github.com/NStefan002/screenkey.nvim"
@@ -124,10 +132,6 @@
     "venv-selector.nvim": {
       "rev": "cc4bb3975de8835291f9bb45889e96c6b2795fc4",
       "src": "https://github.com/linux-cultist/venv-selector.nvim"
-    },
-    "vim-tmux-navigator": {
-      "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
-      "src": "https://github.com/christoomey/vim-tmux-navigator"
     },
     "vimtex": {
       "rev": "9745f3b467f5c24d0d5133e82537a74434da8ae3",
