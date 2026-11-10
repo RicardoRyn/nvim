@@ -3,6 +3,12 @@ if vim.g.vscode then
 end
 
 require("markview").setup({
+  preview = {
+    enable = true,
+    hybrid_modes = { "n" },
+    linewise_hybrid_mode = true,
+    edit_range = { 0, 0 },
+  },
   latex = {
     enable = false,
   },
