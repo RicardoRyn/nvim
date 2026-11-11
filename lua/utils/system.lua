@@ -8,7 +8,7 @@ M.is_linux = vim.fn.has("linux") == 1
 if M.is_win then
   M.shell = "nu"
 elseif M.is_mac then
-  M.shell = "zsh"
+  M.shell = "bash"
 else -- linux
   M.shell = "bash"
 end
