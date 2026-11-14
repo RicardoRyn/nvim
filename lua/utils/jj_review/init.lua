@@ -19,7 +19,7 @@ local TITLE = "JJ Review"
 
 local config = {
   keymap = "<leader>gs",
-  -- vim.diff ctxlen. 0 makes each hunk a maximal block of contiguous changed
+  -- vim.text.diff ctxlen. 0 makes each hunk a maximal block of contiguous changed
   -- lines, matching what gitsigns-style signs show; larger values merge
   -- changes separated by <= 2*ctxlen unchanged lines into one hunk.
   diff_context = 0,
@@ -55,7 +55,7 @@ end
 --- (the same one hunk.nvim uses internally). No subprocess, no text parsing.
 ---@return { oldstart: integer, oldcount: integer, newstart: integer, newcount: integer, newlines: string[] }[]?
 local function diff_hunks(parent_content, current_content)
-  local indices = vim.diff(parent_content, current_content, {
+  local indices = vim.text.diff(parent_content, current_content, {
     result_type = "indices",
     ctxlen = config.diff_context,
   })
