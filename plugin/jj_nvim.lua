@@ -30,6 +30,7 @@ require("utils.lazy").safely({
     { "n", "<leader>jl", function() require("jj.cmd").log({ revisions = "::", limit = 1000 }) end, { desc = "JJ log all", } },
     { "n", "<leader>jL", function() require("jj.cmd").log() end, { desc = "JJ log" } },
     { "n", "<leader>jn", function() require("jj.cmd").new() end, { desc = "JJ new" } },
+    { "n", "<leader>jN", function() require("jj.cmd").new({ args = { "--insert-before", "@" } }) end, { desc = "JJ new insert before" } },
     { "n", "<leader>jpl", function() require("jj.cmd").open_pr({ list_bookmarks = true }) end, { desc = "JJ open PR listing available bookmarks", } },
     { "n", "<leader>jpp", function() require("jj.cmd").push() end, { desc = "JJ push" } },
     { "n", "<leader>jpr", function() require("jj.cmd").open_pr() end, { desc = "JJ open PR from bookmark in current revision or parent", } },
