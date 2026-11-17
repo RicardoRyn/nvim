@@ -164,6 +164,11 @@ function M.statuscolumn(winid)
   if not vim.api.nvim_win_is_valid(winid) then
     return ""
   end
+  -- 切换 buffer 的瞬间 header 窗口可能还挂着旧 buffer，v:lnum 会越界
+  local ok_buf, header_buf = pcall(vim.api.nvim_win_get_buf, winid)
+  if not ok_buf or vim.v.lnum > vim.api.nvim_buf_line_count(header_buf) then
+    return ""
+  end
   local stc = get_statuscolumn_or_default(winid)
   local data = vim.api.nvim_eval_statusline(stc, {
     use_statuscol_lnum = vim.v.lnum,

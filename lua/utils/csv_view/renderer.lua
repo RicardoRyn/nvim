@@ -1,5 +1,7 @@
 local M = {}
 
+local parser = require("utils.csv_view.parser")
+
 local NS = vim.api.nvim_create_namespace("csvview")
 
 function M.define_highlights()
@@ -23,6 +25,17 @@ function M.clear_rendering(bufnr, state)
   vim.api.nvim_buf_clear_namespace(bufnr, NS, 0, -1)
   state.extmarks = {}
   state.rendered = {}
+end
+
+function M.clear_line(state, bufnr, lnum)
+  local ids = state.extmarks[lnum]
+  if ids then
+    for _, id in ipairs(ids) do
+      pcall(vim.api.nvim_buf_del_extmark, bufnr, NS, id)
+    end
+    state.extmarks[lnum] = nil
+  end
+  state.rendered[lnum] = nil
 end
 
 local function get_align_direction(field)
@@ -81,12 +94,23 @@ function M.render_field(state, bufnr, lnum, col_idx, field, fields, column_width
 end
 
 function M.render_line(state, bufnr, lnum, metrics, config)
-  if state.rendered[lnum] then return end
+  if state.rendered[lnum] then return false end
 
   local row = metrics.rows[lnum]
+  local grew = false
+  if not row and state.big_mode then
+    row, grew = parser.ensure_row(
+      bufnr,
+      metrics,
+      lnum,
+      state.delimiter,
+      state.quote_char,
+      config.big_file.max_lookbehind
+    )
+  end
   if not row then
     state.rendered[lnum] = true
-    return
+    return false
   end
 
   if row.continuation then
@@ -116,13 +140,13 @@ function M.render_line(state, bufnr, lnum, metrics, config)
       M.render_field(state, bufnr, lnum, skipped + field_idx, field, fields, metrics.column_widths, config, field_idx)
     end
     state.rendered[lnum] = true
-    return
+    return grew
   end
 
   local fields = row.fields
   if #fields == 0 then
     state.rendered[lnum] = true
-    return
+    return grew
   end
 
   for col_idx, field in ipairs(fields) do
@@ -132,6 +156,8 @@ function M.render_line(state, bufnr, lnum, metrics, config)
   if lnum == 1 then
     M.add_extmark(state, bufnr, lnum, 0, { line_hl_group = "CsvViewHeaderLine" })
   end
+  state.rendered[lnum] = true
+  return grew
 end
 
 function M.render_visible(state, bufnr, metrics, config)
@@ -142,8 +168,22 @@ function M.render_visible(state, bufnr, metrics, config)
   local top = vim.fn.line("w0", winid)
   local bot = vim.fn.line("w$", winid)
 
+  local grew = false
   for lnum = top, bot do
-    M.render_line(state, bufnr, lnum, metrics, config)
+    grew = M.render_line(state, bufnr, lnum, metrics, config) or grew
+  end
+
+  -- 列宽被加宽：清掉所有已渲染行（含 sticky header 用的首行）按新宽度重渲染
+  if grew then
+    for lnum in pairs(state.rendered) do
+      M.clear_line(state, bufnr, lnum)
+    end
+    for lnum = top, bot do
+      M.render_line(state, bufnr, lnum, metrics, config)
+    end
+    if top > 1 then
+      M.render_line(state, bufnr, 1, metrics, config)
+    end
   end
 end
 

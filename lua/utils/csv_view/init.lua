@@ -15,6 +15,28 @@ function M.get_state(bufnr)
 end
 
 -----------------------------------------------------------------------------
+-- 大文件判定（与 snacks.bigfile 相同的公式）
+-----------------------------------------------------------------------------
+local function is_big_file(bufnr)
+  local opts = config.big_file
+  if Snacks and Snacks.config then
+    local ok, snacks_opts = pcall(Snacks.config.get, "bigfile", {})
+    if ok and type(snacks_opts) == "table" then
+      opts = vim.tbl_extend("force", opts, {
+        size = snacks_opts.size or opts.size,
+        line_length = snacks_opts.line_length or opts.line_length,
+      })
+    end
+  end
+  local path = vim.api.nvim_buf_get_name(bufnr)
+  local size = path ~= "" and vim.fn.getfsize(path) or -1
+  if size > opts.size then return true end
+  if size <= 0 then return false end
+  local lines = vim.api.nvim_buf_line_count(bufnr)
+  return lines > 0 and (size - lines) / lines > opts.line_length
+end
+
+-----------------------------------------------------------------------------
 -- 窗口设置
 -----------------------------------------------------------------------------
 local function setup_window(winid, enable)
@@ -39,10 +61,17 @@ function M.enable(bufnr)
 
   local delim, _ = sniffer.resolve_delimiter(bufnr, config)
   local quote_char = config.parser.quote_char
-  local metrics = parser.compute_metrics(bufnr, delim, quote_char)
+  local big_mode = is_big_file(bufnr)
+  local metrics
+  if big_mode then
+    metrics = parser.compute_metrics_sampled(bufnr, delim, quote_char, config.big_file.sample_lines)
+  else
+    metrics = parser.compute_metrics(bufnr, delim, quote_char)
+  end
 
   local state = {
     enabled = true,
+    big_mode = big_mode,
     extmarks = {},
     rendered = {},
     metrics = metrics,
@@ -99,6 +128,27 @@ end
 -- 自动命令
 -----------------------------------------------------------------------------
 local augroup = vim.api.nvim_create_augroup("SetupCsvView", { clear = true })
+
+--- 注册 FileType bigfile 触发（需在启动时调用，snacks 把大 CSV 的 ft 改成了 bigfile，
+--- csv ftplugin 不会执行）。schedule 保证启用落在 snacks.bigfile 的 setup 之后，
+--- 以便覆盖其 conceallevel=0 / statuscolumn=""。
+function M.register_bigfile_autocmd()
+  vim.api.nvim_create_autocmd("FileType", {
+    group = augroup,
+    pattern = "bigfile",
+    callback = function(args)
+      local bufnr = args.buf
+      if vim.bo[bufnr].buftype ~= "" then return end
+      local ft = vim.filetype.match({ buf = bufnr })
+      if ft ~= "csv" and ft ~= "tsv" then return end
+      vim.schedule(function()
+        if vim.api.nvim_buf_is_valid(bufnr) then
+          M.enable(bufnr)
+        end
+      end)
+    end,
+  })
+end
 
 vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
   group = augroup,
@@ -163,9 +213,12 @@ vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
     local state = buffer_states[bufnr]
     if state and state.enabled then
       renderer.clear_rendering(bufnr, state)
-      local metrics = parser.compute_metrics(bufnr, state.delimiter, state.quote_char)
-      state.metrics = metrics
-      renderer.render_visible(state, bufnr, metrics, config)
+      if state.big_mode then
+        state.metrics.rows = {}
+      else
+        state.metrics = parser.compute_metrics(bufnr, state.delimiter, state.quote_char)
+      end
+      renderer.render_visible(state, bufnr, state.metrics, config)
     end
   end,
 })

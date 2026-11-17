@@ -113,3 +113,6 @@ vim.api.nvim_create_autocmd("FileType", {
 --     end
 --   end,
 -- })
+
+-- Register autocmd for big file view
+require("utils.csv_view").register_bigfile_autocmd()
