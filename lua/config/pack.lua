@@ -38,6 +38,7 @@ local active_specs = {
   { src = "https://github.com/nicolasgb/jj.nvim" },
   { src = "https://github.com/julienvincent/hunk.nvim", version = "jv/3-way-merge-tool" },
   { src = "https://github.com/MunifTanjim/nui.nvim" }, -- dependency for hunk.nvim
+  { src = "https://github.com/CoreyKaylor/diffbandit.nvim" },
 }
 
 local disabled_specs = {
