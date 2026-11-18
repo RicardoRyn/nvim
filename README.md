@@ -1,7 +1,7 @@
 # My Neovim Configuration
 
-> [!IMPORTANT] This is NOT a Neovim distribution.
->
+> [!IMPORTANT]
+> This is NOT a Neovim distribution.
 > It's my personal setup shared for reference and inspiration.
 >
 > Neovim 0.12+. This config relies on features introduced in 0.12:
@@ -17,7 +17,8 @@
 Plugins are managed via Neovim's built-in `vim.pack` system.
 Plugin specs are defined in `lua/config/pack.lua`.
 Orphan plugins (installed but not declared in any spec) are
-automatically removed on startup.
+automatically removed on startup, so reusing an existing data
+directory may delete packages that this config doesn't declare.
 
 | Command          | Description                             |
 | ---------------- | --------------------------------------- |
@@ -29,7 +30,8 @@ automatically removed on startup.
 ### Pre-configured LSP
 
 Six language servers are pre-configured in `lsp/` and enabled via
-`vim.lsp.enable()` (`lua/config/lsp.lua`). Install them with Mason:
+`vim.lsp.enable()` (`lua/config/lsp.lua`). In standalone Neovim, Mason
+automatically installs these servers if they're missing:
 
 - `lua_ls`
 - `pyright`
@@ -47,23 +49,26 @@ provide lightweight, self-contained logic:
 | ---------------- | --------------------------------------------------------------------------- |
 | `sessions`       | Auto-save/restore sessions per working directory (lives in `plugin/`)       |
 | `buffer_actions` | Buffer cycle, move, close, pin — used by heirline tabline                   |
-| `csv_view`       | Tabular CSV viewer with aligned columns & sticky headers                    |
+| `csv_view`       | Aligned CSV columns, sticky headers and sampled widths for large files      |
 | `heirline`       | Statusline (15+ components) & tabline (bufferline/tabpages) building blocks |
-| `lazy`           | Lightweight lazy-loading for `vim.pack` specs (keys/cmd triggers)           |
-| `mini_nvim`      | mini.nvim extensions — mini.files (+ clue), mini.pick, rainbow indent       |
+| `lazy`           | Run plugin setup on the first mapped key or command                         |
+| `mini_nvim`      | mini.files extensions; archived configs use the picker and indent helpers   |
 | `snacks_nvim`    | snacks.nvim setup/extensions — pickers, indent, todos, debug tools          |
 | `icons.lua`      | Icon glyph mappings (diff, diagnostics, DAP, etc.)                          |
 | `jj_log`         | Fetch `jj log` info for statusline display                                  |
 | `special_mode`   | Detect diff/merge-tool launch (e.g. jj, hunk.nvim)                          |
 | `system`         | OS detection (Windows/macOS/Linux + distro)                                 |
 
-Configs for plugins that were removed are kept under `lua/utils/deprecated/`
-for reference and are not loaded.
+`lua/utils/deprecated/` holds old configurations, not necessarily removed
+plugins. For example, `jj.nvim` still uses DiffBandit by default on macOS
+and Linux, and the native diff backend on Windows. Snacks provides the
+active picker and indent guides; the mini.pick and rainbow-indent helpers
+are used only by archived configurations.
 
 ### VSCode Integration
 
-This configuration is fully compatible with [VSCode Neovim](https://github.com/vscode-neovim/vscode-neovim),
-enabling Neovim-style modal editing in VSCode with compatible Neovim plugins.
+This configuration supports modal editing in VSCode through
+[VSCode Neovim](https://github.com/vscode-neovim/vscode-neovim).
 
 > Personally, I need to edit Jupyter Notebooks, but Neovim's support for them is quite limited,
 > so I have to use VSCode for that purpose. However, I've become so accustomed to Neovim's
@@ -96,9 +101,9 @@ enabling Neovim-style modal editing in VSCode with compatible Neovim plugins.
 
 #### Available Plugins in VSCode
 
-Since VSCode has its own built-in UI, terminal, and keybinding system, this
-configuration only enables efficiency-focused plugins that enhance the editing
-experience without conflicting with VSCode's native features:
+`vim.pack` adds the same plugin specs in both environments. Most plugin
+configuration scripts skip setup when `vim.g.vscode` is set, leaving the UI
+and terminal to VSCode. The following editing plugins are configured in VSCode:
 
 - **flash.nvim** - Fast cursor jumping
 - **mini.ai** - Enhanced text objects for smarter editing
@@ -113,7 +118,7 @@ experience without conflicting with VSCode's native features:
 - **mini.surround** - Quick surround operations (add/delete/change)
 - **nvim-treesitter-textobjects** - Treesitter-based text objects
 
-For the complete list of VSCode-specific keymaps, see [VSCode Keymaps](#vscode-keymaps) below.
+For the main VSCode-specific bindings, see [VSCode Keymaps](#vscode-keymaps) below.
 
 ## Project Structure
 
@@ -133,16 +138,16 @@ For the complete list of VSCode-specific keymaps, see [VSCode Keymaps](#vscode-k
 │   │   ├── options.lua       # Neovim options
 │   │   └── pack.lua          # vim.pack plugin specs
 │   │
-│   ├── dev/                  # Dev utilities (runtime path helpers, etc.)
+│   ├── dev/                  # Load plugins from a local development checkout
 │   ├── neogen/               # Neogen annotation templates
 │   │   └── python/           # Python docstring templates
 │   └── utils/                # Utility modules
 │       ├── buffer_actions/   # Buffer management
-│       ├── csv_view/         # CSV column-aligned view
-│       ├── deprecated/       # Configs of removed plugins (not loaded)
+│       ├── csv_view/         # CSV viewer (aligned columns, sticky header, large files)
+│       ├── deprecated/       # Archived configurations (not loaded)
 │       ├── heirline/         # Heirline statusline/tabline components
-│       ├── lazy/             # Lightweight lazy-loading for vim.pack
-│       ├── mini_nvim/        # mini.nvim extensions (files, pick, rainbow indent)
+│       ├── lazy/             # Defer plugin setup until a key or command is used
+│       ├── mini_nvim/        # mini.files extensions and helpers for archived configs
 │       ├── snacks_nvim/      # Snacks.nvim configuration
 │       ├── icons.lua         # Icon mappings
 │       ├── jj_log.lua        # JJ log helpers
@@ -156,7 +161,7 @@ For the complete list of VSCode-specific keymaps, see [VSCode Keymaps](#vscode-k
 ├── docs/                     # Screenshot assets + VSCode keybindings reference
 ├── ftplugin/                 # Filetype-specific settings (simple)
 ├── after/                    # Filetype settings & treesitter query overrides
-├── lsp/                      # LSP server custom configs
+├── lsp/                      # LSP server definitions (nvim-lspconfig defaults)
 └── snippets/                 # Custom snippets
 ```
 
@@ -176,7 +181,7 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   ├── a - Sidekick toggle
 │   ├── d - Sidekick detach
 │   ├── f - Sidekick send file
-│   ├── p - Sidekick select prompt
+│   ├── p - Sidekick prompt
 │   ├── s - Sidekick select
 │   ├── t - Sidekick send this
 │   └── v - Sidekick send visual selection
@@ -197,7 +202,7 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   ├── C - Debug clear breakpoints
 │   ├── h - Debug hover
 │   ├── i - Debug step into
-│   ├── k - Debug step back
+│   ├── k - Debug step out (same as <leader>dO)
 │   ├── l - Debug launch OSV server
 │   ├── o - Debug step over
 │   ├── O - Debug step out
@@ -222,7 +227,6 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   └── f - Files in current folder
 ├── f (Find)
 │   ├── c - Find config file
-│   ├── f - Find files
 │   ├── g - Find git files
 │   ├── m - Find smart (recent + fuzzy)
 │   ├── p - Find projects
@@ -235,6 +239,7 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   ├── P - Preview hunk (float)
 │   ├── r - Reset hunk
 │   ├── R - Reset buffer
+│   ├── s - Squash hunk (local dev plugin, Windows only)
 │   ├── t - Toggle blame line
 │   ├── w - Toggle word diff
 │   └── h (GitHub)
@@ -257,6 +262,7 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   ├── l - JJ log all
 │   ├── L - JJ log
 │   ├── n - JJ new
+│   ├── N - JJ new (insert before current)
 │   ├── r - JJ rebase
 │   ├── R - JJ redo
 │   ├── s - JJ status
@@ -273,7 +279,7 @@ Leader key is `<Space>`, and local leader key is `\`.
 ├── l (LSP)
 │   ├── a - LSP code action
 │   ├── d - LSP diagnostics (float)
-│   ├── f - LSP format
+│   ├── f - Format buffer or selection (conform.nvim)
 │   ├── i - LSP implementation
 │   ├── m - Toggle split/join (mini.splitjoin)
 │   ├── n - LSP rename
@@ -286,6 +292,7 @@ Leader key is `<Space>`, and local leader key is `\`.
 ├── n (Notification)
 │   ├── m - Messages
 │   └── n - Notification history
+├── o - Outline
 ├── P (Pack)
 │   ├── s - Pack status
 │   ├── u - Pack update
@@ -325,6 +332,7 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   ├── d - Tab delete
 │   ├── f - Terminal float
 │   ├── n - Tab new
+│   ├── r - Tab rename
 │   ├── s - Tab split
 │   ├── t - Terminal bottom
 │   ├── v - Terminal split
@@ -339,7 +347,7 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   ├── i - Toggle indent
 │   ├── l - Toggle relative number
 │   ├── L - Toggle number
-│   ├── m - Markdown preview
+│   ├── m - Markdown preview (browser)
 │   ├── n - Dismiss notifications
 │   ├── r - UI redraw
 │   ├── s - Toggle screenkey
@@ -374,8 +382,12 @@ Leader key is `<Space>`, and local leader key is `\`.
 - `Ctrl+s` (cmdline) - Toggle flash search
 - `;` / `,` - Repeat last textobject move
 - `Shift+h` / `Shift+l` - Previous/next buffer
-- `Ctrl+h` / `Ctrl+j` / `Ctrl+k` / `Ctrl+l` - Navigate kitty windows (vim-kitty-navigator)
-- `]h` / `[h` / `gh` / `gH` `]H` / `[H` - Next/previous git hunk
+- `Ctrl+h` / `Ctrl+j` / `Ctrl+k` / `Ctrl+l` - Navigate Neovim splits on Linux
+  and Windows. On macOS these mappings are active in a Rex session, where
+  rex-navigator.nvim navigates splits first, then Rex panes at the edge.
+- `]h` / `gh` - Next git hunk
+- `[h` / `gH` - Previous git hunk
+- `]H` / `[H` - Last/first git hunk
 
 **Text Objects & Editing**
 
@@ -383,9 +395,20 @@ Leader key is `<Space>`, and local leader key is `\`.
 - `saiw"`, `sr'"`, `sd'` - Surround operations (mini.surround)
 - `E` / `B` - Go to end/beginning of line
 
+**Search & Replace**
+
+- `<localleader>r` (`\r` by default, normal mode) - Project-wide search and replace (grug-far.nvim)
+
+**Filetypes**
+
+- CSV: table view starts automatically. Large files use sampled column widths.
+  Use `:CsvViewToggle` to toggle the view and `Tab` / `Shift+Tab` to move between fields.
+- Markdown: Markview renders an inline hybrid preview; `<leader>um` opens a
+  browser preview (live-preview.nvim)
+
 **AI**
 
-- `Tab` - Goto/apply next edit suggestion (sidekick.nvim NES)
+- `Tab` (normal mode) - Jump to or apply the next edit suggestion (sidekick.nvim NES)
 - `Ctrl+y` / `Ctrl+w` - Accept Copilot suggestion/word
 - `Alt+]` / `Alt+[` - Next/previous Copilot suggestion
 - `Esc` - Dismiss Copilot suggestion
@@ -400,7 +423,7 @@ Leader key is `<Space>`, and local leader key is `\`.
 <leader>
 ├── <Space> / ff (Files) - Quick open file
 ├── a - Toggle activity bar
-├── aa (UI) - Toggle auxiliary bar
+├── aa - Toggle auxiliary bar
 ├── b (Buffer)
 │   ├── d - Close buffer
 │   ├── o - Close other buffers
@@ -431,7 +454,9 @@ Leader key is `<Space>`, and local leader key is `\`.
 - `Shift+l` - Next buffer
 - `Ctrl+h` / `Ctrl+l` - Navigate windows left/right (also wired in VSCode keybindings)
 - `Ctrl+o` / `Ctrl+i` - Navigate back/forward
-- `]d` / `[d` - Next/previous diagnostic
+- `]d` / `[d` - The VSCode setup initially maps these to next/previous diagnostic;
+  once nvim-treesitter-textobjects sets up, they jump to the next/previous conditional start.
+- `]D` / `[D` - Next/previous conditional end (treesitter)
 - `za` - Toggle fold
 
 **Editing**
@@ -448,11 +473,12 @@ Leader key is `<Space>`, and local leader key is `\`.
 **Jupyter Notebook Cell Operations**
 
 - `l` - Edit current cell
+- `c` - Convert Markdown cell to code cell
 - `y` - Copy cell
 - `p` - Paste cell
 - `Ctrl+Backspace` - Clear all cell outputs
 - `Alt+Backspace` - Clear current cell outputs
-- `Ctrl+j Ctrl+k` - Expand/collapse cell input
+- `Ctrl+j Ctrl+k` - Exit cell edit mode, or expand/collapse cell input depending on context
 - `Ctrl+Shift+Alt+C` - Collapse all cell inputs
 - `Shift+Alt+Backspace` - Restart kernel
 - `Alt+h` / `Alt+l` - Fold/unfold notebook cell
@@ -461,23 +487,17 @@ Leader key is `<Space>`, and local leader key is `\`.
 
 - `Ctrl+/` - Toggle built-in terminal
 - `Ctrl+Shift+=` - Toggle maximized panel
+- `Ctrl+Backtick` - Open the external terminal when the integrated terminal isn't focused
 
 ## Try?
 
+Use a fresh app name to try this configuration without touching your usual
+Neovim config, plugins or sessions. This matters because startup cleanup
+removes undeclared packages from the active Neovim data directory.
+
 ```bash
-# Backup existing config
-mv ~/.config/nvim{,.bak}
-
-# optional but recommended
-mv ~/.local/share/nvim{,.bak}
-mv ~/.local/state/nvim{,.bak}
-mv ~/.cache/nvim{,.bak}
-
-# Clone this configuration
-jj git clone https://github.com/RicardoRyn/nvim ~/.config/nvim
-
-# Start Neovim
-nvim
+jj git clone https://github.com/RicardoRyn/nvim "${XDG_CONFIG_HOME:-$HOME/.config}/nvim-trial"
+NVIM_APPNAME=nvim-trial nvim
 ```
 
 > If GitHub is slow for you, mirrors are available on
@@ -487,8 +507,9 @@ nvim
 
 After first launch:
 
-1. Run `:checkhealth` to verify dependencies and LSP setup.
-2. Run `:Mason` to install language servers and formatters.
+1. Open `:Mason` to check automatic installation of the language servers,
+   formatters and debug adapters listed in `plugin/mason_nvim.lua`.
+2. Once installation finishes, run `:checkhealth` to verify dependencies and LSP setup.
 3. Customize to your needs.
 
 ## License
