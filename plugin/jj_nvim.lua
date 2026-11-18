@@ -55,7 +55,7 @@ require("utils.lazy").safely({
 
     require("jj").setup({
       diff = {
-        backend = "diffbandit",
+        backend = require("utils.system").is_win and "native" or "diffbandit",
       },
       cmd = {
         keymaps = {
