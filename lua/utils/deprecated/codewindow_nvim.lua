@@ -1,6 +1,6 @@
 if vim.g.vscode then return end
 
-require("utils.lazy").load({
+require("utils.lazy").register({
   setup = function()
     require("codewindow").setup({
       screen_bounds = "background", -- How the visible area is displayed, "lines": lines above and below, "background": background color

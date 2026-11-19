@@ -5,7 +5,7 @@ end
 local dap
 local widgets
 
-require("utils.lazy").safely({
+require("utils.lazy").register({
   setup = function()
     dap = require("dap")
     widgets = require("dap.ui.widgets")

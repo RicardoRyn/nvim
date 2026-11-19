@@ -7,7 +7,7 @@ vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
-local nvim_ufo_load = require("utils.lazy").safely({
+local nvim_ufo_load = require("utils.lazy").register({
   setup = function()
     require("ufo").setup({
       preview = {

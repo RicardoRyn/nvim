@@ -2,7 +2,7 @@ if vim.g.vscode then
   return
 end
 
-require("utils.lazy").safely({
+require("utils.lazy").register({
   setup = function()
     local MiniFilesExts = require("utils.mini_nvim.mini_files")
 

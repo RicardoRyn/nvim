@@ -43,11 +43,11 @@ local function cmd_loader(spec)
   end
 end
 
---- Load a plugin lazily via keys and/or commands.
+--- Register key and/or command triggers for lazy plugin setup.
 --- All triggers share a single `load` guard so setup() only runs once.
 ---
 --- Usage:
----   require("utils.lazy").safely({
+---   require("utils.lazy").register({
 ---     setup = function() require("telescope").setup({ ... }) end,
 ---     keys  = { { "n", "<leader>ff", function() ... end, { desc = "Find files" } } },
 ---     cmd   = { "Telescope" },
@@ -55,7 +55,7 @@ end
 ---
 ---@param spec LazySpec
 ---@return fun() load  Call this to force eager-loading.
-function M.safely(spec)
+function M.register(spec)
   local loaded = false
 
   local function load()

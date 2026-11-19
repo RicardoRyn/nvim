@@ -1,6 +1,6 @@
 if vim.g.vscode then return end
 
-require("utils.lazy").load({
+require("utils.lazy").register({
   setup = function()
     require("fyler").setup({
       auto_confirm_simple_mutation = true,

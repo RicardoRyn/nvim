@@ -16,7 +16,7 @@
   "lazyload": {
     "prefix": "lazyload",
     "body": [
-      "require(\"utils.lazy\").load({",
+      "require(\"utils.lazy\").register({",
       "  setup = function()",
       "    $1",
       "  end,",

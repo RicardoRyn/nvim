@@ -1,4 +1,4 @@
--- require("utils.lazy").load({
+-- require("utils.lazy").register({
 --   setup = function()
 --     require("treesj").setup({
 --       use_default_keymaps = false,

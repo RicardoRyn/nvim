@@ -1,6 +1,6 @@
 if vim.g.vscode then return end
 
-require("utils.lazy").safely({
+require("utils.lazy").register({
   setup = function()
     require("neogen").setup({
       enable = true,

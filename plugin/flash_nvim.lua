@@ -174,7 +174,7 @@ local function two_char_jump(opts)
   })
 end
 
-require("utils.lazy").safely({
+require("utils.lazy").register({
   setup = function()
     vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#ff007c", bold = true })
     vim.api.nvim_set_hl(0, "FlashMatch", { fg = "#7287fd" })
