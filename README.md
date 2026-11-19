@@ -59,11 +59,9 @@ provide lightweight, self-contained logic:
 | `special_mode`   | Detect diff/merge-tool launch (e.g. jj, hunk.nvim)                          |
 | `system`         | OS detection (Windows/macOS/Linux + distro)                                 |
 
-`lua/utils/deprecated/` holds old configurations, not necessarily removed
-plugins. For example, `jj.nvim` still uses DiffBandit by default on macOS
-and Linux, and the native diff backend on Windows. Snacks provides the
-active picker and indent guides; the mini.pick and rainbow-indent helpers
-are used only by archived configurations.
+
+`lua/utils/deprecated/` contains legacy configurations. None of the files
+in this directory are loaded; they serve only as backups and references.
 
 ### VSCode Integration
 
@@ -385,9 +383,9 @@ Leader key is `<Space>`, and local leader key is `\`.
 - `Ctrl+h` / `Ctrl+j` / `Ctrl+k` / `Ctrl+l` - Navigate Neovim splits on Linux
   and Windows. On macOS these mappings are active in a Rex session, where
   rex-navigator.nvim navigates splits first, then Rex panes at the edge.
-- `]h` / `gh` - Next git hunk
-- `[h` / `gH` - Previous git hunk
-- `]H` / `[H` - Last/first git hunk
+- `]h` / `gh` - Next hunk
+- `[h` / `gH` - Previous hunk
+- `]H` / `[H` - Last/first hunk
 
 **Text Objects & Editing**
 
