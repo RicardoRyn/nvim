@@ -4,58 +4,59 @@ end
 
 require("utils.lazy").register({
   setup = function()
-    local diff = require("jj.diff")
-    local bandit = require("diffbandit")
-
-    local function report(view, err)
-      if not view and err then
-        vim.notify("DiffBandit: " .. err, vim.log.levels.WARN)
-      end
-      return view
-    end
-
-    -- jj log/status can call us from a non-file buffer. Use its cwd, not its buffer name.
-    local function review(open)
-      return function(opts)
-        local path = opts.path and vim.fn.fnamemodify(opts.path, ":p")
-        local root = vim.fs.root(path or vim.fn.getcwd(), ".jj")
-        if not root then
-          return report(nil, "Not in a jj workspace")
-        end
-        local pathspecs = path and { vim.fs.relpath(root, path) } or nil
-        return report(open(opts, { root = root, pathspecs = pathspecs }))
-      end
-    end
-
-    diff.register_backend("diffbandit", {
-      diff_current = function(opts)
-        local path = opts.path or vim.api.nvim_buf_get_name(0)
-        if vim.startswith(path, "jj://") then
-          -- A revision buffer (possibly modified) is not a working-copy file.
-          return diff.diff_current(vim.tbl_extend("force", opts, { backend = "native" }))
-        end
-        if path == "" then
-          return report(nil, "Current buffer has no file path")
-        end
-        return report(bandit.git_file(path, { mode = "all", base = opts.rev or "@-" }))
-      end,
-      -- show_revision = review(function(opts, args)
-      --   return bandit.git_commit(opts.rev, args)
-      -- end),
-      diff_revisions = review(function(opts, args)
-        args.direct = true -- compare the two trees, not their merge base
-        return bandit.git_compare(opts.left, opts.right, args)
-      end),
-      diff_history_revisions = review(function(opts, args)
-        -- Visual selections in jj log usually give the newest revision first.
-        args.rev = ("coalesce((%s)..(%s), (%s)..(%s))"):format(opts.left, opts.right, opts.right, opts.left)
-        return bandit.git_log(args)
-      end),
-    })
+    -- -- 使用diffbandit作为后端
+    -- local diff = require("jj.diff")
+    -- local bandit = require("diffbandit")
+    --
+    -- local function report(view, err)
+    --   if not view and err then
+    --     vim.notify("DiffBandit: " .. err, vim.log.levels.WARN)
+    --   end
+    --   return view
+    -- end
+    --
+    -- -- jj log/status can call us from a non-file buffer. Use its cwd, not its buffer name.
+    -- local function review(open)
+    --   return function(opts)
+    --     local path = opts.path and vim.fn.fnamemodify(opts.path, ":p")
+    --     local root = vim.fs.root(path or vim.fn.getcwd(), ".jj")
+    --     if not root then
+    --       return report(nil, "Not in a jj workspace")
+    --     end
+    --     local pathspecs = path and { vim.fs.relpath(root, path) } or nil
+    --     return report(open(opts, { root = root, pathspecs = pathspecs }))
+    --   end
+    -- end
+    --
+    -- diff.register_backend("diffbandit", {
+    --   diff_current = function(opts)
+    --     local path = opts.path or vim.api.nvim_buf_get_name(0)
+    --     if vim.startswith(path, "jj://") then
+    --       -- A revision buffer (possibly modified) is not a working-copy file.
+    --       return diff.diff_current(vim.tbl_extend("force", opts, { backend = "native" }))
+    --     end
+    --     if path == "" then
+    --       return report(nil, "Current buffer has no file path")
+    --     end
+    --     return report(bandit.git_file(path, { mode = "all", base = opts.rev or "@-" }))
+    --   end,
+    --   -- show_revision = review(function(opts, args)
+    --   --   return bandit.git_commit(opts.rev, args)
+    --   -- end),
+    --   diff_revisions = review(function(opts, args)
+    --     args.direct = true -- compare the two trees, not their merge base
+    --     return bandit.git_compare(opts.left, opts.right, args)
+    --   end),
+    --   diff_history_revisions = review(function(opts, args)
+    --     -- Visual selections in jj log usually give the newest revision first.
+    --     args.rev = ("coalesce((%s)..(%s), (%s)..(%s))"):format(opts.left, opts.right, opts.right, opts.left)
+    --     return bandit.git_log(args)
+    --   end),
+    -- })
 
     require("jj").setup({
       diff = {
-        backend = require("utils.system").is_win and "native" or "diffbandit",
+        backend = "native",
       },
       cmd = {
         keymaps = {

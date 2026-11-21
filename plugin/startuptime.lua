@@ -5,7 +5,6 @@
 ---   rm -f "$log"
 ---   NVIM_STARTUP_LOG="$log" command nvim --startuptime "$log" "$@"
 ---   local rc=$?
----   [[ -f $log ]] && grep -- '--- NVIM STARTED ---' "$log" | tail -1 | sed 's/^/这次启动: /'
 ---   rm -f "$log"
 ---   return $rc
 --- }
