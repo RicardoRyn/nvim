@@ -10,13 +10,19 @@
 ---   return $rc
 --- }
 ---
+---
 --- 对于windows的nushell：
+---
 --- export def --env nvim [...args: string] {
 ---     let log = ($env.TEMP? | default $env.TMP? | default "/tmp") + $"/nvim-startup-(random uuid).log"
----     $env.NVIM_STARTUP_LOG = $log
----     ^nvim --startuptime $log ...$args
+---     with-env { NVIM_STARTUP_LOG: $log } {
+---         ^nvim --startuptime $log ...$args
+---     }
 ---     let rc = $env.LAST_EXIT_CODE
----     rm -f $log
+---     try {
+---         rm -f $log
+---     } catch {
+---     }
 ---     if $rc != 0 {
 ---         error make { msg: $"nvim exited with code ($rc)" }
 ---     }
@@ -64,6 +70,7 @@ vim.api.nvim_create_user_command("StartupTime", function()
   end
 end, { desc = "Startup Time" })
 
+-- -- 如果想在启动时自动显示启动时间，可以取消下面的注释
 -- vim.api.nvim_create_autocmd("VimEnter", {
 --   once = true,
 --   callback = function()
