@@ -4,7 +4,7 @@ require("utils.lazy").register({
   setup = function()
     require("neogen").setup({
       enable = true,
-      snippet_engine = "luasnip",
+      snippet_engine = "mini",
       languages = {
         python = require("neogen.python"),
       },

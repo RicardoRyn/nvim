@@ -114,5 +114,5 @@ vim.api.nvim_create_autocmd("FileType", {
 --   end,
 -- })
 
--- Register autocmd for big file view
-require("utils.csv_view").register_bigfile_autocmd()
+-- CSV 视图只注册触发点，重活留到真正打开 CSV 时再加载
+require("utils.csv_view.trigger").setup()

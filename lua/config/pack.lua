@@ -23,7 +23,6 @@ local active_specs = {
   { src = "https://github.com/kevinhwang91/promise-async" }, -- dependency for nvim-ufo
   { src = "https://github.com/NStefan002/screenkey.nvim" },
   { src = "https://github.com/danymat/neogen" },
-  { src = "https://github.com/L3MON4D3/LuaSnip" }, -- dependency for neogen
   { src = "https://github.com/lervag/vimtex" },
   { src = "https://github.com/MagicDuck/grug-far.nvim" },
   { src = "https://github.com/baggiponte/rex-navigator.nvim" },

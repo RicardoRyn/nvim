@@ -129,27 +129,6 @@ end
 -----------------------------------------------------------------------------
 local augroup = vim.api.nvim_create_augroup("SetupCsvView", { clear = true })
 
---- 注册 FileType bigfile 触发（需在启动时调用，snacks 把大 CSV 的 ft 改成了 bigfile，
---- csv ftplugin 不会执行）。schedule 保证启用落在 snacks.bigfile 的 setup 之后，
---- 以便覆盖其 conceallevel=0 / statuscolumn=""。
-function M.register_bigfile_autocmd()
-  vim.api.nvim_create_autocmd("FileType", {
-    group = augroup,
-    pattern = "bigfile",
-    callback = function(args)
-      local bufnr = args.buf
-      if vim.bo[bufnr].buftype ~= "" then return end
-      local ft = vim.filetype.match({ buf = bufnr })
-      if ft ~= "csv" and ft ~= "tsv" then return end
-      vim.schedule(function()
-        if vim.api.nvim_buf_is_valid(bufnr) then
-          M.enable(bufnr)
-        end
-      end)
-    end,
-  })
-end
-
 vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
   group = augroup,
   callback = function(args)
@@ -229,12 +208,5 @@ vim.api.nvim_create_autocmd({ "BufDelete", "BufUnload" }, {
     buffer_states[args.buf] = nil
   end,
 })
-
------------------------------------------------------------------------------
--- 用户命令
------------------------------------------------------------------------------
-vim.api.nvim_create_user_command("CsvViewToggle", function()
-  M.toggle()
-end, { desc = "Toggle CSV table view for current buffer" })
 
 return M

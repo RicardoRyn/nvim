@@ -27,22 +27,33 @@ require("mini.misc").safely("now", function()
     "latexindent",
   }
 
-  require("mason").setup({ ensure_installed = my_languages })
+  require("mason").setup()
 
   local mr = require("mason-registry")
-
-  local function ensure_installed()
-    for _, tool in ipairs(my_languages) do
-      local p = mr.get_package(tool)
-      if not p:is_installed() then
-        p:install()
-      end
+  local missing = {}
+  for _, name in ipairs(my_languages) do
+    if not mr.is_installed(name) then
+      missing[#missing + 1] = name
     end
   end
 
-  if mr.refresh then
-    mr.refresh(ensure_installed)
-  else
-    ensure_installed()
+  if #missing == 0 then
+    return
   end
+
+  mr.refresh(function(ok)
+    if not ok then
+      vim.notify("Mason registry 刷新失败，请用 :MasonLog 检查", vim.log.levels.WARN)
+      return
+    end
+
+    for _, name in ipairs(missing) do
+      local found, pkg = pcall(mr.get_package, name)
+      if not found then
+        vim.notify("Mason 找不到包：" .. name, vim.log.levels.WARN)
+      elseif not pkg:is_installed() and not pkg:is_installing() then
+        pkg:install()
+      end
+    end
+  end)
 end)
