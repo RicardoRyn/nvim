@@ -79,10 +79,7 @@ local function get_names_from_spec(spec)
   return name
 end
 
----Auto delete the orhpan plugins.
----@param active table
----@param disabled table
-local function sync()
+local function pack_clean(opts)
   local protected_names = {}
 
   -- protect the plugin in specs
@@ -94,36 +91,21 @@ local function sync()
     protected_names[name] = true
   end
 
-  -- scan the plugins in the disk
-  local installed_plugins = {}
-  local pack_dir = vim.fn.stdpath("data") .. "/site/pack"
-  local packages = vim.fn.expand(pack_dir .. "/*", false, true)
-  for _, pkg in ipairs(packages) do
-    for _, type_dir in ipairs({ "start", "opt" }) do
-      local path = pkg .. "/" .. type_dir
-      if vim.fn.isdirectory(path) == 1 then
-        local dirs = vim.fn.expand(path .. "/*", false, true)
-        for _, dir in ipairs(dirs) do
-          local name = dir:match("([^/]+)$")
-          if name ~= "README.md" and name ~= "doc" then
-            table.insert(installed_plugins, name)
-          end
-        end
-      end
-    end
-  end
-
-  -- delete the orphaned plugins
   local to_delete = {}
-  for _, installed in ipairs(installed_plugins) do
-    if not protected_names[installed] then
-      table.insert(to_delete, installed)
+  for _, plugin in ipairs(vim.pack.get(nil, { info = false })) do
+    local name = plugin.spec.name
+    if not plugin.active and not protected_names[name] then
+      to_delete[#to_delete + 1] = name
     end
   end
-  if #to_delete > 0 then
-    vim.schedule(function()
-      vim.pack.del(to_delete)
-    end)
+  table.sort(to_delete)
+
+  if #to_delete == 0 then
+    vim.notify("No orphaned vim.pack plugins")
+  elseif opts.bang then
+    vim.pack.del(to_delete)
+  else
+    vim.notify("Orphaned vim.pack plugins: " .. table.concat(to_delete, ", ") .. " (use :PackClean! to remove)")
   end
 end
 
@@ -151,10 +133,16 @@ vim.api.nvim_create_user_command("PackStatus", function(opts)
   vim.pack.update(targets, { offline = true })
 end, { nargs = "*", complete = get_names_from_vimpack, desc = "Check plugins status without downloading" })
 
+vim.api.nvim_create_user_command("PackClean", pack_clean, {
+  bang = true,
+  desc = "Preview orphaned vim.pack plugins (! to remove)",
+})
+
 vim.pack.add(active_specs)
-sync()
 
 if not vim.g.vscode then
+  vim.keymap.set("n", "<leader>Pc", "<cmd>PackClean<cr>", { desc = "Pack clean (no remove)" })
+  vim.keymap.set("n", "<leader>PC", "<cmd>PackClean!<cr>", { desc = "Pack clean" })
   vim.keymap.set("n", "<leader>Ps", "<cmd>PackStatus<cr>", { desc = "Pack status" })
   vim.keymap.set("n", "<leader>Pu", "<cmd>PackUpdate<cr>", { desc = "Pack update" })
   vim.keymap.set("n", "<leader>PU", "<cmd>PackUpdate!<cr>", { desc = "Pack update (no confirmation)" })

@@ -2,6 +2,7 @@ if vim.g.vscode then return end
 
 require("utils.lazy").register({
   setup = function()
+    require("config.completion").ensure_snippets()
     require("neogen").setup({
       enable = true,
       snippet_engine = "mini",

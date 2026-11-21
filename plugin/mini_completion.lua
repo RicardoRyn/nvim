@@ -3,20 +3,6 @@ if vim.g.vscode then
 end
 
 require("mini.misc").safely("now", function()
-  require("mini.icons").setup()
-  require("mini.icons").tweak_lsp_kind()
-
-  local MiniSnippets = require("mini.snippets")
-  MiniSnippets.setup({
-    snippets = {
-      MiniSnippets.gen_loader.from_lang(),
-    },
-  })
-  MiniSnippets.start_lsp_server()
-
-  require("mini.completion").setup({
-    -- lsp_completion = { snippet_insert = snippet_insert },
-  })
   require("mini.cmdline").setup({
     autocorrect = {
       enable = false,
@@ -28,6 +14,21 @@ require("mini.misc").safely("now", function()
   vim.keymap.set("c", "<Up>", "<C-p>")
   vim.keymap.set("c", "<Down>", "<C-n>")
 end)
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("SetupFileCompletion", { clear = true }),
+  callback = function(args)
+    if vim.bo[args.buf].buftype ~= "" or vim.bo[args.buf].filetype == "" then
+      return
+    end
+    local ready = false
+    require("mini.misc").safely("now", function()
+      require("config.completion").ensure_completion()
+      ready = true
+    end)
+    return ready
+  end,
+})
 
 -- --------------------------------------------------------------------------------
 -- -- Nvim built-in complete
