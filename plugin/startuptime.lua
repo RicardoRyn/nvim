@@ -9,6 +9,18 @@
 ---   rm -f "$log"
 ---   return $rc
 --- }
+---
+--- 对于windows的nushell：
+--- export def --env nvim [...args: string] {
+---     let log = ($env.TEMP? | default $env.TMP? | default "/tmp") + $"/nvim-startup-(random uuid).log"
+---     $env.NVIM_STARTUP_LOG = $log
+---     ^nvim --startuptime $log ...$args
+---     let rc = $env.LAST_EXIT_CODE
+---     rm -f $log
+---     if $rc != 0 {
+---         error make { msg: $"nvim exited with code ($rc)" }
+---     }
+--- }
 
 local function log_path()
   local a = vim.v.argv
@@ -61,13 +73,6 @@ end, { desc = "Startup Time" })
 --         return
 --       end
 --       vim.notify(("%.1f ms"):format(ms), vim.log.levels.INFO, { title = "NVIM STARTED" })
---       if vim.env.NVIM_STARTUP_HISTORY then -- 想攒历史就 export 这个变量
---         local h = io.open(vim.fn.expand("~/.cache/nvim/startup.csv"), "a")
---         if h then
---           h:write(("%.1f\n"):format(ms))
---           h:close()
---         end
---       end
 --     end, 0)
 --   end,
 -- })

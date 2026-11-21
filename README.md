@@ -15,17 +15,29 @@
 ### Plugin Management
 
 Plugins are managed via Neovim's built-in `vim.pack` system.
-Plugin specs are defined in `lua/config/pack.lua`.
-Orphan plugins (installed but not declared in any spec) are
-automatically removed on startup, so reusing an existing data
-directory may delete packages that this config doesn't declare.
+Plugin specs are defined in `lua/config/pack.lua`; entries listed in
+`disabled_specs` stay out of the active set but are still protected from
+cleanup. Nothing is deleted automatically: orphan plugins (installed but no
+longer declared) are only listed, and removed when you explicitly ask for it.
 
-| Command          | Description                             |
-| ---------------- | --------------------------------------- |
-| `:PackStatus`    | Check plugin status without downloading |
-| `:PackUpdate`    | Check and update plugins (with dry-run) |
-| `:PackUpdate!`   | Update plugins (skip confirmation)      |
-| `:PackDel <...>` | Remove installed plugins                |
+| Command           | Description                             |
+| ----------------- | --------------------------------------- |
+| `:PackStatus`     | Check plugin status without downloading |
+| `:PackUpdate`     | Check and update plugins (with dry-run) |
+| `:PackUpdate!`    | Update plugins (skip confirmation)      |
+| `:PackClean`      | List orphan plugins without removing    |
+| `:PackClean!`     | Remove orphan plugins                   |
+| `:PackDel <...>`  | Remove installed plugins                |
+
+### Startup
+
+`vim.loader` is enabled, so compiled Lua modules are cached between
+launches. Completion (`mini.completion` plus `mini.snippets`) is set up
+lazily on the first regular file buffer (`lua/config/completion.lua`).
+
+`:StartupTime` reports the total from the log written by
+`nvim --startuptime`; `plugin/startuptime.lua` also ships a small
+wrapper that passes the flag and prints the result of every launch.
 
 ### Pre-configured LSP
 
@@ -131,12 +143,13 @@ For the main VSCode-specific bindings, see [VSCode Keymaps](#vscode-keymaps) bel
 ├── lua/
 │   ├── config/               # Core configuration
 │   │   ├── autocmds.lua      # Auto commands
+│   │   ├── completion.lua    # Deferred mini.completion + mini.snippets setup
 │   │   ├── keymaps.lua       # Key mappings
 │   │   ├── lsp.lua           # LSP servers enable + LspAttach keymaps
 │   │   ├── options.lua       # Neovim options
 │   │   └── pack.lua          # vim.pack plugin specs
 │   │
-│   ├── dev/                  # Load plugins from a local development checkout
+│   ├── dev/                  # Local plugins + loading from a development checkout
 │   ├── neogen/               # Neogen annotation templates
 │   │   └── python/           # Python docstring templates
 │   └── utils/                # Utility modules
@@ -292,6 +305,8 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   └── n - Notification history
 ├── o - Outline
 ├── P (Pack)
+│   ├── c - Pack clean preview (list orphans)
+│   ├── C - Pack clean (remove orphans)
 │   ├── s - Pack status
 │   ├── u - Pack update
 │   └── U - Pack update (no confirmation)
@@ -490,8 +505,9 @@ Leader key is `<Space>`, and local leader key is `\`.
 ## Try?
 
 Use a fresh app name to try this configuration without touching your usual
-Neovim config, plugins or sessions. This matters because startup cleanup
-removes undeclared packages from the active Neovim data directory.
+Neovim config, plugins or sessions. Packages and sessions live under the
+app-specific data directory, and orphan packages are only removed when you
+run `:PackClean!`.
 
 ```bash
 jj git clone https://github.com/RicardoRyn/nvim "${XDG_CONFIG_HOME:-$HOME/.config}/nvim-trial"

@@ -1,4 +1,5 @@
 if not vim.g.vscode then
+  vim.loader.enable()
   require("vim._core.ui2").enable({
     enable = true,
     msg = {
