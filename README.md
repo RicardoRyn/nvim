@@ -14,20 +14,20 @@
 
 ### Plugin Management
 
-Plugins are managed via Neovim's built-in `vim.pack` system.
-Plugin specs are defined in `lua/config/pack.lua`; entries listed in
-`disabled_specs` stay out of the active set but are still protected from
-cleanup. Nothing is deleted automatically: orphan plugins (installed but no
-longer declared) are only listed, and removed when you explicitly ask for it.
+All plugins are managed by the built-in `vim.pack`, with the plugin list defined in `lua/config/pack.lua`.
 
-| Command           | Description                             |
-| ----------------- | --------------------------------------- |
-| `:PackStatus`     | Check plugin status without downloading |
-| `:PackUpdate`     | Check and update plugins (with dry-run) |
-| `:PackUpdate!`    | Update plugins (skip confirmation)      |
-| `:PackClean`      | List orphan plugins without removing    |
-| `:PackClean!`     | Remove orphan plugins                   |
-| `:PackDel <...>`  | Remove installed plugins                |
+Plugins that are installed but no longer declared in the configuration are considered
+orphaned and will be automatically removed the next time Neovim starts.
+
+If you only want to temporarily disable a plugin while keeping it on disk, add it to `disabled_specs`.
+These entries will not be loaded but will remain protected from orphan cleanup.
+
+| Command          | Description                             |
+| ---------------- | --------------------------------------- |
+| `:PackStatus`    | Check plugin status without downloading |
+| `:PackUpdate`    | Check and update plugins (with dry-run) |
+| `:PackUpdate!`   | Update plugins (skip confirmation)      |
+| `:PackDel <...>` | Remove installed plugins                |
 
 ### Startup
 
@@ -70,7 +70,6 @@ provide lightweight, self-contained logic:
 | `jj_log`         | Fetch `jj log` info for statusline display                                  |
 | `special_mode`   | Detect diff/merge-tool launch (e.g. jj, hunk.nvim)                          |
 | `system`         | OS detection (Windows/macOS/Linux + distro)                                 |
-
 
 `lua/utils/deprecated/` contains legacy configurations. None of the files
 in this directory are loaded; they serve only as backups and references.
@@ -305,8 +304,6 @@ Leader key is `<Space>`, and local leader key is `\`.
 │   └── n - Notification history
 ├── o - Outline
 ├── P (Pack)
-│   ├── c - Pack clean preview (list orphans)
-│   ├── C - Pack clean (remove orphans)
 │   ├── s - Pack status
 │   ├── u - Pack update
 │   └── U - Pack update (no confirmation)
@@ -505,13 +502,13 @@ Leader key is `<Space>`, and local leader key is `\`.
 ## Try?
 
 Use a fresh app name to try this configuration without touching your usual
-Neovim config, plugins or sessions. Packages and sessions live under the
-app-specific data directory, and orphan packages are only removed when you
-run `:PackClean!`.
+Neovim config, plugins or sessions. Packages live under the app-specific
+data directory and sessions under the app-specific state directory. Automatic
+orphan cleanup scans only the trial app's package directory.
 
 ```bash
-jj git clone https://github.com/RicardoRyn/nvim "${XDG_CONFIG_HOME:-$HOME/.config}/nvim-trial"
-NVIM_APPNAME=nvim-trial nvim
+jj git clone https://github.com/RicardoRyn/nvim "${XDG_CONFIG_HOME:-$HOME/.config}/nvim-rr"
+NVIM_APPNAME=nvim-rr nvim
 ```
 
 > If GitHub is slow for you, mirrors are available on

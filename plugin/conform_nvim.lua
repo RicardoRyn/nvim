@@ -34,6 +34,8 @@ require("utils.lazy").register({
       formatters = {
         miss_hit = { command = "mh_style", args = { "--fix", "$FILENAME" }, stdin = false, exit_codes = { 0, 1 } },
         latexindent = { prepend_args = { "-y=defaultIndent:'  '" } },
+        -- CLI 参数优先级高于 stylua.toml，对所有 lua 文件及 markdown 中的 lua 代码块生效
+        stylua = { prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" } },
       },
     })
 
