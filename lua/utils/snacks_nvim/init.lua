@@ -17,7 +17,7 @@ require("snacks").setup({
     end,
   },
   image = {
-    enabled = not sys.is_win,
+    enabled = true,
     math = { enabled = false}
   },
   indent = indent,
