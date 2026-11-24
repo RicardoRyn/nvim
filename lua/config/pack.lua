@@ -79,6 +79,18 @@ local function get_names_from_spec(spec)
   return name
 end
 
+local function remove_empty_plugin_dirs()
+  local root = vim.fs.joinpath(vim.fn.stdpath("data"), "site", "pack", "core", "opt")
+  for _, spec in ipairs(active_specs) do
+    local path = vim.fs.joinpath(root, get_names_from_spec(spec))
+    local stat = vim.uv.fs_lstat(path)
+    if stat and stat.type == "directory" then
+      -- rmdir only succeeds if the directory is still empty.
+      vim.uv.fs_rmdir(path)
+    end
+  end
+end
+
 ---Auto delete the orhpan plugins.
 ---@param active table
 ---@param disabled table
@@ -151,6 +163,7 @@ vim.api.nvim_create_user_command("PackStatus", function(opts)
   vim.pack.update(targets, { offline = true })
 end, { nargs = "*", complete = get_names_from_vimpack, desc = "Check plugins status without downloading" })
 
+remove_empty_plugin_dirs()
 vim.pack.add(active_specs)
 sync()
 

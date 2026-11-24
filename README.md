@@ -14,36 +14,73 @@
 
 ### Plugin Management
 
-All plugins are managed by the built-in `vim.pack`, with the plugin list defined in `lua/config/pack.lua`.
+Plugins are managed with `vim.pack`; the plugin list lives in `lua/config/pack.lua`.
 
-Plugins that are installed but no longer declared in the configuration are considered
-orphaned and will be automatically removed the next time Neovim starts.
+Plugins that are installed but no longer declared by this config are treated as
+orphans and deleted automatically the next time Neovim starts.
 
-If you only want to temporarily disable a plugin while keeping it on disk, add it to `disabled_specs`.
-These entries will not be loaded but will remain protected from orphan cleanup.
+To put a plugin aside temporarily but keep it on disk, add it to `disabled_specs`.
+Those entries are not loaded, but they are protected and never treated as orphans.
 
-| Command          | Description                             |
-| ---------------- | --------------------------------------- |
-| `:PackStatus`    | Check plugin status without downloading |
-| `:PackUpdate`    | Check and update plugins (with dry-run) |
-| `:PackUpdate!`   | Update plugins (skip confirmation)      |
-| `:PackDel <...>` | Remove installed plugins                |
+| Command                  | Keymap       | Description                      |
+| ------------------------ | ------------ | -------------------------------- |
+| `:PackStatus`            | `<leader>Ps` | Show status of installed plugins |
+| `:PackUpdate`            | `<leader>Pu` | Check for updates (dry run)      |
+| `:PackUpdate!`           | `<leader>PU` | Update and skip confirmation     |
+| `:PackDel <plugin_name>` | none         | Delete the given plugin          |
 
 ### Startup
 
-`vim.loader` is enabled, so compiled Lua modules are cached between
-launches. Completion (`mini.completion` plus `mini.snippets`) is set up
-lazily on the first regular file buffer (`lua/config/completion.lua`).
+`vim.loader` is enabled, so compiled Lua modules are cached and later launches
+are faster.
 
-`:StartupTime` reports the total from the log written by
-`nvim --startuptime`; `plugin/startuptime.lua` also ships a small
-wrapper that passes the flag and prints the result of every launch.
+Completion (`mini.completion` plus `mini.snippets`) is lazy-loaded: it is set up
+only when the first regular file buffer appears. See `lua/config/completion.lua`.
 
-### Pre-configured LSP
+`:StartupTime` does not measure anything itself. It reads the log written by
+`nvim --startuptime <log_file>` and reports the time on the last
+`--- NVIM STARTED ---` line, so you have to start Neovim with `--startuptime`,
+or point it at the log path through `NVIM_STARTUP_LOG`.
 
-Six language servers are pre-configured in `lsp/` and enabled via
-`vim.lsp.enable()` (`lua/config/lsp.lua`). In standalone Neovim, Mason
-automatically installs these servers if they're missing:
+Typing `nvim --startuptime <log_file>` by hand gets tedious, so you can wrap
+`nvim` in `.bashrc` to pass the log on every launch and remove it on exit:
+
+```bash
+function nvim() {
+  local dir="${TMPDIR:-/tmp}"
+  dir="${dir%/}"
+  local log="$dir/nvim-startup-$$.log"
+  NVIM_STARTUP_LOG="$log" command nvim --startuptime "$log" "$@"
+  local rc=$?
+  rm -f "$log"
+  return $rc
+}
+```
+
+> You can ignore startup time entirely and may never use `:StartupTime` at all.
+> At least for my daily use, this config starts fast enough.
+
+### Treesitter
+
+This config uses [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)
+to manage Tree-sitter parsers and their queries, which gives Neovim
+syntax-tree-based editing features.
+Installing a parser requires [tree-sitter-cli](https://github.com/tree-sitter/tree-sitter/blob/master/crates/cli/README.md)
+to build it.
+Make sure the CLI is installed and on your `PATH`.
+
+If you use cargo:
+
+```bash
+cargo install --locked tree-sitter-cli # build it from source
+# or
+cargo binstall tree-sitter-cli # with cargo-binstall
+```
+
+### LSP
+
+`lsp/` ships six pre-configured language servers, enabled through
+`vim.lsp.enable()` in `lua/config/lsp.lua`:
 
 - `lua_ls`
 - `pyright`
@@ -52,27 +89,35 @@ automatically installs these servers if they're missing:
 - `rust_analyzer`
 - `texlab`
 
+> Server configurations come from [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig),
+> while the servers themselves are installed and managed by
+> [mason.nvim](https://github.com/mason-org/mason.nvim).
+>
+> Edit the install list in `plugin/mason_nvim.lua` to drop servers you don't
+> need or add others.
+
 ### Custom Modules
 
 Some features are too simple to warrant a full plugin. These custom modules
 provide lightweight, self-contained logic:
 
-| Module           | Description                                                                 |
-| ---------------- | --------------------------------------------------------------------------- |
-| `sessions`       | Auto-save/restore sessions per working directory (lives in `plugin/`)       |
-| `buffer_actions` | Buffer cycle, move, close, pin — used by heirline tabline                   |
-| `csv_view`       | Aligned CSV columns, sticky headers and sampled widths for large files      |
-| `heirline`       | Statusline (15+ components) & tabline (bufferline/tabpages) building blocks |
-| `lazy`           | Run plugin setup on the first mapped key or command                         |
-| `mini_nvim`      | mini.files extensions; archived configs use the picker and indent helpers   |
-| `snacks_nvim`    | snacks.nvim setup/extensions — pickers, indent, todos, debug tools          |
-| `icons.lua`      | Icon glyph mappings (diff, diagnostics, DAP, etc.)                          |
-| `jj_log`         | Fetch `jj log` info for statusline display                                  |
-| `special_mode`   | Detect diff/merge-tool launch (e.g. jj, hunk.nvim)                          |
-| `system`         | OS detection (Windows/macOS/Linux + distro)                                 |
+| Module           | Description                                                                                                |
+| ---------------- | ---------------------------------------------------------------------------------------------------------- |
+| `sessions`       | Save and restore sessions per working directory (see `plugin/sessions.lua`)                                |
+| `buffer_actions` | Cycle, move, close and pin buffers; used by the heirline tabline (see `lua/utils/buffer_actions`)          |
+| `csv_view`       | CSV rendering, sticky header, sampled column widths for large files (see `lua/utils/csv_view`)             |
+| `heirline`       | statusline (15+ components) and tabline (bufferline / tabpages) building blocks (`lua/utils/heirline`)     |
+| `lazy`           | Run plugin setup on the first mapped key or command only (see `lua/utils/lazy`)                            |
+| `mini_nvim`      | Extensions for some `mini.nvim` plugins, mostly `mini.files` (see `lua/utils/mini_nvim`)                   |
+| `snacks_nvim`    | `snacks.nvim` setup and extensions: pickers, indent, todos, debug tools (see `lua/utils/snacks_nvim`)      |
+| `icons.lua`      | Icon glyph mappings (diff, diagnostics, DAP, etc.) (see `lua/utils/icons.lua`)                             |
+| `jj_log`         | `jj log` info shown in the heirline statusline (see `lua/utils/jj_log.lua`)                                |
+| `special_mode`   | Detect special launch contexts, e.g. the diff editor of jj or hunk.nvim (see `lua/utils/special_mode.lua`) |
+| `system`         | System detection (Windows / macOS / Linux and the specific distro) (see `lua/utils/system.lua`)            |
 
-`lua/utils/deprecated/` contains legacy configurations. None of the files
-in this directory are loaded; they serve only as backups and references.
+> `lua/utils/deprecated/` holds old configurations.
+> None of these files is ever loaded; they are kept only as backups and references.
+> Delete the folder if you don't want it.
 
 ### VSCode Integration
 
@@ -501,20 +546,19 @@ Leader key is `<Space>`, and local leader key is `\`.
 
 ## Try?
 
-Use a fresh app name to try this configuration without touching your usual
-Neovim config, plugins or sessions. Packages live under the app-specific
-data directory and sessions under the app-specific state directory. Automatic
-orphan cleanup scans only the trial app's package directory.
+Set a different `NVIM_APPNAME` to run an isolated Neovim environment without
+touching your existing config, plugins or sessions:
 
 ```bash
 jj git clone https://github.com/RicardoRyn/nvim "${XDG_CONFIG_HOME:-$HOME/.config}/nvim-rr"
 NVIM_APPNAME=nvim-rr nvim
 ```
 
-> If GitHub is slow for you, mirrors are available on
-> [Codeberg](https://codeberg.org/RicardoRyn/nvim),
-> [Tangled](https://tangled.org/ricardoryn.tngl.sh/nvim) and
-> [Gitee](https://gitee.com/RicardoRyn/nvim).
+> Users in China can try these mirrors:
+>
+> - [Gitee](https://gitee.com/RicardoRyn/nvim),
+> - [Codeberg](https://codeberg.org/RicardoRyn/nvim),
+> - [Tangled](https://tangled.org/ricardoryn.tngl.sh/nvim).
 
 After first launch:
 
@@ -523,10 +567,20 @@ After first launch:
 2. Once installation finishes, run `:checkhealth` to verify dependencies and LSP setup.
 3. Customize to your needs.
 
+> [!IMPORTANT]
+> If you encounter numerous errors on the first launch,
+> some plugins may have failed to install due to network issues during `vim.pack` installation.
+> In that case, simply restart Neovim.
+> This configuration will automatically clean up empty plugin directories left behind by failed
+> installations under `stdpath("data")/site/pack/core/opt` and retry installing those plugins.
+>
+> This setup is only tested on Neovim 0.12 stable; nightly builds are not
+> covered.
+
 ## License
 
-[MIT](LICENSE)
+Feel free to open an [issue](https://github.com/RicardoRyn/nvim/issues) or submit a [PR](https://github.com/RicardoRyn/nvim/pulls) if you have suggestions. :)
 
 ---
 
-Feel free to open an [issue](https://github.com/RicardoRyn/nvim/issues) or submit a [PR](https://github.com/RicardoRyn/nvim/pulls) if you have suggestions. :)
+[MIT LICENSE](https://github.com/RicardoRyn/nvim/blob/main/LICENSE)
