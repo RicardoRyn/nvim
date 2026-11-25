@@ -1,5 +1,6 @@
 local names = {
-  "jj-squash-hunk.nvim"
+  "jj-squash-hunk.nvim",
+  "rex-navigator.nvim",
 }
 
 local dev_path
