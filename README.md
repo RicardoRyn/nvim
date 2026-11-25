@@ -176,6 +176,9 @@ For the main VSCode-specific bindings, see [VSCode Keymaps](#vscode-keymaps) bel
 
 ## Project Structure
 
+<details>
+<summary> Click this </summary>
+
 ```text
 ~/.config/nvim/
 ├── init.lua                  # Entry point
@@ -219,6 +222,8 @@ For the main VSCode-specific bindings, see [VSCode Keymaps](#vscode-keymaps) bel
 ├── lsp/                      # LSP server definitions (nvim-lspconfig defaults)
 └── snippets/                 # Custom snippets
 ```
+
+</details>
 
 ## Keymaps
 
@@ -465,7 +470,6 @@ Leader key is `<Space>`, and local leader key is `\`.
 
 - `Tab` (normal mode) - Jump to or apply the next edit suggestion (sidekick.nvim NES)
 - `Ctrl+y` / `Ctrl+w` - Accept Copilot suggestion/word
-- `Alt+]` / `Alt+[` - Next/previous Copilot suggestion
 - `Esc` - Dismiss Copilot suggestion
 
 **Terminal**
@@ -474,7 +478,7 @@ Leader key is `<Space>`, and local leader key is `\`.
 
 ### VSCode Keymaps
 
-```
+```text
 <leader>
 ├── <Space> / ff (Files) - Quick open file
 ├── a - Toggle activity bar
@@ -490,7 +494,7 @@ Leader key is `<Space>`, and local leader key is `\`.
 ├── e - Toggle sidebar
 ├── l (LSP)
 │   ├── f - Format document (normal) / format selection (visual)
-│   └── r - Rename symbol
+│   └── n - Rename symbol
 ├── o (Outline)
 │   ├── o - Focus outline
 │   └── v - Toggle outline visibility

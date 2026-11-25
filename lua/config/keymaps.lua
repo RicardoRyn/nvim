@@ -98,7 +98,7 @@ else
   vim.keymap.set("n", "<C-r>", "<Cmd>lua require('vscode').call('redo')<CR>", { desc = "Redo" })
   vim.keymap.set("v", "<leader>lf", "<Cmd>lua require('vscode').call('editor.action.formatSelection')<CR>", { desc = "Format Selection" })
   vim.keymap.set("n", "<leader>lf", "<Cmd>lua require('vscode').call('editor.action.formatDocument')<CR>", { desc = "Format Document" })
-  vim.keymap.set("n", "<leader>lr", "<Cmd>lua require('vscode').call('editor.action.rename')<CR>", { desc = "Rename Symbol" })
+  vim.keymap.set("n", "<leader>ln", "<Cmd>lua require('vscode').call('editor.action.rename')<CR>", { desc = "Rename Symbol" })
   vim.keymap.set("n", "]d", "<Cmd>lua require('vscode').call('editor.action.marker.next')<CR>", { desc = "Next Diagnostic" })
   vim.keymap.set("n", "[d", "<Cmd>lua require('vscode').call('editor.action.marker.prev')<CR>", { desc = "Previous Diagnostic" })
   vim.keymap.set("n", "<leader>oo", "<Cmd>lua require('vscode').call('outline.focus')<CR>", { desc = "Focus Outline" })
