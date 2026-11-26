@@ -478,6 +478,9 @@ Leader key is `<Space>`, and local leader key is `\`.
 
 ### VSCode Keymaps
 
+<details>
+<summary> Click this </summary>
+
 ```text
 <leader>
 ├── <Space> / ff (Files) - Quick open file
@@ -501,6 +504,8 @@ Leader key is `<Space>`, and local leader key is `\`.
 └── u (UI)
     └── z - Toggle zen mode
 ```
+
+</details>
 
 **Motion & Navigation**
 
