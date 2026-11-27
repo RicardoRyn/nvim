@@ -25,6 +25,7 @@ local active_specs = {
   { src = "https://github.com/danymat/neogen" },
   { src = "https://github.com/lervag/vimtex" },
   { src = "https://github.com/MagicDuck/grug-far.nvim" },
+  { src = "https://github.com/chrisgrieser/nvim-spider" },
   -- UI
   { src = "https://github.com/OXY2DEV/markview.nvim" },
   { src = "https://github.com/rebelot/heirline.nvim" },

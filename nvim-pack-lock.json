@@ -9,7 +9,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "copilot.lua": {
-      "rev": "d1570ddc00fc4fc4caf7422803805ee22cca14ff",
+      "rev": "59403aefb11f2522217ac3926c9f262a2cf789d8",
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "flash.nvim": {
@@ -17,7 +17,7 @@
       "src": "https://github.com/folke/flash.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "ea38d317af34f8ffcfbaf0f0dcc1471736661a4c",
+      "rev": "166c03131e6a3528f692dd89f37668d991f17baa",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "grug-far.nvim": {
@@ -34,7 +34,7 @@
       "version": "'jv/3-way-merge-tool'"
     },
     "jj.nvim": {
-      "rev": "e3f8a500a25e42b82946fa9fe144eb1428f30a99",
+      "rev": "a3ca5ee11c36ac81794e9e8480309b139bd75113",
       "src": "https://github.com/nicolasgb/jj.nvim"
     },
     "lazydev.nvim": {
@@ -78,8 +78,12 @@
       "src": "https://github.com/igorlfs/nvim-dap-view"
     },
     "nvim-lspconfig": {
-      "rev": "7d22e678970d95d8d18494ec389c52b07111c53a",
+      "rev": "76f4cafc49677a34dc8ad8142b773d78ab4a041e",
       "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-spider": {
+      "rev": "38f74f733734566bec3b23a9dcf968a5a5559cd6",
+      "src": "https://github.com/chrisgrieser/nvim-spider"
     },
     "nvim-treesitter": {
       "rev": "52773f0d13a0c11d0c3ef33c14ab6ecc1c17148b",
